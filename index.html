@@ -1,13 +1,211 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Website</title>
+    <title>My Personal Website</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #07111f;
+            color: #f1f5f9;
+            line-height: 1.6;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 8%;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .logo {
+            color: #22d3ee;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 22px;
+        }
+
+        nav a:hover {
+            color: #22d3ee;
+        }
+
+        .hero {
+            min-height: 75vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 20px;
+            background: radial-gradient(circle at top, #12304a, #07111f 65%);
+        }
+
+        .tag {
+            color: #22d3ee;
+            border: 1px solid #155e75;
+            border-radius: 30px;
+            padding: 7px 16px;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+
+        h1 {
+            font-size: clamp(38px, 7vw, 68px);
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        h1 span {
+            color: #22d3ee;
+        }
+
+        .hero p {
+            max-width: 600px;
+            color: #94a3b8;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            background: #22d3ee;
+            color: #07111f;
+            padding: 13px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            background: #67e8f9;
+            transform: translateY(-2px);
+        }
+
+        section.content {
+            padding: 65px 8%;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        h2 {
+            color: #22d3ee;
+            font-size: 30px;
+            margin-bottom: 18px;
+        }
+
+        .content p {
+            color: #94a3b8;
+            margin-bottom: 18px;
+        }
+
+        .card {
+            background: #0f1c2e;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            border-top: 1px solid #1e293b;
+            color: #64748b;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                padding: 18px 5%;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            nav a {
+                margin-left: 10px;
+                font-size: 14px;
+            }
+
+            section.content {
+                padding: 45px 6%;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Welcome to My Website!</h1>
-    <p>This is my first website, created for free.</p>
-    <button>Click Me</button>
+
+    <nav>
+        <div class="logo">MyWebsite.</div>
+        <div>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="tag">WELCOME TO MY WORLD</div>
+
+            <h1>Hello, I'm<br><span>Your Name</span></h1>
+
+            <p>
+                Welcome to my personal website.
+                I'm learning, building new skills, and creating something meaningful.
+            </p>
+
+            <a class="button" href="#about">Explore My Website ↘</a>
+        </section>
+
+        <section class="content" id="about">
+            <h2>About Me</h2>
+            <div class="card">
+                <p>
+                    Hi! I'm someone who loves learning new things,
+                    exploring technology, and improving every day.
+                </p>
+                <p>
+                    This is my personal corner of the internet.
+                    More about me and my journey will be added soon.
+                </p>
+            </div>
+        </section>
+
+        <section class="content" id="projects">
+            <h2>My Projects</h2>
+            <div class="card">
+                <h3>My First Website</h3>
+                <p>
+                    A personal website built with HTML and CSS
+                    and published for free using GitHub Pages.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 My Personal Website. Built with curiosity.
+    </footer>
+
 </body>
 </html>
