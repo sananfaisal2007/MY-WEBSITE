@@ -480,6 +480,47 @@ h1 {
     font-size: 14px;
   }
 }
+/* Prevent quiz page overflow */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+#quizArea,
+#welcomeForm {
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Buttons and inputs stay inside screen */
+#quizArea button,
+#welcomeForm button,
+#playerName {
+  max-width: 100%;
+}
+
+/* Mobile fix */
+@media (max-width: 600px) {
+
+  #quizArea,
+  #welcomeForm {
+    width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  #quizArea h2,
+  #quizGreeting {
+    font-size: 22px;
+  }
+}
 </style>
 </head>
 
