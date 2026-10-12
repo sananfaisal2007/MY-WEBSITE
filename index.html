@@ -483,6 +483,54 @@ section {
     }
 }
 
+  
+/* Snow gathering along the bottom edge */
+#snow-accumulation {
+    height: 0;
+    overflow: visible;
+    transition: height 1.5s ease;
+}
+
+#snow-accumulation::before,
+#snow-accumulation::after {
+    content: "";
+    position: absolute;
+    bottom: 55%;
+    border-radius: 50% 50% 0 0;
+    pointer-events: none;
+}
+
+#snow-accumulation::before {
+    left: -5%;
+    width: 65%;
+    height: 24px;
+    background: linear-gradient(
+        to bottom,
+        #ffffff,
+        #edf4ff
+    );
+}
+
+#snow-accumulation::after {
+    right: -5%;
+    width: 60%;
+    height: 17px;
+    background: linear-gradient(
+        to bottom,
+        #f9fcff,
+        #e5efff
+    );
+}
+
+#snow-accumulation {
+    background: linear-gradient(
+        to bottom,
+        #ffffff,
+        #e5efff
+    );
+    box-shadow: 0 -3px 14px rgba(225, 240, 255, 0.25);
+}
+
     </style>
 ```html
 
