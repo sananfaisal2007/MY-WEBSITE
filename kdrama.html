@@ -5,6 +5,156 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My K-Drama Library 🎬</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 25px 16px;
+        font-family: Arial, sans-serif;
+        color: white;
+        min-height: 100vh;
+        background:
+            radial-gradient(ellipse at top, #63315f 0%, transparent 55%),
+            linear-gradient(135deg, #100d1c, #28152e, #100b20);
+    }
+
+    body > h1 {
+        text-align: center;
+        font-size: clamp(30px, 5vw, 48px);
+        color: #ffc4df;
+        text-shadow: 0 0 22px #ff55b8;
+        margin-top: 30px;
+    }
+
+    body > p {
+        text-align: center;
+        color: #ead6e8;
+        line-height: 1.7;
+    }
+
+    body > a {
+        display: block;
+        width: fit-content;
+        margin: 22px auto 35px;
+        padding: 12px 22px;
+        border: 1px solid #ffacd9;
+        border-radius: 30px;
+        color: white;
+        background: #b13e8055;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    body > a:hover {
+        background: #c13e91;
+        transform: translateY(-3px);
+    }
+
+    .content {
+        max-width: 1100px;
+        margin: 25px auto;
+        padding: 25px;
+        border: 1px solid #ffffff25;
+        border-radius: 24px;
+        background: #ffffff09;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 0 30px #ff55b818;
+    }
+
+    .content h2 {
+        text-align: center;
+        color: #ffc4df;
+        font-size: clamp(25px, 4vw, 36px);
+    }
+
+    .content > p {
+        text-align: center;
+        color: #ead6e8;
+        line-height: 1.7;
+    }
+
+    .card {
+        margin: 18px 0;
+        padding: 20px;
+        border: 1px solid #ffacd940;
+        border-radius: 18px;
+        background: linear-gradient(145deg, #ffffff12, #bd478018);
+        box-shadow: 0 8px 25px #00000025;
+        transition: transform 0.3s, border-color 0.3s;
+        overflow: hidden;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        border-color: #ffacd9;
+    }
+
+    .card h3 {
+        color: #ffc4df;
+    }
+
+    .card p {
+        color: #ead6e8;
+        line-height: 1.6;
+    }
+
+    .card img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 12px auto;
+        border-radius: 14px;
+    }
+
+    .card a {
+        color: #ffb9df;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .card a:hover {
+        color: white;
+        text-decoration: underline;
+    }
+
+    input, button, select {
+        font: inherit;
+        max-width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #ffacd970;
+    }
+
+    input, select {
+        background: #ffffff12;
+        color: white;
+    }
+
+    button {
+        cursor: pointer;
+        color: white;
+        background: #a83d83;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            padding: 15px 10px;
+        }
+
+        .content {
+            padding: 15px;
+        }
+
+        .card {
+            padding: 14px;
+        }
+    }
+</style>
+
 </head>
 <body>
 
