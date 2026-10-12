@@ -614,6 +614,47 @@ section {
     }
 }
 
+   
+/* Magical Portal Sparkles */
+.dream-portal::after {
+    content: "✧";
+    position: absolute;
+    top: -8px;
+    right: 8px;
+    color: #e5d5ff;
+    font-size: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.5) rotate(-25deg);
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+.dream-portal:hover::after {
+    opacity: 1;
+    transform: scale(1.2) rotate(15deg);
+}
+
+.dream-portal:hover {
+    animation: portalFloat 1.8s ease-in-out infinite;
+}
+
+@keyframes portalFloat {
+    0%, 100% {
+        transform: translateY(-3px);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dream-portal:hover {
+        animation: none;
+    }
+}
+
     </style>
 ```html
 
