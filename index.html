@@ -1912,6 +1912,19 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
   background: rgba(255,255,255,.055);
   border: 1px solid rgba(255,255,255,.12);
 }
+    #celestialQuiz:not([hidden]) {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  width: 100%;
+  max-width: none;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0;
+  padding: 30px 20px;
+  overflow-y: auto;
+  border-radius: 0;
+}
 #celestialQuiz label { display:block; margin-bottom:8px; }
 #celestialQuiz input {
   width:100%; padding:13px; border-radius:12px;
