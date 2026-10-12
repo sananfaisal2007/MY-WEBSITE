@@ -692,18 +692,21 @@ const answerButtons = Array.from(
 );
 
 // Welcome form
+```javascript
 welcomeForm.addEventListener("submit", function(event) {
   event.preventDefault();
 
-  playerName = nameInput.value.trim();
+  const enteredName = nameInput.value.trim();
 
-  if (!playerName) {
-    message.textContent =
-      "🌸 Even magic needs your name first! 💜";
+  if (enteredName === "") {
+    message.textContent = "🌸 Even magic needs your name first! 💜";
     nameInput.focus();
     return;
   }
 
+  playerName = enteredName;
+
+  welcomeForm.hidden = true;
   message.textContent =
     "✨ Welcome, " + playerName + "! Your challenge awaits! 💜";
 
@@ -720,6 +723,7 @@ welcomeForm.addEventListener("submit", function(event) {
   answerOptions.hidden = true;
   answerFeedback.textContent = "";
   quizResult.hidden = true;
+
   nextQuestionBtn.hidden = false;
   nextQuestionBtn.textContent = "Start the Quiz! 🌙";
 
@@ -728,6 +732,7 @@ welcomeForm.addEventListener("submit", function(event) {
     block: "start"
   });
 });
+```
 
 // Start a new round with 10 random questions
 function startQuiz() {
