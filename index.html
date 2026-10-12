@@ -1531,5 +1531,44 @@ piano.addEventListener("ended", function () {
 <div id="snowfall-layer" aria-hidden="true"></div>
 <div id="snow-accumulation" aria-hidden="true"></div>
 
+
+<script>
+(function () {
+    const layer = document.getElementById("snowfall-layer");
+
+    if (!layer || layer.dataset.initialized === "true") return;
+    layer.dataset.initialized = "true";
+
+    const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reduceMotion) return;
+
+    const snowCount = window.innerWidth < 600 ? 45 : 85;
+    const fragment = document.createDocumentFragment();
+
+    for (let i = 0; i < snowCount; i++) {
+        const snow = document.createElement("span");
+        snow.className = "snowflake";
+        snow.textContent = Math.random() > 0.7 ? "❄" : "•";
+
+        const size = Math.random() * 5 + 3;
+        const duration = Math.random() * 10 + 10;
+        const delay = Math.random() * -20;
+
+        snow.style.left = Math.random() * 100 + "%";
+        snow.style.fontSize = size + "px";
+        snow.style.opacity = (Math.random() * 0.45 + 0.4).toFixed(2);
+        snow.style.animationDuration = duration + "s";
+        snow.style.animationDelay = delay + "s";
+
+        fragment.appendChild(snow);
+    }
+
+    layer.appendChild(fragment);
+})();
+</script>
+
 </body>
 </html>
