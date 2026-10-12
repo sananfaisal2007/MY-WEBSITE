@@ -1032,5 +1032,25 @@ document.querySelectorAll('nav a[href^="#"]').forEach(function (link) {
     ↑
 </button>
 
+
+<script>
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+window.addEventListener("scroll", function () {
+    if (window.scrollY > 300) {
+        scrollTopBtn.classList.add("visible");
+    } else {
+        scrollTopBtn.classList.remove("visible");
+    }
+});
+
+scrollTopBtn.addEventListener("click", function () {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
+</script>
+
 </body>
 </html>
