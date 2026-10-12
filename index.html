@@ -95,7 +95,22 @@ box-shadow: 0 0 22px rgba(180, 120, 255, 0.55);
     }
 }
 
-/* Professional Navigation Upgrade */
+
+/* Scroll Progress Bar */
+#scrollProgress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    z-index: 100001;
+    background: linear-gradient(90deg, #8b4dff, #e0b3ff);
+    box-shadow: 0 0 12px rgba(155, 100, 255, 0.7);
+    transition: width 0.08s linear;
+    pointer-events: none;
+}
+
+        /* Professional Navigation Upgrade */
 nav {
     position: sticky;
     top: 0;
