@@ -55,6 +55,26 @@ html {
                 transform 0.3s ease,
                 background 0.3s ease;
 }
+        
+@keyframes cuteCatBounce {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-6px) rotate(-5deg);
+    }
+}
+
+#scrollTopBtn.visible {
+    animation: cuteCatBounce 1.5s ease-in-out infinite;
+}
+
+#scrollTopBtn:hover {
+    animation-play-state: paused;
+    transform: scale(1.12);
+}
+
 
 #scrollTopBtn.visible {
     opacity: 1;
