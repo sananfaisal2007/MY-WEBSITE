@@ -2594,20 +2594,7 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
       if (!invite) return;
 
    invite.addEventListener("click", () => {
-  const quiz = document.getElementById("celestialQuiz");
-
-  if (quiz) {
-    quiz.hidden = false;
-    quiz.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-
-    setTimeout(() => {
-      const nameInput = quiz.querySelector("#cqName");
-      if (nameInput) nameInput.focus({ preventScroll: true });
-    }, 500);
-  }
+ window.location.href = "quiz.html";
 });
 
        
