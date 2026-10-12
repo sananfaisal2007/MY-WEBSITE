@@ -2175,5 +2175,253 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
 })();
 </script>
 
+
+<style>
+#adminQuizBoard {
+  max-width: 1000px;
+  margin: 45px auto;
+  padding: 24px;
+  color: #f8f3ff;
+  background: linear-gradient(145deg,#241139,#100b1c);
+  border: 1px solid #8b5cf6;
+  border-radius: 22px;
+  font-family: inherit;
+}
+#adminQuizBoard * { box-sizing: border-box; }
+#adminQuizBoard h2 {
+  color: #e9c7ff;
+  text-align: center;
+}
+#adminQuizBoard .aq-panel {
+  max-width: 620px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #563575;
+  border-radius: 16px;
+  background: rgba(255,255,255,.04);
+}
+#adminQuizBoard input {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  border: 1px solid #8b5cf6;
+  border-radius: 10px;
+  background: #160e27;
+  color: white;
+}
+#adminQuizBoard button {
+  padding: 11px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: #9333ea;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+#adminQuizBoard .aq-status {
+  color: #e9d5ff;
+  overflow-wrap: anywhere;
+}
+#adminQuizBoard .aq-table-wrap { overflow-x: auto; }
+#adminQuizBoard table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 14px;
+}
+#adminQuizBoard th, #adminQuizBoard td {
+  padding: 12px;
+  border-bottom: 1px solid #49305e;
+  text-align: left;
+  white-space: nowrap;
+}
+#adminQuizBoard th { color: #e9c7ff; }
+#adminQuizBoard .aq-hidden { display: none !important; }
+</style>
+
+<section id="adminQuizBoard">
+  <h2>🔐 Celestial Admin Result Board</h2>
+  <p style="text-align:center">
+    Private dashboard for viewing quiz attempts.
+  </p>
+
+  <div id="aqLoginPanel" class="aq-panel">
+    <h3>Admin Login</h3>
+    <p>Sign in with your Supabase admin account.</p>
+    <form id="aqLoginForm">
+      <label for="aqEmail">Admin email</label>
+      <input id="aqEmail" type="email" autocomplete="username"
+             required placeholder="Your admin email">
+
+      <label for="aqPassword">Admin password</label>
+      <input id="aqPassword" type="password"
+             autocomplete="current-password" required
+             placeholder="Your admin password">
+
+      <button type="submit">Login securely</button>
+    </form>
+    <p id="aqLoginStatus" class="aq-status" role="status"></p>
+  </div>
+
+  <div id="aqResultsPanel" class="aq-hidden">
+    <p id="aqWelcome" class="aq-status"></p>
+    <button id="aqRefresh" type="button">Refresh results</button>
+    <button id="aqLogout" type="button">Logout</button>
+    <p id="aqResultsStatus" class="aq-status" role="status"></p>
+
+    <div class="aq-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Score</th>
+            <th>Percentage</th>
+            <th>Played at</th>
+          </tr>
+        </thead>
+        <tbody id="aqResultsRows"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<script>
+(() => {
+  const board = document.getElementById("adminQuizBoard");
+  const quiz = document.getElementById("celestialQuiz");
+  if (quiz && board) quiz.insertAdjacentElement("afterend", board);
+
+  const $ = id => document.getElementById(id);
+  const loginPanel = $("aqLoginPanel");
+  const resultsPanel = $("aqResultsPanel");
+
+  function showStatus(id, message) {
+    $(id).textContent = message;
+  }
+
+  function showLoggedIn(isLoggedIn) {
+    loginPanel.classList.toggle("aq-hidden", isLoggedIn);
+    resultsPanel.classList.toggle("aq-hidden", !isLoggedIn);
+  }
+
+  async function loadResults() {
+    showStatus("aqResultsStatus", "Loading saved results…");
+    $("aqResultsRows").replaceChildren();
+
+    try {
+      const { data, error } = await supabaseClient
+        .from("quiz_results")
+        .select("player_name,score,total_questions,played_at")
+        .order("played_at", { ascending: false })
+        .limit(100);
+
+      if (error) throw error;
+
+      if (!data || data.length === 0) {
+        showStatus("aqResultsStatus", "No quiz results found yet.");
+        return;
+      }
+
+      const rows = $("aqResultsRows");
+      data.forEach(item => {
+        const tr = document.createElement("tr");
+        const percentage = item.total_questions
+          ? Math.round(item.score / item.total_questions * 100)
+          : 0;
+
+        [
+          item.player_name,
+          `${item.score} / ${item.total_questions}`,
+          `${percentage}%`,
+          new Date(item.played_at).toLocaleString()
+        ].forEach(value => {
+          const td = document.createElement("td");
+          td.textContent = value;
+          tr.appendChild(td);
+        });
+
+        rows.appendChild(tr);
+      });
+
+      showStatus(
+        "aqResultsStatus",
+        `Showing ${data.length} latest quiz attempts.`
+      );
+    } catch (error) {
+      console.error("Admin results loading failed:", error);
+      showStatus(
+        "aqResultsStatus",
+        "Could not load results. Check your admin access and database policy."
+      );
+    }
+  }
+
+  $("aqLoginForm").addEventListener("submit", async event => {
+    event.preventDefault();
+    showStatus("aqLoginStatus", "Signing in…");
+
+    try {
+      const { data, error } = await supabaseClient.auth
+        .signInWithPassword({
+          email: $("aqEmail").value.trim(),
+          password: $("aqPassword").value
+        });
+
+      if (error) throw error;
+
+      // The database RLS policy must still restrict reads to the admin UID.
+      if (!data.user ||
+          data.user.id !== "1a5cd185-732d-4131-96e2-d6da84c3c89d") {
+        await supabaseClient.auth.signOut();
+        throw new Error("This account is not authorized as the admin.");
+      }
+
+      showLoggedIn(true);
+      $("aqWelcome").textContent = "Admin authenticated. Welcome back!";
+      await loadResults();
+    } catch (error) {
+      console.error("Admin login failed:", error);
+      showStatus("aqLoginStatus", error.message || "Login failed.");
+    }
+  });
+
+  $("aqRefresh").addEventListener("click", loadResults);
+
+  $("aqLogout").addEventListener("click", async () => {
+    await supabaseClient.auth.signOut();
+    showLoggedIn(false);
+    $("aqPassword").value = "";
+    showStatus("aqLoginStatus", "You have logged out.");
+  });
+
+  // Restore the board if the admin already has an active session.
+  async function restoreSession() {
+    try {
+      const { data, error } = await supabaseClient.auth.getUser();
+      if (error) throw error;
+
+      if (data.user &&
+          data.user.id === "1a5cd185-732d-4131-96e2-d6da84c3c89d") {
+        showLoggedIn(true);
+        $("aqWelcome").textContent = "Your admin session is active.";
+        await loadResults();
+      } else {
+        showLoggedIn(false);
+      }
+    } catch (error) {
+      console.error("Session check failed:", error);
+      showLoggedIn(false);
+    }
+  }
+
+  if (typeof supabaseClient !== "undefined") {
+    restoreSession();
+  } else {
+    showStatus("aqLoginStatus", "Supabase client is not initialized.");
+  }
+})();
+</script>
+
 </body>
 </html>
