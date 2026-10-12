@@ -614,6 +614,34 @@ height: 160px;
 }
 </style>
     
+
+<style>
+/* Cinematic Homepage Reveal */
+@keyframes homepageReveal {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+        filter: blur(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+body.home-reveal > *:not(#welcome-screen) {
+    animation: homepageReveal 1.1s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.home-reveal > *:not(#welcome-screen) {
+        animation: none;
+    }
+}
+</style>
+
 </head>
 
 <body>
