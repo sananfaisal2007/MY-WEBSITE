@@ -817,7 +817,6 @@ const answerButtons = Array.from(
 );
 
 // Welcome form
-```javascript
 welcomeForm.addEventListener("submit", function(event) {
   event.preventDefault();
   console.log("Form submitted");
@@ -853,12 +852,10 @@ welcomeForm.addEventListener("submit", function(event) {
   nextQuestionBtn.hidden = false;
   nextQuestionBtn.textContent = "Start the Quiz! 🌙";
 
-  quizArea.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
+ quizArea.scrollIntoView({
+  behavior: "smooth",
+  block: "start"
 });
-```
 
 // Start a new round with 10 random questions
 function startQuiz() {
@@ -940,12 +937,7 @@ answerButtons.forEach((button, index) => {
 });
 
 // Next question or finish the quiz
-  document.getElementById("startQuizBtn").addEventListener("click", function() {
-  setTimeout(() => {
-    nextQuestionBtn.hidden = false;
-    nextQuestionBtn.textContent = "Start the Quiz! 🌙";
-  }, 100);
-});
+ 
 nextQuestionBtn.addEventListener("click", function() {
   if (quizArea.hidden) return;
 
