@@ -839,18 +839,32 @@ function toggleTheme() {
 </div>
 
 
+
 <script>
 function enterMyWorld() {
-    const welcomeScreen = document.getElementById("welcome-screen");
+    const screen = document.getElementById("welcome-screen");
+    const button = document.getElementById("enter-world-btn");
 
-    welcomeScreen.style.transition = "opacity 0.8s ease";
-    welcomeScreen.style.opacity = "0";
+    if (!screen || screen.classList.contains("leaving")) return;
+
+    screen.classList.add("leaving");
+    button.disabled = true;
+    button.innerHTML = "Entering My World <span>✦</span>";
+
+    screen.style.transition =
+        "opacity 1.2s ease, transform 1.2s ease, filter 1.2s ease";
+
+    screen.style.opacity = "0";
+    screen.style.transform = "scale(1.08)";
+    screen.style.filter = "blur(12px)";
 
     setTimeout(function () {
-        welcomeScreen.style.display = "none";
-    }, 800);
+        screen.style.display = "none";
+        document.body.style.overflow = "";
+    }, 1200);
 }
 </script>
+
 
 </body>
 </html>
