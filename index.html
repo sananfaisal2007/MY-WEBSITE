@@ -913,40 +913,102 @@ body.home-reveal > *:not(#welcome-screen) {
 
 <style>
 /* Peaceful Piano Floating Button */
+
+<style>
+/* Premium Floating Piano Player */
 #pianoToggle {
     position: fixed;
-    left: 22px;
+    left: 24px;
     bottom: 24px;
-    z-index: 9998;
-    padding: 13px 19px;
-    border: 1px solid rgba(190, 140, 255, 0.65);
-    border-radius: 30px;
-    background: rgba(35, 20, 60, 0.92);
-    color: #f0e3ff;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 21px;
+    border: 1px solid rgba(210, 175, 255, 0.65);
+    border-radius: 50px;
+    background: linear-gradient(
+        135deg,
+        rgba(53, 29, 86, 0.96),
+        rgba(19, 13, 35, 0.96)
+    );
+    color: #f5eaff;
     font-size: 14px;
+    font-weight: 600;
     letter-spacing: 0.5px;
     cursor: pointer;
-    box-shadow: 0 0 20px rgba(155, 100, 255, 0.2);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    transition: 0.3s ease;
+    box-shadow:
+        0 0 18px rgba(155, 100, 255, 0.25),
+        inset 0 0 12px rgba(210, 175, 255, 0.06);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition:
+        background 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease;
+    isolation: isolate;
+}
+
+#pianoToggle::before {
+    content: "♫";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(175, 120, 255, 0.18);
+    color: #e4caff;
+    font-size: 20px;
+    box-shadow: 0 0 12px rgba(175, 120, 255, 0.15);
 }
 
 #pianoToggle:hover {
-    background: #7540bd;
-    box-shadow: 0 0 28px rgba(155, 100, 255, 0.5);
+    background: linear-gradient(
+        135deg,
+        rgba(105, 60, 165, 0.98),
+        rgba(43, 24, 73, 0.98)
+    );
+    border-color: #d9baff;
+    box-shadow:
+        0 0 25px rgba(155, 100, 255, 0.4),
+        0 8px 25px rgba(0, 0, 0, 0.25);
     transform: translateY(-3px);
+}
+
+#pianoToggle:focus-visible {
+    outline: 2px solid #e1c6ff;
+    outline-offset: 4px;
+}
+
+#pianoToggle:active {
+    transform: scale(0.96);
 }
 
 @media (max-width: 600px) {
     #pianoToggle {
         left: 14px;
         bottom: 16px;
-        padding: 11px 15px;
+        padding: 10px 15px;
+        gap: 8px;
         font-size: 12px;
+    }
+
+    #pianoToggle::before {
+        width: 27px;
+        height: 27px;
+        font-size: 18px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #pianoToggle {
+        transition: none;
     }
 }
 </style>
+
 
 </head>
 
