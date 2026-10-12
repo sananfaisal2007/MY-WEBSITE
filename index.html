@@ -455,6 +455,34 @@ section {
     box-shadow: 0 -4px 18px rgba(220, 235, 255, 0.18);
 }
 
+    
+.snowflake {
+    position: absolute;
+    top: -20px;
+    color: #fff;
+    user-select: none;
+    pointer-events: none;
+    will-change: transform;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.55);
+    animation: snowFall linear infinite;
+}
+
+@keyframes snowFall {
+    0% {
+        transform: translate3d(0, -10px, 0) rotate(0deg);
+    }
+    100% {
+        transform: translate3d(35px, 110vh, 0) rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .snowflake {
+        animation: none;
+        display: none;
+    }
+}
+
     </style>
 ```html
 
