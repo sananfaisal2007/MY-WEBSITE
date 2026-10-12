@@ -604,9 +604,22 @@ body {
   </button>
 
   <div id="quizResult" hidden>
-    <h2>Challenge Complete! 🎉</h2>
-    <p id="finalScore"></p>
-  </div>
+
+  <h2 id="resultTitle">
+    Challenge Complete! 🎉
+  </h2>
+
+  <h3 id="resultName"></h3>
+
+  <p id="finalScore"></p>
+
+  <p id="resultMessage"></p>
+
+  <button id="restartQuizBtn" class="answer-option">
+    Play Again 🔁
+  </button>
+
+</div>
 </section>
 
 </main>
@@ -811,6 +824,9 @@ const answerFeedback = document.getElementById("answerFeedback");
 const nextQuestionBtn = document.getElementById("nextQuestionBtn");
 const quizResult = document.getElementById("quizResult");
 const finalScore = document.getElementById("finalScore");
+  const resultName = document.getElementById("resultName");
+const resultMessage = document.getElementById("resultMessage");
+const restartQuizBtn = document.getElementById("restartQuizBtn");
 
 const answerButtons = Array.from(
   answerOptions.querySelectorAll(".answer-option")
