@@ -1042,38 +1042,20 @@ finalScore.textContent =
 resultMessage.textContent = reaction;
 
 
-  let restartButton = document.getElementById("restartQuizBtn");
+const restartButton = document.getElementById("restartQuizBtn");
 
+restartButton.hidden = false;
+restartButton.disabled = false;
 
-  if (!restartButton) {
+restartButton.onclick = function() {
+  quizResult.hidden = true;
+  startQuiz();
 
-    restartButton = document.createElement("button");
-
-    restartButton.id = "restartQuizBtn";
-    restartButton.type = "button";
-    restartButton.textContent = "Play Again 🔁";
-    restartButton.className = "answer-option";
-    restartButton.style.marginTop = "16px";
-
-
-    restartButton.addEventListener("click", function() {
-
-      quizResult.hidden = true;
-      startQuiz();
-
-      quizArea.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-
-    });
-
-    quizResult.appendChild(restartButton);
-  }
-
-  restartButton.hidden = false;
-  restartButton.disabled = false;
-}
+  quizArea.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+};
 
 
 </script>
