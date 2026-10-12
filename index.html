@@ -1007,6 +1007,31 @@ body.home-reveal > *:not(#welcome-screen) {
         transition: none;
     }
 }
+
+/* Gentle Piano Playing Glow */
+@keyframes pianoGlow {
+    0%, 100% {
+        box-shadow:
+            0 0 18px rgba(155, 100, 255, 0.25),
+            inset 0 0 12px rgba(210, 175, 255, 0.06);
+    }
+    50% {
+        box-shadow:
+            0 0 30px rgba(170, 110, 255, 0.5),
+            inset 0 0 16px rgba(210, 175, 255, 0.12);
+    }
+}
+
+#pianoToggle.playing {
+    animation: pianoGlow 2.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #pianoToggle.playing {
+        animation: none;
+    }
+}
+
 </style>
 
 
