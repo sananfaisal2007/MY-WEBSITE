@@ -531,6 +531,89 @@ section {
     box-shadow: 0 -3px 14px rgba(225, 240, 255, 0.25);
 }
 
+   
+/* Celestial Dream Portals */
+.nav-portals {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.dream-portal {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    border: 1px solid rgba(190, 160, 255, 0.22);
+    border-radius: 30px;
+    background: rgba(25, 20, 45, 0.48);
+    color: #f4edff;
+    text-decoration: none;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease,
+        background 0.35s ease;
+}
+
+.portal-icon {
+    display: inline-block;
+    font-size: 18px;
+    filter: drop-shadow(0 0 5px rgba(190, 155, 255, 0.35));
+    transition: transform 0.4s ease;
+}
+
+.portal-label {
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.dream-portal:hover {
+    transform: translateY(-4px);
+    border-color: rgba(205, 175, 255, 0.8);
+    background: rgba(100, 65, 150, 0.35);
+    box-shadow:
+        0 0 18px rgba(165, 115, 255, 0.22),
+        inset 0 0 12px rgba(220, 195, 255, 0.06);
+}
+
+.dream-portal:hover .portal-icon {
+    transform: translateY(-3px) rotate(-8deg) scale(1.2);
+}
+
+.dream-portal:focus-visible {
+    outline: 2px solid #d5bdff;
+    outline-offset: 4px;
+}
+
+@media (max-width: 700px) {
+    .nav-portals {
+        gap: 7px;
+    }
+
+    .dream-portal {
+        padding: 8px 11px;
+        gap: 6px;
+    }
+
+    .portal-label {
+        font-size: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dream-portal,
+    .portal-icon {
+        transition: none;
+    }
+}
+
     </style>
 ```html
 
