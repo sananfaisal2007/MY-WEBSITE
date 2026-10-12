@@ -990,42 +990,73 @@ function showResult() {
   );
 
   let reaction;
+  let title;
+
 
   if (score === 10) {
-    reaction = "LEGENDARY! Sanan ka true inner-circle expert! 👑💜";
-  } else if (score >= 8) {
-    reaction = "Amazing! Tum Sanan ko kaafi achhi tarah jaante ho! ✨";
-  } else if (score >= 5) {
-    reaction = "Not bad! Sanan ki story mein abhi aur chapters hain 😂";
-  } else {
-    reaction = "Plot twist! Sanan ko abhi aur jaan'na baqi hai 💀";
+    title = "👑 Sanan Soulmate Level";
+    reaction =
+      "LEGENDARY! Tum Sanan ke inner circle ke official member lagte ho 😂💜";
+  } 
+  
+  else if (score >= 8) {
+    title = "🌟 Sanan Expert Level";
+    reaction =
+      "Amazing! Tum Sanan ki story ke bohat saare secret chapters jaante ho ✨";
+  } 
+  
+  else if (score >= 5) {
+    title = "🌙 Almost There";
+    reaction =
+      "Not bad! Kuch secrets miss huay hain, lekin investigation abhi baqi hai 😂";
+  } 
+  
+  else {
+    title = "💀 Mystery Person";
+    reaction =
+      "Plot twist! Lagta hai Sanan ko samajhne ke liye Season 2 dekhna parega 💀";
   }
 
+
   finalScore.textContent =
-    playerName + ", tumhara score " + score + "/" +
-    TOTAL_QUESTIONS + " (" + percentage + "%) hai. " +
+    "🌙 " + playerName + " ka Result 🌙\n\n" +
+    "🏆 " + title + "\n\n" +
+    "Score: " + score + "/" +
+    TOTAL_QUESTIONS +
+    " (" + percentage + "%)\n\n" +
     reaction;
+
 
   let restartButton = document.getElementById("restartQuizBtn");
 
+
   if (!restartButton) {
+
     restartButton = document.createElement("button");
+
     restartButton.id = "restartQuizBtn";
     restartButton.type = "button";
     restartButton.textContent = "Play Again 🔁";
     restartButton.className = "answer-option";
     restartButton.style.marginTop = "16px";
 
+
     restartButton.addEventListener("click", function() {
+
+      quizResult.hidden = true;
       startQuiz();
+
       quizArea.scrollIntoView({
         behavior: "smooth",
         block: "start"
       });
+
     });
+
 
     quizResult.appendChild(restartButton);
   }
+
 
   restartButton.hidden = false;
   restartButton.disabled = false;
