@@ -155,6 +155,52 @@
     }
 </style>
 
+```html
+<style>
+.drama-cover {
+    text-align: center;
+    padding: 18px;
+    border: 2px solid #e6b8ff;
+    border-radius: 22px;
+    background: linear-gradient(145deg, #160b2c, #52246b, #211033);
+    box-shadow: 0 0 22px rgba(210, 140, 255, 0.4);
+    overflow: hidden;
+}
+
+.drama-cover-image {
+    display: block;
+    width: 100%;
+    max-width: 700px;
+    height: 380px;
+    object-fit: cover;
+    margin: 0 auto;
+    border: 2px solid #e6b8ff;
+    border-radius: 16px;
+}
+
+.drama-cover h3 {
+    color: #fff0ff;
+    font-size: 26px;
+    margin: 18px 0 8px;
+    text-shadow: 0 0 12px #d78aff;
+}
+
+.drama-cover p {
+    color: #f0d9ff;
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+    .drama-cover-image {
+        height: 240px;
+    }
+
+    .drama-cover h3 {
+        font-size: 21px;
+    }
+}
+</style>
+```
 </head>
 <body>
 
@@ -169,35 +215,19 @@
 ```
 <input type="text" id="dramaSearch" placeholder="Search Korean dramas..." oninput="searchDramas()" style="width:100%; padding:12px; margin:15px 0; border-radius:10px;">
 
+```html
 <div id="dramaList">
-    <div class="card">
-        <h3>Can This Love Be Translated? (2026)</h3>
-        <p><strong>Genre:</strong> Romance, Comedy</p>
-        <p><strong>Cast:</strong> Kim Seon-ho, Go Youn-jung</p>
-        <p>A romantic story about a multilingual interpreter and a famous actress.</p>
-    </div>
-
-    <div class="card">
-        <h3>Perfect Crown (2026)</h3>
-        <p><strong>Genre:</strong> Romance, Royal Drama</p>
-        <p><strong>Cast:</strong> IU, Byeon Woo-seok</p>
-        <p>A royal romance set in an alternate modern Korea.</p>
-    </div>
-
-    <div class="card">
-        <h3>Boyfriend on Demand (2026)</h3>
-        <p><strong>Genre:</strong> Romance, Comedy</p>
-        <p><strong>Cast:</strong> Jisoo, Seo In-guk</p>
-        <p>A romance exploring virtual dating and unexpected connections.</p>
-    </div>
-
-    <div class="card">
-        <h3>Queen of Tears (2024)</h3>
-        <p><strong>Genre:</strong> Romance, Melodrama</p>
-        <p><strong>Cast:</strong> Kim Soo-hyun, Kim Ji-won</p>
-        <p>A married couple faces challenges while rediscovering their love.</p>
+    <div class="card drama-cover">
+        <img
+            src="https://i.pinimg.com/originals/07/53/1f/07531f44438081772d5fa0835e5de95e.jpg"
+            alt="My Favourite Korean Dramas"
+            class="drama-cover-image"
+        >
+        <h3>♡ My Favourite K-Dramas ♡</h3>
+        <p>Romance • Comedy • Mystery • Memories 🇰🇷</p>
     </div>
 </div>
+```
 ```
 
 </section>
