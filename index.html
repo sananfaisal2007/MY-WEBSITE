@@ -677,6 +677,40 @@ section {
     color: #ffffff;
 }
 
+  
+/* Dream Portal Navigation Layout */
+.nav-portals {
+    max-width: 100%;
+    min-width: 0;
+}
+
+.dream-portal {
+    flex-shrink: 0;
+}
+
+/* Keep navigation tidy on smaller screens */
+@media (max-width: 700px) {
+    .nav-portals {
+        width: 100%;
+        max-height: 180px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 8px 4px;
+        justify-content: center;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(190, 160, 255, 0.45) transparent;
+    }
+
+    .dream-portal {
+        max-width: 100%;
+    }
+
+    .portal-label {
+        white-space: normal;
+        text-align: center;
+    }
+}
+
     </style>
 ```html
 
