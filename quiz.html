@@ -969,9 +969,10 @@ nextQuestionBtn.addEventListener("click", function() {
 
   currentQuestion++;
 
-  if (currentQuestion < TOTAL_QUESTIONS) {
+ if (currentQuestion < TOTAL_QUESTIONS) {
     showQuestion();
   } else {
+    console.log("LAST QUESTION FINISHED");
     showResult();
   }
 
