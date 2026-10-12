@@ -2423,5 +2423,178 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
 })();
 </script>
 
+
+<!-- CELESTIALDREAMER: Floating Quiz Invitation -->
+<style>
+  #quizMagicInvite {
+    position: fixed;
+    right: 18px;
+    bottom: 125px;
+    z-index: 9998;
+    width: 174px;
+    padding: 15px 13px;
+    border: 1px solid rgba(231, 199, 255, 0.8);
+    border-radius: 22px;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(255,255,255,.2), transparent 45%),
+      linear-gradient(145deg, #482078, #21103f 65%, #35105a);
+    box-shadow:
+      0 0 12px rgba(194, 115, 255, .8),
+      0 0 28px rgba(148, 66, 255, .42),
+      inset 0 0 14px rgba(255,255,255,.08);
+    font-family: inherit;
+    animation: quizInviteFloat 3s ease-in-out infinite,
+               quizInviteGlow 2.5s ease-in-out infinite;
+    transition: transform .25s ease;
+  }
+
+  #quizMagicInvite::before {
+    content: "✦  ·  ✧  ·  ✦";
+    display: block;
+    color: #ffe6ff;
+    font-size: 13px;
+    letter-spacing: 5px;
+    margin-bottom: 5px;
+    animation: quizStars 3s linear infinite;
+  }
+
+  #quizMagicInvite .quiz-mascot {
+    display: block;
+    font-size: 34px;
+    line-height: 1.3;
+    filter: drop-shadow(0 0 8px #f5c5ff);
+    animation: quizMascot 2s ease-in-out infinite;
+  }
+
+  #quizMagicInvite .quiz-invite-title {
+    display: block;
+    margin-top: 5px;
+    color: #ffe8ff;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.35;
+    text-shadow: 0 0 10px #d68bff;
+  }
+
+  #quizMagicInvite .quiz-invite-subtitle {
+    display: block;
+    margin-top: 5px;
+    color: #fff;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  #quizMagicInvite .quiz-invite-cta {
+    display: block;
+    margin-top: 10px;
+    padding: 8px 7px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #f2b7ff, #cda4ff);
+    color: #29113d;
+    font-size: 12px;
+    font-weight: 900;
+    box-shadow: 0 0 13px rgba(239, 180, 255, .55);
+  }
+
+  #quizMagicInvite:hover {
+    transform: scale(1.06);
+  }
+
+  @keyframes quizInviteFloat {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -9px; }
+  }
+
+  @keyframes quizInviteGlow {
+    0%, 100% {
+      box-shadow: 0 0 12px rgba(194,115,255,.7),
+                  0 0 25px rgba(148,66,255,.35);
+    }
+    50% {
+      box-shadow: 0 0 19px rgba(238,176,255,.95),
+                  0 0 38px rgba(148,66,255,.65);
+    }
+  }
+
+  @keyframes quizMascot {
+    0%, 100% { transform: rotate(-7deg) scale(1); }
+    50% { transform: rotate(7deg) scale(1.09); }
+  }
+
+  @keyframes quizStars {
+    0%, 100% { opacity: .65; }
+    50% { opacity: 1; }
+  }
+
+  @media (max-width: 600px) {
+    #quizMagicInvite {
+      right: 10px;
+      bottom: 112px;
+      width: 145px;
+      padding: 11px 9px;
+      border-radius: 18px;
+    }
+
+    #quizMagicInvite .quiz-mascot {
+      font-size: 28px;
+    }
+
+    #quizMagicInvite .quiz-invite-title {
+      font-size: 13px;
+    }
+
+    #quizMagicInvite .quiz-invite-subtitle,
+    #quizMagicInvite .quiz-invite-cta {
+      font-size: 11px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #quizMagicInvite,
+    #quizMagicInvite * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+
+<button id="quizMagicInvite"
+        type="button"
+        aria-label="Scroll to the Celestial Challenge quiz">
+  <span class="quiz-mascot" aria-hidden="true">🌙✨</span>
+  <span class="quiz-invite-title">A Little Challenge Awaits!</span>
+  <span class="quiz-invite-subtitle">
+    Think you know it all? 💜
+  </span>
+  <span class="quiz-invite-cta">✦ PLAY QUIZ ✦</span>
+</button>
+
+<script>
+  (() => {
+    const invite = document.getElementById("quizMagicInvite");
+
+    invite.addEventListener("click", () => {
+      const quiz = document.getElementById("celestialQuiz");
+
+      if (quiz) {
+        quiz.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+
+        setTimeout(() => {
+          const nameInput = quiz.querySelector("input");
+          if (nameInput) nameInput.focus({ preventScroll: true });
+        }, 700);
+      }
+    });
+  })();
+</script>
+
 </body>
 </html>
