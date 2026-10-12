@@ -572,9 +572,9 @@ body {
       >
     </div>
 
-    <button class="start-btn" type="submit">
-      🌙 LET THE MAGIC BEGIN ✨
-    </button>
+    <button id="startQuizBtn" class="start-btn" type="submit">
+  🌙 LET THE MAGIC BEGIN ✨
+</button>
 
     <p id="message" aria-live="polite"></p>
   </form>
@@ -939,6 +939,12 @@ answerButtons.forEach((button, index) => {
 });
 
 // Next question or finish the quiz
+  document.getElementById("startQuizBtn").addEventListener("click", function() {
+  setTimeout(() => {
+    nextQuestionBtn.hidden = false;
+    nextQuestionBtn.textContent = "Start the Quiz! 🌙";
+  }, 100);
+});
 nextQuestionBtn.addEventListener("click", function() {
   if (quizArea.hidden) return;
 
