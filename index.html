@@ -1090,5 +1090,26 @@ scrollTopBtn.addEventListener("click", function () {
 });
 </script>
 
+
+<script>
+const scrollProgress = document.getElementById("scrollProgress");
+
+function updateScrollProgress() {
+    const scrollableHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+    const progress = scrollableHeight > 0
+        ? (window.scrollY / scrollableHeight) * 100
+        : 0;
+
+    scrollProgress.style.width = progress + "%";
+}
+
+window.addEventListener("scroll", updateScrollProgress);
+window.addEventListener("resize", updateScrollProgress);
+
+updateScrollProgress();
+</script>
+
 </body>
 </html>
