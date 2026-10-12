@@ -1236,5 +1236,31 @@ updateScrollProgress();
     ♫ Play Piano
 </button>
 
+
+<script>
+const piano = document.getElementById("peacefulPiano");
+const pianoButton = document.getElementById("pianoToggle");
+
+pianoButton.addEventListener("click", async function () {
+    if (piano.paused) {
+        try {
+            await piano.play();
+            pianoButton.innerHTML = "♫ Pause Piano";
+            pianoButton.setAttribute("aria-label", "Pause peaceful piano");
+        } catch (error) {
+            pianoButton.innerHTML = "Try Again ♫";
+        }
+    } else {
+        piano.pause();
+        pianoButton.innerHTML = "♫ Play Piano";
+        pianoButton.setAttribute("aria-label", "Play peaceful piano");
+    }
+});
+
+piano.addEventListener("ended", function () {
+    pianoButton.innerHTML = "♫ Play Piano";
+});
+</script>
+
 </body>
 </html>
