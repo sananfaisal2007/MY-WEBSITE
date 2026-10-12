@@ -1618,5 +1618,35 @@ piano.addEventListener("ended", function () {
 })();
 </script>
 
+
+<script>
+(function () {
+    const snowBase = document.getElementById("snow-accumulation");
+
+    if (!snowBase || snowBase.dataset.initialized === "true") return;
+    snowBase.dataset.initialized = "true";
+
+    const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reduceMotion) return;
+
+    let height = 0;
+    const maxHeight = window.innerWidth < 600 ? 24 : 36;
+
+    function accumulateSnow() {
+        height = Math.min(height + 1, maxHeight);
+        snowBase.style.height = height + "px";
+
+        if (height < maxHeight) {
+            setTimeout(accumulateSnow, 2500);
+        }
+    }
+
+    setTimeout(accumulateSnow, 1500);
+})();
+</script>
+
 </body>
 </html>
