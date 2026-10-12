@@ -424,7 +424,19 @@ document.getElementById("welcomeForm").addEventListener("submit", function(event
 
   message.textContent = "✨ Hello, " + playerName + "! Your magical quiz is coming next! 💜";
 
-  // Next step: connect this button to the actual quiz.
+  
+  document.getElementById("quizArea").hidden = false;
+  document.getElementById("quizGreeting").textContent =
+    "Welcome, " + playerName + "! 💜 Let's test your Sanan knowledge!";
+  document.getElementById("questionText").textContent =
+    "✨ Ready to discover how well you know Sanan?";
+  document.getElementById("questionCounter").textContent =
+    "Your challenge starts here!";
+  document.getElementById("answerOptions").hidden = true;
+  document.getElementById("nextQuestionBtn").hidden = false;
+  document.getElementById("nextQuestionBtn").textContent =
+    "Start the Quiz! 🌙";
+
 });
 </script>
 
