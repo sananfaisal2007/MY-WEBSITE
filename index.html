@@ -2577,6 +2577,7 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
 <script>
   (() => {
     const invite = document.getElementById("quizMagicInvite");
+      if (!invite) return;
 
    invite.addEventListener("click", () => {
   const quiz = document.getElementById("celestialQuiz");
@@ -2595,12 +2596,7 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
   }
 });
 
-        setTimeout(() => {
-          const nameInput = quiz.querySelector("input");
-          if (nameInput) nameInput.focus({ preventScroll: true });
-        }, 700);
-      }
-    });
+       
   })();
 </script>
 
