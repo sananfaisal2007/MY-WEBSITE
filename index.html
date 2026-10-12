@@ -1884,5 +1884,296 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
     console.log("Supabase client initialized");
 </script>
 
+
+<style>
+#celestialQuiz {
+  --cq-purple: #a855f7;
+  max-width: 900px;
+  margin: 55px auto;
+  padding: 28px;
+  color: #f8f3ff;
+  border: 1px solid rgba(192,132,252,.5);
+  border-radius: 26px;
+  background: radial-gradient(circle at top right,#51218a 0%,#1c1034 48%,#0d0a19 100%);
+  box-shadow: 0 0 35px rgba(168,85,247,.2);
+  font-family: inherit;
+}
+#celestialQuiz * { box-sizing: border-box; }
+#celestialQuiz h2 {
+  text-align: center; font-size: clamp(25px,4vw,38px);
+  margin: 0 0 10px; color: #e9c7ff;
+}
+#celestialQuiz .cq-subtitle {
+  text-align: center; color: #d9c8ee; margin-bottom: 24px;
+}
+#celestialQuiz .cq-panel {
+  max-width: 650px; margin: auto;
+  padding: 22px; border-radius: 20px;
+  background: rgba(255,255,255,.055);
+  border: 1px solid rgba(255,255,255,.12);
+}
+#celestialQuiz label { display:block; margin-bottom:8px; }
+#celestialQuiz input {
+  width:100%; padding:13px; border-radius:12px;
+  border:1px solid #8b5cf6; background:#160e27;
+  color:white; font-size:16px; margin-bottom:14px;
+}
+#celestialQuiz button {
+  border:0; border-radius:12px; padding:12px 17px;
+  cursor:pointer; font-weight:700; font-size:15px;
+  transition:transform .2s, filter .2s;
+}
+#celestialQuiz button:hover { transform:translateY(-2px); filter:brightness(1.12); }
+#celestialQuiz .cq-primary {
+  background:linear-gradient(100deg,#9333ea,#c084fc);
+  color:white; width:100%;
+}
+#celestialQuiz .cq-option {
+  width:100%; text-align:left; margin:7px 0;
+  background:rgba(255,255,255,.08); color:#f8f3ff;
+  border:1px solid rgba(216,180,254,.3);
+}
+#celestialQuiz .cq-option:disabled { cursor:default; opacity:.85; }
+#celestialQuiz .cq-option.cq-correct { background:#166534; border-color:#4ade80; }
+#celestialQuiz .cq-option.cq-wrong { background:#7f1d1d; border-color:#f87171; }
+#celestialQuiz .cq-topline {
+  display:flex; justify-content:space-between; gap:12px;
+  color:#e9d5ff; font-size:14px; margin-bottom:12px;
+}
+#celestialQuiz .cq-track {
+  height:8px; background:#352447; border-radius:20px;
+  overflow:hidden; margin-bottom:22px;
+}
+#celestialQuiz .cq-fill {
+  height:100%; width:0; background:linear-gradient(90deg,#a855f7,#f0abfc);
+  transition:width .3s;
+}
+#celestialQuiz #cqQuestion { font-size:21px; line-height:1.5; margin:0 0 16px; }
+#celestialQuiz .cq-feedback { min-height:25px; margin:10px 0; color:#e9d5ff; }
+#celestialQuiz .cq-hidden { display:none !important; }
+#celestialQuiz .cq-result { text-align:center; }
+#celestialQuiz .cq-score {
+  font-size:44px; font-weight:800; color:#e9c7ff; margin:15px 0;
+}
+#celestialQuiz .cq-note { color:#d9c8ee; line-height:1.6; }
+#celestialQuiz .cq-status { font-size:13px; margin-top:12px; color:#d9c8ee; }
+@media(max-width:600px) {
+  #celestialQuiz { margin:30px 12px; padding:16px; }
+  #celestialQuiz .cq-panel { padding:16px; }
+}
+</style>
+
+<section id="celestialQuiz">
+  <h2>✦ Celestial Challenge ✦</h2>
+  <p class="cq-subtitle">A little magic, 10 questions, and one legendary result.</p>
+
+  <div id="cqWelcome" class="cq-panel">
+    <p style="text-align:center;font-size:30px;margin-top:0">🌙✨</p>
+    <p style="text-align:center">Ready to test your knowledge, dreamer?</p>
+    <p class="cq-note" style="text-align:center">
+      Warning: your brain may ask for a coffee break. ☕😄
+    </p>
+    <label for="cqName">What should we call you?</label>
+    <input id="cqName" maxlength="40" autocomplete="given-name"
+           placeholder="Enter your name" />
+    <button id="cqStart" class="cq-primary">Enter the Portal ✨</button>
+    <p id="cqWelcomeError" class="cq-status" role="alert"></p>
+  </div>
+
+  <div id="cqGame" class="cq-panel cq-hidden">
+    <div class="cq-topline">
+      <span id="cqQuestionCount">Question 1 of 10</span>
+      <span id="cqLiveScore">Score: 0</span>
+    </div>
+    <div class="cq-track"><div id="cqProgress" class="cq-fill"></div></div>
+    <h3 id="cqQuestion"></h3>
+    <div id="cqOptions"></div>
+    <p id="cqFeedback" class="cq-feedback" aria-live="polite"></p>
+    <button id="cqNext" class="cq-primary cq-hidden">Next Question →</button>
+  </div>
+
+  <div id="cqResult" class="cq-panel cq-result cq-hidden">
+    <p style="font-size:35px">🏆</p>
+    <h3 id="cqResultTitle">The Dreamer</h3>
+    <p id="cqResultMessage" class="cq-note"></p>
+    <div id="cqFinalScore" class="cq-score">0 / 10</div>
+    <p id="cqPercentage"></p>
+    <p id="cqDate" class="cq-note"></p>
+    <p id="cqSaveStatus" class="cq-status" aria-live="polite"></p>
+    <button id="cqAgain" class="cq-primary">Play Again ↻</button>
+  </div>
+</section>
+
+<script>
+(() => {
+  const quiz = document.getElementById("celestialQuiz");
+  const home = document.getElementById("home");
+  if (home && quiz) home.insertAdjacentElement("afterend", quiz);
+
+  // Temporary demo questions. We can replace these with your own question bank.
+  const questionBank = [
+    {q:"Which planet is known as the Red Planet?",o:["Venus","Mars","Jupiter","Mercury"],a:1},
+    {q:"What does HTML mainly define?",o:["Webpage structure","Internet speed","Computer battery","Photo quality"],a:0},
+    {q:"Which language is commonly used to style webpages?",o:["SQL","CSS","C++ only","Bash"],a:1},
+    {q:"Which country is famous for K-pop?",o:["Japan","South Korea","Thailand","China"],a:1},
+    {q:"What does CPU stand for?",o:["Central Processing Unit","Computer Power Utility","Core Program User","Central Print Unit"],a:0},
+    {q:"Which one is a C++ output statement?",o:["show()","echo()","cout","printline()"],a:2},
+    {q:"How many sides does a hexagon have?",o:["Five","Six","Seven","Eight"],a:1},
+    {q:"Which star is closest to Earth?",o:["Sirius","Polaris","The Sun","Vega"],a:2},
+    {q:"Which one is a valid CSS colour name?",o:["purple","triangle","keyboard","Monday"],a:0},
+    {q:"Which device is used to type text?",o:["Monitor","Keyboard","Speaker","Printer"],a:1},
+    {q:"What does URL help identify?",o:["A web address","A battery type","A keyboard key","A screen size"],a:0},
+    {q:"Which data type stores whole numbers in basic C++?",o:["int","string","char","bool"],a:0},
+    {q:"Which ocean is the largest?",o:["Indian","Arctic","Atlantic","Pacific"],a:3},
+    {q:"Which symbol commonly ends a C++ statement?",o:[";","?",":","#"],a:0},
+    {q:"Which one is a web browser?",o:["Edge","Excel","Paint","Notepad"],a:0},
+    {q:"What is 9 × 7?",o:["56","63","72","79"],a:1},
+    {q:"Which is a common image file format?",o:["PNG","EXE","DLL","BAT"],a:0},
+    {q:"What does AI stand for?",o:["Artificial Intelligence","Automatic Internet","Advanced Input","Applied Index"],a:0},
+    {q:"Which one is an input device?",o:["Microphone","Projector","Speaker","Monitor"],a:0},
+    {q:"What does a loop help a program do?",o:["Repeat instructions","Change its monitor","Charge a phone","Create electricity"],a:0},
+    {q:"Which planet is famous for its rings?",o:["Earth","Saturn","Mars","Mercury"],a:1},
+    {q:"Which of these is a programming language?",o:["C++","HTML only","Wi-Fi","Bluetooth"],a:0},
+    {q:"What is the capital of South Korea?",o:["Busan","Seoul","Incheon","Daegu"],a:1},
+    {q:"Which key usually creates a new line while typing?",o:["Shift","Enter","Alt","Caps Lock"],a:1},
+    {q:"What does CSS stand for?",o:["Cascading Style Sheets","Computer System Setup","Creative Screen Software","Central Style Server"],a:0}
+  ];
+
+  const $ = id => document.getElementById(id);
+  const welcome = $("cqWelcome"), game = $("cqGame"), result = $("cqResult");
+  let playerName = "", questions = [], index = 0, score = 0, locked = false;
+
+  function show(panel) {
+    [welcome, game, result].forEach(p => p.classList.add("cq-hidden"));
+    panel.classList.remove("cq-hidden");
+  }
+
+  function startGame() {
+    playerName = $("cqName").value.trim();
+    $("cqWelcomeError").textContent = "";
+    if (!playerName) {
+      $("cqWelcomeError").textContent = "Please enter your name first. 🌙";
+      $("cqName").focus();
+      return;
+    }
+    if (playerName.length > 40) {
+      $("cqWelcomeError").textContent = "Please use a name under 40 characters.";
+      return;
+    }
+    questions = [...questionBank].sort(() => Math.random() - 0.5).slice(0, 10);
+    index = 0;
+    score = 0;
+    show(game);
+    renderQuestion();
+  }
+
+  function renderQuestion() {
+    locked = false;
+    const item = questions[index];
+    $("cqQuestionCount").textContent = `Question ${index + 1} of ${questions.length}`;
+    $("cqLiveScore").textContent = `Score: ${score}`;
+    $("cqProgress").style.width = `${(index / questions.length) * 100}%`;
+    $("cqQuestion").textContent = item.q;
+    $("cqFeedback").textContent = "";
+    $("cqNext").classList.add("cq-hidden");
+    const options = $("cqOptions");
+    options.replaceChildren();
+
+    item.o.forEach((option, i) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "cq-option";
+      button.textContent = `${String.fromCharCode(65 + i)}. ${option}`;
+      button.addEventListener("click", () => chooseAnswer(i));
+      options.appendChild(button);
+    });
+  }
+
+  function chooseAnswer(choice) {
+    if (locked) return;
+    locked = true;
+    const item = questions[index];
+    const buttons = [...$("cqOptions").querySelectorAll("button")];
+    buttons.forEach((button, i) => {
+      button.disabled = true;
+      if (i === item.a) button.classList.add("cq-correct");
+      else if (i === choice) button.classList.add("cq-wrong");
+    });
+
+    if (choice === item.a) {
+      score++;
+      $("cqFeedback").textContent = "Correct! Your brain has entered the chat. ✨";
+    } else {
+      $("cqFeedback").textContent = `Not quite! The answer was ${item.o[item.a]}. Even stars need practice. 🌟`;
+    }
+    $("cqLiveScore").textContent = `Score: ${score}`;
+    $("cqProgress").style.width = `${((index + 1) / questions.length) * 100}%`;
+    $("cqNext").textContent = index === questions.length - 1 ? "See My Results ✨" : "Next Question →";
+    $("cqNext").classList.remove("cq-hidden");
+  }
+
+  async function finishGame() {
+    show(result);
+    const percent = Math.round((score / questions.length) * 100);
+    let title, message;
+
+    if (score === 10) {
+      title = "👑 Cosmic Genius";
+      message = "Perfect score! Even the stars are asking for your notes.";
+    } else if (score >= 7) {
+      title = "🌟 Galaxy Brain";
+      message = "Excellent work! Your brain is shining brighter than a supernova.";
+    } else if (score >= 4) {
+      title = "🌙 Rising Dreamer";
+      message = "Not bad! Your knowledge is levelling up. The universe believes in you.";
+    } else {
+      title = "🪐 Cute Chaos";
+      message = "The questions won this round, but your comeback arc starts now!";
+    }
+
+    $("cqResultTitle").textContent = title;
+    $("cqResultMessage").textContent = `${playerName}, ${message}`;
+    $("cqFinalScore").textContent = `${score} / ${questions.length}`;
+    $("cqPercentage").textContent = `Your score: ${percent}%`;
+    $("cqDate").textContent = `Played: ${new Date().toLocaleString()}`;
+    $("cqSaveStatus").textContent = "Saving your result…";
+
+    try {
+      if (typeof supabaseClient === "undefined") {
+        throw new Error("Supabase client was not found.");
+      }
+      const { error } = await supabaseClient.from("quiz_results").insert({
+        player_name: playerName,
+        score: score,
+        total_questions: questions.length
+      });
+      if (error) throw error;
+      $("cqSaveStatus").textContent = "✨ Result saved to the Celestial database!";
+    } catch (error) {
+      console.error("Quiz result save failed:", error);
+      $("cqSaveStatus").textContent =
+        "Your score is shown, but saving failed. Please check the database connection.";
+    }
+  }
+
+  $("cqStart").addEventListener("click", startGame);
+  $("cqName").addEventListener("keydown", event => {
+    if (event.key === "Enter") startGame();
+  });
+  $("cqNext").addEventListener("click", () => {
+    if (index < questions.length - 1) {
+      index++;
+      renderQuestion();
+    } else {
+      finishGame();
+    }
+  });
+  $("cqAgain").addEventListener("click", () => {
+    $("cqName").value = playerName;
+    show(welcome);
+  });
+})();
+</script>
+
 </body>
 </html>
