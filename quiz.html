@@ -432,6 +432,54 @@ h1 {
     font-size: 16px;
   }
 }
+/* Welcome name box adjustment */
+#welcomeForm {
+  width: min(95%, 650px);
+  margin: 20px auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Name heading */
+.name-label {
+  font-size: clamp(18px, 2vw, 24px);
+  margin-bottom: 12px;
+}
+
+/* Name input */
+#playerName {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 15px;
+  border-radius: 16px;
+  box-sizing: border-box;
+}
+
+/* Button */
+#welcomeForm button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 14px;
+  font-size: 15px;
+  border-radius: 16px;
+}
+
+
+/* Mobile adjustment */
+@media (max-width:600px){
+  #welcomeForm {
+    width: 100%;
+    padding: 14px;
+  }
+
+  .name-label {
+    font-size: 18px;
+  }
+
+  #playerName {
+    font-size: 14px;
+  }
+}
 </style>
 </head>
 
