@@ -820,6 +820,7 @@ const answerButtons = Array.from(
 ```javascript
 welcomeForm.addEventListener("submit", function(event) {
   event.preventDefault();
+  console.log("Form submitted");
 
   const enteredName = nameInput.value.trim();
 
