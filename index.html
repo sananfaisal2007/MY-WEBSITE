@@ -2578,14 +2578,22 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
   (() => {
     const invite = document.getElementById("quizMagicInvite");
 
-    invite.addEventListener("click", () => {
-      const quiz = document.getElementById("celestialQuiz");
+   invite.addEventListener("click", () => {
+  const quiz = document.getElementById("celestialQuiz");
 
-      if (quiz) {
-        quiz.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
+  if (quiz) {
+    quiz.hidden = false;
+    quiz.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+    setTimeout(() => {
+      const nameInput = quiz.querySelector("#cqName");
+      if (nameInput) nameInput.focus({ preventScroll: true });
+    }, 500);
+  }
+});
 
         setTimeout(() => {
           const nameInput = quiz.querySelector("input");
