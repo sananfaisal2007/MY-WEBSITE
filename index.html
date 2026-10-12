@@ -869,6 +869,31 @@ body.home-reveal > *:not(#welcome-screen) {
 }
 </style>
 
+
+<style>
+/* About Me Entrance Animation */
+@keyframes aboutCardReveal {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#about .card {
+    animation: aboutCardReveal 1s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #about .card {
+        animation: none;
+    }
+}
+</style>
+
 </head>
 
 <body>
