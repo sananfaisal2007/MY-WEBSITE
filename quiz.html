@@ -902,10 +902,10 @@ nextQuestionBtn.addEventListener("click", function() {
   if (quizArea.hidden) return;
 
   // The welcome screen's button starts the quiz
-  if (answerOptions.hidden && quizResult.hidden) {
+  if (nextQuestionBtn.textContent.includes("Start")) {
     startQuiz();
     return;
-  }
+}
 
   if (!answered) return;
 
