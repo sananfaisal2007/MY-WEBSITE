@@ -752,10 +752,11 @@ nextQuestionBtn.addEventListener("click", function() {
 });
 
 // Show final score
+
 function showResult() {
   answerOptions.hidden = true;
   answerFeedback.textContent = "";
-  questionCounter.textContent = "Challenge complete! 🌙";
+  questionCounter.textContent = "Challenge Complete! 🌙";
   questionText.textContent = "You made it to the end! 🎉";
   nextQuestionBtn.hidden = true;
   quizResult.hidden = false;
@@ -771,9 +772,9 @@ function showResult() {
   } else if (score >= 8) {
     reaction = "Amazing! Tum Sanan ko kaafi achhi tarah jaante ho! ✨";
   } else if (score >= 5) {
-    reaction = "Not bad! Lekin Sanan ki story mein abhi aur chapters hain 😂";
+    reaction = "Not bad! Sanan ki story mein abhi aur chapters hain 😂";
   } else {
-    reaction = "Plot twist! Lagta hai Sanan ko abhi aur jaan'na baqi hai 💀";
+    reaction = "Plot twist! Sanan ko abhi aur jaan'na baqi hai 💀";
   }
 
   finalScore.textContent =
@@ -790,7 +791,6 @@ function showResult() {
     restartButton.textContent = "Play Again 🔁";
     restartButton.className = "answer-option";
     restartButton.style.marginTop = "16px";
-    quizResult.appendChild(restartButton);
 
     restartButton.addEventListener("click", function() {
       startQuiz();
@@ -799,7 +799,14 @@ function showResult() {
         block: "start"
       });
     });
+
+    quizResult.appendChild(restartButton);
   }
+
+  restartButton.hidden = false;
+  restartButton.disabled = false;
+}
+
 }
 </script>
 
