@@ -2,14 +2,342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Celestial Challenge 💜</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celestial Challenge 💜</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 35px 16px;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  background:
+    radial-gradient(ellipse at 15% 20%, #572575 0%, transparent 38%),
+    radial-gradient(ellipse at 85% 80%, #40205f 0%, transparent 40%),
+    linear-gradient(135deg, #10071e, #211032, #10071e);
+}
+
+/* Magical floating flowers */
+.flowers {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.flower {
+  position: absolute;
+  bottom: -70px;
+  opacity: 0;
+  animation: floatFlower linear infinite;
+  filter: drop-shadow(0 0 12px #edbaff);
+}
+
+.flower:nth-child(1) { left: 5%;  font-size: 32px; animation-duration: 12s; }
+.flower:nth-child(2) { left: 17%; font-size: 22px; animation-duration: 16s; animation-delay: 2s; }
+.flower:nth-child(3) { left: 30%; font-size: 38px; animation-duration: 14s; animation-delay: 4s; }
+.flower:nth-child(4) { left: 45%; font-size: 25px; animation-duration: 17s; animation-delay: 1s; }
+.flower:nth-child(5) { left: 60%; font-size: 35px; animation-duration: 13s; animation-delay: 5s; }
+.flower:nth-child(6) { left: 74%; font-size: 23px; animation-duration: 15s; animation-delay: 3s; }
+.flower:nth-child(7) { left: 88%; font-size: 34px; animation-duration: 12s; animation-delay: 6s; }
+.flower:nth-child(8) { left: 96%; font-size: 25px; animation-duration: 18s; animation-delay: 2s; }
+
+@keyframes floatFlower {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(.6);
+    opacity: 0;
+  }
+  15% { opacity: .9; }
+  80% { opacity: .8; }
+  100% {
+    transform: translateY(-115vh) rotate(360deg) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Main magical card */
+.welcome-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 570px);
+  padding: 38px 28px;
+  text-align: center;
+  border: 1px solid rgba(238, 194, 255, .5);
+  border-radius: 32px;
+  background: linear-gradient(
+    145deg,
+    rgba(90, 46, 117, .65),
+    rgba(28, 13, 46, .9)
+  );
+  backdrop-filter: blur(18px);
+  box-shadow:
+    0 0 25px rgba(191, 111, 255, .24),
+    0 0 65px rgba(142, 57, 217, .2),
+    inset 0 0 30px rgba(255, 255, 255, .035);
+  animation: cardEntrance 1.1s ease both,
+             cardGlow 4s ease-in-out infinite;
+}
+
+@keyframes cardEntrance {
+  from { opacity: 0; transform: translateY(35px) scale(.94); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes cardGlow {
+  0%, 100% {
+    box-shadow: 0 0 25px #8c48b944, 0 0 55px #8c48b922;
+  }
+  50% {
+    box-shadow: 0 0 38px #d49aff66, 0 0 85px #8c48b944;
+  }
+}
+
+.crown {
+  display: inline-block;
+  font-size: 46px;
+  animation: crownFloat 2.4s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px #f5c8ff);
+}
+
+@keyframes crownFloat {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  50% { transform: translateY(-9px) rotate(6deg); }
+}
+
+h1 {
+  margin: 14px 0;
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(30px, 7vw, 45px);
+  font-weight: 400;
+  line-height: 1.4;
+  color: #f7d5ff;
+  text-shadow: 0 0 12px #db9cff, 0 0 30px #9f4bda;
+}
+
+.subtitle {
+  color: #f4e6ff;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.joke {
+  margin: 24px 0;
+  padding: 15px;
+  border-radius: 18px;
+  border: 1px dashed #dba6ff99;
+  background: #dba6ff12;
+  color: #f8dcff;
+  font-size: 13px;
+  line-height: 1.9;
+  animation: jokePulse 3s ease-in-out infinite;
+}
+
+@keyframes jokePulse {
+  0%, 100% { background: #dba6ff0d; }
+  50% { background: #dba6ff20; }
+}
+
+.name-label {
+  display: block;
+  margin: 22px 0 12px;
+  font-size: 14px;
+  color: #f2d4ff;
+  font-weight: 600;
+}
+
+.input-wrap {
+  position: relative;
+  padding: 3px;
+  border-radius: 18px;
+  background: linear-gradient(90deg, #a95cff, #ffc8f2, #a95cff);
+  background-size: 200% 200%;
+  animation: borderMagic 4s linear infinite;
+  box-shadow: 0 0 20px #b45bff33;
+}
+
+@keyframes borderMagic {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+#playerName {
+  display: block;
+  width: 100%;
+  padding: 16px 14px;
+  border: 0;
+  outline: none;
+  border-radius: 15px;
+  background: #1c102a;
+  color: white;
+  font: 500 15px 'Poppins', sans-serif;
+  text-align: center;
+  transition: background .3s, box-shadow .3s;
+}
+
+#playerName::placeholder {
+  color: #c7a7d9;
+}
+
+.input-wrap:focus-within {
+  transform: scale(1.025);
+  box-shadow: 0 0 18px #d99bff, 0 0 38px #a95cff88;
+}
+
+#playerName:focus {
+  background: #281538;
+}
+
+.start-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 15px 12px;
+  border: 1px solid #f5d5ff88;
+  border-radius: 16px;
+  background: linear-gradient(100deg, #8b3fd0, #ce78e9, #9149dc);
+  background-size: 200% 100%;
+  color: white;
+  font: 700 14px 'Poppins', sans-serif;
+  letter-spacing: .5px;
+  cursor: pointer;
+  box-shadow: 0 0 20px #b86bff55;
+  transition: transform .3s, box-shadow .3s;
+}
+
+.start-btn:hover {
+  transform: translateY(-4px) scale(1.025);
+  background-position: 100% 0;
+  box-shadow: 0 0 25px #e3b4ff, 0 0 45px #a95cff88;
+}
+
+.bottom-note {
+  margin-top: 22px;
+  color: #cdb4dc;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+#message {
+  min-height: 24px;
+  margin: 12px 0 0;
+  color: #ffd8f6;
+  font-size: 13px;
+}
+
+@media (max-width: 480px) {
+  .welcome-card {
+    padding: 30px 20px;
+    border-radius: 25px;
+  }
+  .joke { font-size: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
 </head>
+
 <body>
 
-  <h1>✦ Celestial Challenge ✦</h1>
-  <p>How well do you know Sanan? 💜</p>
+<div class="flowers" aria-hidden="true">
+  <span class="flower">🌸</span>
+  <span class="flower">✨</span>
+  <span class="flower">🌷</span>
+  <span class="flower">💜</span>
+  <span class="flower">🌺</span>
+  <span class="flower">🦋</span>
+  <span class="flower">🌸</span>
+  <span class="flower">⭐</span>
+</div>
+
+<main class="welcome-card">
+  <div class="crown">👑</div>
+
+  <h1>Welcome, Dreamer!</h1>
+
+  <p class="subtitle">
+    ✨ Enter the magical little universe of Sanan ✨<br>
+    But first... who dares to enter?
+  </p>
+
+  <div class="joke">
+    🌸 <strong>Important warning!</strong> 🌸<br>
+    This quiz may cause uncontrollable laughing,<br>
+    questionable answers and a sudden obsession<br>
+    with Sanan. 😂💜<br>
+    <em>Side effects are not our responsibility.</em> 🧸
+  </div>
+
+  <form id="welcomeForm">
+    <label class="name-label" for="playerName">
+      💌 Tell me your beautiful name
+    </label>
+
+    <div class="input-wrap">
+      <input
+        id="playerName"
+        name="playerName"
+        type="text"
+        placeholder="✨ Type your name here... ✨"
+        maxlength="40"
+        autocomplete="given-name"
+        required
+      >
+    </div>
+
+    <button class="start-btn" type="submit">
+      🌙 LET THE MAGIC BEGIN ✨
+    </button>
+
+    <p id="message" aria-live="polite"></p>
+  </form>
+
+  <p class="bottom-note">
+    🌷 Made of stardust, flowers and a little bit of chaos 🌷<br>
+    Prepare yourself. Sanan's questions are waiting! 💜
+  </p>
+</main>
+
+<script>
+document.getElementById("welcomeForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const nameInput = document.getElementById("playerName");
+  const message = document.getElementById("message");
+  const playerName = nameInput.value.trim();
+
+  if (!playerName) {
+    message.textContent = "🌸 Even magic needs your name first! 💜";
+    nameInput.focus();
+    return;
+  }
+
+  message.textContent = "✨ Hello, " + playerName + "! Your magical quiz is coming next! 💜";
+
+  // Next step: connect this button to the actual quiz.
+});
+</script>
 
 </body>
 </html>
+
