@@ -1378,8 +1378,10 @@ pianoButton.addEventListener("click", async function () {
         }
     } else {
         piano.pause();
+        pianoButton.classList.remove("playing");
         pianoButton.innerHTML = "♫ Play Piano";
         pianoButton.setAttribute("aria-label", "Play peaceful piano");
+        pianoButton.classList.remove("playing");
     }
 });
 
