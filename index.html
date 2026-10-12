@@ -1370,6 +1370,7 @@ pianoButton.addEventListener("click", async function () {
     if (piano.paused) {
         try {
             await piano.play();
+            pianoButton.classList.add("playing");
             pianoButton.innerHTML = "♫ Pause Piano";
             pianoButton.setAttribute("aria-label", "Pause peaceful piano");
         } catch (error) {
