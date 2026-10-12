@@ -386,6 +386,103 @@ body {
 }
 </style>
 ```
+```html
+<style>
+.kdrama-cover {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 18px;
+    border: 2px solid #d9b0ff;
+    border-radius: 22px;
+    background: linear-gradient(145deg, #100d25, #42205d, #17132e);
+    box-shadow: 0 0 18px rgba(190, 130, 255, 0.3);
+    animation: dramaGlow 3.5s ease-in-out infinite alternate;
+}
+
+.drama-decor {
+    color: #f1d4ff;
+    letter-spacing: 5px;
+    margin: 8px 0;
+}
+
+.drama-collage {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
+    margin: 15px 0;
+}
+
+.drama-collage img {
+    display: block;
+    width: 100%;
+    height: 115px;
+    object-fit: cover;
+    border: 1px solid #d9b0ff;
+    border-radius: 9px;
+    transition: transform 0.3s ease;
+}
+
+.drama-collage img:hover {
+    transform: scale(1.06);
+}
+
+.drama-title span {
+    color: #e7c2ff;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.drama-title h3 {
+    color: #fff2ff;
+    font-size: 24px;
+    margin: 9px 0;
+    text-shadow: 0 0 12px #c78cff;
+}
+
+.drama-title p {
+    color: #e7d7f7;
+    font-size: 13px;
+}
+
+.kdrama-cover > a {
+    display: inline-block;
+    margin: 10px 0;
+    padding: 10px 15px;
+    border: 1px solid #e3c2ff;
+    border-radius: 25px;
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.kdrama-cover > a:hover {
+    background: #d6a1ff;
+    color: #17102b;
+}
+
+@keyframes dramaGlow {
+    from {
+        box-shadow: 0 0 10px rgba(190, 130, 255, 0.25);
+    }
+    to {
+        box-shadow: 0 0 24px rgba(190, 130, 255, 0.7);
+    }
+}
+
+@media (max-width: 480px) {
+    .drama-collage img {
+        height: 85px;
+    }
+
+    .drama-title h3 {
+        font-size: 20px;
+    }
+}
+</style>
+```
 </head>
 
 <body>
@@ -478,10 +575,30 @@ This website is a little piece of me — my interests, my dreams, my random thou
        <section class="content" id="dramas">
     <h2>🎬 My K-Drama Library 💗</h2>
     <p>Explore my favourite Korean dramas and unforgettable stories! 🇰🇷</p>
-    <div class="card">
-        <h3>🌸 Korean Drama Collection</h3>
-        <a href="kdrama.html">Explore My K-Drama Library ✨</a>
+   ```html
+<div class="card kdrama-cover">
+    <div class="drama-decor">✦ ❀ 🎬 ❀ ✦</div>
+
+    <div class="drama-collage">
+        <img src="https://image.tmdb.org/t/p/w500/edKpE9B5qN3e559OuMCLZdW1iBZ.jpg" alt="Korean drama poster">
+        <img src="https://image.tmdb.org/t/p/w500/4m0g2x8Qe9R8gk0L5v7V2j1G4cT.jpg" alt="Korean drama poster">
+        <img src="https://image.tmdb.org/t/p/w500/7WUHnWGx5OO145IRxPDUkQSh4C7.jpg" alt="Korean drama poster">
+        <img src="https://image.tmdb.org/t/p/w500/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg" alt="Korean drama poster">
+        <img src="https://image.tmdb.org/t/p/w500/5d8u3K9zQ2W6m7J1L4x0a8B3cYp.jpg" alt="Korean drama poster">
+        <img src="https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg" alt="Korean drama poster">
     </div>
+
+    <div class="drama-title">
+        <span>ROMANCE • THRILLER • FEELS</span>
+        <h3>♡ K-DRAMA WORLD ♡</h3>
+        <p>Stories that stay in your heart ✨</p>
+    </div>
+
+    <a href="kdrama.html">EXPLORE MY DRAMA LIBRARY ↗</a>
+
+    <div class="drama-decor">♡ ✧ ♡ 🎞 ♡ ✧ ♡</div>
+</div>
+```
 </section>
 
 <script>
