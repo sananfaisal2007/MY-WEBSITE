@@ -1044,18 +1044,20 @@ resultMessage.textContent = reaction;
 
 const restartButton = document.getElementById("restartQuizBtn");
 
-restartButton.hidden = false;
-restartButton.disabled = false;
+if (restartButton) {
+  restartButton.hidden = false;
+  restartButton.disabled = false;
 
-restartButton.onclick = function() {
-  quizResult.hidden = true;
-  startQuiz();
+  restartButton.onclick = function() {
+    quizResult.hidden = true;
+    startQuiz();
 
-  quizArea.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-};
+    quizArea.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  };
+}
   }
 
 </script>
