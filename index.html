@@ -1032,6 +1032,59 @@ body.home-reveal > *:not(#welcome-screen) {
     }
 }
 
+
+/* Animated Music Bars */
+.music-bars {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    width: 25px;
+    height: 22px;
+}
+
+.music-bars span {
+    display: block;
+    width: 3px;
+    height: 6px;
+    border-radius: 5px;
+    background: #d9baff;
+    transform-origin: center;
+}
+
+#pianoToggle.playing .music-bars span {
+    animation: musicBarMove 0.8s ease-in-out infinite alternate;
+}
+
+#pianoToggle.playing .music-bars span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+#pianoToggle.playing .music-bars span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+#pianoToggle.playing .music-bars span:nth-child(4) {
+    animation-delay: 0.1s;
+}
+
+@keyframes musicBarMove {
+    from {
+        transform: scaleY(0.6);
+        opacity: 0.6;
+    }
+    to {
+        transform: scaleY(2.5);
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #pianoToggle.playing .music-bars span {
+        animation: none;
+    }
+}
+
 </style>
 
 
