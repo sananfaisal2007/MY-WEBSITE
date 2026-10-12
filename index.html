@@ -838,5 +838,19 @@ function toggleTheme() {
     <div class="welcome-glow"></div>
 </div>
 
+
+<script>
+function enterMyWorld() {
+    const welcomeScreen = document.getElementById("welcome-screen");
+
+    welcomeScreen.style.transition = "opacity 0.8s ease";
+    welcomeScreen.style.opacity = "0";
+
+    setTimeout(function () {
+        welcomeScreen.style.display = "none";
+    }, 800);
+}
+</script>
+
 </body>
 </html>
