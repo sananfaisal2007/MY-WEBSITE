@@ -1810,5 +1810,18 @@ piano.addEventListener("ended", function () {
 })();
 </script>
 
+
+<script>
+document.querySelectorAll(".dream-portal").forEach(function (portal) {
+    portal.addEventListener("click", function () {
+        document.querySelectorAll(".dream-portal").forEach(function (item) {
+            item.classList.remove("active");
+        });
+
+        portal.classList.add("active");
+    });
+});
+</script>
+
 </body>
 </html>
