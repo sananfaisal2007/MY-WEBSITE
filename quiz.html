@@ -824,6 +824,9 @@ const answerFeedback = document.getElementById("answerFeedback");
 const nextQuestionBtn = document.getElementById("nextQuestionBtn");
 const quizResult = document.getElementById("quizResult");
 const finalScore = document.getElementById("finalScore");
+  const resultTitle = document.getElementById("resultTitle");
+const resultName = document.getElementById("resultName");
+const resultMessage = document.getElementById("resultMessage");
   const resultName = document.getElementById("resultName");
 const resultMessage = document.getElementById("resultMessage");
 const restartQuizBtn = document.getElementById("restartQuizBtn");
@@ -1025,13 +1028,18 @@ nextQuestionBtn.addEventListener("click", function() {
   }
 
 
-  finalScore.textContent =
-    "🌙 " + playerName + " ka Result 🌙\n\n" +
-    "🏆 " + title + "\n\n" +
-    "Score: " + score + "/" +
-    TOTAL_QUESTIONS +
-    " (" + percentage + "%)\n\n" +
-    reaction;
+ resultTitle.textContent = "Challenge Complete! 🎉";
+
+resultName.textContent =
+  "🌙 " + playerName + " ka Result 🌙";
+
+finalScore.textContent =
+  "🏆 " + title +
+  "\n\nScore: " + score + "/" +
+  TOTAL_QUESTIONS +
+  " (" + percentage + "%)";
+
+resultMessage.textContent = reaction;
 
 
   let restartButton = document.getElementById("restartQuizBtn");
