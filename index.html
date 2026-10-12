@@ -27,6 +27,49 @@
             padding: 22px 8%;
             border-bottom: 1px solid #1e293b;
         }
+        
+/* Professional Navigation Upgrade */
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 18px 5%;
+    background: rgba(9, 7, 18, 0.92);
+    border-bottom: 1px solid rgba(190, 140, 255, 0.25);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22);
+}
+
+nav a {
+    display: inline-block;
+    color: #e6dcf7;
+    text-decoration: none;
+    padding: 9px 12px;
+    border-radius: 20px;
+    transition: color 0.3s ease,
+                background 0.3s ease,
+                transform 0.3s ease;
+}
+
+nav a:hover {
+    color: #ffffff;
+    background: rgba(155, 100, 255, 0.18);
+    transform: translateY(-2px);
+    box-shadow: 0 0 16px rgba(155, 100, 255, 0.12);
+}
+
+nav .logo {
+    color: #d5b6ff;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
 
         .logo {
             color: #22d3ee;
