@@ -2515,9 +2515,31 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
     box-shadow: 0 0 13px rgba(239, 180, 255, .55);
   }
 
-  #quizMagicInvite:hover {
-    transform: scale(1.06);
-  }
+ 
+#quizMagicInvite {
+    transition: transform 0.4s ease,
+                box-shadow 0.4s ease,
+                filter 0.4s ease;
+    animation: quizInviteFloat 3s ease-in-out infinite,
+               quizInviteGlow 2.5s ease-in-out infinite;
+    transform-origin: center;
+}
+
+#quizMagicInvite:hover {
+    transform: scale(1.08) translateY(-5px);
+    filter: brightness(1.15);
+    box-shadow: 0 0 25px rgba(238,176,255,1),
+                0 0 45px rgba(148,66,255,.8);
+}
+
+#quizMagicInvite:hover .quiz-mascot {
+    animation: quizMascot 0.5s ease-in-out infinite;
+}
+
+#quizMagicInvite:hover .quiz-invite-cta {
+    animation: quizStars 0.8s ease-in-out infinite;
+}
+
 
   @keyframes quizInviteFloat {
     0%, 100% { translate: 0 0; }
