@@ -254,6 +254,70 @@ h1 {
     transition-duration: .01ms !important;
   }
 }
+
+#quizArea {
+  margin-top: 28px;
+  padding: 22px 16px;
+  border: 1px solid #dba6ff88;
+  border-radius: 24px;
+  background: #170b27aa;
+  box-shadow: 0 0 25px #b45bff22;
+  animation: cardEntrance 0.7s ease both;
+}
+
+#quizArea h2 {
+  color: #f7d5ff;
+  font-size: 23px;
+}
+
+#questionCounter {
+  color: #dcb4ff;
+  font-size: 13px;
+}
+
+#questionText {
+  color: white;
+  font-size: 17px;
+  line-height: 1.8;
+  margin: 20px 0;
+}
+
+#answerOptions {
+  display: grid;
+  gap: 12px;
+}
+
+.answer-option,
+#nextQuestionBtn {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #dba6ff88;
+  border-radius: 14px;
+  background: linear-gradient(100deg, #38204f, #241333);
+  color: white;
+  font: 500 14px 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.answer-option:hover,
+#nextQuestionBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 18px #b45bff77;
+}
+
+.answer-option:disabled {
+  cursor: default;
+  opacity: 0.8;
+}
+
+#answerFeedback,
+#finalScore {
+  color: #f4d5ff;
+  line-height: 1.8;
+  margin-top: 18px;
+}
+
 </style>
 </head>
 
