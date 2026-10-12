@@ -316,6 +316,32 @@ h1 {
     🌷 Made of stardust, flowers and a little bit of chaos 🌷<br>
     Prepare yourself. Sanan's questions are waiting! 💜
   </p>
+
+<section id="quizArea" hidden>
+  <h2 id="quizGreeting">Welcome to the Challenge! 💜</h2>
+
+  <p id="questionCounter">Question 1 of 10</p>
+  <h3 id="questionText">Your question will appear here ✨</h3>
+
+  <div id="answerOptions">
+    <button type="button" class="answer-option"></button>
+    <button type="button" class="answer-option"></button>
+    <button type="button" class="answer-option"></button>
+    <button type="button" class="answer-option"></button>
+  </div>
+
+  <p id="answerFeedback" aria-live="polite"></p>
+
+  <button type="button" id="nextQuestionBtn" hidden>
+    Next Question ✨
+  </button>
+
+  <div id="quizResult" hidden>
+    <h2>Challenge Complete! 🎉</h2>
+    <p id="finalScore"></p>
+  </div>
+</section>
+
 </main>
 
 <script>
