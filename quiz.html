@@ -408,37 +408,403 @@ h1 {
 
 </main>
 
+
 <script>
-document.getElementById("welcomeForm").addEventListener("submit", function(event) {
+const questionBank = [
+  {
+    q: "Sanan ka favourite colour kya hai?",
+    o: ["Blue 💙", "Black 🖤", "Purple 💜", "Red ❤️"],
+    a: 1
+  },
+  {
+    q: "Sanan ka dream country kaunsa hai?",
+    o: ["Japan 🇯🇵", "South Korea 🇰🇷", "Canada 🇨🇦", "Italy 🇮🇹"],
+    a: 1
+  },
+  {
+    q: "Sanan ke favourite anime aur K-drama kaun se hain?",
+    o: ["Naruto aur Goblin", "One Piece aur Vincenzo", "JJK aur Queen of Tears", "Death Note aur Squid Game"],
+    a: 2
+  },
+  {
+    q: "Doston ke group mein Sanan ka role kya hai?",
+    o: ["Silent observer 🤐", "Strict leader 😎", "Entertainer 😂", "Photographer 📸"],
+    a: 2
+  },
+  {
+    q: "Sanan ko kis baat par gussa aa sakta hai?",
+    o: ["Koi personal space cross kare", "Koi usay joke sunaye", "Koi music lagaye", "Koi us se baat kare"],
+    a: 0
+  },
+  {
+    q: "Doston ke saath Sanan aam tor par kaisa hota hai?",
+    o: ["Serious aur quiet", "Jokes aur full fun", "Har waqt busy", "Sab se door"],
+    a: 1
+  },
+  {
+    q: "South Korea mein Sanan ko kis cheez mein interest hai?",
+    o: ["Sirf shopping", "Sirf tourism", "Korean culture, K-pop, dramas, career aur aur bhi bohat kuch", "Sirf sports"],
+    a: 2
+  },
+  {
+    q: "Agar Sanan JJK mein hota, toh apne aap ko kis role mein imagine karta?",
+    o: ["Strongest sorcerer", "Villain ka boss", "First episode mein marne wala banda 💀", "School ka principal"],
+    a: 2
+  },
+  {
+    q: "Koi Sanan ke bohat close aaye, toh kya baat matter karti hai?",
+    o: ["Har bande ko allow karega", "Kisi ko bhi allow nahi karega", "Bande aur situation par depend karta hai", "Sirf online friends"],
+    a: 2
+  },
+  {
+    q: "Sanan ka ideal free day kaisa hota hai?",
+    o: ["Bohat saari meetings", "Peace, music aur apni duniya", "Sirf shopping", "Poora din parhai"],
+    a: 1
+  },
+  {
+    q: "Agar koi Sanan ko roast kare, toh uska reaction kya hoga?",
+    o: ["Wahan se bhaag jayega", "Us se bhi double roast karega 😂", "Gussa hokar chala jayega", "Kuch samjhega hi nahi"],
+    a: 1
+  },
+  {
+    q: "Sanan ke phone ko kis naam se describe karna best hai?",
+    o: ["Sirf study material", "Sirf games", "Sirf family photos", "Sab kuch — ek museum 💀"],
+    a: 3
+  },
+  {
+    q: "Sanan kaunsi superpower choose karega?",
+    o: ["Invisibility 👻", "Time control ⏳", "Mind reading 🧠", "Super strength 💪"],
+    a: 1
+  },
+  {
+    q: "Close friendship mein Sanan apni personality ko kaise describe karta hai?",
+    o: ["Thora mysterious 🌙", "Har baat foran share karta hai", "Har waqt serious rehta hai", "Har kisi se jaldi close hota hai"],
+    a: 0
+  },
+  {
+    q: "Agar Sanan ki life K-drama hoti, toh uska genre kya hota?",
+    o: ["Crime documentary", "Historical politics", "Fantasy aur main-character energy ✨", "Cooking competition"],
+    a: 2
+  },
+  {
+    q: "Boring lecture ke waqt Sanan ka dimagh kahan hota hai?",
+    o: ["Lecture ke har lafz par", "Kahin aur chala jata hai 😂", "Sirf homework par", "Teacher ko quiz deta hai"],
+    a: 1
+  },
+  {
+    q: "Sanan ko sab se zyada kis cheez ka craze hai?",
+    o: ["Cricket world", "Car racing", "Korean world 🇰🇷", "Cooking shows"],
+    a: 2
+  },
+  {
+    q: "Agar Sanan ek din ke liye South Korea pohanch jaye, toh kya karega?",
+    o: ["Hotel mein hi rahega", "Sirf shopping karega", "Sab kuch ek saath explore karega 😂", "Foran wapas aa jayega"],
+    a: 2
+  },
+  {
+    q: "Sanan ka secret talent kya hai?",
+    o: ["Har instrument bajana", "Secret talent abhi tak secret hai 🤫", "Professional chef hona", "Har language bolna"],
+    a: 1
+  },
+  {
+    q: "Sanan apni future life mein sab se zyada kya chahta hai?",
+    o: ["South Korea mein dream life 🇰🇷", "Har waqt ghar par rehna", "Sirf famous hona", "Sirf expensive cars"],
+    a: 0
+  },
+  {
+    q: "Sanan apne favourite K-drama hero se mile, toh kya karega?",
+    o: ["Us se dosti karne ki koshish karega 😂", "Usay ignore karega", "Us se autograph bhi nahi lega", "Usay apna teacher banayega"],
+    a: 0
+  },
+  {
+    q: "Sanan ka sab se bara enemy kaun hai?",
+    o: ["Rainy weather", "Boring log 🥱", "Cute animals", "Piano music"],
+    a: 1
+  },
+  {
+    q: "Sanan ko ek magical wish mile, toh kya choose karega?",
+    o: ["Sirf ek new phone", "Sirf ek holiday", "Apne saare dreams poore karna 🌠", "Sirf unlimited snacks"],
+    a: 2
+  },
+  {
+    q: "Akelay waqt mein Sanan kya karta hai?",
+    o: ["Sirf sota hai", "Sirf parhai karta hai", "Music, future dreams aur anime/dramas — sab 😂", "Sirf news dekhta hai"],
+    a: 2
+  },
+  {
+    q: "Sanan ki story ka title kya hai?",
+    o: ["The Busy Office Worker", "Lost in My Own World 🌙", "The Cooking Master", "Mission: Become a Pilot"],
+    a: 1
+  },
+  {
+    q: "Anime main character ke taur par Sanan ki biggest weakness kya hogi?",
+    o: ["Loud music", "Emotional scenes 💔", "Spicy food", "Long walks"],
+    a: 1
+  },
+  {
+    q: "Sanan apni life ka kaunsa scene dobara jeena chahega?",
+    o: ["Koi aisa din jo kabhi bhool na sake 🌙", "Ek normal shopping day", "Ek boring lecture", "Ek random traffic jam"],
+    a: 0
+  },
+  {
+    q: "Naye bande se milte waqt Sanan sab se pehle kya notice karta hai?",
+    o: ["Uske shoes", "Uska phone", "Uska behaviour 👀", "Uski height"],
+    a: 2
+  },
+  {
+    q: "Sanan ki life ka background music kis type ka hoga?",
+    o: ["Heavy metal all day", "Chill piano music 🌙", "Sirf alarm sounds", "Loud marching music"],
+    a: 1
+  },
+  {
+    q: "Sanan apna fictional best friend kaisa chahega?",
+    o: ["Sirf famous", "Loyal aur protective 🛡️", "Har waqt jealous", "Har baat par naraz"],
+    a: 1
+  },
+  {
+    q: "Koi Sanan ki tareef kare, toh woh kya karega?",
+    o: ["Speech dena shuru karega", "Joke bana kar baat badal dega 💀", "Tareef sun kar bhaag jayega", "Sab ko report karega"],
+    a: 1
+  },
+  {
+    q: "Sanan ke liye friendship mein sab se important kya hai?",
+    o: ["Mehngi gifts", "Popularity", "Ek doosre ko samajhna 💜", "Har waqt online rehna"],
+    a: 2
+  },
+  {
+    q: "Sanan ne apni personality ke liye kaunsa emoji choose kiya?",
+    o: ["🔥 — full energy", "🌙 — apni duniya mein", "😎 — cool boss", "⚽ — sports lover"],
+    a: 1
+  },
+  {
+    q: "Dream life milne par Sanan ka reaction kya hoga?",
+    o: ["Kisi ko nahi batayega", "Khushi mein sab ko batayega 😂", "Foran sab kuch chhor dega", "Aise behave karega jaise kuch hua hi nahi"],
+    a: 1
+  },
+  {
+    q: "Sanan ko samajhne ke liye doosre bande ko sab se pehle kya karna chahiye?",
+    o: ["Har waqt questions poochna", "Uski personal space respect karna 💜", "Uske phone ki checking karna", "Usay force karna ke sab kuch bataye"],
+    a: 1
+  }
+];
+
+const TOTAL_QUESTIONS = 10;
+
+let playerName = "";
+let gameQuestions = [];
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+const welcomeForm = document.getElementById("welcomeForm");
+const nameInput = document.getElementById("playerName");
+const message = document.getElementById("message");
+const quizArea = document.getElementById("quizArea");
+const quizGreeting = document.getElementById("quizGreeting");
+const questionCounter = document.getElementById("questionCounter");
+const questionText = document.getElementById("questionText");
+const answerOptions = document.getElementById("answerOptions");
+const answerFeedback = document.getElementById("answerFeedback");
+const nextQuestionBtn = document.getElementById("nextQuestionBtn");
+const quizResult = document.getElementById("quizResult");
+const finalScore = document.getElementById("finalScore");
+
+const answerButtons = Array.from(
+  answerOptions.querySelectorAll(".answer-option")
+);
+
+// Welcome form
+welcomeForm.addEventListener("submit", function(event) {
   event.preventDefault();
 
-  const nameInput = document.getElementById("playerName");
-  const message = document.getElementById("message");
-  const playerName = nameInput.value.trim();
+  playerName = nameInput.value.trim();
 
   if (!playerName) {
-    message.textContent = "🌸 Even magic needs your name first! 💜";
+    message.textContent =
+      "🌸 Even magic needs your name first! 💜";
     nameInput.focus();
     return;
   }
 
-  message.textContent = "✨ Hello, " + playerName + "! Your magical quiz is coming next! 💜";
+  message.textContent =
+    "✨ Welcome, " + playerName + "! Your challenge awaits! 💜";
 
-  
-  document.getElementById("quizArea").hidden = false;
-  document.getElementById("quizGreeting").textContent =
-    "Welcome, " + playerName + "! 💜 Let's test your Sanan knowledge!";
-  document.getElementById("questionText").textContent =
-    "✨ Ready to discover how well you know Sanan?";
-  document.getElementById("questionCounter").textContent =
-    "Your challenge starts here!";
-  document.getElementById("answerOptions").hidden = true;
-  document.getElementById("nextQuestionBtn").hidden = false;
-  document.getElementById("nextQuestionBtn").textContent =
-    "Start the Quiz! 🌙";
+  quizArea.hidden = false;
+  quizGreeting.textContent =
+    "Welcome, " + playerName + "! 💜 How well do you know Sanan?";
 
+  questionText.textContent =
+    "Ready to discover how well you know Sanan? 🌙";
+
+  questionCounter.textContent =
+    "35 secrets. 10 random questions. One challenge!";
+
+  answerOptions.hidden = true;
+  answerFeedback.textContent = "";
+  quizResult.hidden = true;
+  nextQuestionBtn.hidden = false;
+  nextQuestionBtn.textContent = "Start the Quiz! 🌙";
+
+  quizArea.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
 });
+
+// Start a new round with 10 random questions
+function startQuiz() {
+  gameQuestions = [...questionBank]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, TOTAL_QUESTIONS);
+
+  currentQuestion = 0;
+  score = 0;
+  answered = false;
+
+  quizGreeting.textContent =
+    "Let's go, " + playerName + "! 💜";
+
+  quizResult.hidden = true;
+  answerOptions.hidden = false;
+  answerFeedback.textContent = "";
+
+  showQuestion();
+}
+
+// Display current question
+function showQuestion() {
+  answered = false;
+
+  const item = gameQuestions[currentQuestion];
+
+  questionCounter.textContent =
+    "Question " + (currentQuestion + 1) +
+    " of " + TOTAL_QUESTIONS;
+
+  questionText.textContent = item.q;
+  answerFeedback.textContent = "";
+
+  answerButtons.forEach((button, index) => {
+    button.textContent = item.o[index];
+    button.disabled = false;
+    button.hidden = false;
+    button.style.borderColor = "";
+    button.style.background = "";
+  });
+
+  nextQuestionBtn.hidden = true;
+  nextQuestionBtn.textContent =
+    currentQuestion === TOTAL_QUESTIONS - 1
+      ? "See Your Result! 🎉"
+      : "Next Question ✨";
+}
+
+// Check the selected answer
+answerButtons.forEach((button, index) => {
+  button.addEventListener("click", function() {
+    if (answered) return;
+
+    answered = true;
+
+    const item = gameQuestions[currentQuestion];
+    const isCorrect = index === item.a;
+
+    answerButtons.forEach(optionButton => {
+      optionButton.disabled = true;
+    });
+
+    if (isCorrect) {
+      score++;
+      answerFeedback.textContent =
+        "✨ Correct! Sanan ki personality tumhein achhi tarah pata hai! 💜";
+      button.style.borderColor = "#75f0b0";
+    } else {
+      answerFeedback.textContent =
+        "😂 Oops! Sanan ka actual answer hai: " +
+        item.o[item.a];
+      button.style.borderColor = "#ff8ba7";
+      answerButtons[item.a].style.borderColor = "#75f0b0";
+    }
+
+    nextQuestionBtn.hidden = false;
+  });
+});
+
+// Next question or finish the quiz
+nextQuestionBtn.addEventListener("click", function() {
+  if (quizArea.hidden) return;
+
+  // The welcome screen's button starts the quiz
+  if (answerOptions.hidden && quizResult.hidden) {
+    startQuiz();
+    return;
+  }
+
+  if (!answered) return;
+
+  currentQuestion++;
+
+  if (currentQuestion < TOTAL_QUESTIONS) {
+    showQuestion();
+  } else {
+    showResult();
+  }
+});
+
+// Show final score
+function showResult() {
+  answerOptions.hidden = true;
+  answerFeedback.textContent = "";
+  questionCounter.textContent = "Challenge complete! 🌙";
+  questionText.textContent = "You made it to the end! 🎉";
+  nextQuestionBtn.hidden = true;
+  quizResult.hidden = false;
+
+  const percentage = Math.round(
+    (score / TOTAL_QUESTIONS) * 100
+  );
+
+  let reaction;
+
+  if (score === 10) {
+    reaction = "LEGENDARY! Sanan ka true inner-circle expert! 👑💜";
+  } else if (score >= 8) {
+    reaction = "Amazing! Tum Sanan ko kaafi achhi tarah jaante ho! ✨";
+  } else if (score >= 5) {
+    reaction = "Not bad! Lekin Sanan ki story mein abhi aur chapters hain 😂";
+  } else {
+    reaction = "Plot twist! Lagta hai Sanan ko abhi aur jaan'na baqi hai 💀";
+  }
+
+  finalScore.textContent =
+    playerName + ", tumhara score " + score + "/" +
+    TOTAL_QUESTIONS + " (" + percentage + "%) hai. " +
+    reaction;
+
+  let restartButton = document.getElementById("restartQuizBtn");
+
+  if (!restartButton) {
+    restartButton = document.createElement("button");
+    restartButton.id = "restartQuizBtn";
+    restartButton.type = "button";
+    restartButton.textContent = "Play Again 🔁";
+    restartButton.className = "answer-option";
+    restartButton.style.marginTop = "16px";
+    quizResult.appendChild(restartButton);
+
+    restartButton.addEventListener("click", function() {
+      startQuiz();
+      quizArea.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    });
+  }
+}
 </script>
+</body>
+</html>
+
 
 </body>
 </html>
