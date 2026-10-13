@@ -4507,281 +4507,6 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
 
 <style>
 /* ═══════════════════════════════════════════════════════
-   🎤 K-POP SHORTCUT — Purple + Magenta Flow
-   ═══════════════════════════════════════════════════════ */
-
-.kpop-shortcut {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px 10px 12px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 0.3px;
-    color: #2a0f45 !important;
-    background: linear-gradient(110deg,
-        #c9a6ff,
-        #f0abfc,
-        #ff9fd2,
-        #c9a6ff);
-    background-size: 300% 100%;
-    isolation: isolate;
-    overflow: hidden;
-    flex-shrink: 0;
-    -webkit-tap-highlight-color: transparent;
-    animation: kpopFlow 5s linear infinite, kpopFloat 3s ease-in-out infinite;
-    box-shadow:
-        0 4px 14px rgba(0, 0, 0, 0.25),
-        0 0 16px rgba(201, 166, 255, 0.5),
-        0 0 28px rgba(255, 159, 210, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.55);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-@keyframes kpopFlow {
-    to { background-position: 300% 0; }
-}
-
-@keyframes kpopFloat {
-    0%, 100% { translate: 0 0; }
-    50%      { translate: 0 -2px; }
-}
-
-.kpop-shortcut::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -70%;
-    width: 55%;
-    height: 100%;
-    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.9), transparent);
-    transform: skewX(-22deg);
-    z-index: 1;
-    pointer-events: none;
-}
-
-.kpop-shortcut:hover::before {
-    animation: kpopShine 0.95s ease-out;
-}
-
-@keyframes kpopShine {
-    0%   { left: -70%; }
-    100% { left: 160%; }
-}
-
-.kpop-shortcut:hover {
-    transform: translateY(-4px) scale(1.06);
-    box-shadow:
-        0 8px 22px rgba(0, 0, 0, 0.35),
-        0 0 26px rgba(201, 166, 255, 0.85),
-        0 0 50px rgba(255, 159, 210, 0.6),
-        inset 0 1px 0 rgba(255, 255, 255, 0.85);
-}
-
-.kpop-shortcut .ks-icon {
-    display: inline-block;
-    font-size: 17px;
-    line-height: 1;
-    z-index: 2;
-    position: relative;
-    animation: kpopIcon 2s ease-in-out infinite;
-    filter: drop-shadow(0 0 6px rgba(201, 166, 255, 0.7));
-}
-
-@keyframes kpopIcon {
-    0%, 100% { transform: rotate(-8deg) scale(1); }
-    50%      { transform: rotate(8deg) scale(1.15); }
-}
-
-.kpop-shortcut .ks-label {
-    position: relative;
-    z-index: 2;
-    font-weight: 900;
-    background: linear-gradient(90deg, #2a0f45, #4a1f6e, #2a0f45);
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    white-space: nowrap;
-}
-
-.kpop-shortcut .ks-new {
-    position: relative;
-    z-index: 2;
-    padding: 2px 6px;
-    border-radius: 10px;
-    background: #2a0f45;
-    color: #c9a6ff;
-    font-size: 9px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    box-shadow: 0 0 8px rgba(201, 166, 255, 0.6);
-    animation: kpopNewPulse 1.8s ease-in-out infinite;
-}
-
-@keyframes kpopNewPulse {
-    0%, 100% { transform: scale(1); }
-    50%      { transform: scale(1.1); }
-}
-
-/* ═══════════════════════════════════════════════════════
-   🎬 K-DRAMA SHORTCUT — Blue + Cyan Flow
-   ═══════════════════════════════════════════════════════ */
-
-.kdrama-shortcut {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px 10px 12px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 0.3px;
-    color: #0a2a45 !important;
-    background: linear-gradient(110deg,
-        #67e8f9,
-        #a5f3fc,
-        #bfdbfe,
-        #67e8f9);
-    background-size: 300% 100%;
-    isolation: isolate;
-    overflow: hidden;
-    flex-shrink: 0;
-    -webkit-tap-highlight-color: transparent;
-    animation: kdramaFlow 5s linear infinite, kdramaFloat 3s ease-in-out infinite;
-    box-shadow:
-        0 4px 14px rgba(0, 0, 0, 0.25),
-        0 0 16px rgba(103, 232, 249, 0.5),
-        0 0 28px rgba(191, 219, 254, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.55);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-@keyframes kdramaFlow {
-    to { background-position: 300% 0; }
-}
-
-@keyframes kdramaFloat {
-    0%, 100% { translate: 0 0; }
-    50%      { translate: 0 -2px; }
-}
-
-.kdrama-shortcut::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -70%;
-    width: 55%;
-    height: 100%;
-    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.9), transparent);
-    transform: skewX(-22deg);
-    z-index: 1;
-    pointer-events: none;
-}
-
-.kdrama-shortcut:hover::before {
-    animation: kdramaShine 0.95s ease-out;
-}
-
-@keyframes kdramaShine {
-    0%   { left: -70%; }
-    100% { left: 160%; }
-}
-
-.kdrama-shortcut:hover {
-    transform: translateY(-4px) scale(1.06);
-    box-shadow:
-        0 8px 22px rgba(0, 0, 0, 0.35),
-        0 0 26px rgba(103, 232, 249, 0.85),
-        0 0 50px rgba(191, 219, 254, 0.6),
-        inset 0 1px 0 rgba(255, 255, 255, 0.85);
-}
-
-.kdrama-shortcut .kd-icon {
-    display: inline-block;
-    font-size: 17px;
-    line-height: 1;
-    z-index: 2;
-    position: relative;
-    animation: kdramaIcon 2.2s ease-in-out infinite;
-    filter: drop-shadow(0 0 6px rgba(103, 232, 249, 0.7));
-}
-
-@keyframes kdramaIcon {
-    0%, 100% { transform: rotate(-5deg) scale(1); }
-    50%      { transform: rotate(5deg) scale(1.12); }
-}
-
-.kdrama-shortcut .kd-label {
-    position: relative;
-    z-index: 2;
-    font-weight: 900;
-    background: linear-gradient(90deg, #0a2a45, #1e3a5f, #0a2a45);
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    white-space: nowrap;
-}
-
-.kdrama-shortcut .kd-new {
-    position: relative;
-    z-index: 2;
-    padding: 2px 6px;
-    border-radius: 10px;
-    background: #0a2a45;
-    color: #67e8f9;
-    font-size: 9px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    box-shadow: 0 0 8px rgba(103, 232, 249, 0.6);
-    animation: kdramaNewPulse 1.8s ease-in-out infinite;
-}
-
-@keyframes kdramaNewPulse {
-    0%, 100% { transform: scale(1); }
-    50%      { transform: scale(1.1); }
-}
-
-/* ═══════════════════════════════════════════════════════
-   📱 Mobile Tuning
-   ═══════════════════════════════════════════════════════ */
-@media (max-width: 700px) {
-    .kpop-shortcut,
-    .kdrama-shortcut {
-        padding: 8px 13px 8px 10px;
-        font-size: 12px;
-        gap: 6px;
-    }
-    .kpop-shortcut .ks-icon,
-    .kdrama-shortcut .kd-icon {
-        font-size: 15px;
-    }
-}
-
-/* ═══════════════════════════════════════════════════════
-   ♿ Reduce Motion
-   ═══════════════════════════════════════════════════════ */
-@media (prefers-reduced-motion: reduce) {
-    .kpop-shortcut,
-    .kdrama-shortcut,
-    .kpop-shortcut::before,
-    .kdrama-shortcut::before,
-    .kpop-shortcut .ks-icon,
-    .kdrama-shortcut .kd-icon,
-    .kpop-shortcut .ks-new,
-    .kdrama-shortcut .kd-new {
-        animation: none !important;
-    }
-}
-</style>
-<style>
-/* ═══════════════════════════════════════════════════════
    🎬🎤 DUO CHARTS — K-Drama + K-Pop side by side
    ═══════════════════════════════════════════════════════ */
 
@@ -5153,8 +4878,319 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
     }
 }
 </style>
+<!-- ═══════════════════════════════════════
+     🎤🎬 K-POP + K-DRAMA BUTTONS
+     ═══════════════════════════════════════ -->
+<style>
+/* 🎤 K-POP WORLD */
+.kpop-shortcut {
+    --k1: #c9a6ff;
+    --k2: #f0abfc;
+    --k3: #a855f7;
 
-</body>
-</html>
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px 10px 12px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+
+    background: rgba(30, 18, 55, 0.55);
+    border: 1px solid rgba(201, 166, 255, 0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    color: #e7dcf7;
+
+    isolation: isolate;
+    overflow: hidden;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+
+    transition:
+        background 0.5s ease,
+        border-color 0.5s ease,
+        box-shadow 0.5s ease,
+        transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1),
+        color 0.4s ease;
+}
+
+.kpop-shortcut::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(100deg,
+        transparent,
+        rgba(255, 255, 255, 0.55),
+        transparent);
+    transform: skewX(-22deg);
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.kpop-shortcut::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(110deg,
+        var(--k1),
+        var(--k2),
+        var(--k3),
+        var(--k1));
+    background-size: 300% 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.kpop-shortcut .ks-icon,
+.kpop-shortcut .ks-label,
+.kpop-shortcut .ks-new {
+    position: relative;
+    z-index: 2;
+    transition: color 0.4s ease, transform 0.4s ease;
+}
+
+.kpop-shortcut:hover {
+    border-color: var(--k2);
+    color: #1a0d2e !important;
+    transform: translateY(-3px) scale(1.04);
+    box-shadow:
+        0 6px 16px rgba(0, 0, 0, 0.35),
+        0 0 18px var(--k1),
+        0 0 32px var(--k2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.kpop-shortcut:hover::after {
+    opacity: 0.9;
+    animation: navFlow 6s linear infinite;
+}
+
+.kpop-shortcut:hover::before {
+    opacity: 1;
+    animation: navShine 1s ease-out;
+}
+
+.kpop-shortcut:hover .ks-icon {
+    transform: translateY(-2px) rotate(-10deg) scale(1.18);
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.85));
+}
+
+.kpop-shortcut:hover .ks-label {
+    font-weight: 900;
+    color: #1a0d2e;
+}
+
+.kpop-shortcut:hover .ks-new {
+    background: #1a0d2e;
+    color: #f0abfc;
+}
+
+.kpop-shortcut .ks-icon {
+    display: inline-block;
+    font-size: 17px;
+    line-height: 1;
+    animation: kpopIconWiggle 2s ease-in-out infinite;
+}
+
+@keyframes kpopIconWiggle {
+    0%, 100% { transform: rotate(-8deg) scale(1); }
+    50%      { transform: rotate(8deg) scale(1.1); }
+}
+
+.kpop-shortcut .ks-label {
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+.kpop-shortcut .ks-new {
+    padding: 2px 7px;
+    border-radius: 10px;
+    background: rgba(201, 166, 255, 0.2);
+    color: #c9a6ff;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+/* 🎬 K-DRAMA */
+.kdrama-shortcut {
+    --d1: #67e8f9;
+    --d2: #a5f3fc;
+    --d3: #38bdf8;
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px 10px 12px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+
+    background: rgba(15, 30, 50, 0.55);
+    border: 1px solid rgba(103, 232, 249, 0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    color: #cbe8f2;
+
+    isolation: isolate;
+    overflow: hidden;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+
+    transition:
+        background 0.5s ease,
+        border-color 0.5s ease,
+        box-shadow 0.5s ease,
+        transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1),
+        color 0.4s ease;
+}
+
+.kdrama-shortcut::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(100deg,
+        transparent,
+        rgba(255, 255, 255, 0.55),
+        transparent);
+    transform: skewX(-22deg);
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.kdrama-shortcut::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(110deg,
+        var(--d1),
+        var(--d2),
+        var(--d3),
+        var(--d1));
+    background-size: 300% 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.kdrama-shortcut .kd-icon,
+.kdrama-shortcut .kd-label,
+.kdrama-shortcut .kd-new {
+    position: relative;
+    z-index: 2;
+    transition: color 0.4s ease, transform 0.4s ease;
+}
+
+.kdrama-shortcut:hover {
+    border-color: var(--d2);
+    color: #0a2a45 !important;
+    transform: translateY(-3px) scale(1.04);
+    box-shadow:
+        0 6px 16px rgba(0, 0, 0, 0.35),
+        0 0 18px var(--d1),
+        0 0 32px var(--d2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.kdrama-shortcut:hover::after {
+    opacity: 0.9;
+    animation: navFlow 6s linear infinite;
+}
+
+.kdrama-shortcut:hover::before {
+    opacity: 1;
+    animation: navShine 1s ease-out;
+}
+
+.kdrama-shortcut:hover .kd-icon {
+    transform: translateY(-2px) rotate(-10deg) scale(1.18);
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.85));
+}
+
+.kdrama-shortcut:hover .kd-label {
+    font-weight: 900;
+    color: #0a2a45;
+}
+
+.kdrama-shortcut:hover .kd-new {
+    background: #0a2a45;
+    color: #67e8f9;
+}
+
+.kdrama-shortcut .kd-icon {
+    display: inline-block;
+    font-size: 17px;
+    line-height: 1;
+    animation: kdramaIconWiggle 2.2s ease-in-out infinite;
+}
+
+@keyframes kdramaIconWiggle {
+    0%, 100% { transform: rotate(-5deg) scale(1); }
+    50%      { transform: rotate(5deg) scale(1.12); }
+}
+
+.kdrama-shortcut .kd-label {
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+.kdrama-shortcut .kd-new {
+    padding: 2px 7px;
+    border-radius: 10px;
+    background: rgba(103, 232, 249, 0.2);
+    color: #67e8f9;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+/* 📱 Mobile */
+@media (max-width: 700px) {
+    .kpop-shortcut,
+    .kdrama-shortcut {
+        padding: 8px 13px 8px 10px;
+        font-size: 12px;
+        gap: 6px;
+    }
+    .kpop-shortcut .ks-icon,
+    .kdrama-shortcut .kd-icon {
+        font-size: 15px;
+    }
+}
+
+/* ♿ Reduce Motion */
+@media (prefers-reduced-motion: reduce) {
+    .kpop-shortcut,
+    .kdrama-shortcut,
+    .kpop-shortcut::before,
+    .kpop-shortcut::after,
+    .kdrama-shortcut::before,
+    .kdrama-shortcut::after,
+    .kpop-shortcut .ks-icon,
+    .kdrama-shortcut .kd-icon {
+        animation: none !important;
+    }
+    .kpop-shortcut:hover,
+    .kdrama-shortcut:hover {
+        transform: none;
+    }
+}
+</style>
 </body>
 </html>
