@@ -421,9 +421,7 @@ main, footer { position: relative; z-index: 1; }
     100% { clip-path: circle(0% at 50% 50%); visibility: hidden; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    #pageIntro, .fx-orb, .fx-star, .fx-float { display: none; }
-}
+
 Step 2: HTML paste karo
 
 <body> tag dhoondo. Us ke bilkul neeche (header se pehle) ye 2 blocks paste karo:
@@ -609,7 +607,6 @@ html
 
 <script>
 (function () {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     var layer = document.getElementById("bgFx");
     if (!layer) return;
