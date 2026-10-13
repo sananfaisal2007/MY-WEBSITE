@@ -6612,5 +6612,75 @@ body .content {
 
 })();
 </script>
+<script>
+function enterMyWorld() {
+    // 1. Naam check karo
+    var nameInput = document.getElementById("visitorName");
+    var hint = document.getElementById("wdHint");
+    var react = document.getElementById("wdReact");
+    var name = nameInput ? nameInput.value.trim() : "";
+
+    if (!name) {
+        // Naam nahi likha → darwaza hilao + warning
+        var door = document.getElementById("enter-door");
+        if (door) {
+            door.classList.remove("wd-shake");
+            void door.offsetWidth; // restart animation
+            door.classList.add("wd-shake");
+        }
+        if (hint) hint.textContent = "⚠️ Pehle apna naam likho, phir darwaza khulega! 😄";
+        if (react) react.textContent = "Arre! Naam ke bina koi andar nahi aata 🚪😂";
+        return;
+    }
+
+    // 2. Naam save karo (session)
+    try {
+        sessionStorage.setItem("visitorName", name);
+        sessionStorage.setItem("welcomeDone", "1");
+    } catch (e) {}
+
+    // 3. Door ko open animation do
+    var door = document.getElementById("enter-door");
+    if (door) door.classList.add("open");
+
+    // 4. Hint update
+    if (hint) hint.textContent = "✨ Darwaza khul raha hai... Welcome, " + name + "! 💜";
+    if (react) react.textContent = "";
+
+    // 5. Sparkle burst
+    var rect = door ? door.getBoundingClientRect() : null;
+    if (rect) {
+        var cx = rect.left + rect.width / 2;
+        var cy = rect.top + rect.height / 2;
+        for (var i = 0; i < 20; i++) {
+            var s = document.createElement("span");
+            s.className = "wd-spark";
+            s.textContent = ["✨","💜","⭐","🌸","💫"][Math.floor(Math.random()*5)];
+            s.style.left = cx + "px";
+            s.style.top = cy + "px";
+            s.style.fontSize = (12 + Math.random() * 14) + "px";
+            s.style.setProperty("--dx", ((Math.random() - 0.5) * 400) + "px");
+            s.style.setProperty("--dy", ((Math.random() - 0.5) * 400) + "px");
+            s.addEventListener("animationend", function () { this.remove(); });
+            document.body.appendChild(s);
+        }
+    }
+
+    // 6. Welcome screen ko fade out karo
+    var ws = document.getElementById("welcome-screen");
+    if (ws) {
+        ws.classList.add("portal");
+        setTimeout(function () {
+            ws.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+            ws.style.opacity = "0";
+            ws.style.transform = "scale(1.15)";
+            setTimeout(function () {
+                ws.style.display = "none";
+                document.body.classList.add("home-reveal");
+            }, 800);
+        }, 900);
+    }
+}
+</script>
 </body>
 </html>
