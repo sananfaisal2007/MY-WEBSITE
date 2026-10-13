@@ -280,23 +280,7 @@ h1 {
 .name-react { min-height: 22px; margin: 10px 0 0; font-size: 13px; color: #ffe9a8; line-height: 1.6; }
 .shake { animation: shake .45s; }
 @keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-9px); } 40% { transform: translateX(9px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(6px); } }
-STEP 2: HTML mein changes
-2a. Moving background layer add karo
 
-<body> ke baad jo <div class="flowers" ...> hai, uske theek upar yeh paste karo:
-
-html
-<div class="bg-orbs" aria-hidden="true">
-  <i class="orb o1" data-depth="40"></i>
-  <i class="orb o2" data-depth="-55"></i>
-  <i class="orb o3" data-depth="25"></i>
-  <span class="sparkle" data-depth="30"  style="left:12%;top:70%">✨</span>
-  <span class="sparkle" data-depth="-35" style="left:80%;top:18%">🌙</span>
-  <span class="sparkle" data-depth="50"  style="left:25%;top:15%">⭐</span>
-  <span class="sparkle" data-depth="-45" style="left:70%;top:75%">💫</span>
-  <span class="sparkle" data-depth="60"  style="left:90%;top:50%">🦋</span>
-</div>
-<div class="cursor-glow" id="cursorGlow"></div>
 /* ===== HALL OF FAME ===== */
 #lbModal {
   position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center;
@@ -324,7 +308,17 @@ html
 </head>
 
 <body>
-
+<div class="bg-orbs" aria-hidden="true">
+  <i class="orb o1" data-depth="40"></i>
+  <i class="orb o2" data-depth="-55"></i>
+  <i class="orb o3" data-depth="25"></i>
+  <span class="sparkle" data-depth="30"  style="left:12%;top:70%">✨</span>
+  <span class="sparkle" data-depth="-35" style="left:80%;top:18%">🌙</span>
+  <span class="sparkle" data-depth="50"  style="left:25%;top:15%">⭐</span>
+  <span class="sparkle" data-depth="-45" style="left:70%;top:75%">💫</span>
+  <span class="sparkle" data-depth="60"  style="left:90%;top:50%">🦋</span>
+</div>
+<div class="cursor-glow" id="cursorGlow"></div>
 <div class="flowers" aria-hidden="true">
   <span class="flower">🌸</span><span class="flower">✨</span><span class="flower">🌷</span><span class="flower">💜</span>
   <span class="flower">🌺</span><span class="flower">🦋</span><span class="flower">🌸</span><span class="flower">⭐</span>
