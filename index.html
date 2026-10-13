@@ -3045,13 +3045,13 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
 
 <button id="quizMagicInvite" ...> ke bilkul pehle ye line daal do:
 
-html
-<button id="quizTeddy" type="button" aria-label="Quiz card kholo ya band karo" aria-expanded="false">
+<button id="quizTeddy" type="button" onclick="toggleQuizCard()" aria-label="Quiz card kholo ya band karo">
   🧸<span class="teddy-badge" id="teddyBadge">?</span>
 </button>
     
 <button id="quizMagicInvite"
-        type="button"
+        <button id="quizMagicInvite" type="button" onclick="window.location.href='quiz.html'"
+        aria-label="Scroll to the Celestial Challenge quiz">
         aria-label="Scroll to the Celestial Challenge quiz">
  <span class="quiz-mascot" aria-hidden="true">🧸💜</span>
   <span class="quiz-invite-title">How Well Do You Know Sanan? 👀</span>
@@ -3064,29 +3064,17 @@ html
 <script>
   (() => {
    <script>
-(() => {
-  const invite = document.getElementById("quizMagicInvite");
-  const teddy = document.getElementById("quizTeddy");
-  const badge = document.getElementById("teddyBadge");
-  if (!invite || !teddy) return;
+function toggleQuizCard() {
+  var card = document.getElementById("quizMagicInvite");
+  var badge = document.getElementById("teddyBadge");
+  var hidden = card.classList.toggle("qm-hidden");
+  badge.textContent = hidden ? "?" : "✕";
+}
 
-  function setOpen(open) {
-    invite.classList.toggle("qm-hidden", !open);
-    teddy.setAttribute("aria-expanded", String(open));
-    badge.textContent = open ? "✕" : "?";
-  }
-
-  // Phone par shuru mein band, desktop par khula
-  setOpen(window.innerWidth > 768);
-
-  teddy.addEventListener("click", () => {
-    setOpen(invite.classList.contains("qm-hidden"));
-  });
-
-  invite.addEventListener("click", () => {
-    window.location.href = "quiz.html";
-  });
-})();
+// Phone par shuru mein card band rahe
+if (window.innerWidth <= 768) {
+  document.getElementById("quizMagicInvite").classList.add("qm-hidden");
+}
 </script>
 
 </body>
