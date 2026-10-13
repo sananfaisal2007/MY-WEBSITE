@@ -5870,119 +5870,7 @@ body .content {
     if (!THEMES[saved]) saved = "cosmic";
     applyTheme(saved);
 })();
-</script>
-<!-- ═══════════════════════════════════════
-     🎵 MUSIC PLAYER — MULTI OPTION
-     ═══════════════════════════════════════ -->
 
-<!-- Audio Elements -->
-<audio id="audioPiano" loop preload="none">
-    <source src="leberch-soft-piano-soft-piano-music-603947.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="audioLofi" loop preload="none">
-    <source src="lofi-music.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="audioRain" loop preload="none">
-    <source src="rain-sound.mp3" type="audio/mpeg">
-</audio>
-
-<!-- Music Player -->
-<div class="music-player" id="musicPlayer">
-
-    <!-- Master Button -->
-    <button class="music-master-btn" id="musicMasterBtn" type="button" aria-label="Open music player" aria-expanded="false">
-        <span class="mm-icon" id="musicIcon">🎵</span>
-        <span class="mm-label" id="musicLabel">Music</span>
-        <span class="mm-chevron">▾</span>
-
-        <!-- Playing indicator -->
-        <span class="mm-playing-bars" id="mmPlayingBars" aria-hidden="true">
-            <i></i><i></i><i></i><i></i>
-        </span>
-    </button>
-
-    <!-- Dropdown Panel -->
-    <div class="music-menu" id="musicMenu" role="menu" aria-hidden="true">
-
-        <div class="mm-head">
-            <span class="mm-badge">✦ CHOOSE YOUR VIBE ✦</span>
-            <p class="mm-sub">Background music for your mood 🎧</p>
-        </div>
-
-        <div class="mm-options">
-
-            <!-- Piano -->
-            <button class="mm-option active" data-track="piano" type="button" role="menuitem">
-                <span class="mo-icon">🎹</span>
-                <span class="mo-info">
-                    <span class="mo-name">Piano</span>
-                    <span class="mo-desc">Peaceful & soft</span>
-                </span>
-                <span class="mo-check">✓</span>
-            </button>
-
-            <!-- Lo-fi -->
-            <button class="mm-option" data-track="lofi" type="button" role="menuitem">
-                <span class="mo-icon">🎧</span>
-                <span class="mo-info">
-                    <span class="mo-name">Lo-fi</span>
-                    <span class="mo-desc">Chill beats</span>
-                </span>
-                <span class="mo-check">✓</span>
-            </button>
-
-            <!-- Rain -->
-            <button class="mm-option" data-track="rain" type="button" role="menuitem">
-                <span class="mo-icon">🌧️</span>
-                <span class="mo-info">
-                    <span class="mo-name">Rain</span>
-                    <span class="mo-desc">Nature sounds</span>
-                </span>
-                <span class="mo-check">✓</span>
-            </button>
-
-            <!-- Mute -->
-            <!-- 🌙 NIGHT AMBIENCE -->
-<button class="mm-option" data-track="night" type="button" role="menuitem">
-    <span class="mo-icon">🌙</span>
-    <span class="mo-info">
-        <span class="mo-name">Night Ambience</span>
-        <span class="mo-desc">Soft celestial hum</span>
-    </span>
-    <span class="mo-check">✓</span>
-</button>
-
-<!-- 🌊 OCEAN WAVES -->
-<button class="mm-option" data-track="ocean" type="button" role="menuitem">
-    <span class="mo-icon">🌊</span>
-    <span class="mo-info">
-        <span class="mo-name">Ocean Waves</span>
-        <span class="mo-desc">Calm beach vibes</span>
-    </span>
-    <span class="mo-check">✓</span>
-</button>
-
-        </div>
-
-        <!-- Volume Control -->
-        <div class="mm-volume" id="mmVolume">
-            <span class="mv-icon" id="mvIcon">🔊</span>
-            <input type="range" id="mvSlider" min="0" max="100" value="50" aria-label="Volume">
-            <span class="mv-value" id="mvValue">50%</span>
-        </div>
-
-        <div class="mm-foot">
-            <span class="mm-foot-text">💜 Your choice is saved</span>
-        </div>
-
-    </div>
-</div>
-<!-- ═══════════════════════════════════════
-     🎵 MUSIC PLAYER — STYLES
-     ═══════════════════════════════════════ -->
-<style>
 /* ═══════════════════════════════════════
    🎵 MUSIC PLAYER WRAPPER — NEW POSITION
    ═══════════════════════════════════════ */
@@ -5993,15 +5881,15 @@ body .content {
     z-index: 9999;
     font-family: 'Poppins', sans-serif;
 }
-</style>
-    <style>
+    </style>
+<style>
 @media (max-width: 700px) {
     .music-player {
         left: 10px;
         bottom: 20px;          
     }
 }
-</style>
+
 /* ═══════════════════════════════════════
    🎵 MASTER BUTTON
    ═══════════════════════════════════════ */
@@ -6885,5 +6773,121 @@ body.zoom-in-portal {
     }
 }
 </style>
+<!-- ═══════════════════════════════════════
+     🎵 MUSIC PLAYER — FINAL VERSION
+     ═══════════════════════════════════════ -->
+
+<!-- Audio Elements -->
+<audio id="audioPiano" loop preload="none">
+    <source src="leberch-soft-piano-soft-piano-music-603947.mp3" type="audio/mpeg">
+</audio>
+<audio id="audioLofi" loop preload="none">
+    <source src="lofi-music.mp3" type="audio/mpeg">
+</audio>
+<audio id="audioRain" loop preload="none">
+    <source src="rain-sound.mp3" type="audio/mpeg">
+</audio>
+<audio id="audioNight" loop preload="none">
+    <source src="night-ambience.mp3" type="audio/mpeg">
+</audio>
+<audio id="audioOcean" loop preload="none">
+    <source src="ocean-waves.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Music Player -->
+<div class="music-player" id="musicPlayer">
+
+    <!-- 🌸 Master Button -->
+    <button class="music-master-btn" id="musicMasterBtn" type="button"
+            aria-label="Open music player" aria-expanded="false">
+
+        <!-- Animated ring around icon -->
+        <span class="mm-ring" aria-hidden="true"></span>
+
+        <!-- Music icon with glow -->
+        <span class="mm-icon" id="musicIcon">🎵</span>
+
+        <!-- Label -->
+        <span class="mm-label" id="musicLabel">Music</span>
+
+        <!-- Chevron -->
+        <span class="mm-chevron">▾</span>
+
+        <!-- Playing indicator bars -->
+        <span class="mm-playing-bars" id="mmPlayingBars" aria-hidden="true">
+            <i></i><i></i><i></i><i></i>
+        </span>
+    </button>
+
+    <!-- Dropdown Panel -->
+    <div class="music-menu" id="musicMenu" role="menu" aria-hidden="true">
+
+        <div class="mm-head">
+            <span class="mm-badge">✦ SOUND OF MY WORLD ✦</span>
+            <p class="mm-sub">Pick a melody for your mood 🎧💜</p>
+        </div>
+
+        <div class="mm-options">
+
+            <button class="mm-option active" data-track="piano" type="button" role="menuitem">
+                <span class="mo-icon">🎹</span>
+                <span class="mo-info">
+                    <span class="mo-name">Soft Piano</span>
+                    <span class="mo-desc">Peaceful & dreamy</span>
+                </span>
+                <span class="mo-check">✓</span>
+            </button>
+
+            <button class="mm-option" data-track="lofi" type="button" role="menuitem">
+                <span class="mo-icon">🎧</span>
+                <span class="mo-info">
+                    <span class="mo-name">Lo-fi Beats</span>
+                    <span class="mo-desc">Chill & cozy</span>
+                </span>
+                <span class="mo-check">✓</span>
+            </button>
+
+            <button class="mm-option" data-track="rain" type="button" role="menuitem">
+                <span class="mo-icon">🌧️</span>
+                <span class="mo-info">
+                    <span class="mo-name">Gentle Rain</span>
+                    <span class="mo-desc">Soft nature sounds</span>
+                </span>
+                <span class="mo-check">✓</span>
+            </button>
+
+            <button class="mm-option" data-track="night" type="button" role="menuitem">
+                <span class="mo-icon">🌙</span>
+                <span class="mo-info">
+                    <span class="mo-name">Starry Night</span>
+                    <span class="mo-desc">Celestial whispers</span>
+                </span>
+                <span class="mo-check">✓</span>
+            </button>
+
+            <button class="mm-option" data-track="ocean" type="button" role="menuitem">
+                <span class="mo-icon">🌊</span>
+                <span class="mo-info">
+                    <span class="mo-name">Ocean Waves</span>
+                    <span class="mo-desc">Calm & soothing</span>
+                </span>
+                <span class="mo-check">✓</span>
+            </button>
+
+        </div>
+
+        <!-- Volume -->
+        <div class="mm-volume" id="mmVolume">
+            <span class="mv-icon" id="mvIcon">🔊</span>
+            <input type="range" id="mvSlider" min="0" max="100" value="50" aria-label="Volume">
+            <span class="mv-value" id="mvValue">50%</span>
+        </div>
+
+        <div class="mm-foot">
+            <span class="mm-foot-text">💜 Your melody is remembered</span>
+        </div>
+
+    </div>
+</div>
 </body>
 </html>
