@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇰🇷 My Korean World | Sanan's World</title>
+<meta name="description" content="South Korea — K-culture, food, places, fashion, traditions, aur bohat kuch. Enter Sanan's Korean World 🇰🇷✨">
+<meta name="theme-color" content="#0a0718">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇰🇷</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Pacifico&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --kr-red: #cd2e3a;
+    --kr-blue: #0047a0;
+    --kr-pink: #ff9fd2;
+    --kr-purple: #a855f7;
+    --kr-dark: #0a0718;
+    --kr-dark-2: #150e2b;
+    --kr-gold: #ffe27a;
+    --kr-text: #e7dcf7;
+    --kr-soft: #b8a8d1;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+    line-height: 1.7;
+    color: var(--kr-text);
+    background: var(--kr-dark);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* ====== Ambient Background ====== */
+.bg-layer {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(205, 46, 58, 0.22), transparent 45%),
+        radial-gradient(circle at 85% 70%, rgba(0, 71, 160, 0.28), transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.12), transparent 60%),
+        linear-gradient(180deg, #0a0718 0%, #150e2b 50%, #0a0718 100%);
+}
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.35;
+    animation: orbDrift 22s ease-in-out infinite alternate;
+}
+.orb.o1 { width: 340px; height: 340px; left: -5%; top: 10%; background: #cd2e3a; }
+.orb.o2 { width: 400px; height: 400px; right: -8%; top: 40%; background: #0047a0; animation-duration: 26s; animation-delay: -8s; }
+.orb.o3 { width: 280px; height: 280px; left: 40%; bottom: -8%; background: #ff9fd2; opacity: 0.22; animation-duration: 30s; animation-delay: -14s; }
+
+@keyframes orbDrift {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(60px, -45px) scale(1.15); }
+    100% { transform: translate(-50px, 55px) scale(0.95); }
+}
+
+.star {
+    position: absolute;
+    border-radius: 50%;
+    background: #fff;
+    animation: twinkle 3s ease-in-out infinite;
+}
+@keyframes twinkle {
+    0%, 100% { opacity: 0.15; transform: scale(0.7); }
+    50%      { opacity: 1; transform: scale(1.3); }
+}
+
+.petal {
+    position: absolute;
+    top: -40px;
+    font-size: 22px;
+    opacity: 0;
+    animation: petalFall linear infinite;
+    pointer-events: none;
+    filter: drop-shadow(0 0 8px rgba(255, 159, 210, 0.7));
+}
+@keyframes petalFall {
+    0%   { transform: translate(0, -20px) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.9; }
+    90%  { opacity: 0.9; }
+    100% { transform: translate(var(--sway), 110vh) rotate(720deg); opacity: 0; }
+}
+
+/* ====== Top Bar ====== */
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 14px 5%;
+    background: rgba(10, 7, 24, 0.9);
+    border-bottom: 1px solid rgba(205, 46, 58, 0.35);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.topbar .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffb8c5;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.topbar nav { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.topbar nav a {
+    padding: 8px 14px;
+    border: 1px solid rgba(255, 159, 210, 0.28);
+    border-radius: 30px;
+    background: rgba(205, 46, 58, 0.14);
+    color: #ffe8ee;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.topbar nav a:hover {
+    background: rgba(205, 46, 58, 0.35);
+    border-color: rgba(255, 159, 210, 0.85);
+    transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(205, 46, 58, 0.5);
+}
+
+.topbar nav a.current {
+    background: linear-gradient(135deg, rgba(205, 46, 58, 0.55), rgba(0, 71, 160, 0.55));
+    border-color: rgba(255, 159, 210, 0.95);
+    box-shadow: 0 0 22px rgba(205, 46, 58, 0.55);
+    color: #fff;
+}
+
+/* ====== Hero ====== */
+.kr-hero {
+    position: relative;
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 90px 6% 70px;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.kr-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(circle at 50% 30%, rgba(205, 46, 58, 0.35), transparent 55%),
+        radial-gradient(circle at 20% 80%, rgba(0, 71, 160, 0.35), transparent 55%),
+        radial-gradient(circle at 80% 80%, rgba(255, 159, 210, 0.22), transparent 55%);
+    animation: krGlow 8s ease-in-out infinite;
+}
+
+@keyframes krGlow {
+    0%, 100% { opacity: 0.75; }
+    50%      { opacity: 1; }
+}
+
+.kr-flag-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    font-size: 48px;
+    animation: krFloat 3.5s ease-in-out infinite;
+}
+
+@keyframes krFloat {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50%      { transform: translateY(-10px) rotate(3deg); }
+}
+
+.kr-badge {
+    display: inline-block;
+    padding: 7px 20px;
+    margin-bottom: 22px;
+    border: 1px solid rgba(255, 159, 210, 0.55);
+    border-radius: 30px;
+    background: linear-gradient(110deg, rgba(205, 46, 58, 0.25), rgba(0, 71, 160, 0.25));
+    color: #ffe8ee;
+    font-size: 12px;
+    letter-spacing: 4px;
+    font-weight: 700;
+    animation: krBadgeGlow 3s ease-in-out infinite;
+}
+
+@keyframes krBadgeGlow {
+    0%, 100% { box-shadow: 0 0 14px rgba(205, 46, 58, 0.35); }
+    50%      { box-shadow: 0 0 28px rgba(255, 159, 210, 0.65); }
+}
+
+.kr-hero h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(38px, 8vw, 84px);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    background: linear-gradient(120deg, #ffffff, #ffb8c5, #ff9fd2, #a855f7, #ffffff);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 35px rgba(205, 46, 58, 0.25);
+    animation: krTextFlow 6s linear infinite;
+}
+
+@keyframes krTextFlow {
+    to { background-position: 300% 0; }
+}
+
+.kr-hero .kr-sub {
+    max-width: 620px;
+    margin: 0 auto 24px;
+    color: #d9c8ee;
+    font-size: 17px;
+    line-height: 1.9;
+}
+
+.kr-hero .kr-hangul {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: #ffb8c5;
+    letter-spacing: 8px;
+    margin-bottom: 26px;
+    text-shadow: 0 0 18px rgba(205, 46, 58, 0.6);
+    animation: krHangul 4s ease-in-out infinite;
+}
+
+@keyframes krHangul {
+    0%, 100% { opacity: 0.75; letter-spacing: 8px; }
+    50%      { opacity: 1; letter-spacing: 12px; }
+}
+
+.kr-hero .kr-scroll {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 26px;
+    border: 1px solid rgba(255, 159, 210, 0.6);
+    border-radius: 40px;
+    background: rgba(205, 46, 58, 0.18);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.kr-hero .kr-scroll:hover {
+    background: var(--kr-red);
+    box-shadow: 0 0 30px rgba(205, 46, 58, 0.7);
+    transform: translateY(-3px);
+}
+
+/* Hero stats */
+.kr-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.kr-stat {
+    min-width: 120px;
+    padding: 16px 22px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 159, 210, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.kr-stat:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 159, 210, 0.9);
+    box-shadow: 0 0 24px rgba(205, 46, 58, 0.5);
+}
+
+.kr-stat .ks-num {
+    display: block;
+    font-size: 26px;
+    font-weight: 900;
+    color: #ffd6e7;
+    text-shadow: 0 0 14px rgba(255, 159, 210, 0.6);
+}
+
+.kr-stat .ks-label {
+    display: block;
+    font-size: 11px;
+    color: #d9c8ee;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+/* ====== Section base ====== */
+.kr-section {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 70px 6%;
+}
+
+.kr-section-head {
+    text-align: center;
+    margin-bottom: 46px;
+}
+
+.kr-section-head .k-sh-badge {
+    display: inline-block;
+    padding: 5px 16px;
+    margin-bottom: 14px;
+    border: 1px solid rgba(255, 159, 210, 0.45);
+    border-radius: 20px;
+    background: rgba(168, 85, 247, 0.15);
+    color: #ffc8e0;
+    font-size: 11px;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+.kr-section-head h2 {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 400;
+    color: #fff2ff;
+    margin-bottom: 12px;
+    text-shadow: 0 0 22px rgba(205, 46, 58, 0.4);
+}
+
+.kr-section-head p {
+    color: var(--kr-soft);
+    font-size: 15px;
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+/* ====== Cards Grid ====== */
+.kr-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+}
+
+.kr-card {
+    position: relative;
+    padding: 24px 22px;
+    border: 1px solid rgba(255, 159, 210, 0.28);
+    border-radius: 22px;
+    background: linear-gradient(145deg, rgba(30, 18, 55, 0.72), rgba(15, 10, 30, 0.85));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.kr-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(120deg, rgba(205, 46, 58, 0.08), rgba(0, 71, 160, 0.08), rgba(255, 159, 210, 0.06));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.kr-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 159, 210, 0.85);
+    box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.45),
+        0 0 24px rgba(205, 46, 58, 0.5),
+        0 0 50px rgba(0, 71, 160, 0.3);
+}
+
+.kr-card:hover::before { opacity: 1; }
+
+.kr-card .kr-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 14px;
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 28px;
+    line-height: 1;
+    box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.06);
+    transition: transform 0.4s ease;
+}
+
+.kr-card:hover .kr-icon {
+    transform: translateY(-4px) rotate(-8deg) scale(1.12);
+}
+
+.kr-card h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #ffd6e7;
+    margin-bottom: 10px;
+    letter-spacing: 0.3px;
+}
+
+.kr-card p {
+    color: var(--kr-soft);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.kr-card .kr-tag {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: rgba(255, 159, 210, 0.15);
+    border: 1px solid rgba(255, 159, 210, 0.4);
+    color: #ffc8e0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* ====== Image Cards ====== */
+.kr-image-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 26px;
+    min-height: 340px;
+    display: flex;
+    align-items: flex-end;
+    padding: 26px;
+    border: 1px solid rgba(255, 159, 210, 0.35);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    isolation: isolate;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.kr-image-card img {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+}
+
+.kr-image-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, transparent 30%, rgba(10, 7, 24, 0.94) 100%);
+}
+
+.kr-image-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 50px rgba(205, 46, 58, 0.55);
+}
+
+.kr-image-card:hover img { transform: scale(1.08); }
+
+.kr-image-card h3 {
+    font-size: 22px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 6px;
+    text-shadow: 0 0 18px rgba(0, 0, 0, 0.9);
+}
+
+.kr-image-card p {
+    color: #ffe8ee;
+    font-size: 13px;
+    line-height: 1.6;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+}
+
+.kr-image-card .kic-tag {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(205, 46, 58, 0.7);
+    border: 1px solid rgba(255, 159, 210, 0.7);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* ====== Food Section ====== */
+.kr-food-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+}
+
+.kr-food {
+    position: relative;
+    padding: 24px 16px;
+    text-align: center;
+    border-radius: 22px;
+    background: linear-gradient(160deg, rgba(205, 46, 58, 0.14), rgba(0, 71, 160, 0.1));
+    border: 1px solid rgba(255, 159, 210, 0.28);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    overflow: hidden;
+}
+
+.kr-food::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent, rgba(255, 159, 210, 0.35), transparent);
+    animation: krFoodSpin 6s linear infinite;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+.kr-food:hover::before { opacity: 1; }
+
+.kr-food > * { position: relative; z-index: 1; }
+
+@keyframes krFoodSpin {
+    to { transform: rotate(360deg); }
+}
+
+.kr-food:hover {
+    transform: translateY(-6px) scale(1.03);
+    border-color: rgba(255, 159, 210, 0.9);
+    box-shadow: 0 0 28px rgba(205, 46, 58, 0.5);
+}
+
+.kr-food .kf-emoji {
+    display: block;
+    font-size: 46px;
+    margin-bottom: 10px;
+    transition: transform 0.4s ease;
+}
+
+.kr-food:hover .kf-emoji { transform: scale(1.25) rotate(-8deg); }
+
+.kr-food h4 {
+    color: #fff2ff;
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.kr-food p {
+    color: #d9c8ee;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* ====== K-Pop Section ====== */
+.kpop-stage {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 18px;
+    perspective: 1200px;
+}
+
+.kpop-idol {
+    position: relative;
+    overflow: hidden;
+    border-radius: 22px;
+    padding: 26px 20px;
+    text-align: center;
+    background: linear-gradient(160deg, rgba(168, 85, 247, 0.18), rgba(255, 159, 210, 0.12));
+    border: 1px solid rgba(255, 159, 210, 0.35);
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.5s ease;
+    isolation: isolate;
+    cursor: pointer;
+}
+
+.kpop-idol::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    z-index: -2;
+    border-radius: inherit;
+    background: conic-gradient(from 0deg, #ff9fd2, #a855f7, #0047a0, #cd2e3a, #ff9fd2);
+    opacity: 0;
+    filter: blur(14px);
+    animation: kpopRing 5s linear infinite;
+    transition: opacity 0.5s ease;
+}
+
+@keyframes kpopRing { to { transform: rotate(360deg); } }
+
+.kpop-idol:hover::before { opacity: 0.85; }
+
+.kpop-idol:hover {
+    transform: translateY(-8px) rotateY(6deg) rotateX(-4deg) scale(1.03);
+    box-shadow: 0 20px 50px rgba(168, 85, 247, 0.5);
+}
+
+.kpop-idol .ki-logo {
+    display: block;
+    font-size: 42px;
+    margin-bottom: 14px;
+    filter: drop-shadow(0 0 12px rgba(255, 159, 210, 0.7));
+    transition: transform 0.4s ease;
+}
+
+.kpop-idol:hover .ki-logo {
+    transform: scale(1.15) rotate(-8deg);
+}
+
+.kpop-idol h4 {
+    font-size: 18px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+
+.kpop-idol p {
+    font-size: 12px;
+    color: #ffe8ee;
+    line-height: 1.6;
+}
+
+.kpop-idol .kpop-genre {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 159, 210, 0.5);
+    color: #ffd6e7;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* ====== K-Drama Mood Board ====== */
+.kdrama-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 18px;
+}
+
+.kdrama-poster {
+    position: relative;
+    padding: 26px 22px;
+    border-radius: 22px;
+    background: linear-gradient(160deg, rgba(10, 7, 24, 0.9), rgba(40, 15, 70, 0.85));
+    border: 1px solid rgba(255, 159, 210, 0.35);
+    overflow: hidden;
+    isolation: isolate;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.kdrama-poster::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--kr-red), var(--kr-pink), var(--kr-blue));
+    animation: kdramaLine 3s ease-in-out infinite;
+}
+
+@keyframes kdramaLine {
+    0%, 100% { opacity: 0.6; }
+    50%      { opacity: 1; box-shadow: 0 0 20px rgba(255, 159, 210, 0.9); }
+}
+
+.kdrama-poster:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(205, 46, 58, 0.4);
+    border-color: rgba(255, 159, 210, 0.85);
+}
+
+.kdrama-poster .kp-number {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-family: 'Pacifico', cursive;
+    font-size: 32px;
+    color: rgba(255, 159, 210, 0.25);
+    font-weight: 400;
+}
+
+.kdrama-poster h4 {
+    font-family: 'Pacifico', cursive;
+    font-size: 20px;
+    font-weight: 400;
+    color: #ffd6e7;
+    margin-bottom: 12px;
+}
+
+.kdrama-poster p {
+    color: var(--kr-soft);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.kdrama-poster .kp-mood {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(205, 46, 58, 0.22);
+    border: 1px solid rgba(255, 159, 210, 0.45);
+    color: #ffc8e0;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* ====== Places Section ====== */
+.kr-places {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 22px;
+}
+
+/* ====== Hangul Learning Box ====== */
+.kr-hangul-box {
+    max-width: 760px;
+    margin: 40px auto 0;
+    padding: 32px 26px;
+    border-radius: 26px;
+    background: linear-gradient(145deg, rgba(205, 46, 58, 0.16), rgba(0, 71, 160, 0.14));
+    border: 1px solid rgba(255, 159, 210, 0.4);
+    text-align: center;
+}
+
+.kr-hangul-box h3 {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 24px;
+    color: #ffd6e7;
+    margin-bottom: 8px;
+}
+
+.kr-hangul-box .khb-sub {
+    color: #d9c8ee;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.kr-hangul-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.kr-hangul-cell {
+    padding: 14px 6px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 159, 210, 0.3);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kr-hangul-cell:hover {
+    transform: translateY(-4px) scale(1.1);
+    background: rgba(255, 159, 210, 0.22);
+    box-shadow: 0 0 22px rgba(255, 159, 210, 0.55);
+}
+
+.kr-hangul-cell small {
+    display: block;
+    margin-top: 4px;
+    font-size: 10px;
+    color: #ffb8c5;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* ====== Seasons Timeline ====== */
+.kr-seasons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: 16px;
+}
+
+.kr-season {
+    position: relative;
+    padding: 28px 18px;
+    text-align: center;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 159, 210, 0.3);
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    isolation: isolate;
+}
+
+.kr-season::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.35;
+    transition: opacity 0.4s ease;
+}
+
+.kr-season.spring::before { background: linear-gradient(160deg, #ffb8c5, #ffd6e7); }
+.kr-season.summer::before { background: linear-gradient(160deg, #67e8f9, #a5f3fc); }
+.kr-season.autumn::before { background: linear-gradient(160deg, #fb923c, #fcd34d); }
+.kr-season.winter::before { background: linear-gradient(160deg, #a5b4fc, #e0e7ff); }
+
+.kr-season:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(255, 159, 210, 0.4); }
+.kr-season:hover::before { opacity: 0.65; }
+
+.kr-season .ks-emoji {
+    display: block;
+    font-size: 44px;
+    margin-bottom: 12px;
+    transition: transform 0.4s ease;
+}
+
+.kr-season:hover .ks-emoji { transform: scale(1.2) rotate(-10deg); }
+
+.kr-season h4 {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.kr-season p {
+    color: #fff;
+    font-size: 12px;
+    line-height: 1.6;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* ====== Dream Section ====== */
+.kr-dream {
+    max-width: 780px;
+    margin: 40px auto 0;
+    padding: 40px 30px;
+    border-radius: 26px;
+    background: linear-gradient(145deg, rgba(255, 159, 210, 0.12), rgba(168, 85, 247, 0.1), rgba(0, 71, 160, 0.08));
+    border: 1px solid rgba(255, 159, 210, 0.4);
+    text-align: center;
+    box-shadow: 0 0 40px rgba(255, 159, 210, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.kr-dream::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent, rgba(255, 159, 210, 0.15), transparent);
+    animation: krFoodSpin 8s linear infinite;
+    z-index: 0;
+}
+
+.kr-dream > * { position: relative; z-index: 1; }
+
+.kr-dream h3 {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(22px, 4vw, 32px);
+    color: #fff2ff;
+    margin-bottom: 14px;
+    text-shadow: 0 0 22px rgba(255, 159, 210, 0.5);
+}
+
+.kr-dream p {
+    color: #d9c8ee;
+    font-size: 15px;
+    line-height: 1.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.kr-dream .kd-sig {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 8px 22px;
+    border-radius: 30px;
+    background: rgba(255, 159, 210, 0.15);
+    border: 1px solid rgba(255, 159, 210, 0.45);
+    color: #ffd6e7;
+    font-family: 'Pacifico', cursive;
+    font-size: 15px;
+}
+
+/* ====== Buttons ====== */
+.kr-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.kr-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 26px;
+    border: 1px solid rgba(255, 159, 210, 0.6);
+    border-radius: 40px;
+    background: rgba(205, 46, 58, 0.15);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.kr-btn:hover {
+    background: var(--kr-red);
+    box-shadow: 0 0 30px rgba(205, 46, 58, 0.7);
+    transform: translateY(-3px);
+}
+
+.kr-btn.alt {
+    background: rgba(0, 71, 160, 0.25);
+    border-color: rgba(100, 160, 255, 0.6);
+}
+
+.kr-btn.alt:hover {
+    background: var(--kr-blue);
+    box-shadow: 0 0 30px rgba(0, 71, 160, 0.7);
+}
+
+/* ====== Footer ====== */
+footer {
+    text-align: center;
+    padding: 32px 6%;
+    border-top: 1px solid rgba(255, 159, 210, 0.2);
+    color: #9a90ad;
+    font-size: 14px;
+    margin-top: 40px;
+}
+
+/* ====== Floating Home Button ====== */
+#backHomeFloat {
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 200;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px 9px 11px;
+    border: 1px solid rgba(245, 213, 255, 0.75);
+    border-radius: 30px;
+    background: linear-gradient(135deg, rgba(139, 63, 208, 0.92), rgba(40, 18, 70, 0.94));
+    color: #fff0fc;
+    font: 600 13px 'Poppins', sans-serif;
+    text-decoration: none;
+    box-shadow: 0 0 16px rgba(194, 115, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    animation: bhFloat 3s ease-in-out infinite;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#backHomeFloat .bh-icon { display: inline-block; font-size: 20px; animation: bhWiggle 2.4s ease-in-out infinite; }
+#backHomeFloat:hover { transform: translateY(-3px) scale(1.06); box-shadow: 0 0 26px rgba(227, 180, 255, 0.95); }
+
+@keyframes bhFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -4px; } }
+@keyframes bhWiggle { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg) scale(1.1); } }
+
+@media (max-width: 700px) {
+    #backHomeFloat { display: inline-flex; top: 10px; left: 10px; padding: 7px 12px 7px 9px; font-size: 12px; }
+    #backHomeFloat .bh-icon { font-size: 17px; }
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 700px) {
+    .kr-hero { min-height: 72vh; padding: 70px 5% 50px; }
+    .kr-flag-row { font-size: 34px; }
+    .kr-section { padding: 50px 5%; }
+    .kr-card { padding: 20px 16px; border-radius: 18px; }
+    .kr-card h3 { font-size: 17px; }
+    .kr-card p { font-size: 13px; }
+    .kr-image-card { min-height: 240px; padding: 20px; }
+    .kr-image-card h3 { font-size: 18px; }
+    .kr-hangul-box { padding: 22px 16px; }
+    .kr-stat { min-width: 100px; padding: 12px 16px; }
+    .kr-stat .ks-num { font-size: 20px; }
+}
+
+/* ====== Reveal on scroll ====== */
+.rv { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.rv.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+    .rv { opacity: 1; transform: none; transition: none; }
+    .orb, .star, .petal, .kr-flag-row, .kr-badge, .kr-hero h1, .kr-hero .kr-hangul,
+    .kr-food::before, .kpop-idol::before, .kdrama-poster::before, .kr-dream::before { animation: none !important; }
+}
+
+/* ====== Page Intro ====== */
+#krIntro {
+    position: fixed;
+    inset: 0;
+    z-index: 100010;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    text-align: center;
+    color: #fff;
+    background: radial-gradient(circle at center, #cd2e3a 0%, #7c1f37 30%, #150e2b 70%, #0a0718 100%);
+    pointer-events: none;
+    animation: krIntroOut 1.8s cubic-bezier(0.6, 0, 0.2, 1) 1s forwards;
+}
+
+#krIntro .ki-emoji { font-size: 72px; filter: drop-shadow(0 0 22px #ffb8c5); animation: kiFloat 1.4s ease-in-out infinite; }
+#krIntro .ki-text { font-family: 'Pacifico', cursive; font-size: 24px; color: #fff2ff; text-shadow: 0 0 22px #ff9fd2; }
+#krIntro .ki-hangul { font-family: 'Noto Sans KR', sans-serif; font-size: 16px; color: #ffb8c5; letter-spacing: 3px; margin-top: 6px; }
+
+@keyframes kiFloat {
+    0%, 100% { transform: translateY(0) rotate(-6deg); }
+    50%      { transform: translateY(-12px) rotate(6deg); }
+}
+
+@keyframes krIntroOut {
+    0%   { clip-path: circle(150% at 50% 50%); visibility: visible; }
+    99%  { clip-path: circle(0% at 50% 50%); visibility: visible; }
+    100% { clip-path: circle(0% at 50% 50%); visibility: hidden; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== Page Intro ===== -->
+<div id="krIntro" aria-hidden="true">
+    <div class="ki-emoji">🇰🇷</div>
+    <div class="ki-text">Entering my Korean World...</div>
+    <div class="ki-hangul">한국에 오신 것을 환영합니다</div>
+</div>
+
+<!-- ===== Background ===== -->
+<div class="bg-layer" id="bgLayer" aria-hidden="true">
+    <i class="orb o1"></i>
+    <i class="orb o2"></i>
+    <i class="orb o3"></i>
+</div>
+
+<!-- ===== Floating Home (mobile) ===== -->
+<a id="backHomeFloat" href="index.html" aria-label="Back to home">
+    <span class="bh-icon" aria-hidden="true">🏠</span>
+    <span>Back Home 🧸</span>
+</a>
+
+<!-- ===== Top Bar ===== -->
+<header class="topbar">
+    <a class="logo" href="index.html">🌙 SANAN'S WORLD</a>
+    <nav aria-label="Main">
+        <a href="index.html">🏠 Home</a>
+        <a href="about.html">✨ About</a>
+        <a href="kdrama.html">🎬 K-Drama</a>
+        <a href="kpop.html">🎤 K-Pop</a>
+        <a href="korea.html" class="current" aria-current="page">🇰🇷 Korean World</a>
+        <a href="favourites.html">⭐ Favourites</a>
+    </nav>
+</header>
+
+<main>
+
+    <!-- ===== HERO ===== -->
+    <section class="kr-hero">
+        <div class="kr-flag-row" aria-hidden="true">
+            <span>🌸</span>
+            <span>🇰🇷</span>
+            <span>✨</span>
+        </div>
+
+        <span class="kr-badge">✦ MY LITTLE KOREAN UNIVERSE ✦</span>
+
+        <h1>My Korean World</h1>
+
+        <div class="kr-hangul" aria-label="Hangul text">한국 · 서울 · 케이팝</div>
+
+        <p class="kr-sub">
+            South Korea — jahan tradition aur modern ek saath rehte hain. 🇰🇷<br>
+            K-dramas, K-pop, food, fashion, aur woh sab kuch jo dil ko chhoo jata hai. 💜
+        </p>
+
+        <a href="#places" class="kr-scroll">Explore Korea ↘</a>
+
+        <div class="kr-stats">
+            <div class="kr-stat"><span class="ks-num">🇰🇷</span><span class="ks-label">South Korea</span></div>
+            <div class="kr-stat"><span class="ks-num">한글</span><span class="ks-label">Hangul</span></div>
+            <div class="kr-stat"><span class="ks-num">50M+</span><span class="ks-label">People</span></div>
+            <div class="kr-stat"><span class="ks-num">💜</span><span class="ks-label">My Heart</span></div>
+        </div>
+    </section>
+
+    <!-- ===== PLACES ===== -->
+    <section class="kr-section" id="places">
+        <div class="kr-section-head rv">
+            <span class="k-sh-badge">✦ PLACES I DREAM OF ✦</span>
+            <h2>Beautiful Korea 🏯</h2>
+            <p>Har jagah ki apni kahani — from buzzing Seoul to peaceful Jeju Island.</p>
+        </div>
+
+        <div class="kr-places">
+
+            <article class="kr-image-card rv">
+                <img src="https://images.unsplash.com/photo-1538485399081-7191377e8241?w=800&q=80" alt="Seoul city at night with N Seoul Tower" loading="lazy">
+                <div>
+                    <h3>Seoul 서울</h3>
+                    <p>Lights, K-pop, shopping, palaces, aur endless energy. Korea ka dil.</p>
+                    <span class="kic-tag">🏙️ Capital City</span>
+                </div>
+            </article>
+
+            <article class="kr-image-card rv">
+                <img src="https://images.unsplash.com/photo-1615860825995-9e3a1b0b7e1e?w=800&q=80" alt="Busan beach" loading="lazy">
+                <div>
+                    <h3>Busan 부산</h3>
+                    <p>Beaches, seafood, aur scenic coastal vibes. Korea ka summer capital.</p>
+                    <span class="kic-tag">🌊 Coastal City</span>
+                </div>
+            </article>
+
+            <article class="kr-image-card rv">
+                <img src="https://images.unsplash.com/photo-1590247813693-5541d1c609fd?w=800&q=80" alt="Jeju Island scenic view" loading="lazy">
+                <div>
+                    <h3>Jeju Island 제주도</h3>
+                    <p>Volcano, waterfalls, aur mandarin fields. Honeymoon paradise.</p>
+                    <span class="kic-tag">🏝️ Island</span>
+                </div>
+            </article>
+
+            <article class="kr-image-card rv">
+                <img src="https://images.unsplash.com/photo-1548115184-bc6544d06a58?w=800&q=80" alt="Nami Island trees" loading="lazy">
+                <div>
+                    <h3>Nami Island 남이섬</h3>
+                    <p>Tree-lined paths, winter snow, aur K-drama shoot locations.</p>
+                    <span class="kic-tag">🍂 Romantic Spot</span>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- ===== FOOD ===== -->
+    <section class="kr-section" id="food">
+        <div class="kr-section-head rv">
+            <span class="k-sh-badge">✦ TASTY KOREA ✦</span>
+            <h2>Korean Food 🍜</h2>
+            <p>Spicy, comforting, aur full of flavour — Korea ka khana ek experience hai.</p>
+        </div>
+
+        <div class="kr-food-grid">
+
+            <div class="kr-food rv">
+                <span class="kf-emoji">🥬</span>
+                <h4>Kimchi</h4>
+                <p>Fermented spicy cabbage — Korea ki soul food.</p>
+            </div>
+
+            <div class="kr-food rv">
+                <span class="kf-emoji">🍚</span>
+                <h4>Bibimbap</h4>
+                <p>Rice, veggies, egg aur gochujang — sab mix karo.</p>
+            </div>
+
+            <div class="kr-food rv">
+                <span class="kf-emoji">🍜</span>
+                <h4>Ramyeon</h4>
+                <p>Spicy instant noodles — har K-drama ka favourite.</p>
+            </div>
+
+            <div class="kr-food rv">
+                <span class="kf-emoji">🌶️</span>
+                <h4>Tteokbokki</h4>
+                <p>Chewy rice cakes in spicy sauce — street food king.</p>
+            </div>
+
+            <div class="kr-food rv">
+                <span class="kf-emoji">🥩</span>
+                <h4>Korean BBQ</h4>
+                <p>Grilled meat, lettuce wraps, aur bohat saara fun.</p>
+            </div>
+
+            <div class="kr-food rv">
+                <span class="kf-emoji">🍲</span>
+                <h4>Kimchi Jjigae</h4>
+                <p>Warm kimchi stew — winter ka comfort food.</p>
+            </div>
+
+            <div class="kr-food rv">
+                <span class="kf-emoji">🍗</span>
+                <h4>Korean Fried Chicken</h4>
+                <p>Crispy, saucy, aur beer ke saath best. Chimaek!</p>
+            </div>
+
+            <div class="kr-food rv">
+                <span class="kf-emoji">🍡</span>
+                <h4>Hotteok</h4>
+                <p>Sweet pancake with brown sugar — winter street snack.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== K-POP ===== -->
+    <section class="kr-section" id="kpop">
+        <div class="kr-section-head rv">
+            <span class="k-sh-badge">✦ THE K-WAVE ✦</span>
+            <h2>K-Pop World 🎤</h2>
+            <p>Music jo duniya bhar ke dilon ko jeet chuka hai — aur mera bhi. 💜</p>
+        </div>
+
+        <div class="kpop-stage">
+
+            <div class="kpop-idol rv">
+                <span class="ki-logo">💜</span>
+                <h4>BTS</h4>
+                <p>Legends of K-pop — music, message, aur ARMY.</p>
+                <span class="kpop-genre">GLOBAL ICONS</span>
+            </div>
+
+            <div class="kpop-idol rv">
+                <span class="ki-logo">🖤</span>
+                <h4>BLACKPINK</h4>
+                <p>Girl crush concept, powerful vocals, aur style.</p>
+                <span class="kpop-genre">GIRL GROUP</span>
+            </div>
+
+            <div class="kpop-idol rv">
+                <span class="ki-logo">✨</span>
+                <h4>IVE</h4>
+                <p>Elegant, confident, aur full of "I AM" energy.</p>
+                <span class="kpop-genre">4TH GEN</span>
+            </div>
+
+            <div class="kpop-idol rv">
+                <span class="ki-logo">🐰</span>
+                <h4>BABYMONSTER</h4>
+                <p>YG ka naya monster rookie group — powerful stage presence.</p>
+                <span class="kpop-genre">ROOKIE</span>
+            </div>
+
+            <div class="kpop-idol rv">
+                <span class="ki-logo">💙</span>
+                <h4>NewJeans</h4>
+                <p>Fresh, minimal, aur instantly catchy music.</p>
+                <span class="kpop-genre">TRENDY</span>
+            </div>
+
+            <div class="kpop-idol rv">
+                <span class="ki-logo">🔥</span>
+                <h4>SEVENTEEN</h4>
+                <p>Self-producing idols — performance aur music dono perfect.</p>
+                <span class="kpop-genre">PERFORMANCE</span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== K-DRAMA MOOD ===== -->
+    <section class="kr-section" id="kdrama">
+        <div class="kr-section-head rv">
+            <span class="k-sh-badge">✦ K-DRAMA MOOD ✦</span>
+            <h2>Stories That Stay 🎬</h2>
+            <p>K-dramas sirf shows nahi — emotions, memories aur feelings ka pura package.</p>
+        </div>
+
+        <div class="kdrama-board">
+
+            <div class="kdrama-poster rv">
+                <span class="kp-number">01</span>
+                <h4>Romance 💕</h4>
+                <p>Slow burn love stories jo dil ko chhoo jaati hain. Coffee moments, rain scenes, aur unforgettable confessions.</p>
+                <span class="kp-mood">MOOD: Warm & Soft</span>
+            </div>
+
+            <div class="kdrama-poster rv">
+                <span class="kp-number">02</span>
+                <h4>Thriller 🔪</h4>
+                <p>Twisty plots, hidden secrets, aur "ek aur episode" wali feeling. Ek baar shuru, phir rukna mushkil.</p>
+                <span class="kp-mood">MOOD: Intense</span>
+            </div>
+
+            <div class="kdrama-poster rv">
+                <span class="kp-number">03</span>
+                <h4>Fantasy ✨</h4>
+                <p>Goblins, gods, time travel, aur parallel worlds. Imagination ki koi limit nahi.</p>
+                <span class="kp-mood">MOOD: Magical</span>
+            </div>
+
+            <div class="kdrama-poster rv">
+                <span class="kp-number">04</span>
+                <h4>Slice of Life 🌸</h4>
+                <p>Simple stories, real emotions. Chhoti chhoti baatein jo dil mein ghar kar leti hain.</p>
+                <span class="kp-mood">MOOD: Cozy</span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== K-WAVE STRIP ===== -->
+    <section class="kr-strip rv">
+        <h2>🇰🇷 The Korean Wave</h2>
+        <p>
+            Hallyu — Korean culture ka woh wave jo music, dramas, food, fashion, aur beauty ke through duniya bhar mein phaila.
+            Korea ne dikhaya ke chhoti si country bhi apni kahani se poori duniya ko chhoo sakti hai. ✨
+        </p>
+    </section>
+
+    <!-- ===== HANGUL BOX ===== -->
+    <section class="kr-section">
+        <div class="kr-section-head rv">
+            <span class="k-sh-badge">✦ LEARN WITH ME ✦</span>
+            <h2>Hangul 한글</h2>
+            <p>Korea ka official script — easy, logical, aur beautiful.</p>
+        </div>
+
+        <div class="kr-hangul-box rv">
+            <h3>한글 · Hangul</h3>
+            <p class="khb-sub">Basic vowels jo maine seekhe — hover karke dekho! ✨</p>
+
+            <div class="kr-hangul-grid">
+                <div class="kr-hangul-cell">ㅏ<small>a</small></div>
+                <div class="kr-hangul-cell">ㅑ<small>ya</small></div>
+                <div class="kr-hangul-cell">ㅓ<small>eo</small></div>
+                <div class="kr-hangul-cell">ㅕ<small>yeo</small></div>
+                <div class="kr-hangul-cell">ㅗ<small>o</small></div>
+                <div class="kr-hangul-cell">ㅛ<small>yo</small></div>
+                <div class="kr-hangul-cell">ㅜ<small>u</small></div>
+                <div class="kr-hangul-cell">ㅠ<small>yu</small></div>
+                <div class="kr-hangul-cell">ㅡ<small>eu</small></div>
+                <div class="kr-hangul-cell">ㅣ<small>i</small></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SEASONS ===== -->
+    <section class="kr-section" id="seasons">
+        <div class="kr-section-head rv">
+            <span class="k-sh-badge">✦ FOUR SEASONS ✦</span>
+            <h2>Korea in Every Season 🌸</h2>
+            <p>Har mausam ki apni beauty — Korea har season mein different lagta hai.</p>
+        </div>
+
+        <div class="kr-seasons">
+
+            <div class="kr-season spring rv">
+                <span class="ks-emoji">🌸</span>
+                <h4>Spring 봄</h4>
+                <p>Cherry blossoms, soft winds, aur pink streets.</p>
+            </div>
+
+            <div class="kr-season summer rv">
+                <span class="ks-emoji">☀️</span>
+                <h4>Summer 여름</h4>
+                <p>Beaches, festivals, aur vibrant nights.</p>
+            </div>
+
+            <div class="kr-season autumn rv">
+                <span class="ks-emoji">🍁</span>
+                <h4>Autumn 가을</h4>
+                <p>Golden leaves, cozy cafes, aur warm vibes.</p>
+            </div>
+
+            <div class="kr-season winter rv">
+                <span class="ks-emoji">❄️</span>
+                <h4>Winter 겨울</h4>
+                <p>Snowy streets, hot drinks, aur magical white world.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== DREAM ===== -->
+    <section class="kr-section" id="dream">
+        <div class="kr-dream rv">
+            <h3>My Korean Dream 🌙</h3>
+            <p>
+                Ek din main South Korea jaunga. Seoul ki streets par chalunga, K-pop concerts mein jaunga,
+                Korean food try karunga, aur woh life jeeyunga jiska main sirf sapna dekhta hoon. ✨<br><br>
+                Ye page mere usi khwab ka ek chhota sa hissa hai. 💜
+            </p>
+            <span class="kd-sig">— Sanan 🇰🇷</span>
+        </div>
+
+        <div class="kr-btns rv">
+            <a class="kr-btn" href="index.html">🏠 Back to Home</a>
+            <a class="kr-btn alt" href="kdrama.html">🎬 K-Drama Library</a>
+            <a class="kr-btn alt" href="kpop.html">🎤 K-Pop World</a>
+        </div>
+    </section>
+
+</main>
+
+<footer>© 2026 Sanan's World · Korean World · Built with curiosity 💜</footer>
+
+<script>
+(function () {
+    /* ---------- Ambient stars ---------- */
+    var layer = document.getElementById("bgLayer");
+    if (layer) {
+        for (var i = 0; i < 55; i++) {
+            var s = document.createElement("span");
+            var size = 1 + Math.random() * 2.5;
+            s.className = "star";
+            s.style.left = Math.random() * 100 + "%";
+            s.style.top = Math.random() * 100 + "%";
+            s.style.width = size + "px";
+            s.style.height = size + "px";
+            s.style.animationDelay = (-Math.random() * 3) + "s";
+            s.style.animationDuration = (2.5 + Math.random() * 2.5) + "s";
+            layer.appendChild(s);
+        }
+
+        /* ---------- Cherry blossom petals ---------- */
+        var petals = ["🌸", "🌸", "🌷", "💮"];
+        for (var j = 0; j < 14; j++) {
+            var p = document.createElement("span");
+            p.className = "petal";
+            p.textContent = petals[Math.floor(Math.random() * petals.length)];
+            p.style.left = Math.random() * 100 + "%";
+            p.style.fontSize = (14 + Math.random() * 14) + "px";
+            p.style.animationDuration = (16 + Math.random() * 14) + "s";
+            p.style.animationDelay = (-Math.random() * 20) + "s";
+            p.style.setProperty("--sway", (Math.random() * 120 - 60) + "px");
+            layer.appendChild(p);
+        }
+    }
+
+    /* ---------- Reveal on scroll ---------- */
+    var items = document.querySelectorAll(".rv");
+    if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("in");
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        items.forEach(function (el) { io.observe(el); });
+    } else {
+        items.forEach(function (el) { el.classList.add("in"); });
+    }
+})();
+</script>
+
+</body>
+</html>
