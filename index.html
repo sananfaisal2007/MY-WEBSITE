@@ -1537,6 +1537,146 @@ try {
 <style>
 html.skip-welcome #welcome-screen { display: none !important; }
 </style>
+<style>
+/* ===== HOME PAGE: Cursor + Ambient Movement ===== */
+
+/* 1) Cursor glow — mouse ke saath chalne wala soft light */
+#homeCursorGlow {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 320px;
+    height: 320px;
+    margin: -160px 0 0 -160px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 2;
+    background: radial-gradient(circle, rgba(190, 130, 255, 0.28), rgba(255, 190, 230, 0.12) 45%, transparent 70%);
+    transition: transform 0.18s ease-out;
+    will-change: transform;
+    mix-blend-mode: screen;
+}
+
+/* 2) Cursor trail sparkles */
+.home-trail {
+    position: fixed;
+    z-index: 3;
+    pointer-events: none;
+    font-size: 14px;
+    animation: homeTrailFade 1s ease-out forwards;
+    filter: drop-shadow(0 0 6px rgba(217, 186, 255, 0.9));
+}
+@keyframes homeTrailFade {
+    to {
+        opacity: 0;
+        transform: translateY(-28px) scale(0.4) rotate(20deg);
+    }
+}
+
+/* 3) Floating ambient orbs (background ke upar halki roshni) */
+#homeAmbient {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+.home-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.35;
+    will-change: transform;
+    animation: homeOrbDrift 22s ease-in-out infinite alternate;
+}
+.home-orb.ho1 {
+    width: 340px; height: 340px;
+    left: -6%; top: 8%;
+    background: rgba(150, 80, 255, 0.55);
+}
+.home-orb.ho2 {
+    width: 400px; height: 400px;
+    right: -8%; top: 45%;
+    background: rgba(255, 120, 220, 0.45);
+    animation-duration: 26s;
+    animation-delay: -8s;
+}
+.home-orb.ho3 {
+    width: 260px; height: 260px;
+    left: 40%; bottom: -8%;
+    background: rgba(255, 226, 122, 0.28);
+    animation-duration: 30s;
+    animation-delay: -14s;
+}
+@keyframes homeOrbDrift {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(60px, -45px) scale(1.15); }
+    100% { transform: translate(-50px, 55px) scale(0.95); }
+}
+
+/* 4) Parallax depth layers — cursor ke saath move */
+.home-layer { will-change: transform; }
+
+/* 5) Floating dream emojis (background ke upar) */
+.home-float {
+    position: absolute;
+    bottom: -60px;
+    opacity: 0;
+    font-size: 22px;
+    filter: drop-shadow(0 0 10px rgba(217, 186, 255, 0.8));
+    animation: homeFloatUp linear infinite;
+    will-change: transform;
+}
+@keyframes homeFloatUp {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+    12% { opacity: 0.85; }
+    88% { opacity: 0.85; }
+    100% {
+        opacity: 0;
+        transform: translate3d(var(--sway), -115vh, 0) rotate(360deg);
+    }
+}
+
+/* 6) Gentle breathing on the whole hero */
+.hero {
+    animation: homeHeroBreath 8s ease-in-out infinite;
+}
+@keyframes homeHeroBreath {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%      { transform: translateY(-6px) scale(1.005); }
+}
+
+/* 7) Sections ko halka sa cursor ke saath tilt */
+.home-tilt {
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1);
+    will-change: transform;
+}
+
+/* Accessibility: motion kam karne wale users ke liye */
+@media (prefers-reduced-motion: reduce) {
+    #homeCursorGlow,
+    .home-trail,
+    .home-orb,
+    .home-float,
+    .hero {
+        animation: none !important;
+        transition: none !important;
+    }
+    #homeCursorGlow { display: none; }
+}
+
+/* Mobile: glow chhota karo */
+@media (max-width: 700px) {
+    #homeCursorGlow {
+        width: 200px;
+        height: 200px;
+        margin: -100px 0 0 -100px;
+    }
+}
+</style>
 </head>
 
 <body>
@@ -1772,6 +1912,13 @@ function searchDramas() {
   @media (max-width: 700px) { .fav-shortcut { padding: 8px 13px 8px 10px; font-size: 12px; } }
   @media (prefers-reduced-motion: reduce) { .fav-shortcut, .fav-shortcut::before, .fav-shortcut .fs-star { animation: none; } }
 </style>
+            <!-- Home Page Cursor & Ambient Magic -->
+<div id="homeAmbient" aria-hidden="true">
+    <i class="home-orb ho1"></i>
+    <i class="home-orb ho2"></i>
+    <i class="home-orb ho3"></i>
+</div>
+<div id="homeCursorGlow" aria-hidden="true"></div>
 
         <section class="content" id="projects">
             <h2>My Projects</h2>
@@ -3165,6 +3312,100 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
   });
 })();
 </script>
+<script>
+(function () {
+    // Sirf home page par chalega (agar zarurat ho to specific check laga sakte ho)
+    var glow = document.getElementById("homeCursorGlow");
+    var ambient = document.getElementById("homeAmbient");
+    if (!glow || !ambient) return;
 
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var small = window.innerWidth < 700;
+
+    /* ---------- Cursor glow follow ---------- */
+    var mx = window.innerWidth / 2, my = window.innerHeight / 2;
+    var gx = mx, gy = my;
+
+    window.addEventListener("pointermove", function (e) {
+        mx = e.clientX;
+        my = e.clientY;
+    }, { passive: true });
+
+    /* ---------- Sparkle trail ---------- */
+    var lastTrail = 0;
+    var trailEmojis = ["✨", "💜", "⭐", "🌸", "🦋"];
+
+    window.addEventListener("pointermove", function (e) {
+        if (reduce || small) return;
+        var now = Date.now();
+        if (now - lastTrail < 80) return;
+        lastTrail = now;
+
+        var t = document.createElement("span");
+        t.className = "home-trail";
+        t.textContent = trailEmojis[Math.floor(Math.random() * trailEmojis.length)];
+        t.style.left = e.clientX + "px";
+        t.style.top = e.clientY + "px";
+        t.style.fontSize = (12 + Math.random() * 10) + "px";
+        t.addEventListener("animationend", function () { t.remove(); });
+        document.body.appendChild(t);
+    }, { passive: true });
+
+    /* ---------- Floating dream emojis ---------- */
+    var floatEmojis = ["🌸", "🦋", "💜", "⭐", "✨", "🌙", "💫", "🍃"];
+    var floatCount = small ? 7 : 13;
+    for (var i = 0; i < floatCount; i++) {
+        var f = document.createElement("span");
+        f.className = "home-float";
+        f.textContent = floatEmojis[Math.floor(Math.random() * floatEmojis.length)];
+        f.style.left = Math.random() * 100 + "%";
+        f.style.fontSize = (16 + Math.random() * 18) + "px";
+        f.style.animationDuration = (16 + Math.random() * 14) + "s";
+        f.style.animationDelay = (-Math.random() * 28) + "s";
+        f.style.setProperty("--sway", (Math.random() * 160 - 80) + "px");
+        ambient.appendChild(f);
+    }
+
+    /* ---------- Smooth animation loop ---------- */
+    function loop() {
+        gx += (mx - gx) * 0.14;
+        gy += (my - gy) * 0.14;
+        glow.style.transform = "translate3d(" + gx + "px," + gy + "px,0)";
+
+        // Parallax: cursor ke hisaab se hero ko thora tilt
+        if (!reduce && !small) {
+            var tx = (mx / window.innerWidth - 0.5);
+            var ty = (my / window.innerHeight - 0.5);
+            var hero = document.querySelector(".hero");
+            if (hero) {
+                hero.style.transform =
+                    "translate(" + (tx * 12) + "px," + (ty * 10 - 6) + "px)";
+            }
+        }
+
+        requestAnimationFrame(loop);
+    }
+
+    if (!reduce) loop();
+
+    /* ---------- Sections pe hover tilt ---------- */
+    if (!reduce && !small) {
+        var tiltables = document.querySelectorAll(".card, .social-card, .kpop-cover, .kdrama-cover, .dream-portal");
+        tiltables.forEach(function (el) {
+            el.classList.add("home-tilt");
+            el.addEventListener("pointermove", function (e) {
+                var r = el.getBoundingClientRect();
+                var px = (e.clientX - r.left) / r.width - 0.5;
+                var py = (e.clientY - r.top) / r.height - 0.5;
+                el.style.transform =
+                    "perspective(700px) rotateY(" + (px * 6) + "deg) rotateX(" + (-py * 6) + "deg) translateY(-4px)";
+            });
+            el.addEventListener("pointerleave", function () {
+                el.style.transform = "";
+            });
+        });
+    }
+})();
+</script>
 </body>
 </html>
