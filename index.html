@@ -7304,7 +7304,8 @@ body.zoom-in-portal {
     });
 
     /* Play track */
-    function playTrack(trackKey) {
+      function playTrack(trackKey) {
+        /* Pause all */
         Object.values(audios).forEach(function (a) {
             if (a) { a.pause(); try { a.currentTime = 0; } catch (e) {} }
         });
@@ -7316,6 +7317,15 @@ body.zoom-in-portal {
             opt.classList.toggle("active", opt.getAttribute("data-track") === trackKey);
         });
 
+        /* 🆕 Silent mode — music band */
+        if (trackKey === "silent" || !audio) {
+            btn.classList.remove("playing");
+            isPlaying = false;
+            try { localStorage.setItem(STORAGE_KEY, trackKey); } catch (e) {}
+            return;
+        }
+
+        /* Play if not silent */
         if (audio && userInteracted) {
             audio.volume = currentVolume;
             audio.play().then(function () {
