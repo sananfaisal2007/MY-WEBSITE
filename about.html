@@ -169,7 +169,7 @@ main { max-width: 1000px; margin: 0 auto; padding: 0 6% 40px; }
     transition: transform 0.6s ease;
 }
 
-.story-card:hover .frame img { transform: scale(1.07); }
+.story-card:hover .frame img { transform: scale(1.04); }
 
 /* Shown when a photo file is missing */
 .photo.empty .frame {
@@ -307,7 +307,7 @@ footer {
     font-size: 14px;
 }
 
-/* ---------- One reveal as cards scroll in (JS adds .ready and .in) ---------- */
+/* ---------- Reveal as cards scroll in ---------- */
 .ready .rv:not(.in) { opacity: 0; }
 .rv.in { animation: rise 0.9s ease backwards; }
 @keyframes rise { from { opacity: 0; transform: translateY(26px); } }
@@ -331,6 +331,7 @@ footer {
     .story-card, .photo, .frame img, .sticker, .btn, .topbar nav a { transition: none; }
     .rv.in { animation: none; }
 }
+
 /* ===== MOVING BACKGROUND + MAGIC ===== */
 main, footer { position: relative; z-index: 1; }
 
@@ -342,7 +343,6 @@ main, footer { position: relative; z-index: 1; }
     pointer-events: none;
 }
 
-/* behte hue glow */
 .fx-orb {
     position: absolute;
     border-radius: 50%;
@@ -359,7 +359,6 @@ main, footer { position: relative; z-index: 1; }
     100% { transform: translate(-50px, 60px) scale(.95); }
 }
 
-/* jhilmilate taare */
 .fx-star {
     position: absolute;
     border-radius: 50%;
@@ -371,7 +370,6 @@ main, footer { position: relative; z-index: 1; }
     50%      { opacity: 1;  transform: scale(1.3); }
 }
 
-/* udte hue emoji */
 .fx-float {
     position: absolute;
     bottom: -50px;
@@ -380,13 +378,12 @@ main, footer { position: relative; z-index: 1; }
     animation: floatUp linear infinite;
 }
 @keyframes floatUp {
-    0%   { opacity: 0;  transform: translate3d(0, 0, 0) rotate(0deg); }
+    0%   { opacity: 0;   transform: translate3d(0, 0, 0) rotate(0deg); }
     10%  { opacity: .85; }
     90%  { opacity: .85; }
-    100% { opacity: 0;  transform: translate3d(var(--sway), -115vh, 0) rotate(360deg); }
+    100% { opacity: 0;   transform: translate3d(var(--sway), -115vh, 0) rotate(360deg); }
 }
 
-/* mouse ka sparkle trail */
 .fx-trail {
     position: fixed;
     z-index: 100002;
@@ -396,7 +393,6 @@ main, footer { position: relative; z-index: 1; }
 }
 @keyframes trailFade { to { opacity: 0; transform: translateY(-30px) scale(.4); } }
 
-/* entry parda */
 #pageIntro {
     position: fixed;
     inset: 0;
@@ -416,20 +412,18 @@ main, footer { position: relative; z-index: 1; }
 #pageIntro .pi-text  { font-size: 20px; font-weight: 700; color: #ffeab8; text-shadow: 0 0 12px #ffd24d; }
 @keyframes piFloat { 0%, 100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-12px) rotate(6deg); } }
 @keyframes introOut {
-    0%   { clip-path: circle(150% at 50% 50%); }
-    99%  { clip-path: circle(0% at 50% 50%); visibility: visible; }
-    100% { clip-path: circle(0% at 50% 50%); visibility: hidden; }
+    0%   { clip-path: circle(150% at 50% 50%); visibility: visible; }
+    99%  { clip-path: circle(0% at 50% 50%);   visibility: visible; }
+    100% { clip-path: circle(0% at 50% 50%);   visibility: hidden; }
 }
+</style>
+</head>
 
+<body>
 
-Step 2: HTML paste karo
-
-<body> tag dhoondo. Us ke bilkul neeche (header se pehle) ye 2 blocks paste karo:
-
-html
 <div id="pageIntro" aria-hidden="true">
     <div class="pi-emoji">🌙✨</div>
-    <div class="pi-text">Welcome to my little universe... 🌌💜</div>
+    <div class="pi-text">Welcome to my story... 💜</div>
 </div>
 
 <div class="bg-fx" id="bgFx" aria-hidden="true">
@@ -437,11 +431,6 @@ html
     <i class="fx-orb o2"></i>
     <i class="fx-orb o3"></i>
 </div>
-</style>
-
-</head>
-
-<body>
 
 <header class="topbar">
     <a class="logo" href="index.html">🌙 SANAN'S WORLD</a>
@@ -607,13 +596,12 @@ html
 
 <script>
 (function () {
-
     var layer = document.getElementById("bgFx");
     if (!layer) return;
     var small = window.innerWidth < 700;
     var pick = function (a) { return a[Math.floor(Math.random() * a.length)]; };
 
-    // taare
+    // twinkling stars
     for (var i = 0; i < (small ? 30 : 55); i++) {
         var s = document.createElement("span");
         var size = 1 + Math.random() * 3;
@@ -625,7 +613,7 @@ html
         layer.appendChild(s);
     }
 
-    // udte emoji
+    // floating emojis
     var emojis = ["🌸", "🦋", "💜", "⭐", "✨", "🌙", "💫"];
     for (var j = 0; j < (small ? 8 : 14); j++) {
         var f = document.createElement("span");
@@ -639,7 +627,7 @@ html
         layer.appendChild(f);
     }
 
-    // mouse sparkle trail (sirf computer par)
+    // mouse sparkle trail (desktop only)
     if (small) return;
     var last = 0;
     window.addEventListener("pointermove", function (e) {
@@ -656,5 +644,6 @@ html
     }, { passive: true });
 })();
 </script>
+
 </body>
 </html>
