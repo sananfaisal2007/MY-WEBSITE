@@ -304,6 +304,22 @@ h1 {
 .lb-row.top1 { background: linear-gradient(90deg, #ffe27a33, #ffffff14); }
 .lb-row.me { border-color: #ffe27a; background: #ffe27a26; box-shadow: 0 0 14px #ffe27a55; }
 .lb-msg { margin: 14px 0; color: #ffd8f6; font-size: 13px; line-height: 1.6; }
+
+/* ===== SHARE CARD ===== */
+#scModal {
+  position: fixed; inset: 0; z-index: 110; display: flex; align-items: center; justify-content: center;
+  padding: 16px; background: rgba(10, 4, 20, .86); backdrop-filter: blur(6px); overflow-y: auto;
+}
+.sc-box {
+  width: min(100%, 380px); margin: auto; padding: 18px; text-align: center; border-radius: 24px;
+  border: 1px solid rgba(238, 194, 255, .5);
+  background: linear-gradient(145deg, rgba(90, 46, 117, .96), rgba(28, 13, 46, .98));
+  box-shadow: 0 0 40px #8c48b966; animation: pop .5s cubic-bezier(.2, 1.4, .4, 1) both;
+}
+#scImg {
+  display: block; width: auto; max-width: 100%; max-height: 58vh; margin: 0 auto 6px;
+  border-radius: 16px; box-shadow: 0 0 25px #d99bff66;
+}
 </style>
 </head>
 
@@ -414,7 +430,8 @@ h1 {
       <h2 id="resultLevel"></h2>
       <p id="resultMessage"></p>
       <p class="bottom-note">📸 Screenshot lo aur Sanan ko dikhao: "Dekho, mera score ye hai!" 😎</p>
-<button type="button" id="lbOpenResult" class="btn secondary">🏆 Hall of Fame dekho</button>
+<button type="button" id="scOpen" class="btn">📸 Share Card banao</button>
+      <button type="button" id="lbOpenResult" class="btn secondary">🏆 Hall of Fame dekho</button>
       <button type="button" id="restartQuizBtn" class="btn">Play Again 🔁</button>
 <button type="button" id="backHomeBtn" class="btn secondary" onclick="window.location.href='index.html'">🏠 Back Home</button>
     </div>
@@ -1016,6 +1033,236 @@ moveBg(window.innerWidth / 2, window.innerHeight / 2);
     g("lbClose").addEventListener("click", function () { modal.hidden = true; });
     modal.addEventListener("click", function (e) { if (e.target === modal) modal.hidden = true; });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") modal.hidden = true; });
+})();
+</script>
+<div id="scModal" hidden>
+  <div class="sc-box" role="dialog" aria-modal="true" aria-label="Share card">
+    <img id="scImg" alt="Tumhara result card">
+    <p id="scMsg" class="lb-msg"></p>
+    <button type="button" class="btn" id="scShare">📤 Share karo</button>
+    <button type="button" class="btn" id="scDownload">⬇️ Download karo</button>
+    <button type="button" class="btn secondary" id="scClose">Close ✨</button>
+  </div>
+</div>
+<script>
+(function () {
+  const SITE = "https://sananfaisal2007.github.io/MY-WEBSITE/quiz.html";
+  const g = (id) => document.getElementById(id);
+  const modal = g("scModal"), img = g("scImg"), msg = g("scMsg");
+  let blob = null, imgUrl = null;
+
+  function fit(ctx, text, weight, family, size, maxW) {
+    while (size > 20) {
+      ctx.font = weight + " " + size + "px " + family;
+      if (ctx.measureText(text).width <= maxW) break;
+      size -= 2;
+    }
+    return size;
+  }
+
+  function wrap(ctx, text, x, y, maxW, lh) {
+    const words = text.split(" ");
+    let line = "";
+    for (const w of words) {
+      const test = line ? line + " " + w : w;
+      if (ctx.measureText(test).width > maxW && line) {
+        ctx.fillText(line, x, y);
+        line = w; y += lh;
+      } else {
+        line = test;
+      }
+    }
+    if (line) { ctx.fillText(line, x, y); y += lh; }
+    return y;
+  }
+
+  function sparkle(ctx, cx, cy, s) {
+    const n = s * 0.2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - s); ctx.lineTo(cx + n, cy - n); ctx.lineTo(cx + s, cy); ctx.lineTo(cx + n, cy + n);
+    ctx.lineTo(cx, cy + s); ctx.lineTo(cx - n, cy + n); ctx.lineTo(cx - s, cy); ctx.lineTo(cx - n, cy - n);
+    ctx.closePath(); ctx.fill();
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  async function draw() {
+    try {
+      await Promise.all([
+        document.fonts.load("80px Pacifico"),
+        document.fonts.load("400 30px Poppins"),
+        document.fonts.load("600 30px Poppins"),
+        document.fonts.load("800 30px Poppins")
+      ]);
+    } catch (e) {}
+
+    const W = 1080, H = 1920;
+    const c = document.createElement("canvas");
+    c.width = W; c.height = H;
+    const ctx = c.getContext("2d");
+    const P = "Pacifico, cursive", Q = "Poppins, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    // Background
+    const bg = ctx.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0, "#12062b");
+    bg.addColorStop(0.45, "#3b1766");
+    bg.addColorStop(0.8, "#9b49c4");
+    bg.addColorStop(1, "#ff9fd2");
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    let rg = ctx.createRadialGradient(200, 300, 0, 200, 300, 520);
+    rg.addColorStop(0, "rgba(150,80,255,.4)"); rg.addColorStop(1, "rgba(150,80,255,0)");
+    ctx.fillStyle = rg; ctx.fillRect(0, 0, W, H);
+    rg = ctx.createRadialGradient(900, 1500, 0, 900, 1500, 620);
+    rg.addColorStop(0, "rgba(255,120,220,.35)"); rg.addColorStop(1, "rgba(255,120,220,0)");
+    ctx.fillStyle = rg; ctx.fillRect(0, 0, W, H);
+
+    // Stars
+    let seed = 12345;
+    const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    ctx.fillStyle = "#fff";
+    for (let i = 0; i < 90; i++) {
+      ctx.globalAlpha = 0.3 + rnd() * 0.7;
+      ctx.beginPath();
+      ctx.arc(rnd() * W, rnd() * H * 0.85, 1 + rnd() * 3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = "#ffe9a8";
+    [[110, 140, 26], [960, 520, 20], [90, 760, 18], [990, 1180, 24], [140, 1500, 20]].forEach(function (s) {
+      sparkle(ctx, s[0], s[1], s[2]);
+    });
+
+    // Top
+    ctx.font = "130px " + Q;
+    ctx.fillText("🌙", 930, 150);
+    ctx.fillStyle = "#e5d0ff";
+    ctx.font = "700 34px " + Q;
+    ctx.fillText("✦  CELESTIAL CHALLENGE  ✦", W / 2, 150);
+
+    // Pet emoji
+    ctx.font = "190px " + Q;
+    ctx.fillText(resultPet.textContent, W / 2, 360);
+
+    // Title
+    ctx.save();
+    ctx.shadowColor = "#db9cff"; ctx.shadowBlur = 30;
+    ctx.fillStyle = "#f7d5ff";
+    ctx.font = fit(ctx, "Challenge Complete! 🎉", "400", P, 84, 900) && ctx.font;
+    ctx.fillText("Challenge Complete! 🎉", W / 2, 540);
+    ctx.restore();
+
+    // Name
+    const nameText = "🌙 " + playerName + " 🌙";
+    ctx.fillStyle = "#ffe3f7";
+    fit(ctx, nameText, "600", Q, 58, 880);
+    ctx.fillText(nameText, W / 2, 640);
+
+    // Score circle
+    const cx = W / 2, cy = 930, r = 190;
+    ctx.save();
+    ctx.shadowColor = "rgba(255,159,210,.85)"; ctx.shadowBlur = 60;
+    const cg = ctx.createRadialGradient(cx, cy, 20, cx, cy, r);
+    cg.addColorStop(0, "#4a2468"); cg.addColorStop(1, "#1c102a");
+    ctx.fillStyle = cg;
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();
+    ctx.lineWidth = 10; ctx.strokeStyle = "#ffd6f5"; ctx.stroke();
+    ctx.restore();
+    ctx.fillStyle = "#fff";
+    ctx.font = "800 130px " + Q;
+    ctx.fillText(score + "/" + TOTAL_QUESTIONS, cx, cy - 10);
+    ctx.fillStyle = "#ffd6f5";
+    ctx.font = "600 48px " + Q;
+    ctx.fillText(Math.round((score / TOTAL_QUESTIONS) * 100) + "%", cx, cy + 90);
+
+    // Level + message
+    ctx.fillStyle = "#fff";
+    fit(ctx, resultLevel.textContent, "700", Q, 60, 900);
+    ctx.fillText(resultLevel.textContent, W / 2, 1230);
+
+    ctx.fillStyle = "#f9e8ff";
+    ctx.font = "400 40px " + Q;
+    wrap(ctx, resultMessage.textContent, W / 2, 1330, 860, 60);
+
+    // Footer panel
+    ctx.fillStyle = "rgba(255,255,255,.13)";
+    roundRect(ctx, 70, 1600, 940, 250, 44); ctx.fill();
+    ctx.lineWidth = 3; ctx.strokeStyle = "rgba(245,213,255,.55)"; ctx.stroke();
+
+    ctx.fillStyle = "#fff0fc";
+    fit(ctx, "How well do you know Sanan? 👀", "400", P, 56, 860);
+    ctx.fillText("How well do you know Sanan? 👀", W / 2, 1668);
+    ctx.fillStyle = "#ffeab8";
+    ctx.font = "600 40px " + Q;
+    ctx.fillText("Challenge accept karo! 💜", W / 2, 1738);
+    ctx.fillStyle = "#e5d0ff";
+    ctx.font = "500 28px " + Q;
+    ctx.fillText("sananfaisal2007.github.io/MY-WEBSITE", W / 2, 1800);
+
+    return new Promise(function (resolve) {
+      c.toBlob(function (b) {
+        blob = b;
+        if (imgUrl) URL.revokeObjectURL(imgUrl);
+        imgUrl = URL.createObjectURL(b);
+        img.src = imgUrl;
+        resolve();
+      }, "image/png");
+    });
+  }
+
+  function download() {
+    if (!blob) return;
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "sanan-quiz-" + playerName.replace(/[^a-z0-9]+/gi, "-").toLowerCase() + ".png";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  g("scOpen").addEventListener("click", async function () {
+    modal.hidden = false;
+    img.removeAttribute("src");
+    msg.textContent = "Card ban raha hai... ✨";
+    try {
+      await draw();
+      msg.textContent = "Tayyar hai! 💜";
+    } catch (e) {
+      console.error("Share card failed:", e);
+      msg.textContent = "Card nahi ban saka 😢";
+    }
+  });
+
+  g("scDownload").addEventListener("click", download);
+
+  g("scShare").addEventListener("click", async function () {
+    if (!blob) return;
+    const file = new File([blob], "sanan-quiz-result.png", { type: "image/png" });
+    const text = "Maine Sanan ke quiz mein " + score + "/" + TOTAL_QUESTIONS + " score kiya! 😎 Tum bhi try karo 💜 " + SITE;
+    try {
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title: "How Well Do You Know Sanan?", text: text });
+      } else {
+        download();
+        msg.textContent = "Is browser mein direct share nahi hota, isliye card download kar diya. Ab usay story ya status par laga do 💜";
+      }
+    } catch (e) { /* user ne share cancel kiya */ }
+  });
+
+  g("scClose").addEventListener("click", function () { modal.hidden = true; });
+  modal.addEventListener("click", function (e) { if (e.target === modal) modal.hidden = true; });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") modal.hidden = true; });
 })();
 </script>
 </body>
