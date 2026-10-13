@@ -6,223 +6,684 @@
 <title>My Favourites Hub 💜 | Sanan's World</title>
 <meta name="theme-color" content="#07060c">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⭐</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
+  :root { --c: #ff5fa2; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: 'Poppins', Arial, sans-serif;
-    background: #07060c;
-    background-image: url('SANAN.JPG');
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    color: #f1f5f9;
-    line-height: 1.6;
+    font-family: 'Outfit', system-ui, sans-serif;
+    color: #f4efff;
+    background: #07060c url('SANAN.JPG') center top / cover no-repeat fixed;
     min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.5;
   }
 
-  /* Top bar with back button */
-  .fh-topbar {
-    position: sticky; top: 0; z-index: 1000;
-    display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    padding: 14px 5%;
-    background: rgba(9, 7, 18, 0.92);
-    border-bottom: 1px solid rgba(190, 140, 255, 0.25);
-    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22);
+  /* ========== BACKGROUND LAYERS ========== */
+  /* Photo ke upar dark overlay. Photo zyada dikhani ho to neeche wale .78 / .92 kam kar do. */
+  .fx-bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(circle at 15% 8%, rgba(139,77,255,.30), transparent 50%),
+      radial-gradient(circle at 88% 85%, rgba(255,110,200,.22), transparent 50%),
+      linear-gradient(rgba(7,6,12,.78), rgba(7,6,12,.92));
   }
-  .fh-topbar .logo { color: #d5b6ff; font-weight: 700; letter-spacing: 2px; font-size: 15px; }
-  .fh-back {
-    display: inline-block; padding: 9px 18px; border-radius: 24px;
-    border: 1px solid rgba(220,185,255,.6); color: #fff; text-decoration: none;
-    background: rgba(155,100,255,.2); font-weight: 600; font-size: 13px;
+  .fx-orb {
+    position: fixed; z-index: 0; pointer-events: none; border-radius: 50%;
+    background: var(--c); filter: blur(100px); opacity: .32;
+    transition: background 1s ease;
+    animation: fxDrift 20s ease-in-out infinite alternate;
+  }
+  .fx-orb.a { width: 420px; height: 420px; left: -120px; top: 20%; }
+  .fx-orb.b { width: 360px; height: 360px; right: -100px; top: 55%; animation-delay: -8s; }
+  .fx-stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  .fx-star { position: absolute; border-radius: 50%; background: #fff; animation: fxTwinkle 3s ease-in-out infinite; }
+  @keyframes fxDrift { to { transform: translate(80px, -60px) scale(1.2); } }
+  @keyframes fxTwinkle { 0%, 100% { opacity: .15; } 50% { opacity: .9; } }
+
+  /* ========== TOP BAR ========== */
+  .fx-topbar {
+    position: sticky; top: 0; z-index: 60;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 12px 5%;
+    background: rgba(9, 7, 18, .78);
+    border-bottom: 1px solid rgba(190, 140, 255, .22);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  }
+  .fx-logo { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 2px; color: #e3ccff; }
+  .fx-back {
+    display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border-radius: 30px;
+    color: #fff; text-decoration: none; font-weight: 600; font-size: 13px;
+    border: 1px solid rgba(225,195,255,.55); background: rgba(155,100,255,.18);
     transition: transform .25s, background .25s, box-shadow .25s;
   }
-  .fh-back:hover { transform: translateY(-2px); background: #8b4dff; box-shadow: 0 0 20px rgba(139,77,255,.6); }
+  .fx-back:hover { transform: translateX(-3px); background: #8b4dff; box-shadow: 0 0 22px rgba(139,77,255,.6); }
 
-  /* Main section */
-  section.content {
-    max-width: 1000px; margin: 30px auto; padding: 40px 6%;
-    background: rgba(255, 255, 255, 0.08);
+  .fx-wrap { position: relative; z-index: 2; max-width: 1150px; margin: 0 auto; padding: 0 20px 70px; }
+
+  /* ========== HERO ========== */
+  .fx-hero { position: relative; text-align: center; padding: 54px 0 24px; }
+  .fx-kicker { font-size: 12px; letter-spacing: 6px; text-transform: uppercase; color: #dcc6ff; }
+  .fx-title {
+    font-family: 'Unbounded', sans-serif; font-weight: 800;
+    font-size: clamp(30px, 7vw, 68px); line-height: 1.1; margin: 14px 0 12px;
+    background: linear-gradient(100deg, #fff 5%, var(--c) 45%, #ffe27a 85%);
+    background-size: 200% auto; -webkit-background-clip: text; background-clip: text;
+    color: transparent; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 22px color-mix(in srgb, var(--c) 55%, transparent));
+    animation: fxShine 7s linear infinite;
+  }
+  .fx-sub { color: #e6d8fb; font-size: 16px; max-width: 520px; margin: 0 auto; }
+  .fx-float { position: absolute; font-size: 28px; opacity: .85; filter: drop-shadow(0 0 10px var(--c)); animation: fxFloat 5s ease-in-out infinite; pointer-events: none; }
+  .fx-float.f1 { left: 6%; top: 18%; } .fx-float.f2 { right: 8%; top: 12%; animation-delay: -1.5s; }
+  .fx-float.f3 { left: 14%; bottom: 14%; animation-delay: -3s; } .fx-float.f4 { right: 12%; bottom: 20%; animation-delay: -2s; }
+  @keyframes fxFloat { 0%, 100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-14px) rotate(8deg); } }
+  @keyframes fxShine { to { background-position: 200% 0; } }
+
+  .fx-stats { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+  .fx-stat {
+    min-width: 112px; padding: 12px 18px; border-radius: 18px;
+    background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  }
+  .fx-stat b { display: block; font-family: 'Unbounded', sans-serif; font-size: 24px; color: #fff; }
+  .fx-stat span { font-size: 12px; color: #cdbfe6; }
+
+  /* ========== TABS + SEARCH ========== */
+  .fx-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 26px 0 16px; }
+  .fx-tab {
+    display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 30px; cursor: pointer;
+    font: 600 14px 'Outfit', sans-serif; color: #fff;
+    background: rgba(255,255,255,.07); border: 1px solid color-mix(in srgb, var(--tc) 70%, transparent);
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 20px;
+    transition: transform .25s, background .25s, box-shadow .25s, color .25s;
+  }
+  .fx-tab em { font-style: normal; font-size: 11px; padding: 2px 8px; border-radius: 10px; background: rgba(255,255,255,.14); }
+  .fx-tab:hover { transform: translateY(-3px); box-shadow: 0 6px 20px color-mix(in srgb, var(--tc) 40%, transparent); }
+  .fx-tab.active { background: var(--tc); color: #14091f; box-shadow: 0 0 26px color-mix(in srgb, var(--tc) 70%, transparent); }
+  .fx-tab.active em { background: rgba(0,0,0,.18); }
+
+  .fx-search { position: relative; max-width: 420px; margin: 0 auto 6px; }
+  .fx-search input {
+    width: 100%; padding: 13px 18px 13px 46px; border-radius: 30px; outline: none;
+    font: 500 15px 'Outfit', sans-serif; color: #fff;
+    background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    transition: border-color .25s, box-shadow .25s;
+  }
+  .fx-search input::placeholder { color: #bfaedb; }
+  .fx-search input:focus { border-color: var(--c); box-shadow: 0 0 22px color-mix(in srgb, var(--c) 45%, transparent); }
+  .fx-search::before { content: "🔍"; position: absolute; left: 17px; top: 50%; transform: translateY(-50%); font-size: 16px; }
+
+  /* ========== HEADINGS ========== */
+  .fx-h {
+    display: flex; align-items: center; gap: 12px; margin: 30px 0 16px;
+    font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 2px; text-transform: uppercase;
+  }
+  .fx-h::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--c), transparent); }
+
+  /* ========== GRIDS ========== */
+  .fx-feature { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .fx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 18px; }
+
+  /* ========== CARD ========== */
+  .fx-card {
+    position: relative; border-radius: 20px; cursor: pointer; outline: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,.45);
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: transform .22s ease, box-shadow .3s ease;
+    animation: fxPop .6s ease both;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .fx-card:hover, .fx-card:focus-visible {
+    box-shadow: 0 0 0 2px var(--c), 0 18px 50px color-mix(in srgb, var(--c) 45%, transparent);
+  }
+  .fx-poster {
+    position: relative; overflow: hidden; border-radius: 20px; aspect-ratio: var(--ar, 2 / 3);
+    background: linear-gradient(160deg, color-mix(in srgb, var(--c) 55%, #1a0f2e), #120a22);
+  }
+  .fx-poster img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    opacity: 0; transform: scale(1.1); transition: opacity .6s ease, transform .8s ease;
+  }
+  .fx-poster img.on { opacity: 1; transform: scale(1); }
+  .fx-card:hover .fx-poster img.on { transform: scale(1.07); }
+  .fx-ph { position: absolute; inset: 0; display: grid; place-items: center; font-size: 56px; filter: drop-shadow(0 0 18px var(--c)); transition: opacity .5s; }
+  .fx-poster.has .fx-ph { opacity: 0; }
+  .fx-poster.loading::before {
+    content: ""; position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.16) 50%, transparent 70%);
+    background-size: 200% 100%; animation: fxShimmer 1.4s linear infinite;
+  }
+  .fx-shade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,3,12,.95) 0%, rgba(5,3,12,.4) 38%, transparent 62%); }
+  .fx-poster::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .3s;
+    background: radial-gradient(circle at var(--gx, 50%) var(--gy, 0%), rgba(255,255,255,.3), transparent 45%);
+    mix-blend-mode: soft-light;
+  }
+  .fx-card:hover .fx-poster::after { opacity: 1; }
+
+  .fx-rank {
+    position: absolute; top: 10px; left: 10px; z-index: 2; padding: 4px 10px; border-radius: 12px;
+    font: 700 12px 'Unbounded', sans-serif; background: rgba(0,0,0,.55);
+    border: 1px solid color-mix(in srgb, var(--c) 70%, transparent);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  }
+  .fx-ring {
+    position: absolute; top: 8px; right: 8px; z-index: 2; width: 46px; height: 46px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: conic-gradient(var(--c) calc(var(--p) * 1%), rgba(255,255,255,.2) 0);
+    box-shadow: 0 0 14px color-mix(in srgb, var(--c) 60%, transparent);
+  }
+  .fx-ring::before { content: ""; position: absolute; inset: 4px; border-radius: 50%; background: rgba(10,6,20,.9); }
+  .fx-ring b { position: relative; font: 800 14px 'Outfit', sans-serif; }
+  .fx-badge {
+    position: absolute; top: 8px; right: 8px; z-index: 2; width: 38px; height: 38px; border-radius: 50%;
+    display: grid; place-items: center; font-size: 18px; background: rgba(0,0,0,.55);
+    border: 1px solid color-mix(in srgb, var(--c) 70%, transparent);
+  }
+  .fx-info { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 14px; }
+  .fx-name {
+    font-size: 15px; font-weight: 700; line-height: 1.25; text-shadow: 0 2px 10px #000;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .fx-feature .fx-name { font-size: 18px; }
+  .fx-tag {
+    display: inline-block; margin-top: 8px; padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 600;
+    background: color-mix(in srgb, var(--c) 35%, rgba(0,0,0,.4)); border: 1px solid color-mix(in srgb, var(--c) 60%, transparent);
   }
 
-  /* ===== Favourites Hub v2 ===== */
-  #favourites { text-align: center; }
-  #favourites .fh-title {
-    font-family: 'Pacifico', cursive; font-weight: 400; font-size: clamp(30px, 6vw, 46px);
-    margin-bottom: 8px; line-height: 1.4;
-    background: linear-gradient(90deg, #fff, #ffd6f5, #c9a6ff, #ffe27a, #fff); background-size: 250% 100%;
-    -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 10px #c78bff) drop-shadow(0 0 22px rgba(255,150,230,.5));
-    animation: fhShine 5s linear infinite;
+  .fx-empty { text-align: center; padding: 50px 0; color: #d9c8ee; font-size: 17px; }
+  .fx-more {
+    display: block; margin: 30px auto 0; padding: 13px 30px; border-radius: 30px; cursor: pointer;
+    font: 700 14px 'Outfit', sans-serif; color: #fff; background: rgba(255,255,255,.08);
+    border: 1px solid var(--c); box-shadow: 0 0 20px color-mix(in srgb, var(--c) 40%, transparent);
+    transition: transform .25s, background .25s;
   }
-  #favourites .fh-sub { color: #f2dcff; font-family: 'Poppins', sans-serif; text-shadow: 0 0 10px rgba(200,140,255,.7); }
-  .fh-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; margin: 20px 0 24px; }
-  .fh-tab {
-    padding: 9px 16px; border-radius: 24px; border: 1px solid var(--c); cursor: pointer;
-    background: rgba(255,255,255,.06); color: #fff; font: 700 13px 'Poppins', sans-serif;
-    text-shadow: 0 0 8px var(--c); box-shadow: 0 0 10px color-mix(in srgb, var(--c) 45%, transparent);
-    transition: transform .25s, box-shadow .25s, background .25s;
-  }
-  .fh-tab span { opacity: .8; font-size: 11px; }
-  .fh-tab:hover { transform: translateY(-3px) scale(1.05); }
-  .fh-tab.active { background: var(--c); color: #1a0a2e; text-shadow: none; box-shadow: 0 0 22px var(--c), 0 0 40px color-mix(in srgb, var(--c) 60%, transparent); }
-  .fh-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 16px; text-align: center; }
-  .fh-card {
-    position: relative; padding: 24px 14px 16px; border-radius: 20px; overflow: hidden;
-    background: linear-gradient(160deg, rgba(40,20,70,.85), rgba(14,8,28,.9));
-    border: 1px solid var(--c); box-shadow: 0 0 14px color-mix(in srgb, var(--c) 45%, transparent), inset 0 0 18px color-mix(in srgb, var(--c) 12%, transparent);
-    animation: fhPop .55s ease both; transition: transform .3s, box-shadow .3s;
-  }
-  .fh-card::before {
-    content: ""; position: absolute; top: 0; bottom: 0; left: -70%; width: 40%;
-    background: linear-gradient(100deg, transparent, rgba(255,255,255,.22), transparent);
-    animation: fhSweep 4.5s ease-in-out infinite; pointer-events: none;
-  }
-  .fh-card:hover { transform: translateY(-7px) scale(1.03); box-shadow: 0 0 28px var(--c), 0 0 52px color-mix(in srgb, var(--c) 50%, transparent); }
-  .fh-rank { position: absolute; top: 8px; left: 10px; font: 800 12px 'Poppins', sans-serif; color: var(--c); text-shadow: 0 0 8px var(--c); }
-  .fh-emoji { display: block; font-size: 36px; margin-bottom: 8px; filter: drop-shadow(0 0 10px var(--c)); }
-  .fh-card:hover .fh-emoji { animation: fhWiggle .6s ease; }
-  .fh-name { margin: 0 0 12px; min-height: 40px; color: #fff; font: 700 15px/1.35 'Poppins', sans-serif; text-shadow: 0 0 10px var(--c); display: flex; align-items: center; justify-content: center; }
-  .fh-pill {
-    display: inline-block; padding: 4px 14px; border-radius: 20px; font: 800 14px 'Poppins', sans-serif;
-    color: #1a0a2e; background: linear-gradient(90deg, #ffe27a, #fff3b0, #ffe27a); background-size: 200% 100%;
-    box-shadow: 0 0 14px rgba(255,226,122,.85); animation: fhShine 3s linear infinite;
-  }
-  .fh-pill.fav { background: linear-gradient(90deg, #ffc8f2, #fff, #ffc8f2); box-shadow: 0 0 14px rgba(255,200,242,.8); font-size: 12px; }
-  .fh-pill.sug { background: linear-gradient(90deg, #a6e9ff, #fff, #a6e9ff); box-shadow: 0 0 14px rgba(166,233,255,.8); font-size: 12px; }
-  .fh-meter { height: 5px; margin: 10px 8px 0; border-radius: 9px; background: rgba(255,255,255,.14); overflow: hidden; }
-  .fh-meter i { display: block; height: 100%; border-radius: 9px; background: linear-gradient(90deg, var(--c), #ffe27a); box-shadow: 0 0 8px var(--c); }
-  .fh-more {
-    margin: 24px auto 0; padding: 11px 26px; border-radius: 26px; border: 1px solid #ffe27a; cursor: pointer;
-    background: rgba(255,226,122,.12); color: #ffeab8; font: 700 14px 'Poppins', sans-serif; text-shadow: 0 0 10px #ffd24d;
-    box-shadow: 0 0 16px rgba(255,226,122,.5); transition: transform .25s;
-  }
-  .fh-more:hover { transform: scale(1.06); }
-  @keyframes fhShine { to { background-position: 250% 0; } }
-  @keyframes fhSweep { 0% { left: -70%; } 55%, 100% { left: 150%; } }
-  @keyframes fhPop { from { opacity: 0; transform: translateY(18px) scale(.94); } to { opacity: 1; transform: none; } }
-  @keyframes fhWiggle { 0%,100% { transform: rotate(0); } 30% { transform: rotate(-14deg) scale(1.2); } 60% { transform: rotate(12deg) scale(1.2); } }
-  @media (max-width: 480px) {
-    .fh-grid { grid-template-columns: repeat(2, 1fr); gap: 11px; }
-    .fh-name { font-size: 13px; }
-    section.content { margin: 16px 10px; padding: 28px 14px; }
-  }
-  @media (prefers-reduced-motion: reduce) { .fh-card, .fh-card::before, .fh-pill, #favourites .fh-title { animation: none; } }
+  .fx-more:hover { transform: scale(1.06); background: color-mix(in srgb, var(--c) 35%, transparent); }
+  .fx-more[hidden] { display: none; }
 
-  footer { text-align: center; padding: 25px; color: #94a3b8; font-size: 13px; }
+  /* ========== MODAL ========== */
+  .fx-modal {
+    position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 18px;
+    background: rgba(5,3,12,.78); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    animation: fxFade .25s ease;
+  }
+  .fx-modal[hidden] { display: none; }
+  .fx-mcard {
+    position: relative; width: 100%; max-width: 760px; max-height: 92vh; overflow: auto;
+    display: grid; grid-template-columns: 300px 1fr; border-radius: 26px;
+    background: linear-gradient(160deg, rgba(40,20,70,.96), rgba(14,8,28,.98));
+    border: 1px solid var(--c); box-shadow: 0 0 60px color-mix(in srgb, var(--c) 45%, transparent);
+    animation: fxPop .4s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  .fx-mposter { position: relative; min-height: 300px; background: linear-gradient(160deg, color-mix(in srgb, var(--c) 55%, #1a0f2e), #120a22); }
+  .fx-mposter img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .fx-mposter .fx-ph { font-size: 90px; }
+  .fx-mbody { padding: 30px 28px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+  .fx-mcat { align-self: flex-start; padding: 4px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; color: #14091f; background: var(--c); }
+  .fx-mtitle { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: clamp(20px, 3.4vw, 28px); line-height: 1.25; }
+  .fx-mscore { font-family: 'Unbounded', sans-serif; font-size: 34px; font-weight: 800; color: #ffe27a; text-shadow: 0 0 18px rgba(255,226,122,.6); }
+  .fx-mscore small { font-size: 16px; color: #d9c8ee; }
+  .fx-mbar { height: 8px; border-radius: 10px; background: rgba(255,255,255,.14); overflow: hidden; }
+  .fx-mbar i { display: block; height: 100%; border-radius: 10px; background: linear-gradient(90deg, var(--c), #ffe27a); box-shadow: 0 0 12px var(--c); }
+  .fx-mmsg { color: #e6d8fb; font-size: 16px; }
+  .fx-x {
+    position: absolute; top: 12px; right: 12px; z-index: 5; width: 38px; height: 38px; border-radius: 50%; cursor: pointer;
+    font-size: 16px; color: #fff; background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.3);
+    transition: transform .25s, background .25s;
+  }
+  .fx-x:hover { transform: rotate(90deg); background: var(--c); color: #14091f; }
+
+  footer { position: relative; z-index: 2; text-align: center; padding: 26px; color: #a99dc0; font-size: 13px; }
+
+  /* ========== ANIMATIONS ========== */
+  @keyframes fxPop { from { opacity: 0; transform: translateY(22px) scale(.94); } to { opacity: 1; } }
+  @keyframes fxFade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fxShimmer { to { background-position: -200% 0; } }
+
+  /* ========== MOBILE ========== */
+  @media (max-width: 720px) {
+    .fx-wrap { padding: 0 14px 60px; }
+    .fx-hero { padding-top: 38px; }
+    .fx-float { font-size: 22px; }
+    .fx-feature { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .fx-feature .fx-card:first-child { grid-column: 1 / -1; }
+    .fx-feature .fx-name { font-size: 15px; }
+    .fx-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .fx-tab { padding: 9px 14px; font-size: 13px; }
+    .fx-mcard { grid-template-columns: 1fr; }
+    .fx-mposter { min-height: 260px; }
+    .fx-mbody { padding: 22px 20px 26px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fx-orb, .fx-star, .fx-title, .fx-float, .fx-card, .fx-poster.loading::before, .fx-mcard { animation: none; }
+    .fx-card { transition: box-shadow .3s; }
+  }
 </style>
 </head>
 <body>
 
-<div class="fh-topbar">
-  <span class="logo">SANAN'S WORLD 🌙</span>
-  <a class="fh-back" href="index.html">← Back to Home</a>
+<div class="fx-bg" aria-hidden="true"></div>
+<div class="fx-orb a" aria-hidden="true"></div>
+<div class="fx-orb b" aria-hidden="true"></div>
+<div class="fx-stars" id="fxStars" aria-hidden="true"></div>
+
+<div class="fx-topbar">
+  <span class="fx-logo">SANAN'S WORLD 🌙</span>
+  <a class="fx-back" href="index.html?skip=1#home">← Back to Home</a>
 </div>
 
-<section class="content" id="favourites">
-  <h2 class="fh-title">⭐ My Favourites Hub 💜</h2>
-  <p class="fh-sub">Meri duniya ki sab se pyari cheezein. Category chuno aur chamak dekho! ✨</p>
-  <div class="fh-tabs" id="fhTabs"></div>
-  <div class="fh-grid" id="fhGrid"></div>
-  <button type="button" class="fh-more" id="fhMore" hidden>Aur dikhao ✨</button>
-</section>
+<div class="fx-wrap" id="favourites">
+  <header class="fx-hero">
+    <span class="fx-float f1" aria-hidden="true">🌸</span>
+    <span class="fx-float f2" aria-hidden="true">⭐</span>
+    <span class="fx-float f3" aria-hidden="true">🦋</span>
+    <span class="fx-float f4" aria-hidden="true">💜</span>
+    <p class="fx-kicker">Sanan's Little Collection</p>
+    <h1 class="fx-title">MY FAVOURITES</h1>
+    <p class="fx-sub">Meri duniya ki sab se pyari cheezein ✨ Category chuno, kisi bhi card par tap karo!</p>
+    <div class="fx-stats" id="fxStats"></div>
+  </header>
+
+  <nav class="fx-tabs" id="fxTabs" aria-label="Categories"></nav>
+  <div class="fx-search"><input id="fxSearch" type="search" placeholder="Is category mein dhoondo..." autocomplete="off"></div>
+
+  <main id="fxArea"></main>
+  <button type="button" class="fx-more" id="fxMore" hidden>Aur dikhao ✨</button>
+</div>
 
 <footer>© 2026 Sanan's World. Built with curiosity. 💜</footer>
 
+<!-- Detail popup -->
+<div class="fx-modal" id="fxModal" hidden>
+  <div class="fx-mcard" role="dialog" aria-modal="true" aria-labelledby="fxMTitle">
+    <button type="button" class="fx-x" id="fxX" aria-label="Close">✕</button>
+    <div class="fx-mposter" id="fxMPoster"></div>
+    <div class="fx-mbody">
+      <span class="fx-mcat" id="fxMCat"></span>
+      <h2 class="fx-mtitle" id="fxMTitle"></h2>
+      <div class="fx-mscore" id="fxMScore"></div>
+      <div class="fx-mbar" id="fxMBar"><i></i></div>
+      <p class="fx-mmsg" id="fxMMsg"></p>
+    </div>
+  </div>
+</div>
+
 <script>
 (function () {
-  // ✏️ Format: "Naam|rating" (rating 1-10) | "Naam|" = meri pasand | "Naam|s" = suggested
+  /* =====================================================================
+     ✏️ APNI LIST YAHAN BADLO
+     Format:  "Naam|rating"  (rating 1-10)  |  "Naam|" = meri pasand  |  "Naam|s" = suggested
+     ar = poster ka shape, sfx = picture dhoondne ke liye extra lafz
+     ===================================================================== */
   var CATS = [
-    { n: "Anime", i: "⚔️", c: "#ff5fa2", d: "Jujutsu Kaisen|10;Solo Leveling|10;Chainsaw Man|9" },
-    { n: "K-Dramas", i: "🎬", c: "#c084fc", d:
+    { n: "Anime", i: "⚔️", c: "#ff5fa2", p: "anime", sfx: " anime", ar: "2 / 3",
+      d: "Jujutsu Kaisen|10;Solo Leveling|10;Chainsaw Man|9" },
+    { n: "K-Dramas", i: "🎬", c: "#c084fc", p: "tv", sfx: " Korean drama", ar: "2 / 3", d:
       "Queen of Tears|10;Business Proposal|9;Sweet Home|9;Lovely Runner|10;Can This Love Be Translated?|10;Teach You a Lesson|10;The Wonderfools|10;Take Charge of My Heart|10;Mr. Plankton|9;My Bias, My Boss|10;All of Us Are Dead|10;My Name|10;No Gain, No Love|8;Love Next Door|9;See You at Work Tomorrow!|10;Study Group|9;Good Boy|10;My Demon|10;Mr. Queen|10;Our Sticky Love|10;Head Over Heels|9;Vincenzo|10;The Glory|10;Destined with You|9;My Strange Hero|9;Twinkling Watermelon|10" },
-    { n: "Songs", i: "🎧", c: "#5fd4ff", d:
+    { n: "Songs", i: "🎧", c: "#5fd4ff", p: "song", sfx: " song", ar: "1 / 1", d:
       "Choom — BABYMONSTER|;Drip — BABYMONSTER|;I Like It — BABYMONSTER|;Sugar Honey — BABYMONSTER|;Eleven — IVE|;After Like — IVE|;Bang Bang — IVE|;Black Hole — IVE|;I AM — IVE|;Rebel Heart — IVE|;Golden|" },
-    { n: "Food", i: "🍜", c: "#ffb347", d: "Noodles|;Pasta|;Biryani|;Wings|;Soup|;Ice Cream|;Chocolates|;Chicken|;Beans|" },
-    { n: "Movies", i: "🍿", c: "#ffd24d", d:
+    { n: "Food", i: "🍜", c: "#ffb347", p: "", sfx: "", ar: "1 / 1",
+      d: "Noodles|;Pasta|;Biryani|;Wings|;Soup|;Ice Cream|;Chocolates|;Chicken|;Beans|" },
+    { n: "Movies", i: "🍿", c: "#ffd24d", p: "", sfx: " film", ar: "2 / 3", d:
       "Iron Man|;The Incredible Hulk|;Iron Man 2|;Thor|;Captain America: The First Avenger|;The Avengers|;Iron Man 3|;Thor: The Dark World|;Captain America: The Winter Soldier|;Guardians of the Galaxy|;Avengers: Age of Ultron|;Ant-Man|;Captain America: Civil War|;Doctor Strange|;Guardians Vol. 2|;Spider-Man: Homecoming|;Thor: Ragnarok|;Black Panther|;Avengers: Infinity War|;Ant-Man and the Wasp|;Captain Marvel|;Avengers: Endgame|;Spider-Man: Far From Home|;Black Widow|;Shang-Chi|;Eternals|;Spider-Man: No Way Home|;Doctor Strange 2|;Thor: Love and Thunder|;Black Panther: Wakanda Forever|;Guardians Vol. 3|;The Marvels|;Deadpool & Wolverine|;KGF Chapter 1|;KGF Chapter 2|;Salaar|;PK|;Dangal|;Krrish|;Marjaavaan|;Veer-Zaara|;Kabhi Khushi Kabhie Gham|;Avatar|;Avatar: The Way of Water|;Avatar: Fire and Ash|;" +
       "Parasite|s;Oldboy|s;Memories of Murder|s;The Handmaiden|s;Train to Busan|s;I Saw the Devil|s;The Wailing|s;Burning|s;Decision to Leave|s;A Taxi Driver|s;Miracle in Cell No. 7|s;Extreme Job|s;The Man from Nowhere|s;The Chaser|s;Peppermint Candy|s;Secret Sunshine|s;Mother|s;Joint Security Area|s;Sympathy for Mr. Vengeance|s;Silenced|s;Veteran|s;Ode to My Father|s;The Admiral: Roaring Currents|s;Masquerade|s;Along with the Gods|s;Exit|s;Escape from Mogadishu|s;Hansan|s;12.12: The Day|s;Concrete Utopia|s" },
-    { n: "Games", i: "🎮", c: "#7dff9b", d:
+    { n: "Games", i: "🎮", c: "#7dff9b", p: "", sfx: " video game", ar: "3 / 4", d:
       "PUBG|s;MapleStory|s;Black Desert|s;Lost Ark|s;Lineage W|s;Cookie Run: Kingdom|s;Solo Leveling: Arise|s;Lies of P|s;Stellar Blade|s;Ragnarok Online|s;Blade & Soul|s;Dungeon Fighter Online|s;Minecraft|s;GTA V|s;Subway Surfers|s;Among Us|s;Valorant|s" }
   ];
 
-  var LIMIT = 12;
-  var tabsBox = document.getElementById("fhTabs");
-  var grid = document.getElementById("fhGrid");
-  var moreBtn = document.getElementById("fhMore");
-  if (!tabsBox || !grid || !moreBtn) return;
+  // Picture dhoondne ke liye naam theek karne wali list (agar koi galat picture aaye to yahan add karo)
+  var FIX = {
+    "Wings": "Buffalo wing", "Chicken": "Fried chicken", "Beans": "Bean", "Chocolates": "Chocolate",
+    "GTA V": "Grand Theft Auto V", "PUBG": "PUBG: Battlegrounds", "Black Desert": "Black Desert Online",
+    "Golden": "Golden HUNTR/X"
+  };
 
-  // Parse + sort (zyada rating pehle, phir pasand, phir suggested)
+  var LIMIT = 12;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var canHover = window.matchMedia("(hover: hover)").matches;
+
+  var tabsBox = document.getElementById("fxTabs");
+  var area = document.getElementById("fxArea");
+  var moreBtn = document.getElementById("fxMore");
+  var search = document.getElementById("fxSearch");
+  var statsBox = document.getElementById("fxStats");
+  var root = document.documentElement;
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+
+  /* ---------- Data parse + sort ---------- */
   CATS.forEach(function (cat) {
     cat.items = cat.d.split(";").map(function (s, idx) {
       var p = s.split("|");
       var r = p[1];
-      return { t: p[0], r: /^\d+$/.test(r) ? +r : null, k: r === "s" ? 2 : (r === "" ? 1 : 0), idx: idx };
+      return { t: p[0], r: /^\d+$/.test(r) ? +r : null, k: r === "s" ? 2 : (r === "" ? 1 : 0), idx: idx, img: null };
     }).sort(function (a, b) {
       return (a.k - b.k) || ((b.r || 0) - (a.r || 0)) || (a.idx - b.idx);
     });
+    cat.items.forEach(function (it, i) { it.rk = it.r !== null ? i + 1 : 0; });
   });
 
+  /* ---------- Background stars ---------- */
+  (function () {
+    var box = document.getElementById("fxStars");
+    for (var i = 0; i < 60; i++) {
+      var s = el("span", "fx-star");
+      var size = 1 + Math.random() * 2.5;
+      s.style.cssText = "left:" + Math.random() * 100 + "%;top:" + Math.random() * 100 + "%;width:" + size + "px;height:" + size +
+        "px;animation-delay:" + (-Math.random() * 3) + "s;animation-duration:" + (2 + Math.random() * 3) + "s";
+      box.appendChild(s);
+    }
+  })();
+
+  /* ---------- Stats (count-up) ---------- */
+  (function () {
+    var all = [].concat.apply([], CATS.map(function (c) { return c.items; }));
+    var data = [
+      [all.filter(function (x) { return x.k < 2; }).length, "Favourites"],
+      [all.filter(function (x) { return x.r === 10; }).length, "Perfect 10/10"],
+      [all.filter(function (x) { return x.k === 2; }).length, "Suggested"],
+      [CATS.length, "Categories"]
+    ];
+    data.forEach(function (d) {
+      var box = el("div", "fx-stat");
+      var b = el("b", "", "0");
+      box.appendChild(b); box.appendChild(el("span", "", d[1]));
+      statsBox.appendChild(box);
+      if (reduce) { b.textContent = d[0]; return; }
+      var t0 = null;
+      function step(t) {
+        if (t0 === null) t0 = t;
+        var p = Math.min((t - t0) / 1200, 1);
+        b.textContent = Math.round(d[0] * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  })();
+
+  /* =====================================================================
+     PICTURES — free public sources se, page khulte hi load hoti hain
+     Anime: Jikan | K-Dramas: TVMaze | Songs: iTunes | baqi sab: Wikipedia
+     ===================================================================== */
+  var KEY = "fx_img_cache_v1";
+  var cache = {};
+  try { cache = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { cache = {}; }
+  function saveCache() { try { localStorage.setItem(KEY, JSON.stringify(cache)); } catch (e) {} }
+
+  function getJSON(url) {
+    return fetch(url).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+  }
+
+  function wiki(q) {
+    var u = "https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrlimit=3" +
+      "&prop=pageimages&piprop=thumbnail&pithumbsize=500&gsrsearch=" + encodeURIComponent(q);
+    return getJSON(u).then(function (j) {
+      var pages = j.query && j.query.pages;
+      if (!pages) return null;
+      var arr = Object.keys(pages).map(function (k) { return pages[k]; })
+        .sort(function (a, b) { return a.index - b.index; });
+      for (var i = 0; i < arr.length; i++) if (arr[i].thumbnail) return arr[i].thumbnail.source;
+      return null;
+    });
+  }
+
+  function resolve(cat, it) {
+    var name = FIX[it.t] || it.t;
+    var primary = Promise.resolve(null);
+
+    if (cat.p === "anime") {
+      primary = getJSON("https://api.jikan.moe/v4/anime?limit=1&q=" + encodeURIComponent(name)).then(function (j) {
+        var d = j.data && j.data[0];
+        return d && d.images && d.images.jpg ? (d.images.jpg.large_image_url || d.images.jpg.image_url) : null;
+      });
+    } else if (cat.p === "tv") {
+      primary = getJSON("https://api.tvmaze.com/search/shows?q=" + encodeURIComponent(name)).then(function (list) {
+        for (var i = 0; i < list.length; i++) {
+          var s = list[i].show;
+          if (s && s.language === "Korean" && s.image) return (s.image.original || s.image.medium).replace("http://", "https://");
+        }
+        return null;
+      });
+    } else if (cat.p === "song") {
+      var parts = name.split(" — ");
+      var term = parts.join(" ");
+      primary = getJSON("https://itunes.apple.com/search?media=music&entity=song&limit=1&term=" + encodeURIComponent(term)).then(function (j) {
+        var r = j.results && j.results[0];
+        return r && r.artworkUrl100 ? r.artworkUrl100.replace("100x100bb", "400x400bb") : null;
+      });
+    }
+
+    var sfx = cat.n === "Movies" && it.k === 2 ? " South Korean film" : cat.sfx;
+    var wikiName = name.split(" — ")[0];
+    return primary.catch(function () { return null; }).then(function (u) {
+      return u || wiki(wikiName + sfx);
+    });
+  }
+
+  // chhoti queue taake servers par zyada bojh na pade
+  var queue = [], active = 0, inflight = {};
+  function pump() {
+    while (active < 3 && queue.length) {
+      var t = queue.shift();
+      active++;
+      t.fn().then(t.res, t.rej).then(function () { active--; setTimeout(pump, 120); });
+    }
+  }
+  function enqueue(fn) {
+    return new Promise(function (res, rej) { queue.push({ fn: fn, res: res, rej: rej }); pump(); });
+  }
+
+  function getImage(cat, it) {
+    var key = cat.n + "|" + it.t;
+    if (key in cache) { it.img = cache[key] || null; return Promise.resolve(it.img); }
+    if (inflight[key]) return inflight[key];
+    inflight[key] = enqueue(function () { return resolve(cat, it); }).then(function (u) {
+      cache[key] = u || "";
+      saveCache();
+      it.img = u || null;
+      delete inflight[key];
+      return it.img;
+    }, function () { delete inflight[key]; return null; });
+    return inflight[key];
+  }
+
+  /* =====================================================================
+     CARDS
+     ===================================================================== */
+  function addTilt(card) {
+    if (reduce || !canHover) return;
+    card.addEventListener("pointermove", function (e) {
+      var r = card.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      card.style.setProperty("--rx", ((0.5 - y) * 9).toFixed(2) + "deg");
+      card.style.setProperty("--ry", ((x - 0.5) * 11).toFixed(2) + "deg");
+      card.style.setProperty("--gx", (x * 100).toFixed(0) + "%");
+      card.style.setProperty("--gy", (y * 100).toFixed(0) + "%");
+    });
+    card.addEventListener("pointerleave", function () {
+      card.style.setProperty("--rx", "0deg");
+      card.style.setProperty("--ry", "0deg");
+    });
+  }
+
+  function makeCard(cat, it, i) {
+    var card = el("article", "fx-card");
+    card.tabIndex = 0;
+    card.setAttribute("role", "button");
+    card.setAttribute("aria-label", it.t + (it.r !== null ? ", " + it.r + " out of 10" : ""));
+    card.style.setProperty("--c", cat.c);
+    card.style.setProperty("--ar", cat.ar);
+    card.style.animationDelay = (i % LIMIT) * 0.05 + "s";
+
+    var poster = el("div", "fx-poster loading");
+    var ph = el("span", "fx-ph", cat.i);
+    var img = document.createElement("img");
+    img.alt = it.t; img.decoding = "async"; img.referrerPolicy = "no-referrer";
+    poster.appendChild(ph); poster.appendChild(img); poster.appendChild(el("span", "fx-shade"));
+
+    if (it.r !== null) {
+      var medal = ["", "🥇", "🥈", "🥉"][it.rk] || "";
+      poster.appendChild(el("span", "fx-rank", medal ? medal : "#" + it.rk));
+      var ring = el("span", "fx-ring");
+      ring.style.setProperty("--p", it.r * 10);
+      ring.appendChild(el("b", "", String(it.r)));
+      poster.appendChild(ring);
+    } else {
+      poster.appendChild(el("span", "fx-badge", it.k === 1 ? "💜" : "✨"));
+    }
+
+    var info = el("div", "fx-info");
+    info.appendChild(el("h3", "fx-name", it.t));
+    info.appendChild(el("span", "fx-tag", it.r !== null ? it.r + " / 10" : (it.k === 1 ? "Meri pasand" : "Suggested")));
+    poster.appendChild(info);
+    card.appendChild(poster);
+
+    getImage(cat, it).then(function (url) {
+      poster.classList.remove("loading");
+      if (!url) return;
+      img.onload = function () { img.classList.add("on"); poster.classList.add("has"); };
+      img.src = url;
+    });
+
+    card.addEventListener("click", function () { openModal(cat, it); });
+    card.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openModal(cat, it); }
+    });
+    addTilt(card);
+    return card;
+  }
+
+  /* =====================================================================
+     RENDER
+     ===================================================================== */
   var current = CATS[0], shown = LIMIT;
 
   function render() {
-    grid.replaceChildren();
-    grid.style.setProperty("--c", current.c);
-    current.items.slice(0, shown).forEach(function (it, i) {
-      var card = document.createElement("div");
-      card.className = "fh-card";
-      card.style.setProperty("--c", current.c);
-      card.style.animationDelay = (i % LIMIT) * 0.05 + "s";
+    var q = search.value.trim().toLowerCase();
+    var cat = current;
+    var items = cat.items.filter(function (it) { return !q || it.t.toLowerCase().indexOf(q) > -1; });
+    area.replaceChildren();
 
-      function add(tag, cls, text) {
-        var el = document.createElement(tag);
-        el.className = cls; el.textContent = text; card.appendChild(el); return el;
-      }
-      add("span", "fh-rank", "#" + (i + 1));
-      add("span", "fh-emoji", current.i);
-      add("h3", "fh-name", it.t);
+    if (!items.length) {
+      area.appendChild(el("p", "fx-empty", "Kuch nahi mila 🙈 Koi aur naam try karo!"));
+      moreBtn.hidden = true;
+      return;
+    }
 
-      if (it.r !== null) {
-        add("span", "fh-pill", it.r + "/10");
-        var m = document.createElement("div"); m.className = "fh-meter";
-        var bar = document.createElement("i"); bar.style.width = it.r * 10 + "%";
-        m.appendChild(bar); card.appendChild(m);
-      } else if (it.k === 1) {
-        add("span", "fh-pill fav", "Favourite 💜");
-      } else {
-        add("span", "fh-pill sug", "Suggested ✨");
-      }
-      grid.appendChild(card);
-    });
-    moreBtn.hidden = shown >= current.items.length;
-    moreBtn.textContent = "Aur dikhao ✨ (" + (current.items.length - shown) + " baqi)";
+    var feat = [];
+    if (!q && items[0].r !== null) feat = items.filter(function (it) { return it.r !== null; }).slice(0, 3);
+    var rest = items.slice(feat.length);
+
+    if (feat.length) {
+      area.appendChild(el("h2", "fx-h", "👑 Top Picks"));
+      var fg = el("div", "fx-feature");
+      feat.forEach(function (it, i) { fg.appendChild(makeCard(cat, it, i)); });
+      area.appendChild(fg);
+    }
+
+    if (rest.length) {
+      area.appendChild(el("h2", "fx-h", q ? "Search Results" : (feat.length ? "Baqi Sab" : "Sab " + cat.n)));
+      var g = el("div", "fx-grid");
+      var list = q ? rest : rest.slice(0, shown);
+      list.forEach(function (it, i) { g.appendChild(makeCard(cat, it, i)); });
+      area.appendChild(g);
+      moreBtn.hidden = q || shown >= rest.length;
+      moreBtn.textContent = "Aur dikhao ✨ (" + (rest.length - shown) + " baqi)";
+    } else {
+      moreBtn.hidden = true;
+    }
   }
 
   CATS.forEach(function (cat, idx) {
-    var b = document.createElement("button");
+    var b = el("button", "fx-tab" + (idx === 0 ? " active" : ""));
     b.type = "button";
-    b.className = "fh-tab" + (idx === 0 ? " active" : "");
-    b.style.setProperty("--c", cat.c);
-    b.textContent = cat.i + " " + cat.n + " ";
-    var count = document.createElement("span");
-    count.textContent = "(" + cat.items.length + ")";
-    b.appendChild(count);
+    b.style.setProperty("--tc", cat.c);
+    b.appendChild(document.createTextNode(cat.i + " " + cat.n + " "));
+    b.appendChild(el("em", "", String(cat.items.length)));
     b.addEventListener("click", function () {
-      tabsBox.querySelectorAll(".fh-tab").forEach(function (t) { t.classList.remove("active"); });
+      tabsBox.querySelectorAll(".fx-tab").forEach(function (t) { t.classList.remove("active"); });
       b.classList.add("active");
-      current = cat; shown = LIMIT; render();
+      current = cat; shown = LIMIT; search.value = "";
+      root.style.setProperty("--c", cat.c);
+      render();
     });
     tabsBox.appendChild(b);
   });
 
   moreBtn.addEventListener("click", function () { shown += LIMIT; render(); });
+  search.addEventListener("input", function () { shown = LIMIT; render(); });
+  root.style.setProperty("--c", current.c);
   render();
+
+  /* =====================================================================
+     DETAIL POPUP
+     ===================================================================== */
+  var modal = document.getElementById("fxModal");
+  var mcard = modal.querySelector(".fx-mcard");
+  var mposter = document.getElementById("fxMPoster");
+  var lastFocus = null;
+
+  function message(it) {
+    if (it.r === 10) return "Ye to bilkul meri jaan hai! Perfect 10 💜";
+    if (it.r === 9) return "Bohat hi zabardast, dil jeet liya ✨";
+    if (it.r !== null) return "Achi hai, dekhne/sunne ka maza aata hai 🌙";
+    if (it.k === 1) return "Meri pasand ki cheezon mein se ek 💜";
+    return "Suggested hai, ek baar zaroor try karo ✨";
+  }
+
+  function openModal(cat, it) {
+    lastFocus = document.activeElement;
+    mcard.style.setProperty("--c", cat.c);
+    document.getElementById("fxMCat").textContent = cat.i + " " + cat.n;
+    document.getElementById("fxMTitle").textContent = it.t;
+    var score = document.getElementById("fxMScore");
+    var bar = document.getElementById("fxMBar");
+    score.replaceChildren();
+    if (it.r !== null) {
+      score.appendChild(document.createTextNode(it.r));
+      score.appendChild(el("small", "", " / 10"));
+      bar.style.display = "";
+      bar.firstElementChild.style.width = it.r * 10 + "%";
+    } else {
+      score.textContent = it.k === 1 ? "💜 Favourite" : "✨ Suggested";
+      score.style.fontSize = "22px";
+      bar.style.display = "none";
+    }
+    if (it.r !== null) score.style.fontSize = "";
+    document.getElementById("fxMMsg").textContent = message(it);
+
+    mposter.replaceChildren();
+    mposter.appendChild(el("span", "fx-ph", cat.i));
+    getImage(cat, it).then(function (url) {
+      if (!url || modal.hidden) return;
+      var im = document.createElement("img");
+      im.alt = it.t; im.referrerPolicy = "no-referrer"; im.src = url;
+      mposter.replaceChildren(im);
+    });
+
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+    document.getElementById("fxX").focus();
+  }
+
+  function closeModal() {
+    modal.hidden = true;
+    document.body.style.overflow = "";
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  document.getElementById("fxX").addEventListener("click", closeModal);
+  modal.addEventListener("click", function (e) { if (e.target === modal) closeModal(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !modal.hidden) closeModal(); });
 })();
 </script>
 </body>
