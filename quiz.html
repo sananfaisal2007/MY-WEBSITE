@@ -203,33 +203,62 @@ h1 {
 <main class="welcome-card" id="card">
 
   <!-- SCREEN 1: Welcome / name -->
-  <section id="introScreen" class="screen">
-    <div class="crown">👑</div>
-    <h1>Welcome, Dreamer!</h1>
-    <p class="subtitle">
-      ✨ Enter the magical little universe of Sanan ✨<br>
-      But first... who dares to enter?
+ ```html
+<section id="introScreen" class="screen cosmic-welcome">
+  <div class="welcome-card">
+    <div class="cosmic-moon">🌙</div>
+
+    <p class="cosmic-tag">✦ A LITTLE UNIVERSE OF MAGIC ✦</p>
+
+    <h1>So… who just entered my universe? 👀</h1>
+
+    <p class="cosmic-message">
+      Ohooo! 👀 Mujhe pata tha tum zaroor aaoge…
+      Sanan ki duniya ka raasta mil hi gaya tumhein!
+      Ab aaye ho toh bina naam bataye wapas nahi ja sakte. 😏💜
     </p>
-    <div class="joke">
-      🌸 <strong>Important warning!</strong> 🌸<br>
-      This quiz may cause uncontrollable laughing,<br>
-      questionable answers and a sudden obsession<br>
-      with Sanan. 😂💜<br>
-      <em>Side effects are not our responsibility.</em> 🧸
-    </div>
+
+    <div class="cosmic-divider">✧ ── ⋆⋅☆⋅⋆ ── ✧</div>
+
+    <p class="cosmic-subtitle">
+      Apna naam bata do, mysterious stranger!
+      Ya phir main tumhein
+      <strong>“Sanan ka secret admirer”</strong>
+      bulaun? 😂
+    </p>
+
     <form id="welcomeForm">
-      <label class="name-label" for="playerName">💌 Tell me your beautiful name</label>
+      <label class="name-label" for="playerName">
+        💌 YOUR IDENTITY, PLEASE
+      </label>
+
       <div class="input-wrap">
-        <input id="playerName" name="playerName" type="text" placeholder="✨ Type your name here... ✨" maxlength="40" autocomplete="given-name" required>
+        <input
+          id="playerName"
+          name="playerName"
+          type="text"
+          placeholder="Your name, stranger… 🌙"
+          maxlength="40"
+          autocomplete="given-name"
+          required
+        >
       </div>
-      <button id="startQuizBtn" class="start-btn" type="submit">🌙 LET THE MAGIC BEGIN ✨</button>
+
+      <button id="startQuizBtn" class="start-btn" type="submit">
+        ✦ ENTER SANAN'S UNIVERSE ✦
+      </button>
+
       <p id="message" aria-live="polite"></p>
     </form>
+
     <p class="bottom-note">
-      🌷 Made of stardust, flowers and a little bit of chaos 🌷<br>
-      Prepare yourself. Sanan's questions are waiting! 💜
+      ✨ Somewhere between stars, secrets and chaos… ✨
+      <br>
+      Your little adventure is waiting. 💜
     </p>
-  </section>
+  </div>
+</section>
+```
 
   <!-- SCREEN 2: Quiz -->
   <section id="quizArea" class="screen" hidden>
