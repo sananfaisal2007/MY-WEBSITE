@@ -1527,6 +1527,16 @@ height: 100%;
   .wd-door, .wd-glow, .wd-name-wrap, .wd-panel::before { animation: none; }
 }
 </style>
+<script>
+try {
+    if (sessionStorage.getItem("welcomeDone") === "1") {
+        document.documentElement.classList.add("skip-welcome");
+    }
+} catch (e) {}
+</script>
+<style>
+html.skip-welcome #welcome-screen { display: none !important; }
+</style>
 </head>
 
 <body>
@@ -1845,6 +1855,17 @@ function toggleTheme() {
 (function () {
     const screen = document.getElementById("welcome-screen");
     if (!screen) return;
+     // Agar visitor pehle andar aa chuka hai to welcome skip karo
+    if (document.documentElement.classList.contains("skip-welcome")) {
+        screen.style.display = "none";
+        document.body.style.overflow = "";
+        try {
+            var savedName = localStorage.getItem("visitorName");
+            var heroTag = document.querySelector(".hero .tag");
+            if (savedName && heroTag) heroTag.textContent = "WELCOME " + savedName.toUpperCase() + " 💜";
+        } catch (e) {}
+        return;
+    }
 
     const input = document.getElementById("visitorName");
     const react = document.getElementById("wdReact");
@@ -1999,6 +2020,7 @@ function toggleTheme() {
         }
 
         try { localStorage.setItem("visitorName", name); } catch (e) {}
+        try { sessionStorage.setItem("welcomeDone", "1"); } catch (e) {}
 
         screen.classList.add("leaving");
         door.disabled = true;
