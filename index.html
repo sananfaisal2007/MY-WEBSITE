@@ -6682,5 +6682,189 @@ function enterMyWorld() {
     }
 }
 </script>
+<style>
+/* ═══════════════════════════════════════
+   🌌 CINEMATIC TRANSMISSION EFFECT
+   ═══════════════════════════════════════ */
+
+/* Full screen white/purple flash */
+#portalFlash {
+    position: fixed;
+    inset: 0;
+    z-index: 100002;
+    background: radial-gradient(circle,
+        #ffffff 0%,
+        #e0b3ff 25%,
+        #a855f7 50%,
+        #4a1f6e 75%,
+        #07060c 100%);
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0);
+    border-radius: 50%;
+}
+
+#portalFlash.burst {
+    animation: portalBurst 1.6s cubic-bezier(0.5, 0, 0.3, 1) forwards;
+}
+
+@keyframes portalBurst {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    35% {
+        opacity: 1;
+        transform: scale(3);
+    }
+    75% {
+        opacity: 1;
+        transform: scale(8);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(20);
+    }
+}
+
+/* Warp lines / light rays */
+.warp-ray {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 100vh;
+    background: linear-gradient(to top,
+        transparent,
+        rgba(255, 255, 255, 0.9),
+        transparent);
+    transform-origin: center;
+    pointer-events: none;
+    z-index: 100001;
+    opacity: 0;
+    animation: warpRay 1.4s ease-out forwards;
+    filter: blur(1px);
+    box-shadow: 0 0 20px rgba(224, 179, 255, 0.9);
+}
+
+@keyframes warpRay {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(var(--angle)) scaleY(0);
+    }
+    30% {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(var(--angle)) scaleY(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(var(--angle)) scaleY(2);
+    }
+}
+
+/* Ring pulse waves */
+.portal-ring {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    margin: -50px 0 0 -50px;
+    border-radius: 50%;
+    border: 3px solid rgba(224, 179, 255, 0.9);
+    pointer-events: none;
+    z-index: 100001;
+    opacity: 0;
+    box-shadow:
+        0 0 30px rgba(168, 85, 247, 0.9),
+        inset 0 0 30px rgba(224, 179, 255, 0.6);
+    animation: portalRing 1.4s ease-out forwards;
+}
+
+@keyframes portalRing {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+        border-width: 8px;
+    }
+    40% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(12);
+        border-width: 1px;
+    }
+}
+
+/* Camera shake on whole body */
+body.camera-shake {
+    animation: camShake 0.6s ease-in-out;
+}
+
+@keyframes camShake {
+    0%, 100% { transform: translate(0, 0); }
+    10%      { transform: translate(-6px, 4px); }
+    20%      { transform: translate(5px, -5px); }
+    30%      { transform: translate(-4px, -3px); }
+    40%      { transform: translate(4px, 5px); }
+    50%      { transform: translate(-3px, 3px); }
+    60%      { transform: translate(3px, -2px); }
+    70%      { transform: translate(-2px, 2px); }
+    80%      { transform: translate(2px, -1px); }
+    90%      { transform: translate(-1px, 1px); }
+}
+
+/* Flying emoji particles */
+.fly-emoji {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    font-size: 24px;
+    pointer-events: none;
+    z-index: 100003;
+    filter: drop-shadow(0 0 12px rgba(224, 179, 255, 1));
+    animation: flyEmoji 1.3s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+}
+
+@keyframes flyEmoji {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform:
+            translate(
+                calc(-50% + var(--fx)),
+                calc(-50% + var(--fy))
+            )
+            scale(2.2) rotate(720deg);
+    }
+}
+
+/* Screen zoom in on portal */
+body.zoom-in-portal {
+    animation: zoomPortal 1.4s ease-in forwards;
+}
+
+@keyframes zoomPortal {
+    0%   { transform: scale(1);    filter: brightness(1); }
+    60%  { transform: scale(1.05); filter: brightness(1.2); }
+    100% { transform: scale(1.25); filter: brightness(2) blur(6px); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    #portalFlash,
+    .warp-ray,
+    .portal-ring,
+    .fly-emoji,
+    body.camera-shake,
+    body.zoom-in-portal {
+        animation: none !important;
+    }
+}
+</style>
 </body>
 </html>
