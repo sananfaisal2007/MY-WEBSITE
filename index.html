@@ -1558,9 +1558,10 @@ height: 100%;
         <span class="portal-icon">🌌</span>
         <span class="portal-label">My Dream World</span>
     </a>
-    <a href="#favourites" class="dream-portal">
-    <span class="portal-icon">⭐</span>
-    <span class="portal-label">Favourites</span>
+   <a href="#favourites" class="fav-shortcut" aria-label="Go to My Favourites">
+    <span class="fs-star" aria-hidden="true">⭐</span>
+    <span>My Favourites</span>
+    <span class="fs-new">NEW</span>
 </a>
 </div>
 
@@ -1637,7 +1638,7 @@ This website is a little piece of me — my interests, my dreams, my random thou
   .fav-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 18px 0 22px; }
   .fav-tab {
     padding: 8px 15px; border: 1px solid rgba(220,185,255,.4); border-radius: 22px;
-    background: rgba(190,150,255,.14); color: #f4edff; font: 600 13px inherit; font-family: inherit;
+    background: rgba(190,150,255,.14); color: #f4edff; font-weight: 600; font-size: 13px; font-family: inherit;
     cursor: pointer; transition: transform .25s, background .25s, box-shadow .25s;
   }
   .fav-tab:hover { transform: translateY(-2px); }
@@ -1878,13 +1879,6 @@ function searchDramas() {
   @media (max-width: 700px) { .fav-shortcut { padding: 8px 13px 8px 10px; font-size: 12px; } }
   @media (prefers-reduced-motion: reduce) { .fav-shortcut, .fav-shortcut::before, .fav-shortcut .fs-star { animation: none; } }
 </style>
-
-<!-- ===== PART 2: Button (nav ke <div class="nav-portals"> ke andar, aakhri </a> ke baad, </div> se pehle) ===== -->
-<a href="#favourites" class="fav-shortcut" aria-label="Go to My Favourites">
-    <span class="fs-star" aria-hidden="true">⭐</span>
-    <span>My Favourites</span>
-    <span class="fs-new">NEW</span>
-</a>
 
         <section class="content" id="projects">
             <h2>My Projects</h2>
