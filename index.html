@@ -6545,7 +6545,7 @@ function enterMyWorld() {
     } catch (e) {}
 
     // 3. Door ko open animation do
-    var door = document.getElementById("enter-door");
+        // 3. Door ko open animation do
     if (door) door.classList.add("open");
 
     // 4. Hint update
@@ -7276,141 +7276,7 @@ body.zoom-in-portal {
 </style>
 
 <!-- 🎹 PIANO SCRIPT -->
-<script>
-(function () {
-    var wrap = document.getElementById("pianoMenuWrap");
-    var btn = document.getElementById("pianoToggle");
-    var menu = document.getElementById("pianoMenu");
-    var options = document.querySelectorAll(".pm-option");
 
-    var audios = {
-        piano: document.getElementById("pianoAudioPiano"),
-        lofi:  document.getElementById("pianoAudioLofi"),
-        rain:  document.getElementById("pianoAudioRain"),
-        night: document.getElementById("pianoAudioNight"),
-        ocean: document.getElementById("pianoAudioOcean")
-    };
-
-    if (!btn || !menu) return;
-
-    var STORAGE_KEY = "sananPianoTrack";
-    var STORAGE_VOL = "sananPianoVolume";
-    var currentTrack = "piano";
-    var currentVolume = 0.5;
-    var isPlaying = false;
-    var userInteracted = false;
-
-    /* Set volume on all */
-    Object.values(audios).forEach(function (a) {
-        if (a) a.volume = currentVolume;
-    });
-
-    /* Play track */
-    function playTrack(trackKey) {
-        Object.values(audios).forEach(function (a) {
-            if (a) { a.pause(); try { a.currentTime = 0; } catch (e) {} }
-        });
-
-        currentTrack = trackKey;
-        var audio = audios[trackKey];
-
-        options.forEach(function (opt) {
-            opt.classList.toggle("active", opt.getAttribute("data-track") === trackKey);
-        });
-
-        if (audio && userInteracted) {
-            audio.volume = currentVolume;
-            audio.play().then(function () {
-                btn.classList.add("playing");
-                isPlaying = true;
-            }).catch(function (err) {
-                console.warn("Piano play blocked:", err);
-                btn.classList.remove("playing");
-                isPlaying = false;
-            });
-        }
-
-        try { localStorage.setItem(STORAGE_KEY, trackKey); } catch (e) {}
-    }
-
-    /* Stop */
-    function stopAll() {
-        Object.values(audios).forEach(function (a) {
-            if (a) { a.pause(); try { a.currentTime = 0; } catch (e) {} }
-        });
-        btn.classList.remove("playing");
-        isPlaying = false;
-    }
-
-    /* Open / Close menu */
-    function openMenu() {
-        menu.classList.add("active");
-        menu.setAttribute("aria-hidden", "false");
-        btn.setAttribute("aria-expanded", "true");
-    }
-    function closeMenu() {
-        menu.classList.remove("active");
-        menu.setAttribute("aria-hidden", "true");
-        btn.setAttribute("aria-expanded", "false");
-    }
-    function toggleMenu() {
-        menu.classList.contains("active") ? closeMenu() : openMenu();
-    }
-
-    /* Button click */
-    btn.addEventListener("click", function (e) {
-        e.stopPropagation();
-        userInteracted = true;
-        toggleMenu();
-    });
-
-    /* Click outside */
-    document.addEventListener("click", function (e) {
-        if (!wrap.contains(e.target)) closeMenu();
-    });
-
-    /* ESC */
-    document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") closeMenu();
-    });
-
-    /* Option click */
-    options.forEach(function (opt) {
-        opt.addEventListener("click", function () {
-            userInteracted = true;
-            var track = opt.getAttribute("data-track");
-
-            /* Same track? → toggle play/pause */
-            if (track === currentTrack && isPlaying) {
-                stopAll();
-            } else {
-                playTrack(track);
-            }
-        });
-    });
-
-    /* Load saved */
-    var saved = "piano";
-    try { saved = localStorage.getItem(STORAGE_KEY) || "piano"; } catch (e) {}
-    if (!audios[saved]) saved = "piano";
-
-    currentTrack = saved;
-    options.forEach(function (opt) {
-        opt.classList.toggle("active", opt.getAttribute("data-track") === saved);
-    });
-
-    /* Pehle user click par play (agar saved tha) */
-    var firstClick = function () {
-        userInteracted = true;
-        playTrack(saved);
-        document.removeEventListener("click", firstClick);
-        document.removeEventListener("touchstart", firstClick);
-    };
-    document.addEventListener("click", firstClick);
-    document.addEventListener("touchstart", firstClick);
-
-})();
-</script>
 
 <script>
 (function () {
@@ -7461,7 +7327,5 @@ body.zoom-in-portal {
 })();
 </script>
 
-</body>
-</html>
 </body>
 </html>
