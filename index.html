@@ -1631,105 +1631,165 @@ This website is a little piece of me — my interests, my dreams, my random thou
     </div>
 </section>
           
-       <!-- ===== Favourites Hub ===== -->
+      <!-- ===== Favourites Hub v2 ===== -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  #favourites h2 { text-align: center; color: #e5d0ff; text-shadow: 0 0 12px rgba(170,105,255,.45); }
-  #favourites .fav-sub { text-align: center; }
-  .fav-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 18px 0 22px; }
-  .fav-tab {
-    padding: 8px 15px; border: 1px solid rgba(220,185,255,.4); border-radius: 22px;
-    background: rgba(190,150,255,.14); color: #f4edff; font-weight: 600; font-size: 13px; font-family: inherit;
-    cursor: pointer; transition: transform .25s, background .25s, box-shadow .25s;
+  #favourites { text-align: center; }
+  #favourites .fh-title {
+    font-family: 'Pacifico', cursive; font-weight: 400; font-size: clamp(30px, 6vw, 46px);
+    margin-bottom: 8px; line-height: 1.4;
+    background: linear-gradient(90deg, #fff, #ffd6f5, #c9a6ff, #ffe27a, #fff); background-size: 250% 100%;
+    -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 10px #c78bff) drop-shadow(0 0 22px rgba(255,150,230,.5));
+    animation: fhShine 5s linear infinite;
   }
-  .fav-tab:hover { transform: translateY(-2px); }
-  .fav-tab.active { background: linear-gradient(135deg,#8b3fd0,#c084fc); color: #fff; box-shadow: 0 0 16px rgba(190,130,255,.6); }
-  .fav-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; }
-  .fav-card {
-    position: relative; padding: 20px 16px; text-align: center; border-radius: 18px;
-    background: rgba(20,14,35,.75); border: 1px solid rgba(180,130,255,.3);
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    animation: favPop .5s ease both; transition: transform .3s, box-shadow .3s, border-color .3s;
+  #favourites .fh-sub { color: #f2dcff; font-family: 'Poppins', sans-serif; text-shadow: 0 0 10px rgba(200,140,255,.7); }
+  .fh-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; margin: 20px 0 24px; }
+  .fh-tab {
+    padding: 9px 16px; border-radius: 24px; border: 1px solid var(--c); cursor: pointer;
+    background: rgba(255,255,255,.06); color: #fff; font: 700 13px 'Poppins', sans-serif;
+    text-shadow: 0 0 8px var(--c); box-shadow: 0 0 10px color-mix(in srgb, var(--c) 45%, transparent);
+    transition: transform .25s, box-shadow .25s, background .25s;
   }
-  .fav-card:hover { transform: translateY(-6px) rotate(-1deg); border-color: rgba(205,175,255,.9); box-shadow: 0 10px 28px rgba(139,77,255,.35); }
-  .fav-emoji { display: block; font-size: 40px; margin-bottom: 8px; filter: drop-shadow(0 0 8px #d9baff); }
-  .fav-card:hover .fav-emoji { animation: favWiggle .6s ease; }
-  .fav-title { margin: 0 0 4px; color: #fff0fc; font-size: 17px; }
-  .fav-note { margin: 0 0 10px; color: #d6cde5; font-size: 13px; line-height: 1.6; }
-  .fav-stars { color: #ffe27a; font-size: 15px; letter-spacing: 2px; text-shadow: 0 0 8px rgba(255,226,122,.6); }
-  .fav-tag { position: absolute; top: 10px; right: 12px; font-size: 11px; color: #f3d9ff; opacity: .8; }
-  @keyframes favPop { from { opacity: 0; transform: translateY(16px) scale(.95); } to { opacity: 1; transform: none; } }
-  @keyframes favWiggle { 0%,100% { transform: rotate(0); } 30% { transform: rotate(-14deg) scale(1.15); } 60% { transform: rotate(12deg) scale(1.15); } }
-  @media (prefers-reduced-motion: reduce) { .fav-card, .fav-card:hover .fav-emoji { animation: none; } }
+  .fh-tab span { opacity: .8; font-size: 11px; }
+  .fh-tab:hover { transform: translateY(-3px) scale(1.05); }
+  .fh-tab.active { background: var(--c); color: #1a0a2e; text-shadow: none; box-shadow: 0 0 22px var(--c), 0 0 40px color-mix(in srgb, var(--c) 60%, transparent); }
+  .fh-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 16px; text-align: center; }
+  .fh-card {
+    position: relative; padding: 24px 14px 16px; border-radius: 20px; overflow: hidden;
+    background: linear-gradient(160deg, rgba(40,20,70,.85), rgba(14,8,28,.9));
+    border: 1px solid var(--c); box-shadow: 0 0 14px color-mix(in srgb, var(--c) 45%, transparent), inset 0 0 18px color-mix(in srgb, var(--c) 12%, transparent);
+    animation: fhPop .55s ease both; transition: transform .3s, box-shadow .3s;
+  }
+  .fh-card::before {
+    content: ""; position: absolute; top: 0; bottom: 0; left: -70%; width: 40%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,.22), transparent);
+    animation: fhSweep 4.5s ease-in-out infinite; pointer-events: none;
+  }
+  .fh-card:hover { transform: translateY(-7px) scale(1.03); box-shadow: 0 0 28px var(--c), 0 0 52px color-mix(in srgb, var(--c) 50%, transparent); }
+  .fh-rank { position: absolute; top: 8px; left: 10px; font: 800 12px 'Poppins', sans-serif; color: var(--c); text-shadow: 0 0 8px var(--c); }
+  .fh-emoji { display: block; font-size: 36px; margin-bottom: 8px; filter: drop-shadow(0 0 10px var(--c)); }
+  .fh-card:hover .fh-emoji { animation: fhWiggle .6s ease; }
+  .fh-name { margin: 0 0 12px; min-height: 40px; color: #fff; font: 700 15px/1.35 'Poppins', sans-serif; text-shadow: 0 0 10px var(--c); display: flex; align-items: center; justify-content: center; }
+  .fh-pill {
+    display: inline-block; padding: 4px 14px; border-radius: 20px; font: 800 14px 'Poppins', sans-serif;
+    color: #1a0a2e; background: linear-gradient(90deg, #ffe27a, #fff3b0, #ffe27a); background-size: 200% 100%;
+    box-shadow: 0 0 14px rgba(255,226,122,.85); animation: fhShine 3s linear infinite;
+  }
+  .fh-pill.fav { background: linear-gradient(90deg, #ffc8f2, #fff, #ffc8f2); box-shadow: 0 0 14px rgba(255,200,242,.8); font-size: 12px; }
+  .fh-pill.sug { background: linear-gradient(90deg, #a6e9ff, #fff, #a6e9ff); box-shadow: 0 0 14px rgba(166,233,255,.8); font-size: 12px; }
+  .fh-meter { height: 5px; margin: 10px 8px 0; border-radius: 9px; background: rgba(255,255,255,.14); overflow: hidden; }
+  .fh-meter i { display: block; height: 100%; border-radius: 9px; background: linear-gradient(90deg, var(--c), #ffe27a); box-shadow: 0 0 8px var(--c); }
+  .fh-more {
+    margin: 24px auto 0; padding: 11px 26px; border-radius: 26px; border: 1px solid #ffe27a; cursor: pointer;
+    background: rgba(255,226,122,.12); color: #ffeab8; font: 700 14px 'Poppins', sans-serif; text-shadow: 0 0 10px #ffd24d;
+    box-shadow: 0 0 16px rgba(255,226,122,.5); transition: transform .25s;
+  }
+  .fh-more:hover { transform: scale(1.06); }
+  @keyframes fhShine { to { background-position: 250% 0; } }
+  @keyframes fhSweep { 0% { left: -70%; } 55%, 100% { left: 150%; } }
+  @keyframes fhPop { from { opacity: 0; transform: translateY(18px) scale(.94); } to { opacity: 1; transform: none; } }
+  @keyframes fhWiggle { 0%,100% { transform: rotate(0); } 30% { transform: rotate(-14deg) scale(1.2); } 60% { transform: rotate(12deg) scale(1.2); } }
+  @media (max-width: 480px) { .fh-grid { grid-template-columns: repeat(2, 1fr); gap: 11px; } .fh-name { font-size: 13px; } }
+  @media (prefers-reduced-motion: reduce) { .fh-card, .fh-card::before, .fh-pill, #favourites .fh-title { animation: none; } }
 </style>
 
 <section class="content" id="favourites">
-  <h2>⭐ My Favourites Hub 💜</h2>
-  <p class="fav-sub">Meri pasandeeda cheezein ek jagah. Category chuno aur dekho! ✨</p>
-  <div class="fav-tabs" id="favTabs"></div>
-  <div class="fav-grid" id="favGrid"></div>
+  <h2 class="fh-title">⭐ My Favourites Hub 💜</h2>
+  <p class="fh-sub">Meri duniya ki sab se pyari cheezein. Category chuno aur chamak dekho! ✨</p>
+  <div class="fh-tabs" id="fhTabs"></div>
+  <div class="fh-grid" id="fhGrid"></div>
+  <button type="button" class="fh-more" id="fhMore" hidden>Aur dikhao ✨</button>
 </section>
 
 <script>
 (function () {
-  // ✏️ YAHAN APNI FAVOURITES BADLO: cat = category, icon = emoji, title = naam,
-  // note = aapki ek line ki raye, stars = rating (1 se 5)
-  var favs = [
-    { cat: "Anime",  icon: "⚔️", title: "Jujutsu Kaisen", note: "Action aur emotions, dono full on.", stars: 5 },
-    { cat: "Anime",  icon: "🌀", title: "Apna anime likho", note: "Yahan apni raye likho.", stars: 4 },
-    { cat: "K-Drama", icon: "👑", title: "Queen of Tears", note: "Aisi kahani jo dil mein reh jaye.", stars: 5 },
-    { cat: "K-Drama", icon: "🎬", title: "Apna drama likho", note: "Yahan apni raye likho.", stars: 4 },
-    { cat: "Gaane",  icon: "🎹", title: "Peaceful Piano", note: "Sukoon wali dhun, bilkul meri duniya.", stars: 5 },
-    { cat: "Gaane",  icon: "🎧", title: "Apna gaana likho", note: "Yahan apni raye likho.", stars: 4 },
-    { cat: "Khana",  icon: "🍜", title: "Korean Ramen", note: "Garam aur spicy, perfect.", stars: 5 },
-    { cat: "Khana",  icon: "🍕", title: "Apna khana likho", note: "Yahan apni raye likho.", stars: 4 },
-    { cat: "Movies", icon: "🍿", title: "Apni movie likho", note: "Yahan apni raye likho.", stars: 4 },
-    { cat: "Games",  icon: "🎮", title: "Apna game likho", note: "Yahan apni raye likho.", stars: 4 }
+  // ✏️ Format: "Naam|rating" (rating 1-10) | "Naam|" = meri pasand | "Naam|s" = suggested
+  var CATS = [
+    { n: "Anime", i: "⚔️", c: "#ff5fa2", d: "Jujutsu Kaisen|10;Solo Leveling|10;Chainsaw Man|9" },
+    { n: "K-Dramas", i: "🎬", c: "#c084fc", d:
+      "Queen of Tears|10;Business Proposal|9;Sweet Home|9;Lovely Runner|10;Can This Love Be Translated?|10;Teach You a Lesson|10;The Wonderfools|10;Take Charge of My Heart|10;Mr. Plankton|9;My Bias, My Boss|10;All of Us Are Dead|10;My Name|10;No Gain, No Love|8;Love Next Door|9;See You at Work Tomorrow!|10;Study Group|9;Good Boy|10;My Demon|10;Mr. Queen|10;Our Sticky Love|10;Head Over Heels|9;Vincenzo|10;The Glory|10;Destined with You|9;My Strange Hero|9;Twinkling Watermelon|10" },
+    { n: "Songs", i: "🎧", c: "#5fd4ff", d:
+      "Choom — BABYMONSTER|;Drip — BABYMONSTER|;I Like It — BABYMONSTER|;Sugar Honey — BABYMONSTER|;Eleven — IVE|;After Like — IVE|;Bang Bang — IVE|;Black Hole — IVE|;I AM — IVE|;Rebel Heart — IVE|;Golden|" },
+    { n: "Food", i: "🍜", c: "#ffb347", d: "Noodles|;Pasta|;Biryani|;Wings|;Soup|;Ice Cream|;Chocolates|;Chicken|;Beans|" },
+    { n: "Movies", i: "🍿", c: "#ffd24d", d:
+      "Iron Man|;The Incredible Hulk|;Iron Man 2|;Thor|;Captain America: The First Avenger|;The Avengers|;Iron Man 3|;Thor: The Dark World|;Captain America: The Winter Soldier|;Guardians of the Galaxy|;Avengers: Age of Ultron|;Ant-Man|;Captain America: Civil War|;Doctor Strange|;Guardians Vol. 2|;Spider-Man: Homecoming|;Thor: Ragnarok|;Black Panther|;Avengers: Infinity War|;Ant-Man and the Wasp|;Captain Marvel|;Avengers: Endgame|;Spider-Man: Far From Home|;Black Widow|;Shang-Chi|;Eternals|;Spider-Man: No Way Home|;Doctor Strange 2|;Thor: Love and Thunder|;Black Panther: Wakanda Forever|;Guardians Vol. 3|;The Marvels|;Deadpool & Wolverine|;KGF Chapter 1|;KGF Chapter 2|;Salaar|;PK|;Dangal|;Krrish|;Marjaavaan|;Veer-Zaara|;Kabhi Khushi Kabhie Gham|;Avatar|;Avatar: The Way of Water|;Avatar: Fire and Ash|;" +
+      "Parasite|s;Oldboy|s;Memories of Murder|s;The Handmaiden|s;Train to Busan|s;I Saw the Devil|s;The Wailing|s;Burning|s;Decision to Leave|s;A Taxi Driver|s;Miracle in Cell No. 7|s;Extreme Job|s;The Man from Nowhere|s;The Chaser|s;Peppermint Candy|s;Secret Sunshine|s;Mother|s;Joint Security Area|s;Sympathy for Mr. Vengeance|s;Silenced|s;Veteran|s;Ode to My Father|s;The Admiral: Roaring Currents|s;Masquerade|s;Along with the Gods|s;Exit|s;Escape from Mogadishu|s;Hansan|s;12.12: The Day|s;Concrete Utopia|s" },
+    { n: "Games", i: "🎮", c: "#7dff9b", d:
+      "PUBG|s;MapleStory|s;Black Desert|s;Lost Ark|s;Lineage W|s;Cookie Run: Kingdom|s;Solo Leveling: Arise|s;Lies of P|s;Stellar Blade|s;Ragnarok Online|s;Blade & Soul|s;Dungeon Fighter Online|s;Minecraft|s;GTA V|s;Subway Surfers|s;Among Us|s;Valorant|s" }
   ];
 
-  var tabsBox = document.getElementById("favTabs");
-  var grid = document.getElementById("favGrid");
-  if (!tabsBox || !grid) return;
+  var LIMIT = 12;
+  var tabsBox = document.getElementById("fhTabs");
+  var grid = document.getElementById("fhGrid");
+  var moreBtn = document.getElementById("fhMore");
+  if (!tabsBox || !grid || !moreBtn) return;
 
-  var cats = ["All"];
-  favs.forEach(function (f) { if (cats.indexOf(f.cat) === -1) cats.push(f.cat); });
+  // Parse + sort (zyada rating pehle, phir pasand, phir suggested)
+  CATS.forEach(function (cat) {
+    cat.items = cat.d.split(";").map(function (s, idx) {
+      var p = s.split("|");
+      var r = p[1];
+      return { t: p[0], r: /^\d+$/.test(r) ? +r : null, k: r === "s" ? 2 : (r === "" ? 1 : 0), idx: idx };
+    }).sort(function (a, b) {
+      return (a.k - b.k) || ((b.r || 0) - (a.r || 0)) || (a.idx - b.idx);
+    });
+  });
 
-  function render(cat) {
+  var current = CATS[0], shown = LIMIT;
+
+  function render() {
     grid.replaceChildren();
-    favs.filter(function (f) { return cat === "All" || f.cat === cat; })
-      .forEach(function (f, i) {
-        var card = document.createElement("div");
-        card.className = "fav-card";
-        card.style.animationDelay = i * 0.07 + "s";
+    grid.style.setProperty("--c", current.c);
+    current.items.slice(0, shown).forEach(function (it, i) {
+      var card = document.createElement("div");
+      card.className = "fh-card";
+      card.style.setProperty("--c", current.c);
+      card.style.animationDelay = (i % LIMIT) * 0.05 + "s";
 
-        function add(tag, cls, text) {
-          var el = document.createElement(tag);
-          el.className = cls;
-          el.textContent = text;
-          card.appendChild(el);
-        }
-        add("span", "fav-tag", f.cat);
-        add("span", "fav-emoji", f.icon);
-        add("h3", "fav-title", f.title);
-        add("p", "fav-note", f.note);
-        add("div", "fav-stars", "★".repeat(f.stars) + "☆".repeat(5 - f.stars));
-        grid.appendChild(card);
-      });
+      function add(tag, cls, text) {
+        var el = document.createElement(tag);
+        el.className = cls; el.textContent = text; card.appendChild(el); return el;
+      }
+      add("span", "fh-rank", "#" + (i + 1));
+      add("span", "fh-emoji", current.i);
+      add("h3", "fh-name", it.t);
+
+      if (it.r !== null) {
+        add("span", "fh-pill", it.r + "/10");
+        var m = document.createElement("div"); m.className = "fh-meter";
+        var bar = document.createElement("i"); bar.style.width = it.r * 10 + "%";
+        m.appendChild(bar); card.appendChild(m);
+      } else if (it.k === 1) {
+        add("span", "fh-pill fav", "Favourite 💜");
+      } else {
+        add("span", "fh-pill sug", "Suggested ✨");
+      }
+      grid.appendChild(card);
+    });
+    moreBtn.hidden = shown >= current.items.length;
+    moreBtn.textContent = "Aur dikhao ✨ (" + (current.items.length - shown) + " baqi)";
   }
 
-  cats.forEach(function (c, i) {
+  CATS.forEach(function (cat, idx) {
     var b = document.createElement("button");
     b.type = "button";
-    b.className = "fav-tab" + (i === 0 ? " active" : "");
-    b.textContent = c;
+    b.className = "fh-tab" + (idx === 0 ? " active" : "");
+    b.style.setProperty("--c", cat.c);
+    b.textContent = cat.i + " " + cat.n + " ";
+    var count = document.createElement("span");
+    count.textContent = "(" + cat.items.length + ")";
+    b.appendChild(count);
     b.addEventListener("click", function () {
-      tabsBox.querySelectorAll(".fav-tab").forEach(function (t) { t.classList.remove("active"); });
+      tabsBox.querySelectorAll(".fh-tab").forEach(function (t) { t.classList.remove("active"); });
       b.classList.add("active");
-      render(c);
+      current = cat; shown = LIMIT; render();
     });
     tabsBox.appendChild(b);
   });
 
-  render("All");
+  moreBtn.addEventListener("click", function () { shown += LIMIT; render(); });
+  render();
 })();
 </script>
         <section class="content" id="korea">
