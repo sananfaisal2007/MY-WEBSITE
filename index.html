@@ -5827,5 +5827,100 @@ body .content {
     transition: background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease;
 }
 </style>
+<!-- ═══════════════════════════════════════
+     🎨 THEME SWITCHER — SCRIPT
+     ═══════════════════════════════════════ -->
+<script>
+(function () {
+    var switcher = document.getElementById("themeSwitcher");
+    var btn = document.getElementById("themeBtn");
+    var menu = document.getElementById("themeMenu");
+    var iconEl = document.getElementById("themeIcon");
+    var labelEl = document.getElementById("themeLabel");
+    var options = document.querySelectorAll(".theme-option");
+
+    if (!btn || !menu) return;
+
+    var STORAGE_KEY = "sananTheme";
+
+    var THEMES = {
+        cosmic: { icon: "🌙", label: "Cosmic" },
+        light:  { icon: "☀️", label: "Light" },
+        sakura: { icon: "🌸", label: "Sakura" },
+        ocean:  { icon: "🌊", label: "Ocean" },
+        neon:   { icon: "🌈", label: "Neon" }
+    };
+
+    function applyTheme(theme) {
+        document.body.classList.remove(
+            "theme-cosmic", "theme-light", "theme-sakura", "theme-ocean", "theme-neon"
+        );
+        document.body.classList.add("theme-" + theme);
+
+        var t = THEMES[theme] || THEMES.cosmic;
+        if (iconEl) iconEl.textContent = t.icon;
+        if (labelEl) labelEl.textContent = t.label;
+
+        options.forEach(function (opt) {
+            opt.classList.toggle("active", opt.getAttribute("data-theme") === theme);
+        });
+
+        try {
+            localStorage.setItem(STORAGE_KEY, theme);
+        } catch (e) {}
+    }
+
+    function openMenu() {
+        menu.classList.add("active");
+        menu.setAttribute("aria-hidden", "false");
+        btn.setAttribute("aria-expanded", "true");
+    }
+
+    function closeMenu() {
+        menu.classList.remove("active");
+        menu.setAttribute("aria-hidden", "true");
+        btn.setAttribute("aria-expanded", "false");
+    }
+
+    function toggleMenu() {
+        if (menu.classList.contains("active")) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    }
+
+    btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        toggleMenu();
+    });
+
+    document.addEventListener("click", function (e) {
+        if (!switcher.contains(e.target)) {
+            closeMenu();
+        }
+    });
+
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeMenu();
+    });
+
+    options.forEach(function (opt) {
+        opt.addEventListener("click", function () {
+            var theme = opt.getAttribute("data-theme");
+            applyTheme(theme);
+            closeMenu();
+        });
+    });
+
+    var saved = "cosmic";
+    try {
+        saved = localStorage.getItem(STORAGE_KEY) || "cosmic";
+    } catch (e) {}
+
+    if (!THEMES[saved]) saved = "cosmic";
+    applyTheme(saved);
+})();
+</script>
 </body>
 </html>
