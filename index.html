@@ -1708,6 +1708,11 @@ html.skip-welcome #welcome-screen { display: none !important; }
         <span class="portal-icon">🌌</span>
         <span class="portal-label">My Dream World</span>
     </a>
+    <a href="#socials" class="social-shortcut" id="socialPortalBtn" aria-label="Jump to My Social World">
+    <span class="ss-star" aria-hidden="true">✦</span>
+    <span class="ss-label">Social World</span>
+    <span class="ss-new">NEW</span>
+</a>
    <a href="favourites.html" class="fav-shortcut" aria-label="Go to My Favourites">
     <span class="fs-star" aria-hidden="true">⭐</span>
     <span>My Favourites</span>
@@ -3342,6 +3347,12 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
   });
 })();
 </script>
+    <!-- ===== 🌈 Social World Portal Transition ===== -->
+<div id="socialPortal" aria-hidden="true">
+    <div class="sp-icon">💜</div>
+    <div class="sp-title">Entering My Social World...</div>
+    <div class="sp-sub">Let's connect across the universe ✨</div>
+</div>
 <script>
 (function () {
     // Sirf home page par chalega (agar zarurat ho to specific check laga sakte ho)
@@ -3928,6 +3939,525 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
                 })(b);
             }
         });
+    });
+})();
+</script>
+<style>
+/* ============================================
+   ✨ SOCIAL WORLD NAV SHORTCUT — 3D Premium ✨
+   ============================================ */
+
+.social-shortcut {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 20px 11px 14px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    color: #2a0f45 !important;
+    background: linear-gradient(110deg,
+        #f9a8d4,
+        #ffc8f2,
+        #67e8f9,
+        #fde047,
+        #ffc8f2,
+        #f9a8d4);
+    background-size: 350% 100%;
+    isolation: isolate;
+    overflow: visible;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+    transform-style: preserve-3d;
+    perspective: 800px;
+    animation:
+        ssFlow 6s linear infinite,
+        ssFloat 3s ease-in-out infinite;
+    box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.28),
+        0 0 20px rgba(249, 168, 212, 0.5),
+        0 0 32px rgba(103, 232, 249, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    transition:
+        transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1),
+        box-shadow 0.4s ease;
+}
+
+@keyframes ssFlow {
+    to { background-position: 350% 0; }
+}
+
+@keyframes ssFloat {
+    0%, 100% { translate: 0 0; }
+    50%      { translate: 0 -3px; }
+}
+
+/* Rotating rainbow ring around the button */
+.social-shortcut::before {
+    content: "";
+    position: absolute;
+    inset: -2.5px;
+    z-index: -2;
+    border-radius: inherit;
+    background: conic-gradient(
+        from 0deg,
+        #f9a8d4,
+        #ffc8f2,
+        #67e8f9,
+        #fde047,
+        #c9a6ff,
+        #f9a8d4
+    );
+    filter: blur(7px);
+    opacity: 0.75;
+    animation: ssRingSpin 4s linear infinite;
+}
+
+@keyframes ssRingSpin {
+    to { transform: rotate(360deg); }
+}
+
+/* Shine sweep */
+.social-shortcut::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -70%;
+    width: 55%;
+    height: 100%;
+    background: linear-gradient(100deg,
+        transparent,
+        rgba(255, 255, 255, 0.85),
+        transparent);
+    transform: skewX(-22deg);
+    z-index: 1;
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+.social-shortcut:hover::after {
+    animation: ssShine 0.95s ease-out;
+}
+
+@keyframes ssShine {
+    0%   { left: -70%; }
+    100% { left: 150%; }
+}
+
+/* Star icon */
+.social-shortcut .ss-star {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #fff7c9, #ffd24d);
+    font-size: 14px;
+    line-height: 1;
+    box-shadow:
+        0 0 10px rgba(255, 210, 77, 0.9),
+        0 0 18px rgba(255, 210, 77, 0.55),
+        inset 0 0 6px rgba(255, 255, 255, 0.85);
+    animation: ssStarWiggle 2.2s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes ssStarWiggle {
+    0%, 100% { transform: rotate(-10deg) scale(1); }
+    50%      { transform: rotate(12deg) scale(1.18); }
+}
+
+/* Label */
+.social-shortcut .ss-label {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(90deg, #2a0f45, #4a1f6e, #2a0f45);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: ssLabelFlow 3s linear infinite;
+    white-space: nowrap;
+}
+
+@keyframes ssLabelFlow {
+    to { background-position: 200% 0; }
+}
+
+/* NEW badge */
+.social-shortcut .ss-new {
+    position: relative;
+    z-index: 2;
+    padding: 2px 7px;
+    border-radius: 10px;
+    background: #2a0f45;
+    color: #fde047;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    box-shadow: 0 0 8px rgba(253, 224, 71, 0.6);
+    animation: ssNewPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes ssNewPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 8px rgba(253, 224, 71, 0.5); }
+    50%      { transform: scale(1.08); box-shadow: 0 0 14px rgba(253, 224, 71, 0.95); }
+}
+
+/* Hover — lift, glow, more energy */
+.social-shortcut:hover {
+    color: #2a0f45 !important;
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.35),
+        0 0 30px rgba(249, 168, 212, 0.85),
+        0 0 55px rgba(103, 232, 249, 0.6),
+        0 0 75px rgba(253, 224, 71, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.social-shortcut:hover::before {
+    opacity: 1;
+    filter: blur(10px);
+}
+
+.social-shortcut:hover .ss-star {
+    animation: ssStarSpin 0.9s ease-in-out;
+}
+
+@keyframes ssStarSpin {
+    0%   { transform: rotate(0deg) scale(1); }
+    50%  { transform: rotate(180deg) scale(1.35); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+/* Focus accessibility */
+.social-shortcut:focus-visible {
+    outline: 2px solid #ffe27a;
+    outline-offset: 4px;
+}
+
+/* Active press effect */
+.social-shortcut:active {
+    transform: scale(0.94) translateY(2px);
+}
+
+/* Mobile tuning */
+@media (max-width: 700px) {
+    .social-shortcut {
+        padding: 9px 15px 9px 11px;
+        font-size: 12px;
+        gap: 7px;
+    }
+    .social-shortcut .ss-star {
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .social-shortcut,
+    .social-shortcut::before,
+    .social-shortcut .ss-star,
+    .social-shortcut .ss-new,
+    .social-shortcut .ss-label {
+        animation: none !important;
+    }
+}
+
+/* ============================================
+   CINEMATIC PORTAL TRANSITION — Social World
+   ============================================ */
+#socialPortal {
+    position: fixed;
+    inset: 0;
+    z-index: 100004;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    text-align: center;
+    color: #fff;
+    background: radial-gradient(circle at center,
+        #ff9fd2 0%,
+        #b04dff 30%,
+        #4a1f6e 60%,
+        #10071e 100%);
+    clip-path: circle(0% at var(--sx, 50%) var(--sy, 50%));
+    pointer-events: none;
+    transition: clip-path 0.9s cubic-bezier(0.6, 0, 0.2, 1);
+}
+
+#socialPortal.active {
+    clip-path: circle(155% at var(--sx, 50%) var(--sy, 50%));
+    pointer-events: all;
+}
+
+#socialPortal .sp-icon {
+    font-size: 88px;
+    filter: drop-shadow(0 0 24px #ffc8f2);
+    animation: spIconPop 1.1s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+
+@keyframes spIconPop {
+    0%   { opacity: 0; transform: scale(0.3) rotate(-30deg); }
+    60%  { opacity: 1; transform: scale(1.2) rotate(10deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+#socialPortal .sp-title {
+    font-size: clamp(22px, 5vw, 32px);
+    font-weight: 900;
+    letter-spacing: 1px;
+    background: linear-gradient(110deg, #fff, #ffe27a, #ffc8f2, #fff);
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: spTitleFlow 2s linear infinite;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+#socialPortal.active .sp-title {
+    animation:
+        spTitleFlow 2s linear infinite,
+        spTitleUp 0.6s ease 0.35s forwards;
+}
+
+@keyframes spTitleFlow {
+    to { background-position: 250% 0; }
+}
+
+@keyframes spTitleUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#socialPortal .sp-sub {
+    font-size: 14px;
+    color: #ffeab8;
+    opacity: 0;
+    transition: opacity 0.5s ease 0.6s;
+}
+
+#socialPortal.active .sp-sub {
+    opacity: 0.95;
+}
+
+/* Burst sparkles */
+.sp-burst {
+    position: absolute;
+    font-size: 22px;
+    pointer-events: none;
+    z-index: 3;
+    animation: spBurstOut 1.3s ease-out forwards;
+    filter: drop-shadow(0 0 8px #ffc8f2);
+}
+
+@keyframes spBurstOut {
+    to {
+        transform: translate(var(--bx), var(--by)) scale(0.3) rotate(360deg);
+        opacity: 0;
+    }
+}
+</style>
+
+<script>
+(function () {
+    var btn = document.getElementById("socialPortalBtn");
+    var portal = document.getElementById("socialPortal");
+    var target = document.getElementById("socials");
+    if (!btn || !portal || !target) return;
+
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var isRunning = false;
+
+    /* ---------- 3D Tilt on hover ---------- */
+    if (!reduce) {
+        btn.addEventListener("pointermove", function (e) {
+            var r = btn.getBoundingClientRect();
+            var px = (e.clientX - r.left) / r.width - 0.5;
+            var py = (e.clientY - r.top) / r.height - 0.5;
+            btn.style.transform =
+                "perspective(600px) " +
+                "rotateX(" + (-py * 14) + "deg) " +
+                "rotateY(" + (px * 18) + "deg) " +
+                "translateY(-4px) scale(1.06)";
+        });
+
+        btn.addEventListener("pointerleave", function () {
+            btn.style.transform = "";
+        });
+    }
+
+    /* ---------- Portal sparkle burst ---------- */
+    function burstSparkles(x, y) {
+        var emojis = ["✨", "💜", "⭐", "🌸", "💫", "🦋", "🌈", "✦"];
+        for (var i = 0; i < 26; i++) {
+            var s = document.createElement("span");
+            s.className = "sp-burst";
+            s.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            s.style.left = x + "px";
+            s.style.top = y + "px";
+            s.style.fontSize = (16 + Math.random() * 18) + "px";
+            s.style.setProperty("--bx", ((Math.random() - 0.5) * 560) + "px");
+            s.style.setProperty("--by", ((Math.random() - 0.5) * 560) + "px");
+            s.addEventListener("animationend", function () {
+                this.remove();
+            });
+            document.body.appendChild(s);
+        }
+    }
+
+    /* ---------- Portal click handler ---------- */
+    btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (isRunning) return;
+        isRunning = true;
+
+        var r = btn.getBoundingClientRect();
+        var cx = r.left + r.width / 2;
+        var cy = r.top + r.height / 2;
+
+        // Portal circle isi button se phailega
+        portal.style.setProperty("--sx", cx + "px");
+        portal.style.setProperty("--sy", cy + "px");
+
+        // Sparkle burst
+        burstSparkles(cx, cy);
+
+        // Portal activate
+        setTimeout(function () {
+            portal.classList.add("active");
+        }, 120);
+
+        // Scroll to Social World
+        var scrollDelay = reduce ? 0 : 1300;
+        setTimeout(function () {
+            target.scrollIntoView({
+                behavior: reduce ? "auto" : "smooth",
+                block: "start"
+            });
+        }, scrollDelay);
+
+        // Portal band karo
+        setTimeout(function () {
+            portal.classList.remove("active");
+            setTimeout(function () {
+                isRunning = false;
+            }, 900);
+        }, scrollDelay + 600);
+    });
+
+    /* ---------- Back button par portal clear ---------- */
+    window.addEventListener("pageshow", function () {
+        portal.classList.remove("active");
+        isRunning = false;
+    });
+})();
+</script>
+    
+<!-- 🌈 SOCIAL WORLD PORTAL — DIV + SCRIPT (DONO EK SAATH) -->
+
+<!-- 1. Portal Overlay Div -->
+<div id="socialPortal" aria-hidden="true">
+    <div class="sp-icon">💜</div>
+    <div class="sp-title">Entering My Social World...</div>
+    <div class="sp-sub">Let's connect across the universe ✨</div>
+</div>
+
+<!-- 2. Portal Script -->
+<script>
+(function () {
+    var btn = document.getElementById("socialPortalBtn");
+    var portal = document.getElementById("socialPortal");
+    var target = document.getElementById("socials");
+    if (!btn || !portal || !target) return;
+
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var isRunning = false;
+
+    /* ---------- 3D Tilt on hover ---------- */
+    if (!reduce) {
+        btn.addEventListener("pointermove", function (e) {
+            var r = btn.getBoundingClientRect();
+            var px = (e.clientX - r.left) / r.width - 0.5;
+            var py = (e.clientY - r.top) / r.height - 0.5;
+            btn.style.transform =
+                "perspective(600px) " +
+                "rotateX(" + (-py * 14) + "deg) " +
+                "rotateY(" + (px * 18) + "deg) " +
+                "translateY(-4px) scale(1.06)";
+        });
+
+        btn.addEventListener("pointerleave", function () {
+            btn.style.transform = "";
+        });
+    }
+
+    /* ---------- Portal sparkle burst ---------- */
+    function burstSparkles(x, y) {
+        var emojis = ["✨", "💜", "⭐", "🌸", "💫", "🦋", "🌈", "✦"];
+        for (var i = 0; i < 26; i++) {
+            var s = document.createElement("span");
+            s.className = "sp-burst";
+            s.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            s.style.left = x + "px";
+            s.style.top = y + "px";
+            s.style.fontSize = (16 + Math.random() * 18) + "px";
+            s.style.setProperty("--bx", ((Math.random() - 0.5) * 560) + "px");
+            s.style.setProperty("--by", ((Math.random() - 0.5) * 560) + "px");
+            s.addEventListener("animationend", function () {
+                this.remove();
+            });
+            document.body.appendChild(s);
+        }
+    }
+
+    /* ---------- Portal click handler ---------- */
+    btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (isRunning) return;
+        isRunning = true;
+
+        var r = btn.getBoundingClientRect();
+        var cx = r.left + r.width / 2;
+        var cy = r.top + r.height / 2;
+
+        portal.style.setProperty("--sx", cx + "px");
+        portal.style.setProperty("--sy", cy + "px");
+
+        burstSparkles(cx, cy);
+
+        setTimeout(function () {
+            portal.classList.add("active");
+        }, 120);
+
+        var scrollDelay = reduce ? 0 : 1300;
+        setTimeout(function () {
+            target.scrollIntoView({
+                behavior: reduce ? "auto" : "smooth",
+                block: "start"
+            });
+        }, scrollDelay);
+
+        setTimeout(function () {
+            portal.classList.remove("active");
+            setTimeout(function () {
+                isRunning = false;
+            }, 900);
+        }, scrollDelay + 600);
+    });
+
+    /* ---------- Back button par portal clear ---------- */
+    window.addEventListener("pageshow", function () {
+        portal.classList.remove("active");
+        isRunning = false;
     });
 })();
 </script>
