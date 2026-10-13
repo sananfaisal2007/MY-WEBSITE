@@ -3014,41 +3014,184 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
   }
 
   /* Teddy handle */
-  #quizTeddy {
+ /* ═══════════════════════════════════════════
+   🎀 ANIME GIRL AVATAR (replaces teddy)
+   ═══════════════════════════════════════════ */
+#quizTeddy {
     position: relative;
     flex: 0 0 auto;
-    width: 58px;
-    height: 58px;
+    width: 72px;
+    height: 92px;
     padding: 0;
     margin-right: 0;
-    border-radius: 50% 0 0 50%;
-    border: 1px solid rgba(231, 199, 255, .85);
-    border-right: 0;
-    background: linear-gradient(145deg, #5a2a96, #21103f);
-    font-size: 32px;
-    line-height: 1;
+    border: 0;
+    background: transparent;
     cursor: pointer;
-    box-shadow: 0 0 18px rgba(194, 115, 255, .85);
     -webkit-tap-highlight-color: transparent;
     z-index: 3;
-  }
-  #quizTeddy .qz-teddy-face { display: block; animation: qzTeddyBob 2.2s ease-in-out infinite; }
-  #quizDock.open #quizTeddy .qz-teddy-face { animation: qzTeddyPull .9s ease-in-out 2; }
-  #quizTeddy .teddy-badge {
-    position: absolute; top: -6px; left: -4px;
-    min-width: 20px; height: 20px; padding: 0 4px;
-    border-radius: 10px; background: #f2b7ff; color: #29113d;
-    font-size: 12px; font-weight: 900; line-height: 20px; text-align: center;
-    box-shadow: 0 0 8px rgba(239, 180, 255, .8);
-  }
-  @keyframes qzTeddyBob {
-    0%, 100% { transform: translateX(0) rotate(0); }
-    50% { transform: translateX(-5px) rotate(-10deg); }
-  }
-  @keyframes qzTeddyPull {
-    0%, 100% { transform: translateX(0) rotate(0); }
-    50% { transform: translateX(-4px) rotate(8deg) scale(1.1); }
-  }
+    filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.9))
+            drop-shadow(0 0 22px rgba(240, 171, 252, 0.5));
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+#quizTeddy:hover {
+    filter: drop-shadow(0 0 18px rgba(200, 120, 255, 1))
+            drop-shadow(0 0 32px rgba(255, 150, 240, 0.7));
+    transform: translateY(-3px) scale(1.05);
+}
+
+#quizTeddy:active {
+    transform: scale(0.95);
+}
+
+/* Avatar wrap — sab elements ka container */
+.avatar-wrap {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    animation: avatarBob 2.6s ease-in-out infinite;
+    transform-origin: center bottom;
+}
+
+/* Bounce animation */
+@keyframes avatarBob {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50%      { transform: translateY(-5px) rotate(2deg); }
+}
+
+/* Pull animation (jab dock khulta hai) */
+#quizDock.open .avatar-wrap {
+    animation: avatarPull 1s ease-in-out 2;
+}
+@keyframes avatarPull {
+    0%, 100% { transform: translateY(0) rotate(0) scale(1); }
+    30%      { transform: translateY(-8px) rotate(-8deg) scale(1.08); }
+    60%      { transform: translateY(-4px) rotate(8deg) scale(1.05); }
+}
+
+/* SVG */
+.avatar-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* Left arm waving */
+.avatar-arm {
+    transform-origin: 24.5px 78px;
+    animation: avatarWave 1.4s ease-in-out infinite;
+}
+@keyframes avatarWave {
+    0%, 100% { transform: rotate(-15deg); }
+    50%      { transform: rotate(25deg); }
+}
+
+/* Eyes blinking */
+.avatar-eye {
+    transform-origin: center;
+    animation: avatarBlink 4s ease-in-out infinite;
+}
+@keyframes avatarBlink {
+    0%, 42%, 58%, 100% { transform: scaleY(1); }
+    50%                { transform: scaleY(0.1); }
+}
+
+/* Mouth soft smile */
+.avatar-mouth {
+    animation: avatarSmile 3s ease-in-out infinite;
+    transform-origin: center;
+}
+@keyframes avatarSmile {
+    0%, 100% { transform: scaleX(1); }
+    50%      { transform: scaleX(1.15); }
+}
+
+/* Hair star sparkle */
+.avatar-star {
+    animation: avatarStar 2s ease-in-out infinite;
+    transform-origin: 72px 30px;
+}
+@keyframes avatarStar {
+    0%, 100% { opacity: 1; transform: rotate(0) scale(1); }
+    50%      { opacity: 0.6; transform: rotate(20deg) scale(1.3); }
+}
+
+/* Floating sparkles around avatar */
+.av-spark {
+    position: absolute;
+    font-size: 12px;
+    pointer-events: none;
+    filter: drop-shadow(0 0 6px #e0b3ff);
+    opacity: 0;
+}
+.av-spark.sp1 {
+    top: 8px; right: -4px;
+    animation: avSpark 3s ease-in-out infinite;
+    animation-delay: 0s;
+}
+.av-spark.sp2 {
+    top: 42px; left: -6px;
+    animation: avSpark 3s ease-in-out infinite;
+    animation-delay: 1s;
+}
+.av-spark.sp3 {
+    bottom: 12px; right: 0;
+    animation: avSpark 3s ease-in-out infinite;
+    animation-delay: 2s;
+}
+@keyframes avSpark {
+    0%, 100% { opacity: 0; transform: translateY(0) scale(0.6); }
+    50%      { opacity: 1; transform: translateY(-8px) scale(1.2); }
+}
+
+/* Badge — '?' / '✕' circle */
+#quizTeddy .teddy-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 5px;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #f0abfc, #a855f7);
+    color: #1e1b4b;
+    font-size: 13px;
+    font-weight: 900;
+    line-height: 22px;
+    text-align: center;
+    box-shadow:
+        0 0 10px rgba(240, 171, 252, 0.9),
+        0 0 20px rgba(168, 85, 247, 0.6);
+    animation: teddyBadgePulse 2s ease-in-out infinite;
+}
+@keyframes teddyBadgePulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.12); }
+}
+
+/* Mobile tuning */
+@media (max-width: 600px) {
+    #quizTeddy {
+        width: 62px;
+        height: 80px;
+    }
+    .av-spark { font-size: 10px; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .avatar-wrap,
+    .avatar-arm,
+    .avatar-eye,
+    .avatar-mouth,
+    .avatar-star,
+    .av-spark,
+    #quizTeddy .teddy-badge {
+        animation: none !important;
+    }
+}
 
   /* Speech bubble (only when folded) */
   .qz-bubble {
@@ -3154,10 +3297,92 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
 </style>
 
 <div id="quizDock">
-  <button id="quizTeddy" type="button" aria-expanded="false" aria-label="Quiz card kholo ya band karo">
-    <span class="qz-teddy-face">🧸</span>
+<button id="quizTeddy" type="button" aria-expanded="false" aria-label="Quiz card kholo ya band karo">
+    <!-- ═══ 🎀 ANIME GIRL AVATAR ═══ -->
+    <span class="avatar-wrap" aria-hidden="true">
+        <svg class="avatar-svg" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+            <!-- Neon glow filter -->
+            <defs>
+                <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="2" result="blur"/>
+                    <feMerge>
+                        <feMergeNode in="blur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+                <linearGradient id="hairGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#c084fc"/>
+                    <stop offset="50%" stop-color="#a855f7"/>
+                    <stop offset="100%" stop-color="#7c3aed"/>
+                </linearGradient>
+                <linearGradient id="dressGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#f0abfc"/>
+                    <stop offset="100%" stop-color="#a855f7"/>
+                </linearGradient>
+            </defs>
+
+            <!-- Body / Dress -->
+            <ellipse cx="50" cy="95" rx="18" ry="14" fill="url(#dressGrad)" filter="url(#neonGlow)"/>
+
+            <!-- Legs -->
+            <rect x="42" y="105" width="4" height="12" rx="2" fill="#7c3aed"/>
+            <rect x="54" y="105" width="4" height="12" rx="2" fill="#7c3aed"/>
+
+            <!-- Left Arm (waving) -->
+            <g class="avatar-arm">
+                <rect x="22" y="80" width="5" height="20" rx="2.5" fill="url(#dressGrad)" filter="url(#neonGlow)"/>
+                <circle cx="24.5" cy="78" r="4" fill="#fcd5ce" filter="url(#neonGlow)"/>
+            </g>
+
+            <!-- Right Arm -->
+            <rect x="73" y="84" width="5" height="18" rx="2.5" fill="url(#dressGrad)" filter="url(#neonGlow)"/>
+            <circle cx="75.5" cy="84" r="4" fill="#fcd5ce" filter="url(#neonGlow)"/>
+
+            <!-- Neck -->
+            <rect x="46" y="68" width="8" height="6" fill="#fcd5ce"/>
+
+            <!-- Hair back -->
+            <ellipse cx="50" cy="42" rx="24" ry="28" fill="url(#hairGrad)" filter="url(#neonGlow)"/>
+
+            <!-- Face -->
+            <ellipse cx="50" cy="45" rx="18" ry="20" fill="#fef3f2" filter="url(#neonGlow)"/>
+
+            <!-- Hair bangs -->
+            <path d="M 32 38 Q 40 22 50 25 Q 60 22 68 38 Q 62 42 55 40 Q 50 44 45 40 Q 38 42 32 38 Z" fill="url(#hairGrad)" filter="url(#neonGlow)"/>
+
+            <!-- Side hair strands -->
+            <path d="M 30 42 Q 26 55 30 65 Q 33 55 34 48 Z" fill="url(#hairGrad)"/>
+            <path d="M 70 42 Q 74 55 70 65 Q 67 55 66 48 Z" fill="url(#hairGrad)"/>
+
+            <!-- Eyes (blinking) -->
+            <g class="avatar-eyes">
+                <ellipse class="avatar-eye" cx="43" cy="47" rx="3.5" ry="4.5" fill="#1e1b4b"/>
+                <ellipse class="avatar-eye" cx="57" cy="47" rx="3.5" ry="4.5" fill="#1e1b4b"/>
+                <ellipse cx="43" cy="46" rx="1.5" ry="2" fill="#e0b3ff"/>
+                <ellipse cx="57" cy="46" rx="1.5" ry="2" fill="#e0b3ff"/>
+                <circle cx="44" cy="45" r="0.8" fill="#fff"/>
+                <circle cx="58" cy="45" r="0.8" fill="#fff"/>
+            </g>
+
+            <!-- Blush -->
+            <ellipse cx="38" cy="53" rx="3" ry="1.5" fill="#ffb3d1" opacity="0.7"/>
+            <ellipse cx="62" cy="53" rx="3" ry="1.5" fill="#ffb3d1" opacity="0.7"/>
+
+            <!-- Mouth -->
+            <path class="avatar-mouth" d="M 47 55 Q 50 58 53 55" stroke="#7c3aed" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+            <!-- Hair accessory (star) -->
+            <text x="68" y="30" font-size="8" class="avatar-star">✨</text>
+        </svg>
+
+        <!-- Sparkles around avatar -->
+        <span class="av-spark sp1">✦</span>
+        <span class="av-spark sp2">✨</span>
+        <span class="av-spark sp3">💜</span>
+    </span>
+
     <span class="teddy-badge" id="teddyBadge">?</span>
-  </button>
+</button>
   <span class="qz-bubble" id="qzBubble">Quiz kholo na? 🥺💜</span>
   <span class="qz-rope" aria-hidden="true"></span>
 
