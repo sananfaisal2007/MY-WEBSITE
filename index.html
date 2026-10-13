@@ -5881,8 +5881,6 @@ body .content {
     z-index: 9999;
     font-family: 'Poppins', sans-serif;
 }
-    </style>
-<style>
 @media (max-width: 700px) {
     .music-player {
         left: 10px;
@@ -6889,5 +6887,68 @@ body.zoom-in-portal {
 
     </div>
 </div>
+<!-- 🎹 PIANO BUTTON -->
+<button id="pianoToggle" aria-label="Play piano music" title="Play piano">
+    <span class="music-bars" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+    </span>
+</button>
+
+<!-- 🎹 PIANO AUDIO -->
+<audio id="pianoAudio" loop preload="none">
+    <source src="leberch-soft-piano-soft-piano-music-603947.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+(function () {
+    var btn = document.getElementById("pianoToggle");
+    var audio = document.getElementById("pianoAudio");
+    if (!btn || !audio) return;
+
+    var STORAGE_KEY = "sananPianoPlaying";
+    var playing = false;
+
+    audio.volume = 0.5;
+
+    function setPlaying(state) {
+        playing = state;
+        if (state) {
+            btn.classList.add("playing");
+            audio.play().catch(function (err) {
+                console.warn("Piano play blocked:", err);
+                playing = false;
+                btn.classList.remove("playing");
+            });
+        } else {
+            btn.classList.remove("playing");
+            audio.pause();
+        }
+        try {
+            localStorage.setItem(STORAGE_KEY, state ? "1" : "0");
+        } catch (e) {}
+    }
+
+    btn.addEventListener("click", function () {
+        setPlaying(!playing);
+    });
+
+    /* Agar pehle on kiya tha toh pehle click par chalao */
+    var saved = "0";
+    try { saved = localStorage.getItem(STORAGE_KEY) || "0"; } catch (e) {}
+
+    if (saved === "1") {
+        var firstClick = function () {
+            setPlaying(true);
+            document.removeEventListener("click", firstClick);
+            document.removeEventListener("touchstart", firstClick);
+        };
+        document.addEventListener("click", firstClick);
+        document.addEventListener("touchstart", firstClick);
+    }
+})();
+</script>
+
+</body>
+</html>
 </body>
 </html>
