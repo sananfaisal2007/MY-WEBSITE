@@ -1265,5 +1265,63 @@ moveBg(window.innerWidth / 2, window.innerHeight / 2);
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") modal.hidden = true; });
 })();
 </script>
+<!-- Floating Back Home Button -->
+<style>
+  #backHomeFloat {
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 60;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px 9px 11px;
+    border: 1px solid rgba(245, 213, 255, .75);
+    border-radius: 30px;
+    background: linear-gradient(135deg, rgba(139, 63, 208, .92), rgba(40, 18, 70, .94));
+    color: #fff0fc;
+    font: 600 13px 'Poppins', sans-serif;
+    text-decoration: none;
+    box-shadow: 0 0 16px rgba(194, 115, 255, .7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-tap-highlight-color: transparent;
+    animation: bhFloat 3s ease-in-out infinite;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  #backHomeFloat .bh-icon {
+    display: inline-block;
+    font-size: 20px;
+    line-height: 1;
+    animation: bhWiggle 2.4s ease-in-out infinite;
+  }
+  #backHomeFloat:hover,
+  #backHomeFloat:focus-visible {
+    transform: translateY(-3px) scale(1.06);
+    box-shadow: 0 0 26px rgba(227, 180, 255, .95);
+    outline: none;
+  }
+  #backHomeFloat:active { transform: scale(.95); }
+  @keyframes bhFloat {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -4px; }
+  }
+  @keyframes bhWiggle {
+    0%, 100% { transform: rotate(-8deg); }
+    50% { transform: rotate(8deg) scale(1.1); }
+  }
+  @media (max-width: 600px) {
+    #backHomeFloat { top: 10px; left: 10px; padding: 7px 12px 7px 9px; font-size: 12px; }
+    #backHomeFloat .bh-icon { font-size: 17px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #backHomeFloat, #backHomeFloat .bh-icon { animation: none; }
+  }
+</style>
+
+<a id="backHomeFloat" href="index.html" aria-label="Back to home">
+  <span class="bh-icon" aria-hidden="true">🏠</span>
+  <span>Back Home 🧸</span>
+</a>
 </body>
 </html>
