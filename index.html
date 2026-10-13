@@ -1538,7 +1538,7 @@ height: 100%;
         <span class="portal-icon">🌙</span>
         <span class="portal-label">Home</span>
     </a>
-    <a href="about.html" class="dream-portal">
+   <a href="about.html" class="dream-portal about-glow" id="aboutPortal">
         <span class="portal-icon">✨</span>
         <span class="portal-label">About</span>
     </a>
@@ -3053,6 +3053,96 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
   #favourites { scroll-margin-top: 20px; }
 </style>
 
+<style>
+/* ===== About button: shine + glow ===== */
+.dream-portal.about-glow {
+  overflow: hidden;
+  border-color: rgba(255, 226, 122, 0.9);
+  background: linear-gradient(110deg, #ffe27a, #ffc8f2, #c9a6ff, #ffe27a);
+  background-size: 250% 100%;
+  box-shadow: 0 0 16px rgba(255, 226, 122, .55), 0 0 30px rgba(201, 166, 255, .4);
+  animation: abFlow 4s linear infinite;
+}
+.dream-portal.about-glow .portal-label { color: #2a0f45; font-weight: 800; }
+
+/* chamakti hui patti */
+.dream-portal.about-glow::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: -60%;
+  width: 40%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.85), transparent);
+  animation: abShine 3s ease-in-out infinite;
+  pointer-events: none;
+}
+.dream-portal.about-glow::after { top: 3px; right: 10px; color: #2a0f45; }
+
+@keyframes abFlow  { to { background-position: 250% 0; } }
+@keyframes abShine { 0% { left: -60%; } 55%, 100% { left: 140%; } }
+
+/* ===== Pyaara transition (click ke baad) ===== */
+#pageTransition {
+  position: fixed;
+  inset: 0;
+  z-index: 100005;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #fff;
+  text-align: center;
+  background: radial-gradient(circle at center, #5b2a86, #1c1034 60%, #07060c);
+  clip-path: circle(0% at var(--x, 50%) var(--y, 50%));
+  pointer-events: none;
+  transition: clip-path .9s cubic-bezier(.6, 0, .2, 1);
+}
+#pageTransition.active {
+  clip-path: circle(150% at var(--x, 50%) var(--y, 50%));
+  pointer-events: all;
+}
+#pageTransition .pt-emoji { font-size: 64px; animation: ptFloat 1.4s ease-in-out infinite; filter: drop-shadow(0 0 14px #d9baff); }
+#pageTransition .pt-text  { font-size: 20px; font-weight: 700; color: #ffeab8; text-shadow: 0 0 12px #ffd24d; opacity: 0; transition: opacity .6s ease .4s; }
+#pageTransition.active .pt-text { opacity: 1; }
+@keyframes ptFloat { 0%,100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-12px) rotate(6deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .dream-portal.about-glow, .dream-portal.about-glow::before, #pageTransition .pt-emoji { animation: none; }
+  #pageTransition { transition: none; }
+}
+</style>
+
+    <div id="pageTransition" aria-hidden="true">
+  <div class="pt-emoji">🌙✨</div>
+  <div class="pt-text">Sanan ki kahani khul rahi hai... 💜</div>
+</div>
+
+<script>
+(function () {
+  var link = document.getElementById("aboutPortal");
+  var overlay = document.getElementById("pageTransition");
+  if (!link || !overlay) return;
+
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  link.addEventListener("click", function (e) {
+    e.preventDefault();                       // foran page na khule
+    var r = link.getBoundingClientRect();     // button ki jagah se circle phailega
+    overlay.style.setProperty("--x", (r.left + r.width / 2) + "px");
+    overlay.style.setProperty("--y", (r.top + r.height / 2) + "px");
+    overlay.classList.add("active");
+
+    setTimeout(function () {
+      window.location.href = link.getAttribute("href");   // about.html
+    }, reduce ? 0 : 1500);
+  });
+
+  // Back button dabane par overlay wapas hat jaye
+  window.addEventListener("pageshow", function () {
+    overlay.classList.remove("active");
+  });
+})();
+</script>
 
 </body>
 </html>
