@@ -1,0 +1,1958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌌 My Dream World | Sanan's World</title>
+<meta name="description" content="Enter my dream world — a cosmic universe of dreams, wishes, stars and imagination. 🌙✨">
+<meta name="theme-color" content="#05030f">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌌</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --space: #05030f;
+    --space-2: #0d0722;
+    --purple: #5b2a86;
+    --pink: #ff9fd2;
+    --cyan: #67e8f9;
+    --gold: #ffe27a;
+    --white: #f0e5ff;
+    --text: #d9c8ee;
+    --soft: #b8a8d1;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--space);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* ═══════════════════════════════════════
+   ✨ COSMIC BACKGROUND LAYERS
+   ═══════════════════════════════════════ */
+#cosmicBg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(91, 42, 134, 0.55), transparent 45%),
+        radial-gradient(circle at 80% 60%, rgba(255, 159, 210, 0.22), transparent 50%),
+        radial-gradient(circle at 50% 90%, rgba(103, 232, 249, 0.18), transparent 50%),
+        linear-gradient(180deg, #05030f 0%, #0d0722 50%, #05030f 100%);
+}
+
+.nebula {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.5;
+    animation: nebulaDrift 25s ease-in-out infinite alternate;
+}
+.nebula.n1 { width: 500px; height: 500px; left: -10%; top: 5%; background: #5b2a86; }
+.nebula.n2 { width: 600px; height: 600px; right: -15%; top: 35%; background: #ff9fd2; opacity: 0.28; animation-duration: 30s; animation-delay: -10s; }
+.nebula.n3 { width: 400px; height: 400px; left: 35%; bottom: -10%; background: #67e8f9; opacity: 0.22; animation-duration: 35s; animation-delay: -20s; }
+
+@keyframes nebulaDrift {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(80px, -60px) scale(1.15); }
+    100% { transform: translate(-60px, 70px) scale(0.95); }
+}
+
+/* Twinkling stars */
+.cosmic-star {
+    position: absolute;
+    border-radius: 50%;
+    background: #fff;
+    animation: twinkle ease-in-out infinite;
+    pointer-events: none;
+}
+@keyframes twinkle {
+    0%, 100% { opacity: 0.15; transform: scale(0.7); }
+    50%      { opacity: 1;    transform: scale(1.3); }
+}
+
+/* Shooting stars */
+.shooting-star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #fff, 0 0 12px #fff;
+    animation: shoot linear forwards;
+    pointer-events: none;
+    z-index: 1;
+}
+.shooting-star::after {
+    content: "";
+    position: absolute;
+    top: 50%; left: 0;
+    width: 120px; height: 1px;
+    background: linear-gradient(90deg, transparent, #fff, transparent);
+    transform: translateY(-50%);
+}
+@keyframes shoot {
+    0%   { transform: translate(0, 0) rotate(-35deg); opacity: 0; }
+    10%  { opacity: 1; }
+    100% { transform: translate(700px, 500px) rotate(-35deg); opacity: 0; }
+}
+
+/* ═══════════════════════════════════════
+   ✨ CURSOR GLOW + TRAIL
+   ═══════════════════════════════════════ */
+#dreamCursorGlow {
+    position: fixed;
+    left: 0; top: 0;
+    width: 340px; height: 340px;
+    margin: -170px 0 0 -170px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    background: radial-gradient(circle, rgba(190, 130, 255, 0.3), rgba(255, 190, 230, 0.14) 45%, transparent 70%);
+    transition: transform 0.18s ease-out;
+    will-change: transform;
+    mix-blend-mode: screen;
+}
+
+.dream-trail {
+    position: fixed;
+    z-index: 50;
+    pointer-events: none;
+    font-size: 14px;
+    animation: trailFade 1s ease-out forwards;
+    filter: drop-shadow(0 0 8px rgba(217, 186, 255, 0.9));
+}
+@keyframes trailFade {
+    to { opacity: 0; transform: translateY(-30px) scale(0.4) rotate(25deg); }
+}
+
+/* ═══════════════════════════════════════
+   🏠 FLOATING HOME BUTTON
+   ═══════════════════════════════════════ */
+#backHomeFloat {
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 1000;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px 9px 11px;
+    border: 1px solid rgba(245, 213, 255, 0.75);
+    border-radius: 30px;
+    background: linear-gradient(135deg, rgba(139, 63, 208, 0.92), rgba(40, 18, 70, 0.94));
+    color: #fff0fc;
+    font: 600 13px 'Poppins', sans-serif;
+    text-decoration: none;
+    box-shadow: 0 0 16px rgba(194, 115, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    animation: bhFloat 3s ease-in-out infinite;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+#backHomeFloat:hover {
+    transform: translateY(-3px) scale(1.06);
+    box-shadow: 0 0 26px rgba(227, 180, 255, 0.95);
+}
+#backHomeFloat .bh-icon { display: inline-block; font-size: 18px; animation: bhWiggle 2.4s ease-in-out infinite; }
+@keyframes bhFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -4px; } }
+@keyframes bhWiggle { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg) scale(1.1); } }
+
+/* ═══════════════════════════════════════
+   📜 PAGE INTRO
+   ═══════════════════════════════════════ */
+#dreamIntro {
+    position: fixed;
+    inset: 0;
+    z-index: 100010;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    text-align: center;
+    color: #fff;
+    background: radial-gradient(circle at center, #5b2a86 0%, #2a0f45 35%, #0d0722 70%, #05030f 100%);
+    pointer-events: none;
+    animation: dreamIntroOut 2s cubic-bezier(0.6, 0, 0.2, 1) 1.2s forwards;
+}
+#dreamIntro .di-emoji { font-size: 76px; filter: drop-shadow(0 0 26px #ffb8c5); animation: diFloat 1.6s ease-in-out infinite; }
+#dreamIntro .di-text { font-family: 'Pacifico', cursive; font-size: 26px; color: #fff2ff; text-shadow: 0 0 26px #c78bff; }
+#dreamIntro .di-sub  { font-size: 13px; color: #d9c8ee; letter-spacing: 3px; }
+@keyframes diFloat {
+    0%, 100% { transform: translateY(0) rotate(-6deg); }
+    50%      { transform: translateY(-14px) rotate(6deg); }
+}
+@keyframes dreamIntroOut {
+    0%   { clip-path: circle(150% at 50% 50%); visibility: visible; }
+    99%  { clip-path: circle(0% at 50% 50%); visibility: visible; }
+    100% { clip-path: circle(0% at 50% 50%); visibility: hidden; }
+}
+
+/* ═══════════════════════════════════════
+   🌌 HERO
+   ═══════════════════════════════════════ */
+.dream-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 6% 80px;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Big moon */
+.hero-moon {
+    position: absolute;
+    top: 12%;
+    right: 10%;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fff9e0, #ffe27a 40%, #d4b060 80%, #8b6f30 100%);
+    box-shadow:
+        0 0 60px rgba(255, 226, 122, 0.7),
+        0 0 120px rgba(255, 226, 122, 0.4),
+        inset -18px -18px 40px rgba(139, 111, 48, 0.55);
+    animation: moonGlow 6s ease-in-out infinite;
+    z-index: 1;
+}
+@keyframes moonGlow {
+    0%, 100% {
+        box-shadow: 0 0 60px rgba(255, 226, 122, 0.7), 0 0 120px rgba(255, 226, 122, 0.4), inset -18px -18px 40px rgba(139, 111, 48, 0.55);
+    }
+    50% {
+        box-shadow: 0 0 80px rgba(255, 226, 122, 0.95), 0 0 160px rgba(255, 226, 122, 0.55), inset -18px -18px 40px rgba(139, 111, 48, 0.55);
+    }
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 8px 22px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255, 226, 122, 0.5);
+    border-radius: 30px;
+    background: linear-gradient(110deg, rgba(91, 42, 134, 0.4), rgba(255, 159, 210, 0.25));
+    color: #ffeab8;
+    font-size: 12px;
+    letter-spacing: 4px;
+    font-weight: 700;
+    animation: badgeGlow 3s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+}
+@keyframes badgeGlow {
+    0%, 100% { box-shadow: 0 0 14px rgba(255, 226, 122, 0.4); }
+    50%      { box-shadow: 0 0 28px rgba(255, 226, 122, 0.75); }
+}
+
+.dream-hero h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(42px, 9vw, 100px);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    background: linear-gradient(120deg, #ffffff, #ffc8f2, #c9a6ff, #67e8f9, #ffffff);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 50px rgba(168, 85, 247, 0.35);
+    animation: heroTextFlow 7s linear infinite;
+    position: relative;
+    z-index: 2;
+}
+@keyframes heroTextFlow { to { background-position: 300% 0; } }
+
+.dream-hero .hero-sub {
+    max-width: 640px;
+    margin: 0 auto 30px;
+    color: #d9c8ee;
+    font-size: 17px;
+    line-height: 1.9;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-scroll {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border: 1px solid rgba(255, 226, 122, 0.6);
+    border-radius: 40px;
+    background: rgba(91, 42, 134, 0.3);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+.hero-scroll:hover {
+    background: var(--purple);
+    box-shadow: 0 0 30px rgba(91, 42, 134, 0.9);
+    transform: translateY(-3px);
+}
+.hero-scroll .hs-arrow {
+    animation: arrowBounce 1.6s ease-in-out infinite;
+}
+@keyframes arrowBounce {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(6px); }
+}
+
+/* ═══════════════════════════════════════
+   🌍 SECTION BASE
+   ═══════════════════════════════════════ */
+.dream-section {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 90px 6%;
+}
+
+.section-head {
+    text-align: center;
+    margin-bottom: 50px;
+}
+.section-head .sh-badge {
+    display: inline-block;
+    padding: 6px 18px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255, 159, 210, 0.5);
+    border-radius: 20px;
+    background: rgba(91, 42, 134, 0.25);
+    color: #ffc8e0;
+    font-size: 11px;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+.section-head h2 {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(30px, 5.5vw, 50px);
+    font-weight: 400;
+    color: #fff2ff;
+    margin-bottom: 14px;
+    text-shadow: 0 0 26px rgba(168, 85, 247, 0.55);
+}
+.section-head p {
+    color: var(--soft);
+    font-size: 15px;
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+/* ═══════════════════════════════════════
+   🪐 UNIVERSE / SOLAR SYSTEM
+   ═══════════════════════════════════════ */
+.universe-stage {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    height: 700px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sun {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fff9e0, #ffd24d 45%, #e09424 100%);
+    box-shadow:
+        0 0 40px rgba(255, 226, 122, 0.9),
+        0 0 80px rgba(255, 226, 122, 0.5),
+        0 0 120px rgba(255, 159, 210, 0.4);
+    animation: sunPulse 3s ease-in-out infinite;
+    z-index: 3;
+    cursor: pointer;
+}
+@keyframes sunPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50%      { transform: translate(-50%, -50%) scale(1.08); }
+}
+
+/* Orbit rings */
+.orbit {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    border: 1px dashed rgba(255, 255, 255, 0.18);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+.orbit.orbit-1 { width: 220px; height: 220px; }
+.orbit.orbit-2 { width: 340px; height: 340px; }
+.orbit.orbit-3 { width: 460px; height: 460px; }
+.orbit.orbit-4 { width: 580px; height: 580px; }
+.orbit.orbit-5 { width: 700px; height: 700px; }
+
+/* Planets (rotating with their orbits) */
+.orbit-wrap {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    animation: orbitSpin linear infinite;
+    pointer-events: none;
+}
+.orbit-wrap.ow-1 { width: 220px; height: 220px; animation-duration: 18s; }
+.orbit-wrap.ow-2 { width: 340px; height: 340px; animation-duration: 26s; animation-direction: reverse; }
+.orbit-wrap.ow-3 { width: 460px; height: 460px; animation-duration: 34s; }
+.orbit-wrap.ow-4 { width: 580px; height: 580px; animation-duration: 44s; animation-direction: reverse; }
+.orbit-wrap.ow-5 { width: 700px; height: 700px; animation-duration: 56s; }
+
+@keyframes orbitSpin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.planet {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    z-index: 4;
+}
+.planet::after {
+    content: attr(data-name);
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 10px;
+    color: #ffe8ee;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.9);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+.planet:hover {
+    transform: translateX(-50%) scale(1.35);
+    box-shadow: 0 0 24px rgba(255, 159, 210, 0.9);
+}
+.planet:hover::after { opacity: 1; }
+
+.planet.p1 { background: radial-gradient(circle at 35% 35%, #ffc8f2, #ff6bb3); box-shadow: 0 0 18px rgba(255, 107, 179, 0.7); }
+.planet.p2 { background: radial-gradient(circle at 35% 35%, #67e8f9, #22b8cf); box-shadow: 0 0 18px rgba(103, 232, 249, 0.7); }
+.planet.p3 { background: radial-gradient(circle at 35% 35%, #c9a6ff, #7c3aed); box-shadow: 0 0 18px rgba(201, 166, 255, 0.7); }
+.planet.p4 { background: radial-gradient(circle at 35% 35%, #ffe27a, #d4a017); box-shadow: 0 0 18px rgba(255, 226, 122, 0.7); }
+.planet.p5 { background: radial-gradient(circle at 35% 35%, #a5f3fc, #22d3ee); box-shadow: 0 0 18px rgba(165, 243, 252, 0.7); }
+
+/* Universe info popup */
+.universe-info {
+    margin-top: 40px;
+    padding: 24px;
+    border-radius: 22px;
+    background: rgba(91, 42, 134, 0.22);
+    border: 1px solid rgba(255, 159, 210, 0.4);
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 100px;
+    backdrop-filter: blur(10px);
+}
+.universe-info .ui-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 22px;
+    color: #ffd6e7;
+    margin-bottom: 8px;
+}
+.universe-info .ui-text {
+    color: #d9c8ee;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* ═══════════════════════════════════════
+   ✨ CONSTELLATION CANVAS
+   ═══════════════════════════════════════ */
+.constellation-box {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    height: 500px;
+    margin: 0 auto;
+    border-radius: 26px;
+    background: rgba(13, 7, 34, 0.7);
+    border: 1px solid rgba(255, 159, 210, 0.3);
+    overflow: hidden;
+    cursor: crosshair;
+    box-shadow:
+        0 0 40px rgba(91, 42, 134, 0.4),
+        inset 0 0 40px rgba(103, 232, 249, 0.06);
+}
+#constellationCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.constellation-hint {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px 16px;
+    border-radius: 20px;
+    background: rgba(5, 3, 15, 0.7);
+    border: 1px solid rgba(255, 159, 210, 0.4);
+    color: #ffd6e7;
+    font-size: 12px;
+    font-weight: 600;
+    pointer-events: none;
+    animation: hintPulse 2.5s ease-in-out infinite;
+}
+@keyframes hintPulse {
+    0%, 100% { opacity: 0.6; }
+    50%      { opacity: 1; }
+}
+
+/* ═══════════════════════════════════════
+   🌙 DREAM JOURNAL (Floating cards)
+   ═══════════════════════════════════════ */
+.journal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+}
+
+.journal-card {
+    position: relative;
+    padding: 26px 22px;
+    border-radius: 24px;
+    background: linear-gradient(145deg, rgba(91, 42, 134, 0.35), rgba(13, 7, 34, 0.85));
+    border: 1px solid rgba(255, 159, 210, 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    cursor: pointer;
+    overflow: hidden;
+    isolation: isolate;
+    animation: journalFloat 5s ease-in-out infinite;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.5s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+.journal-card:nth-child(1) { animation-delay: 0s; }
+.journal-card:nth-child(2) { animation-delay: 0.6s; }
+.journal-card:nth-child(3) { animation-delay: 1.2s; }
+.journal-card:nth-child(4) { animation-delay: 1.8s; }
+.journal-card:nth-child(5) { animation-delay: 2.4s; }
+.journal-card:nth-child(6) { animation-delay: 3s; }
+
+@keyframes journalFloat {
+    0%, 100% { translate: 0 0; }
+    50%      { translate: 0 -8px; }
+}
+
+.journal-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: rgba(255, 159, 210, 0.9);
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(255, 159, 210, 0.55),
+        0 0 60px rgba(103, 232, 249, 0.35);
+}
+
+.journal-card .jc-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    margin-bottom: 14px;
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 26px;
+    line-height: 1;
+    box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.06);
+    transition: transform 0.4s ease;
+}
+.journal-card:hover .jc-icon {
+    transform: translateY(-4px) rotate(-8deg) scale(1.15);
+}
+
+.journal-card h3 {
+    font-size: 19px;
+    color: #ffd6e7;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+.journal-card p {
+    color: var(--soft);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.journal-card .jc-more {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.4s ease, margin 0.4s ease;
+    color: #d9c8ee;
+    font-size: 13px;
+    line-height: 1.8;
+    margin-top: 0;
+}
+.journal-card.expanded .jc-more {
+    max-height: 300px;
+    opacity: 1;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed rgba(255, 159, 210, 0.35);
+}
+.journal-card .jc-hint {
+    display: block;
+    margin-top: 12px;
+    font-size: 11px;
+    color: #ffc8e0;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    opacity: 0.75;
+}
+.journal-card.expanded .jc-hint::after {
+    content: " ✕";
+}
+
+/* ═══════════════════════════════════════
+   🏝️ DREAM PLACES (Floating Islands)
+   ═══════════════════════════════════════ */
+.places-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 22px;
+}
+
+.place-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    min-height: 340px;
+    display: flex;
+    align-items: flex-end;
+    padding: 24px;
+    border: 1px solid rgba(255, 159, 210, 0.35);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    isolation: isolate;
+    cursor: pointer;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    animation: placeFloat 6s ease-in-out infinite;
+}
+.place-card:nth-child(odd)  { animation-delay: 0s; }
+.place-card:nth-child(even) { animation-delay: 1.5s; }
+
+@keyframes placeFloat {
+    0%, 100% { translate: 0 0; }
+    50%      { translate: 0 -6px; }
+}
+
+.place-card img {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+}
+.place-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, transparent 25%, rgba(5, 3, 15, 0.95) 100%);
+}
+.place-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.55),
+        0 0 30px rgba(255, 159, 210, 0.45);
+}
+.place-card:hover img { transform: scale(1.1); }
+
+.place-card h3 {
+    font-size: 22px;
+    color: #fff;
+    margin-bottom: 6px;
+    text-shadow: 0 0 18px rgba(0, 0, 0, 0.95);
+    font-weight: 900;
+}
+.place-card p {
+    color: #ffe8ee;
+    font-size: 13px;
+    line-height: 1.6;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.95);
+}
+.place-card .pc-tag {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(91, 42, 134, 0.85);
+    border: 1px solid rgba(255, 159, 210, 0.7);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* ═══════════════════════════════════════
+   🚀 TIME CAPSULE (Future Timeline)
+   ═══════════════════════════════════════ */
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom,
+        transparent,
+        rgba(255, 159, 210, 0.6) 15%,
+        rgba(103, 232, 249, 0.6) 50%,
+        rgba(255, 226, 122, 0.6) 85%,
+        transparent);
+    transform: translateX(-50%);
+    box-shadow: 0 0 14px rgba(255, 159, 210, 0.5);
+}
+
+.tl-item {
+    position: relative;
+    width: 50%;
+    padding: 20px 40px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.tl-item.in { opacity: 1; transform: none; }
+
+.tl-item.left  { left: 0; text-align: right; }
+.tl-item.right { left: 50%; text-align: left; }
+
+.tl-item::after {
+    content: "";
+    position: absolute;
+    top: 28px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #fff, #ff9fd2 50%, #5b2a86);
+    box-shadow:
+        0 0 14px rgba(255, 159, 210, 0.9),
+        0 0 28px rgba(255, 159, 210, 0.5);
+    z-index: 2;
+}
+.tl-item.left::after  { right: -8px; }
+.tl-item.right::after { left: -8px; }
+
+.tl-card {
+    display: inline-block;
+    padding: 20px 22px;
+    border-radius: 20px;
+    background: linear-gradient(145deg, rgba(91, 42, 134, 0.4), rgba(13, 7, 34, 0.85));
+    border: 1px solid rgba(255, 159, 210, 0.35);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    max-width: 380px;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.tl-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 24px rgba(255, 159, 210, 0.5);
+}
+.tl-year {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 16px;
+    background: rgba(255, 226, 122, 0.2);
+    border: 1px solid rgba(255, 226, 122, 0.5);
+    color: #ffe27a;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+.tl-card h4 {
+    font-family: 'Pacifico', cursive;
+    font-size: 19px;
+    color: #ffd6e7;
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+.tl-card p {
+    color: var(--soft);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+@media (max-width: 700px) {
+    .timeline::before { left: 20px; }
+    .tl-item { width: 100%; padding: 14px 14px 14px 50px; text-align: left !important; }
+    .tl-item.left  { left: 0; }
+    .tl-item.right { left: 0; }
+    .tl-item.left::after,
+    .tl-item.right::after { left: 12px; right: auto; }
+    .tl-card { max-width: 100%; }
+}
+
+/* ═══════════════════════════════════════
+   💫 WISH UPON A STAR
+   ═══════════════════════════════════════ */
+.wish-box {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 34px 26px;
+    border-radius: 26px;
+    background: linear-gradient(145deg, rgba(91, 42, 134, 0.35), rgba(13, 7, 34, 0.9));
+    border: 1px solid rgba(255, 159, 210, 0.45);
+    text-align: center;
+    box-shadow: 0 0 40px rgba(255, 159, 210, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+.wish-box::before {
+    content: "";
+    position: absolute;
+    inset: -50%;
+    background: conic-gradient(from 0deg, transparent, rgba(255, 226, 122, 0.08), transparent 30%);
+    animation: wishSpin 12s linear infinite;
+    pointer-events: none;
+}
+@keyframes wishSpin { to { transform: rotate(360deg); } }
+
+.wish-box > * { position: relative; z-index: 1; }
+
+.wish-input-wrap {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 4px;
+    border-radius: 18px;
+    background: linear-gradient(110deg, #a855f7, #ffc8f2, #a855f7);
+    background-size: 200% 100%;
+    animation: wishBorder 4s linear infinite;
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+}
+@keyframes wishBorder { to { background-position: 200% 0; } }
+
+#wishInput {
+    flex: 1;
+    padding: 14px 18px;
+    border: 0;
+    outline: none;
+    border-radius: 14px;
+    background: #0d0722;
+    color: #fff;
+    font: 500 15px 'Poppins', sans-serif;
+}
+#wishInput::placeholder { color: #9985b8; }
+
+#wishBtn {
+    padding: 14px 22px;
+    border: 0;
+    border-radius: 14px;
+    background: linear-gradient(110deg, #a855f7, #c084fc, #ffc8f2);
+    color: #2a0f45;
+    font: 900 13px 'Poppins', sans-serif;
+    letter-spacing: 1px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 16px rgba(168, 85, 247, 0.6);
+}
+#wishBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 26px rgba(255, 200, 242, 0.9);
+}
+#wishBtn:active { transform: scale(0.95); }
+
+.wish-status {
+    min-height: 22px;
+    margin-top: 14px;
+    color: #ffe9a8;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Wish sky (dots appear here) */
+.wish-sky {
+    position: relative;
+    margin-top: 26px;
+    width: 100%;
+    height: 180px;
+    border-radius: 20px;
+    background: radial-gradient(circle at 50% 50%, rgba(91, 42, 134, 0.4), rgba(5, 3, 15, 0.95));
+    border: 1px solid rgba(255, 159, 210, 0.3);
+    overflow: hidden;
+    box-shadow: inset 0 0 30px rgba(103, 232, 249, 0.1);
+}
+
+.wish-star {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    margin: -6px 0 0 -6px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #fff, #ffe27a 60%, transparent);
+    box-shadow:
+        0 0 10px #ffe27a,
+        0 0 22px rgba(255, 226, 122, 0.75);
+    cursor: pointer;
+    animation: wishStarTwinkle 2s ease-in-out infinite;
+    transition: transform 0.3s ease;
+}
+.wish-star:hover { transform: scale(1.4); z-index: 5; }
+
+.wish-star::after {
+    content: attr(data-wish);
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    border-radius: 10px;
+    background: rgba(5, 3, 15, 0.95);
+    border: 1px solid rgba(255, 226, 122, 0.5);
+    color: #ffeab8;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+.wish-star:hover::after { opacity: 1; }
+
+@keyframes wishStarTwinkle {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50%      { opacity: 1; transform: scale(1.15); }
+}
+
+/* ═══════════════════════════════════════
+   💬 DREAM QUOTES
+   ═══════════════════════════════════════ */
+.quotes-stage {
+    max-width: 780px;
+    margin: 0 auto;
+    min-height: 200px;
+    padding: 40px 30px;
+    border-radius: 26px;
+    background: linear-gradient(145deg, rgba(91, 42, 134, 0.3), rgba(13, 7, 34, 0.85));
+    border: 1px solid rgba(255, 159, 210, 0.35);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+.quotes-stage::before,
+.quotes-stage::after {
+    content: """;
+    position: absolute;
+    font-family: 'Pacifico', cursive;
+    font-size: 90px;
+    color: rgba(255, 159, 210, 0.25);
+    line-height: 1;
+}
+.quotes-stage::before { top: 12px; left: 22px; }
+.quotes-stage::after  { content: """; bottom: -22px; right: 22px; }
+
+.quote-text {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(20px, 3.5vw, 30px);
+    line-height: 1.6;
+    background: linear-gradient(120deg, #ffffff, #ffc8f2, #c9a6ff, #67e8f9, #ffffff);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 16px rgba(255, 159, 210, 0.35));
+    animation: quoteFlow 8s linear infinite;
+    transition: opacity 0.8s ease;
+    margin-bottom: 16px;
+}
+@keyframes quoteFlow { to { background-position: 300% 0; } }
+
+.quote-author {
+    font-size: 13px;
+    color: #ffc8e0;
+    letter-spacing: 2px;
+    font-weight: 700;
+    transition: opacity 0.8s ease;
+}
+
+.quote-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 26px;
+}
+.quote-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 159, 210, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.quote-dot.active {
+    background: #ff9fd2;
+    box-shadow: 0 0 12px rgba(255, 159, 210, 0.9);
+    transform: scale(1.3);
+}
+
+/* ═══════════════════════════════════════
+   🌙 CLOSING
+   ═══════════════════════════════════════ */
+.dream-closing {
+    position: relative;
+    text-align: center;
+    padding: 100px 6% 80px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.dream-closing h2 {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(30px, 6vw, 54px);
+    font-weight: 400;
+    color: #fff2ff;
+    margin-bottom: 20px;
+    text-shadow: 0 0 30px rgba(168, 85, 247, 0.55);
+    line-height: 1.3;
+}
+.dream-closing p {
+    color: var(--soft);
+    font-size: 16px;
+    line-height: 1.9;
+    margin-bottom: 34px;
+}
+
+.closing-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+}
+.closing-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 30px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border: 1px solid;
+    cursor: pointer;
+    font-family: inherit;
+}
+.closing-btn.stay {
+    background: linear-gradient(110deg, #a855f7, #c084fc, #ffc8f2);
+    background-size: 200% 100%;
+    color: #2a0f45;
+    border-color: transparent;
+    box-shadow: 0 0 22px rgba(168, 85, 247, 0.55);
+    animation: stayFlow 5s linear infinite;
+}
+@keyframes stayFlow { to { background-position: 200% 0; } }
+.closing-btn.stay:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 0 34px rgba(255, 200, 242, 0.9);
+}
+.closing-btn.wake {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 159, 210, 0.5);
+    color: #ffd6e7;
+}
+.closing-btn.wake:hover {
+    background: rgba(255, 159, 210, 0.18);
+    transform: translateY(-3px);
+    box-shadow: 0 0 22px rgba(255, 159, 210, 0.5);
+}
+
+/* ═══════════════════════════════════════
+   🏠 FOOTER
+   ═══════════════════════════════════════ */
+.dream-footer {
+    text-align: center;
+    padding: 34px 6%;
+    border-top: 1px solid rgba(255, 159, 210, 0.2);
+    color: #9a90ad;
+    font-size: 14px;
+}
+.dream-footer span { color: #ffb8c5; }
+
+/* ═══════════════════════════════════════
+   ✨ REVEAL ON SCROLL
+   ═══════════════════════════════════════ */
+.rv {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+.rv.in { opacity: 1; transform: none; }
+
+/* ═══════════════════════════════════════
+   📱 RESPONSIVE
+   ═══════════════════════════════════════ */
+@media (max-width: 700px) {
+    .dream-hero { padding: 80px 5% 60px; min-height: 90vh; }
+    .hero-moon { width: 100px; height: 100px; top: 8%; right: 8%; }
+    .dream-hero h1 { font-size: clamp(38px, 11vw, 60px); }
+    .dream-section { padding: 60px 5%; }
+
+    .universe-stage { height: 500px; }
+    .orbit.orbit-1, .orbit-wrap.ow-1 { width: 140px; height: 140px; }
+    .orbit.orbit-2, .orbit-wrap.ow-2 { width: 220px; height: 220px; }
+    .orbit.orbit-3, .orbit-wrap.ow-3 { width: 300px; height: 300px; }
+    .orbit.orbit-4, .orbit-wrap.ow-4 { width: 380px; height: 380px; }
+    .orbit.orbit-5, .orbit-wrap.ow-5 { width: 460px; height: 460px; }
+    .planet { width: 34px; height: 34px; top: -17px; }
+    .sun { width: 70px; height: 70px; }
+
+    .constellation-box { height: 340px; }
+
+    .wish-input-wrap { flex-direction: column; }
+    #wishBtn { padding: 12px; }
+
+    .quotes-stage { padding: 30px 20px; }
+    .quotes-stage::before,
+    .quotes-stage::after { font-size: 60px; }
+
+    #dreamCursorGlow { width: 200px; height: 200px; margin: -100px 0 0 -100px; }
+}
+
+/* ═══════════════════════════════════════
+   ♿ REDUCED MOTION
+   ═══════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+    .nebula, .shooting-star, .cosmic-star,
+    .hero-moon, .hero-badge,
+    .dream-hero h1, .hero-scroll .hs-arrow,
+    .orbit-wrap, .sun, .planet,
+    .journal-card, .place-card,
+    .wish-box::before, .wish-star,
+    .quote-text, #backHomeFloat,
+    .stayFlow { animation: none !important; }
+    .rv { opacity: 1; transform: none; transition: none; }
+    #dreamCursorGlow, .dream-trail { display: none; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════
+     📜 PAGE INTRO
+     ═══════════════════════════════════════ -->
+<div id="dreamIntro" aria-hidden="true">
+    <div class="di-emoji">🌌</div>
+    <div class="di-text">Entering my Dream World...</div>
+    <div class="di-sub">꿈의 세계로</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     ✨ COSMIC BACKGROUND
+     ═══════════════════════════════════════ -->
+<div id="cosmicBg" aria-hidden="true">
+    <div class="nebula n1"></div>
+    <div class="nebula n2"></div>
+    <div class="nebula n3"></div>
+</div>
+<div id="dreamCursorGlow" aria-hidden="true"></div>
+
+<!-- ═══════════════════════════════════════
+     🏠 FLOATING HOME
+     ═══════════════════════════════════════ -->
+<a id="backHomeFloat" href="index.html" aria-label="Back to Home">
+    <span class="bh-icon" aria-hidden="true">🏠</span>
+    <span>Back Home 🧸</span>
+</a>
+
+<!-- ═══════════════════════════════════════
+     🌌 HERO
+     ═══════════════════════════════════════ -->
+<section class="dream-hero">
+    <div class="hero-moon" aria-hidden="true"></div>
+    <span class="hero-badge">✦ WELCOME TO MY DREAM WORLD ✦</span>
+    <h1>My Dream World</h1>
+    <p class="hero-sub">
+        Ek aisi duniya jahan sirf sapne hain, sitaray hain, aur endless imagination. 🌙<br>
+        Yahan aap khud ke dreams bhi likh sakte ho — aur woh sitaron mein hamesha ke liye chamak jaate hain. ✨
+    </p>
+    <a href="#universe" class="hero-scroll">
+        Deeper into the dream <span class="hs-arrow">↓</span>
+    </a>
+</section>
+
+<!-- ═══════════════════════════════════════
+     🪐 UNIVERSE — Interactive Solar System
+     ═══════════════════════════════════════ -->
+<section class="dream-section" id="universe">
+    <div class="section-head rv">
+        <span class="sh-badge">✦ MY UNIVERSE ✦</span>
+        <h2>The Dreams Orbit</h2>
+        <p>Mere har sapne ko ek planet banaya hai — aur woh mere around ghoomte hain. Kisi bhi planet ko touch karo! 🌍</p>
+    </div>
+
+    <div class="universe-stage rv">
+        <div class="sun" data-name="Sun"></div>
+
+        <div class="orbit orbit-1"></div>
+        <div class="orbit orbit-2"></div>
+        <div class="orbit orbit-3"></div>
+        <div class="orbit orbit-4"></div>
+        <div class="orbit orbit-5"></div>
+
+        <div class="orbit-wrap ow-1">
+            <div class="planet p1" data-planet="peace" data-name="Peace 🌸"></div>
+        </div>
+        <div class="orbit-wrap ow-2">
+            <div class="planet p2" data-planet="travel" data-name="Travel ✈️"></div>
+        </div>
+        <div class="orbit-wrap ow-3">
+            <div class="planet p3" data-planet="korea" data-name="Korea 🇰🇷"></div>
+        </div>
+        <div class="orbit-wrap ow-4">
+            <div class="planet p4" data-planet="create" data-name="Create 🎨"></div>
+        </div>
+        <div class="orbit-wrap ow-5">
+            <div class="planet p5" data-planet="love" data-name="Love 💜"></div>
+        </div>
+    </div>
+
+    <div class="universe-info rv" id="universeInfo">
+        <div class="ui-title">🌍 Tap a planet!</div>
+        <div class="ui-text">Har planet ek dream hai — click karo aur dekho kaun sa sapna chhupa hai.</div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ✨ CONSTELLATION
+     ═══════════════════════════════════════ -->
+<section class="dream-section" id="constellation">
+    <div class="section-head rv">
+        <span class="sh-badge">✦ CONSTELLATION ✦</span>
+        <h2>Write Your Own Stars</h2>
+        <p>Apne cursor se stars ko touch karo — aur woh aapas mein judkar ek nayi constellation banayenge. ✨</p>
+    </div>
+
+    <div class="constellation-box rv">
+        <canvas id="constellationCanvas"></canvas>
+        <div class="constellation-hint">✦ Move your cursor to connect the stars ✦</div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     🌙 DREAM JOURNAL
+     ═══════════════════════════════════════ -->
+<section class="dream-section" id="journal">
+    <div class="section-head rv">
+        <span class="sh-badge">✦ DREAM JOURNAL ✦</span>
+        <h2>Pages From My Dream Diary</h2>
+        <p>Har card ek chhota sa sapna hai. Click karke expand karo aur poori story padho. 🌙</p>
+    </div>
+
+    <div class="journal-grid">
+
+        <div class="journal-card rv">
+            <div class="jc-icon">🌙</div>
+            <h3>A Sky Full of Stars</h3>
+            <p>Ek raat, ek chhat, aur endless sitaray. Bas khud ke saath baithkar unhein dekhta hoon.</p>
+            <div class="jc-more">
+                Main chahta hoon ek din kisi aisi jagah jaun jahan light pollution na ho — jahan Milky Way saaf nazar aaye. Wahan baithkar apne saare sapne yaad karunga, aur shukar ada karunga ke main yahan tak pohancha.
+            </div>
+            <span class="jc-hint">TAP TO EXPAND</span>
+        </div>
+
+        <div class="journal-card rv">
+            <div class="jc-icon">🌊</div>
+            <h3>Ocean at Midnight</h3>
+            <p>Ek aisi jagah jahan samandar aur sitaray ek saath ho. Bas lehron ki aawaz aur thanda wind.</p>
+            <div class="jc-more">
+                Raat ka samandar — sirf moon light aur wave sounds. Main ek chhote se beach house mein rahunga, sooraj doobta dekhunga, aur subah fresh coffee peeunga. Yehi peace hai.
+            </div>
+            <span class="jc-hint">TAP TO EXPAND</span>
+        </div>
+
+        <div class="journal-card rv">
+            <div class="jc-icon">🌸</div>
+            <h3>Cherry Blossom Walk</h3>
+            <p>Jab spring aata hai, poori duniya pink ho jaati hai. Ek aisi jagah jahan waqt ruk sa jaye.</p>
+            <div class="jc-more">
+                Seoul ki streets, Japan ke temples, ya kisi chhote se town ki gully. Ped se girti pink petals, aur main bas chalta jaunga — koi destination nahi, bas journey.
+            </div>
+            <span class="jc-hint">TAP TO EXPAND</span>
+        </div>
+
+        <div class="journal-card rv">
+            <div class="jc-icon">🎨</div>
+            <h3>Create Something Beautiful</h3>
+            <p>Kuch aisa banao jo dil se ho. Jo logon ke chehre par smile le aaye.</p>
+            <div class="jc-more">
+                Ek website, ek story, ek painting, ek song — kuch bhi. Lekin wo mera ho, mere dil se. Aur jab log usay dekhein, unhein woh warmth mehsoos ho jo maine daali thi.
+            </div>
+            <span class="jc-hint">TAP TO EXPAND</span>
+        </div>
+
+        <div class="journal-card rv">
+            <div class="jc-icon">✈️</div>
+            <h3>The Window Seat Dream</h3>
+            <p>Baadalon ke upar, ek window seat, aur headphones. Yehi ek perfect moment hai.</p>
+            <div class="jc-more">
+                Jab plane take off kare, mera dil bhi uchhal jaye. Neeche city chhoti hoti jaye, baadalon ke upar sooraj nikle. Music baj rahi ho, aur main ek naye chapter ke liye ready hoon.
+            </div>
+            <span class="jc-hint">TAP TO EXPAND</span>
+        </div>
+
+        <div class="journal-card rv">
+            <div class="jc-icon">🏡</div>
+            <h3>A Peaceful Home</h3>
+            <p>Ek chhota sa ghar, bohat saari roshni, aur ek aisi jagah jahan main khud banun.</p>
+            <div class="jc-more">
+                Windows ke through subah ki dhoop aaye. Ek reading corner ho, ek music system, aur ek balcony jahan baithkar chai piyun. Simple, warm, aur pura mera.
+            </div>
+            <span class="jc-hint">TAP TO EXPAND</span>
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     🏝️ DREAM PLACES
+     ═══════════════════════════════════════ -->
+<section class="dream-section" id="places">
+    <div class="section-head rv">
+        <span class="sh-badge">✦ DREAM PLACES ✦</span>
+        <h2>Places I Want To Visit</h2>
+        <p>Ye woh jagah hain jahan main ek din zaroor jaunga — In Sha Allah. ✈️</p>
+    </div>
+
+    <div class="places-grid">
+
+        <div class="place-card rv">
+            <img src="https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=800&q=80" alt="South Korea" loading="lazy">
+            <div>
+                <h3>🇰🇷 South Korea</h3>
+                <p>Seoul ki raatein, K-drama streets, aur cherry blossoms.</p>
+                <span class="pc-tag">SEOUL · BUSAN · JEJU</span>
+            </div>
+        </div>
+
+        <div class="place-card rv">
+            <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80" alt="Japan" loading="lazy">
+            <div>
+                <h3>🇯🇵 Japan</h3>
+                <p>Tokyo lights, Kyoto temples, aur sakura season.</p>
+                <span class="pc-tag">TOKYO · KYOTO · OSAKA</span>
+            </div>
+        </div>
+
+        <div class="place-card rv">
+            <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80" alt="Paris" loading="lazy">
+            <div>
+                <h3>🇫🇷 Paris</h3>
+                <p>Eiffel Tower, cafes, aur dreamy French vibes.</p>
+                <span class="pc-tag">Eiffel · Louvre · Seine</span>
+            </div>
+        </div>
+
+        <div class="place-card rv">
+            <img src="https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?w=800&q=80" alt="Switzerland" loading="lazy">
+            <div>
+                <h3>🇨🇭 Switzerland</h3>
+                <p>Alps, snow, aur green valleys — bilkul paradise.</p>
+                <span class="pc-tag">ZURICH · INTERLAKEN</span>
+            </div>
+        </div>
+
+        <div class="place-card rv">
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80" alt="Space" loading="lazy">
+            <div>
+                <h3>🌌 Space</h3>
+                <p>Stars, galaxies, aur Earth ka blue view.</p>
+                <span class="pc-tag">THE FINAL FRONTIER</span>
+            </div>
+        </div>
+
+        <div class="place-card rv">
+            <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80" alt="Maldives" loading="lazy">
+            <div>
+                <h3>🏝️ Maldives</h3>
+                <p>Blue water, white sand, aur peaceful silence.</p>
+                <span class="pc-tag">OVERWATER VILLA</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     🚀 TIME CAPSULE
+     ═══════════════════════════════════════ -->
+<section class="dream-section" id="timeline">
+    <div class="section-head rv">
+        <span class="sh-badge">✦ TIME CAPSULE ✦</span>
+        <h2>Future is Written in Stars</h2>
+        <p>Meri future timeline — 2026 se 2040 tak ke sapne. 🚀</p>
+    </div>
+
+    <div class="timeline">
+
+        <div class="tl-item left rv">
+            <div class="tl-card">
+                <span class="tl-year">2026</span>
+                <h4>The Beginning</h4>
+                <p>Abhi — building my world, learning, growing. Ye woh saal hai jab sab kuch shuru hota hai.</p>
+            </div>
+        </div>
+
+        <div class="tl-item right rv">
+            <div class="tl-card">
+                <span class="tl-year">2027</span>
+                <h4>A New Chapter</h4>
+                <p>Naye opportunities, naye log, aur naya safar. Ek fresh start.</p>
+            </div>
+        </div>
+
+        <div class="tl-item left rv">
+            <div class="tl-card">
+                <span class="tl-year">2028</span>
+                <h4>Something Big</h4>
+                <p>Kuch bara hone wala hai — ek milestone jo sab kuch badal dega.</p>
+            </div>
+        </div>
+
+        <div class="tl-item right rv">
+            <div class="tl-card">
+                <span class="tl-year">2030</span>
+                <h4>Dream Life Starts</h4>
+                <p>Apni dream life ka pehla saal. Korea trip, apna kaam, aur freedom.</p>
+            </div>
+        </div>
+
+        <div class="tl-item left rv">
+            <div class="tl-card">
+                <span class="tl-year">2035</span>
+                <h4>Building My Home</h4>
+                <p>Ek apna ghar, apni jagah, aur apni pehchaan. Sab kuch jo maine socha tha.</p>
+            </div>
+        </div>
+
+        <div class="tl-item right rv">
+            <div class="tl-card">
+                <span class="tl-year">2040</span>
+                <h4>The Full Dream</h4>
+                <p>Poora dream life — settled, happy, aur woh insaan jo main banna chahta tha. ✨</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     💫 WISH UPON A STAR
+     ═══════════════════════════════════════ -->
+<section class="dream-section" id="wish">
+    <div class="section-head rv">
+        <span class="sh-badge">✦ WISH UPON A STAR ✦</span>
+        <h2>Send a Wish to the Universe</h2>
+        <p>Apna koi bhi sapna likho — aur woh sitaron mein hamesha ke liye chamak jayega. ✨</p>
+    </div>
+
+    <div class="wish-box rv">
+        <p style="color: #d9c8ee; font-size: 14px; margin-bottom: 6px;">
+            🌟 Har wish ek naya star banata hai
+        </p>
+
+        <div class="wish-input-wrap">
+            <input id="wishInput" type="text" maxlength="80" placeholder="✨ Write your wish here...">
+            <button id="wishBtn" type="button">Send ✨</button>
+        </div>
+
+        <p class="wish-status" id="wishStatus" aria-live="polite"></p>
+
+        <div class="wish-sky" id="wishSky"></div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     💬 DREAM QUOTES
+     ═══════════════════════════════════════ -->
+<section class="dream-section" id="quotes">
+    <div class="section-head rv">
+        <span class="sh-badge">✦ WHISPERS OF DREAMS ✦</span>
+        <h2>Dream Quotes</h2>
+        <p>Kuch lafz jo dil ko chhoo jaate hain — aur har baar nayi baat kehte hain. 💭</p>
+    </div>
+
+    <div class="quotes-stage rv">
+        <p class="quote-text" id="quoteText">The future belongs to those who believe in the beauty of their dreams.</p>
+        <p class="quote-author" id="quoteAuthor">— Eleanor Roosevelt</p>
+
+        <div class="quote-dots" id="quoteDots"></div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     🌙 CLOSING
+     ═══════════════════════════════════════ -->
+<section class="dream-closing rv">
+    <h2>Was it all a dream? 🌙</h2>
+    <p>
+        Har sapna ek shuruaat hoti hai. Kuch sapne poore hote hain, kuch raste dikhate hain, aur kuch sirf mehsoos karne ke liye hote hain.<br><br>
+        Chalo, wapas chalein? Ya thora aur der yahan rukein? ✨
+    </p>
+
+    <div class="closing-btns">
+        <button class="closing-btn stay" type="button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            ✨ Stay in the Dream
+        </button>
+        <a class="closing-btn wake" href="index.html">
+            🌙 Wake Up
+        </a>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     🏠 FOOTER
+     ═══════════════════════════════════════ -->
+<footer class="dream-footer">
+    © 2026 Sanan's World · <span>My Dream World</span> · Built with imagination 💜✨
+</footer>
+
+<script>
+(function () {
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var small = window.innerWidth < 700;
+
+    /* ═══════════════════════════════════════
+       1. AMBIENT STARS in Background
+       ═══════════════════════════════════════ */
+    var bg = document.getElementById("cosmicBg");
+    if (bg) {
+        for (var i = 0; i < (small ? 60 : 130); i++) {
+            var s = document.createElement("span");
+            var size = 1 + Math.random() * 2.5;
+            s.className = "cosmic-star";
+            s.style.left = Math.random() * 100 + "%";
+            s.style.top = Math.random() * 100 + "%";
+            s.style.width = size + "px";
+            s.style.height = size + "px";
+            s.style.animationDelay = (-Math.random() * 3) + "s";
+            s.style.animationDuration = (2 + Math.random() * 3) + "s";
+            bg.appendChild(s);
+        }
+    }
+
+    /* ═══════════════════════════════════════
+       2. SHOOTING STARS
+       ═══════════════════════════════════════ */
+    if (!reduce && bg) {
+        function spawnShootingStar() {
+            var st = document.createElement("div");
+            st.className = "shooting-star";
+            st.style.left = (Math.random() * 40) + "%";
+            st.style.top = (Math.random() * 40) + "%";
+            st.style.animationDuration = (1.6 + Math.random() * 1.4) + "s";
+            bg.appendChild(st);
+            setTimeout(function () { st.remove(); }, 3200);
+        }
+        spawnShootingStar();
+        setInterval(spawnShootingStar, 3800);
+    }
+
+    /* ═══════════════════════════════════════
+       3. CURSOR GLOW + TRAIL
+       ═══════════════════════════════════════ */
+    var glow = document.getElementById("dreamCursorGlow");
+    if (glow && !reduce) {
+        var mx = innerWidth / 2, my = innerHeight / 2;
+        var gx = mx, gy = my;
+        var lastTrail = 0;
+        var trailEmojis = ["✨", "💜", "⭐", "🌸", "💫"];
+
+        window.addEventListener("pointermove", function (e) {
+            mx = e.clientX;
+            my = e.clientY;
+
+            var now = Date.now();
+            if (now - lastTrail > 90 && !small) {
+                lastTrail = now;
+                var t = document.createElement("span");
+                t.className = "dream-trail";
+                t.textContent = trailEmojis[Math.floor(Math.random() * trailEmojis.length)];
+                t.style.left = mx + "px";
+                t.style.top = my + "px";
+                t.style.fontSize = (12 + Math.random() * 8) + "px";
+                t.addEventListener("animationend", function () { t.remove(); });
+                document.body.appendChild(t);
+            }
+        }, { passive: true });
+
+        function loop() {
+            gx += (mx - gx) * 0.14;
+            gy += (my - gy) * 0.14;
+            glow.style.transform = "translate3d(" + gx + "px," + gy + "px,0)";
+            requestAnimationFrame(loop);
+        }
+        loop();
+    }
+
+    /* ═══════════════════════════════════════
+       4. UNIVERSE — Planet Info
+       ═══════════════════════════════════════ */
+    var planetInfo = {
+        peace:  { icon: "🌸", title: "Peace", text: "Ek aisi zindagi jahan sukoon ho, khushiyan ho, aur dil ka chain ho. Bas mein aur mere sapne." },
+        travel: { icon: "✈️", title: "Travel", text: "Duniya ke har kone ko dekhna — Korea se Paris, Japan se Maldives. Har jagah ek kahani." },
+        korea:  { icon: "🇰🇷", title: "Korea", text: "Seoul ki streets par chalna, K-dramas ki jagah dekhnha, aur woh feel mehsoos karna jo sirf Korea deta hai." },
+        create: { icon: "🎨", title: "Create", text: "Kuch aisa banana jo duniya yaad rakhe — ek website, ek story, ya ek chhota sa idea jo bara ban jaye." },
+        love:   { icon: "💜", title: "Love", text: "Apne logon ke saath rehna, unhein khush dekhna, aur unki khushi mein apni khushi dhoondhna." }
+    };
+
+    var infoBox = document.getElementById("universeInfo");
+    document.querySelectorAll(".planet").forEach(function (p) {
+        p.addEventListener("click", function () {
+            var key = p.getAttribute("data-planet");
+            var info = planetInfo[key];
+            if (!info || !infoBox) return;
+            infoBox.querySelector(".ui-title").textContent = info.icon + " " + info.title;
+            infoBox.querySelector(".ui-text").textContent = info.text;
+            infoBox.style.transform = "scale(1.03)";
+            setTimeout(function () { infoBox.style.transform = ""; }, 300);
+        });
+    });
+
+    /* ═══════════════════════════════════════
+       5. CONSTELLATION CANVAS
+       ═══════════════════════════════════════ */
+    var canvas = document.getElementById("constellationCanvas");
+    if (canvas && !reduce) {
+        var ctx = canvas.getContext("2d");
+        var dpr = window.devicePixelRatio || 1;
+
+        function sizeCanvas() {
+            var r = canvas.getBoundingClientRect();
+            canvas.width = r.width * dpr;
+            canvas.height = r.height * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+        sizeCanvas();
+        window.addEventListener("resize", sizeCanvas);
+
+        var stars = [];
+        var numStars = small ? 20 : 40;
+        for (var k = 0; k < numStars; k++) {
+            stars.push({
+                x: Math.random(),
+                y: Math.random(),
+                baseR: 1.2 + Math.random() * 1.6,
+                phase: Math.random() * Math.PI * 2
+            });
+        }
+
+        var cursor = { x: -1000, y: -1000 };
+
+        canvas.addEventListener("pointermove", function (e) {
+            var r = canvas.getBoundingClientRect();
+            cursor.x = e.clientX - r.left;
+            cursor.y = e.clientY - r.top;
+        });
+        canvas.addEventListener("pointerleave", function () {
+            cursor.x = -1000;
+            cursor.y = -1000;
+        });
+
+        function draw() {
+            var r = canvas.getBoundingClientRect();
+            var W = r.width, H = r.height;
+            ctx.clearRect(0, 0, W, H);
+
+            var t = Date.now() / 1000;
+            var positions = stars.map(function (s) {
+                return {
+                    x: s.x * W,
+                    y: s.y * H,
+                    r: s.baseR + Math.sin(t * 2 + s.phase) * 0.4
+                };
+            });
+
+            /* Connection lines between nearby stars */
+            for (var i = 0; i < positions.length; i++) {
+                for (var j = i + 1; j < positions.length; j++) {
+                    var a = positions[i], b = positions[j];
+                    var d = Math.hypot(a.x - b.x, a.y - b.y);
+                    if (d < 130) {
+                        var alpha = (1 - d / 130) * 0.35;
+                        ctx.beginPath();
+                        ctx.moveTo(a.x, a.y);
+                        ctx.lineTo(b.x, b.y);
+                        ctx.strokeStyle = "rgba(255, 200, 242, " + alpha + ")";
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            /* Cursor connection lines */
+            positions.forEach(function (p) {
+                var d = Math.hypot(p.x - cursor.x, p.y - cursor.y);
+                if (d < 180) {
+                    var alpha = (1 - d / 180) * 0.7;
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(cursor.x, cursor.y);
+                    var grad = ctx.createLinearGradient(p.x, p.y, cursor.x, cursor.y);
+                    grad.addColorStop(0, "rgba(255, 226, 122, " + alpha + ")");
+                    grad.addColorStop(1, "rgba(168, 85, 247, " + alpha + ")");
+                    ctx.strokeStyle = grad;
+                    ctx.lineWidth = 1.2;
+                    ctx.stroke();
+                }
+            });
+
+            /* Draw stars */
+            positions.forEach(function (p) {
+                var grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
+                grad.addColorStop(0, "rgba(255, 255, 255, 1)");
+                grad.addColorStop(0.4, "rgba(255, 200, 242, 0.6)");
+                grad.addColorStop(1, "rgba(168, 85, 247, 0)");
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2);
+                ctx.fillStyle = grad;
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = "#fff";
+                ctx.shadowBlur = 12;
+                ctx.shadowColor = "rgba(255, 226, 122, 0.9)";
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            });
+
+            /* Cursor glow */
+            if (cursor.x > -500) {
+                var cg = ctx.createRadialGradient(cursor.x, cursor.y, 0, cursor.x, cursor.y, 40);
+                cg.addColorStop(0, "rgba(255, 200, 242, 0.5)");
+                cg.addColorStop(1, "rgba(255, 200, 242, 0)");
+                ctx.beginPath();
+                ctx.arc(cursor.x, cursor.y, 40, 0, Math.PI * 2);
+                ctx.fillStyle = cg;
+                ctx.fill();
+            }
+
+            requestAnimationFrame(draw);
+        }
+        draw();
+    }
+
+    /* ═══════════════════════════════════════
+       6. DREAM JOURNAL — Expand on click
+       ═══════════════════════════════════════ */
+    document.querySelectorAll(".journal-card").forEach(function (card) {
+        card.addEventListener("click", function () {
+            card.classList.toggle("expanded");
+        });
+    });
+
+    /* ═══════════════════════════════════════
+       7. WISH UPON A STAR
+       ═══════════════════════════════════════ */
+    var wishInput = document.getElementById("wishInput");
+    var wishBtn = document.getElementById("wishBtn");
+    var wishStatus = document.getElementById("wishStatus");
+    var wishSky = document.getElementById("wishSky");
+    var WISH_KEY = "dreamWishes";
+
+    function loadWishes() {
+        var wishes = [];
+        try {
+            var raw = localStorage.getItem(WISH_KEY);
+            if (raw) wishes = JSON.parse(raw);
+        } catch (e) {}
+        return wishes;
+    }
+
+    function saveWishes(arr) {
+        try {
+            localStorage.setItem(WISH_KEY, JSON.stringify(arr));
+        } catch (e) {}
+    }
+
+    function addWishStar(wish) {
+        if (!wishSky) return;
+        var s = document.createElement("span");
+        s.className = "wish-star";
+        s.style.left = (8 + Math.random() * 84) + "%";
+        s.style.top = (10 + Math.random() * 76) + "%";
+        s.setAttribute("data-wish", wish);
+        s.style.animationDelay = (-Math.random() * 2) + "s";
+        wishSky.appendChild(s);
+    }
+
+    /* Load existing wishes */
+    loadWishes().forEach(addWishStar);
+
+    if (wishBtn && wishInput) {
+        wishBtn.addEventListener("click", function () {
+            var wish = wishInput.value.trim();
+            if (!wish) {
+                wishStatus.textContent = "✨ Pehle apna wish likho!";
+                return;
+            }
+            var wishes = loadWishes();
+            wishes.push(wish);
+            saveWishes(wishes);
+
+            addWishStar(wish);
+
+            wishInput.value = "";
+            wishStatus.textContent = "🌟 Your wish has been sent to the universe ✨";
+
+            /* Click burst */
+            var r = wishBtn.getBoundingClientRect();
+            for (var i = 0; i < 16; i++) {
+                var b = document.createElement("span");
+                b.textContent = ["✨", "💜", "⭐", "🌟", "💫"][Math.floor(Math.random() * 5)];
+                b.style.cssText =
+                    "position:fixed;left:" + (r.left + r.width / 2) + "px;top:" + (r.top) + "px;" +
+                    "font-size:" + (14 + Math.random() * 14) + "px;pointer-events:none;z-index:99999;" +
+                    "transition:transform 1.2s ease-out,opacity 1.2s ease-out;";
+                document.body.appendChild(b);
+                (function (el) {
+                    var dx = (Math.random() - 0.5) * 300;
+                    var dy = (Math.random() - 0.5) * 300;
+                    requestAnimationFrame(function () {
+                        el.style.transform = "translate(" + dx + "px," + dy + "px) scale(0.3) rotate(" + (Math.random() * 360) + "deg)";
+                        el.style.opacity = "0";
+                    });
+                    setTimeout(function () { el.remove(); }, 1300);
+                })(b);
+            }
+        });
+        wishInput.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") wishBtn.click();
+        });
+    }
+
+    /* ═══════════════════════════════════════
+       8. DREAM QUOTES — Rotating
+       ═══════════════════════════════════════ */
+    var quotes = [
+        { t: "The future belongs to those who believe in the beauty of their dreams.", a: "— Eleanor Roosevelt" },
+        { t: "Dreams are the seeds of tomorrow. Water them with hope.", a: "— Sanan" },
+        { t: "All that we see or seem, is but a dream within a dream.", a: "— Edgar Allan Poe" },
+        { t: "Hold fast to dreams, for if dreams die, life is a broken-winged bird.", a: "— Langston Hughes" },
+        { t: "The biggest adventure you can take is to live the life of your dreams.", a: "— Oprah Winfrey" },
+        { t: "Yes, I am a dreamer. For a dreamer is one who can only find his way by moonlight.", a: "— Oscar Wilde" },
+        { t: "Chase the moon. Even if you miss, you'll land among the stars.", a: "— Norman Vincent Peale" }
+    ];
+
+    var quoteIdx = 0;
+    var quoteText = document.getElementById("quoteText");
+    var quoteAuthor = document.getElementById("quoteAuthor");
+    var quoteDots = document.getElementById("quoteDots");
+
+    /* Build dots */
+    quotes.forEach(function (_, i) {
+        var d = document.createElement("span");
+        d.className = "quote-dot" + (i === 0 ? " active" : "");
+        d.addEventListener("click", function () { showQuote(i); });
+        quoteDots.appendChild(d);
+    });
+
+    function showQuote(i) {
+        quoteIdx = i;
+        if (quoteText) quoteText.style.opacity = "0";
+        if (quoteAuthor) quoteAuthor.style.opacity = "0";
+
+        setTimeout(function () {
+            if (quoteText) quoteText.textContent = quotes[i].t;
+            if (quoteAuthor) quoteAuthor.textContent = quotes[i].a;
+            if (quoteText) quoteText.style.opacity = "1";
+            if (quoteAuthor) quoteAuthor.style.opacity = "1";
+
+            quoteDots.querySelectorAll(".quote-dot").forEach(function (d, idx) {
+                d.classList.toggle("active", idx === i);
+            });
+        }, 400);
+    }
+
+    /* Auto rotate */
+    if (!reduce) {
+        setInterval(function () {
+            showQuote((quoteIdx + 1) % quotes.length);
+        }, 6000);
+    }
+
+    /* ═══════════════════════════════════════
+       9. REVEAL ON SCROLL
+       ═══════════════════════════════════════ */
+    if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("in");
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll(".rv").forEach(function (el) { io.observe(el); });
+    } else {
+        document.querySelectorAll(".rv").forEach(function (el) { el.classList.add("in"); });
+    }
+})();
+</script>
+
+</body>
+</html>
