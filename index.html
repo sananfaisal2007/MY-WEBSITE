@@ -5944,14 +5944,25 @@ body .content {
             </button>
 
             <!-- Mute -->
-            <button class="mm-option" data-track="mute" type="button" role="menuitem">
-                <span class="mo-icon">🔇</span>
-                <span class="mo-info">
-                    <span class="mo-name">Mute</span>
-                    <span class="mo-desc">Silence please</span>
-                </span>
-                <span class="mo-check">✓</span>
-            </button>
+            <!-- 🌙 NIGHT AMBIENCE -->
+<button class="mm-option" data-track="night" type="button" role="menuitem">
+    <span class="mo-icon">🌙</span>
+    <span class="mo-info">
+        <span class="mo-name">Night Ambience</span>
+        <span class="mo-desc">Soft celestial hum</span>
+    </span>
+    <span class="mo-check">✓</span>
+</button>
+
+<!-- 🌊 OCEAN WAVES -->
+<button class="mm-option" data-track="ocean" type="button" role="menuitem">
+    <span class="mo-icon">🌊</span>
+    <span class="mo-info">
+        <span class="mo-name">Ocean Waves</span>
+        <span class="mo-desc">Calm beach vibes</span>
+    </span>
+    <span class="mo-check">✓</span>
+</button>
 
         </div>
 
@@ -5973,16 +5984,24 @@ body .content {
      ═══════════════════════════════════════ -->
 <style>
 /* ═══════════════════════════════════════
-   🎵 MUSIC PLAYER WRAPPER
+   🎵 MUSIC PLAYER WRAPPER — NEW POSITION
    ═══════════════════════════════════════ */
 .music-player {
     position: fixed;
     left: 20px;
-    bottom: 100px;
+    bottom: 30px;              
     z-index: 9999;
     font-family: 'Poppins', sans-serif;
 }
-
+</style>
+    <style>
+@media (max-width: 700px) {
+    .music-player {
+        left: 10px;
+        bottom: 20px;          
+    }
+}
+</style>
 /* ═══════════════════════════════════════
    🎵 MASTER BUTTON
    ═══════════════════════════════════════ */
