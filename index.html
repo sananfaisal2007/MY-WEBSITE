@@ -2754,6 +2754,70 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
 
 <!-- CELESTIALDREAMER: Floating Quiz Invitation -->
 <style>
+    <style>
+  /* Teddy toggle button */
+  #quizTeddy {
+    position: fixed;
+    right: 14px;
+    bottom: 80px;
+    z-index: 9999;
+    width: 54px;
+    height: 54px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(231, 199, 255, 0.85);
+    background: linear-gradient(145deg, #5a2a96, #21103f);
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 0 16px rgba(194, 115, 255, .8);
+    animation: teddyBounce 2s ease-in-out infinite;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  #quizTeddy .teddy-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 4px;
+    border-radius: 10px;
+    background: #f2b7ff;
+    color: #29113d;
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 20px;
+    text-align: center;
+    box-shadow: 0 0 8px rgba(239, 180, 255, .8);
+  }
+
+  @keyframes teddyBounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(-6deg); }
+  }
+
+  /* Card ki position teddy ke upar */
+  #quizMagicInvite {
+    bottom: 145px !important;
+    right: 14px !important;
+    transform-origin: bottom right;
+    transition: opacity .35s ease, visibility .35s ease, transform .35s ease !important;
+  }
+
+  /* Fold hone par card chhup jaye */
+  #quizMagicInvite.qm-hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: scale(.2) translateY(30px) !important;
+  }
+
+  @media (min-width: 769px) {
+    #quizTeddy { bottom: 90px; right: 18px; }
+    #quizMagicInvite { bottom: 155px !important; right: 18px !important; }
+  }
+</style>
   #quizMagicInvite {
     position: fixed;
     right: 18px;
@@ -2913,6 +2977,79 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
   }
 </style>
 
+<style>
+  /* Teddy toggle button */
+  #quizTeddy {
+    position: fixed;
+    right: 14px;
+    bottom: 80px;
+    z-index: 9999;
+    width: 54px;
+    height: 54px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(231, 199, 255, 0.85);
+    background: linear-gradient(145deg, #5a2a96, #21103f);
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 0 16px rgba(194, 115, 255, .8);
+    animation: teddyBounce 2s ease-in-out infinite;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  #quizTeddy .teddy-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 4px;
+    border-radius: 10px;
+    background: #f2b7ff;
+    color: #29113d;
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 20px;
+    text-align: center;
+    box-shadow: 0 0 8px rgba(239, 180, 255, .8);
+  }
+
+  @keyframes teddyBounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(-6deg); }
+  }
+
+  /* Card ki position teddy ke upar */
+  #quizMagicInvite {
+    bottom: 145px !important;
+    right: 14px !important;
+    transform-origin: bottom right;
+    transition: opacity .35s ease, visibility .35s ease, transform .35s ease !important;
+  }
+
+  /* Fold hone par card chhup jaye */
+  #quizMagicInvite.qm-hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: scale(.2) translateY(30px) !important;
+  }
+
+  @media (min-width: 769px) {
+    #quizTeddy { bottom: 90px; right: 18px; }
+    #quizMagicInvite { bottom: 155px !important; right: 18px !important; }
+  }
+</style>
+2. Teddy button add karo
+
+<button id="quizMagicInvite" ...> ke bilkul pehle ye line daal do:
+
+html
+<button id="quizTeddy" type="button" aria-label="Quiz card kholo ya band karo" aria-expanded="false">
+  🧸<span class="teddy-badge" id="teddyBadge">?</span>
+</button>
+    
 <button id="quizMagicInvite"
         type="button"
         aria-label="Scroll to the Celestial Challenge quiz">
@@ -2926,15 +3063,30 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
 
 <script>
   (() => {
-    const invite = document.getElementById("quizMagicInvite");
-      if (!invite) return;
+   <script>
+(() => {
+  const invite = document.getElementById("quizMagicInvite");
+  const teddy = document.getElementById("quizTeddy");
+  const badge = document.getElementById("teddyBadge");
+  if (!invite || !teddy) return;
 
-   invite.addEventListener("click", () => {
- window.location.href = "quiz.html";
-});
+  function setOpen(open) {
+    invite.classList.toggle("qm-hidden", !open);
+    teddy.setAttribute("aria-expanded", String(open));
+    badge.textContent = open ? "✕" : "?";
+  }
 
-       
-  })();
+  // Phone par shuru mein band, desktop par khula
+  setOpen(window.innerWidth > 768);
+
+  teddy.addEventListener("click", () => {
+    setOpen(invite.classList.contains("qm-hidden"));
+  });
+
+  invite.addEventListener("click", () => {
+    window.location.href = "quiz.html";
+  });
+})();
 </script>
 
 </body>
