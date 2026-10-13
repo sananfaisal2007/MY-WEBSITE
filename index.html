@@ -1681,46 +1681,63 @@ html.skip-welcome #welcome-screen { display: none !important; }
 
 <body>
 
-    <nav>
-      
-<div class="nav-portals">
-    <a href="#home" class="dream-portal">
-        <span class="portal-icon">🌙</span>
-        <span class="portal-label">Home</span>
-    </a>
-   <a href="about.html" class="dream-portal about-glow" id="aboutPortal">
-        <span class="portal-icon">✨</span>
-        <span class="portal-label">About</span>
-    </a>
-    <a href="#projects" class="dream-portal">
-        <span class="portal-icon">💎</span>
-        <span class="portal-label">Projects</span>
-    </a>
-   <a href="korea.html" class="dream-portal" id="koreaPortal">
-    <span class="portal-icon">🏯</span>
-    <span class="portal-label">Korean World 🇰🇷</span>
-</a>
-    <a href="#kpop" class="dream-portal">
-        <span class="portal-icon">🎵</span>
-        <span class="portal-label">K-Pop & K-Dramas</span>
-    </a>
-    <a href="#dream" class="dream-portal">
-        <span class="portal-icon">🌌</span>
-        <span class="portal-label">My Dream World</span>
-    </a>
-    <a href="#socials" class="social-shortcut" id="socialPortalBtn" aria-label="Jump to My Social World">
-    <span class="ss-star" aria-hidden="true">✦</span>
-    <span class="ss-label">Social World</span>
-    <span class="ss-new">NEW</span>
-</a>
-   <a href="favourites.html" class="fav-shortcut" aria-label="Go to My Favourites">
-    <span class="fs-star" aria-hidden="true">⭐</span>
-    <span>My Favourites</span>
-    <span class="fs-new">NEW</span>
-</a>
-</div>
+    <!-- ═══════════════════════════════════════
+     ✦ MAGIC FOLDABLE NAV BAR
+     ═══════════════════════════════════════ -->
+<div id="magicNavWrap" class="magic-nav-wrap">
 
+    <!-- Fold/Unfold Button -->
+    <button id="magicNavToggle" class="magic-nav-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation menu">
+        <span class="mnt-sparkle mnt-s1" aria-hidden="true">✦</span>
+        <span class="mnt-icon" aria-hidden="true">🪄</span>
+        <span class="mnt-label">MENU</span>
+        <span class="mnt-sparkle mnt-s2" aria-hidden="true">✨</span>
+        <span class="mnt-badge" id="mntBadge" aria-hidden="true">8</span>
+    </button>
+
+    <!-- Nav Bar (Drawer) -->
+    <nav class="magic-nav-drawer" id="magicNavDrawer">
+        <div class="nav-portals">
+            <a href="#home" class="dream-portal">
+                <span class="portal-icon">🌙</span>
+                <span class="portal-label">Home</span>
+            </a>
+            <a href="about.html" class="dream-portal about-glow" id="aboutPortal">
+                <span class="portal-icon">✨</span>
+                <span class="portal-label">About</span>
+            </a>
+            <a href="#projects" class="dream-portal">
+                <span class="portal-icon">💎</span>
+                <span class="portal-label">Projects</span>
+            </a>
+            <a href="korea.html" class="dream-portal" id="koreaPortal">
+                <span class="portal-icon">🏯</span>
+                <span class="portal-label">Korean World 🇰🇷</span>
+            </a>
+            <a href="#kpop" class="dream-portal">
+                <span class="portal-icon">🎵</span>
+                <span class="portal-label">K-Pop & K-Dramas</span>
+            </a>
+            <a href="#dream" class="dream-portal">
+                <span class="portal-icon">🌌</span>
+                <span class="portal-label">My Dream World</span>
+            </a>
+            <a href="favourites.html" class="fav-shortcut" aria-label="Go to My Favourites">
+                <span class="fs-star" aria-hidden="true">⭐</span>
+                <span>My Favourites</span>
+                <span class="fs-new">NEW</span>
+            </a>
+            <a href="#socials" class="social-shortcut" id="socialPortalBtn" aria-label="Jump to My Social World">
+                <span class="ss-star" aria-hidden="true">✦</span>
+                <span class="ss-label">Social World</span>
+                <span class="ss-new">NEW</span>
+            </a>
+        </div>
     </nav>
+
+    <!-- Backdrop (screen ke peeche dark overlay) -->
+    <div class="magic-nav-backdrop" id="magicNavBackdrop" aria-hidden="true"></div>
+</div>
     
 <button id="themeToggle" onclick="toggleTheme()" style="padding:10px 16px; margin:12px; border-radius:20px; cursor:pointer; background:#00e5ff; color:#111; border:none; font-weight:bold;">
 🌙 Dark / ☀️ Light
@@ -4715,5 +4732,336 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
     draw();
 })();
 </script>
+<style>
+/* ═══════════════════════════════════════════════════════
+   ✦ MAGIC FOLDABLE NAV BAR
+   ═══════════════════════════════════════════════════════ */
+
+.magic-nav-wrap {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 5000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    pointer-events: none;
+}
+
+.magic-nav-wrap > * {
+    pointer-events: auto;
+}
+
+/* ═══════════════════════════════════════
+   🪄 TOGGLE BUTTON (Magic Wand)
+   ═══════════════════════════════════════ */
+.magic-nav-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 20px 11px 14px;
+    border: 1px solid rgba(255, 226, 122, 0.7);
+    border-radius: 30px;
+    background: linear-gradient(110deg, #a855f7, #c084fc, #ffc8f2, #a855f7);
+    background-size: 300% 100%;
+    color: #2a0f45;
+    font: 800 13px 'Poppins', sans-serif;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    overflow: hidden;
+    isolation: isolate;
+    box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 0 22px rgba(168, 85, 247, 0.7),
+        0 0 44px rgba(255, 159, 210, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    animation: mntFlow 5s linear infinite, mntFloat 3s ease-in-out infinite;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes mntFlow {
+    to { background-position: 300% 0; }
+}
+
+@keyframes mntFloat {
+    0%, 100% { translate: 0 0; }
+    50%      { translate: 0 -3px; }
+}
+
+.magic-nav-toggle::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -70%;
+    width: 55%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+    transform: skewX(-22deg);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.magic-nav-toggle:hover::before {
+    animation: mntShine 0.9s ease-out;
+}
+
+@keyframes mntShine {
+    0%   { left: -70%; }
+    100% { left: 160%; }
+}
+
+.magic-nav-toggle:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.45),
+        0 0 32px rgba(168, 85, 247, 0.9),
+        0 0 60px rgba(255, 159, 210, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.magic-nav-toggle:active {
+    transform: scale(0.95);
+}
+
+.magic-nav-toggle .mnt-icon {
+    display: inline-block;
+    font-size: 20px;
+    line-height: 1;
+    animation: mntWand 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 6px rgba(255, 226, 122, 0.9));
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes mntWand {
+    0%, 100% { transform: rotate(-12deg) scale(1); }
+    50%      { transform: rotate(14deg) scale(1.15); }
+}
+
+.magic-nav-toggle .mnt-label {
+    position: relative;
+    z-index: 2;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+}
+
+/* Sparkles around toggle */
+.magic-nav-toggle .mnt-sparkle {
+    position: absolute;
+    font-size: 12px;
+    color: #fff7c9;
+    pointer-events: none;
+    filter: drop-shadow(0 0 6px #ffd24d);
+    opacity: 0;
+    z-index: 3;
+}
+.mnt-s1 {
+    top: -6px; right: 16px;
+    animation: mntSpark 2.6s ease-in-out infinite;
+    animation-delay: 0s;
+}
+.mnt-s2 {
+    bottom: -6px; right: 42px;
+    animation: mntSpark 2.6s ease-in-out infinite;
+    animation-delay: 1.3s;
+}
+
+@keyframes mntSpark {
+    0%, 100% { opacity: 0; transform: translateY(0) scale(0.6) rotate(0deg); }
+    50%      { opacity: 1; transform: translateY(-6px) scale(1.3) rotate(25deg); }
+}
+
+/* Badge (kitne buttons hain) */
+.magic-nav-toggle .mnt-badge {
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 11px;
+    background: #2a0f45;
+    color: #ffe27a;
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 20px;
+    text-align: center;
+    box-shadow: 0 0 12px rgba(255, 226, 122, 0.8);
+    z-index: 4;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Open state par badge hide */
+.magic-nav-wrap.open .mnt-badge {
+    opacity: 0;
+    transform: scale(0.3);
+}
+
+/* ═══════════════════════════════════════
+   📂 DRAWER (foldable nav)
+   ═══════════════════════════════════════ */
+.magic-nav-drawer {
+    position: relative;
+    display: block !important;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 24px;
+    background: rgba(9, 7, 18, 0.94);
+    border: 1px solid rgba(190, 140, 255, 0.35);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow:
+        0 18px 50px rgba(0, 0, 0, 0.55),
+        0 0 40px rgba(168, 85, 247, 0.35),
+        inset 0 0 20px rgba(255, 255, 255, 0.03);
+    transform-origin: top left;
+    transform: scaleY(0.6) translateY(-10px);
+    transition:
+        max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.4s ease,
+        transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+        padding 0.4s ease;
+}
+
+.magic-nav-wrap.open .magic-nav-drawer {
+    max-height: 620px;
+    opacity: 1;
+    padding: 18px;
+    pointer-events: auto;
+    transform: scaleY(1) translateY(0);
+}
+
+/* ═══════════════════════════════════════
+   🎯 NAV BUTTONS GRID
+   ═══════════════════════════════════════ */
+.magic-nav-drawer .nav-portals {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    width: 100%;
+    max-width: 260px;
+    max-height: none;
+    overflow: visible;
+    padding: 0;
+    margin: 0;
+}
+
+/* Sab buttons full width ho jayein */
+.magic-nav-drawer .nav-portals .dream-portal,
+.magic-nav-drawer .nav-portals .fav-shortcut,
+.magic-nav-drawer .nav-portals .social-shortcut {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 10px;
+    padding: 11px 16px;
+    font-size: 13px;
+    border-radius: 14px;
+    margin: 0 !important;
+    transform: translateX(-20px) scale(0.95);
+    opacity: 0;
+    transition:
+        transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 0.4s ease;
+}
+
+/* Open hote hi buttons ek ek karke pop karein */
+.magic-nav-wrap.open .magic-nav-drawer .nav-portals > * {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+}
+
+/* Staggered delays */
+.magic-nav-wrap.open .magic-nav-drawer .nav-portals > *:nth-child(1) { transition-delay: 0.10s; }
+.magic-nav-wrap.open .magic-nav-drawer .nav-portals > *:nth-child(2) { transition-delay: 0.15s; }
+.magic-nav-wrap.open .magic-nav-drawer .nav-portals > *:nth-child(3) { transition-delay: 0.20s; }
+.magic-nav-wrap.open .magic-nav-drawer .nav-portals > *:nth-child(4) { transition-delay: 0.25s; }
+.magic-nav-wrap.open .magic-nav-drawer .nav-portals > *:nth-child(5) { transition-delay: 0.30s; }
+.magic-nav-wrap.open .magic-nav-drawer .nav-portals > *:nth-child(6) { transition-delay: 0.35s; }
+.magic-nav-wrap.open .magic-nav-drawer .nav-portals > *:nth-child(7) { transition-delay: 0.40s; }
+.magic-nav-wrap.open .magic-nav-drawer .nav-portals > *:nth-child(8) { transition-delay: 0.45s; }
+
+/* ═══════════════════════════════════════
+   🌑 BACKDROP
+   ═══════════════════════════════════════ */
+.magic-nav-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: rgba(5, 3, 12, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.magic-nav-wrap.open .magic-nav-backdrop {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* ═══════════════════════════════════════
+   📱 Mobile Tuning
+   ═══════════════════════════════════════ */
+@media (max-width: 700px) {
+    .magic-nav-wrap {
+        top: 12px;
+        left: 12px;
+    }
+
+    .magic-nav-toggle {
+        padding: 9px 14px 9px 10px;
+        font-size: 12px;
+        gap: 6px;
+    }
+
+    .magic-nav-toggle .mnt-icon {
+        font-size: 17px;
+    }
+
+    .magic-nav-drawer .nav-portals {
+        max-width: 220px;
+    }
+
+    .magic-nav-drawer .nav-portals > * {
+        padding: 10px 14px;
+        font-size: 12px;
+    }
+}
+
+/* ═══════════════════════════════════════
+   ✨ MAGICAL PAGE CONTENT SHIFT
+   (jab menu khule, page thora dim ho jaye)
+   ═══════════════════════════════════════ */
+body.magic-menu-open {
+    overflow: hidden;
+}
+
+/* ═══════════════════════════════════════
+   ♿ Reduce Motion
+   ═══════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+    .magic-nav-toggle,
+    .magic-nav-toggle::before,
+    .magic-nav-toggle .mnt-icon,
+    .magic-nav-toggle .mnt-sparkle {
+        animation: none !important;
+    }
+
+    .magic-nav-drawer,
+    .magic-nav-drawer .nav-portals > * {
+        transition: none !important;
+    }
+}
+</style>
 </body>
 </html>
