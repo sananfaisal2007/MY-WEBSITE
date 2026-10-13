@@ -1652,6 +1652,8 @@ html.skip-welcome #welcome-screen { display: none !important; }
     }
 }
 </style>
+
+<style>
 /* ═══════════════════════════════════════
    🎬 CINEMATIC PORTAL TRANSITION
    ═══════════════════════════════════════ */
@@ -1679,22 +1681,10 @@ html.skip-welcome #welcome-screen { display: none !important; }
 }
 
 @keyframes wdBurstGlow {
-    0% {
-        transform: scale(0.3);
-        opacity: 0;
-    }
-    30% {
-        transform: scale(4);
-        opacity: 1;
-    }
-    70% {
-        transform: scale(14);
-        opacity: 0.9;
-    }
-    100% {
-        transform: scale(30);
-        opacity: 0;
-    }
+    0%   { transform: scale(0.3); opacity: 0; }
+    30%  { transform: scale(4);   opacity: 1; }
+    70%  { transform: scale(14);  opacity: 0.9; }
+    100% { transform: scale(30);  opacity: 0; }
 }
 
 /* --- Ring pulse waves --- */
@@ -1714,19 +1704,9 @@ html.skip-welcome #welcome-screen { display: none !important; }
 }
 
 @keyframes wdRingPulse {
-    0% {
-        transform: scale(0.2);
-        opacity: 0;
-        border-width: 6px;
-    }
-    30% {
-        opacity: 1;
-    }
-    100% {
-        transform: scale(14);
-        opacity: 0;
-        border-width: 1px;
-    }
+    0%   { transform: scale(0.2); opacity: 0; border-width: 6px; }
+    30%  { opacity: 1; }
+    100% { transform: scale(14); opacity: 0; border-width: 1px; }
 }
 
 /* --- Flying sparkles --- */
@@ -1811,18 +1791,18 @@ body.wd-cinematic-zoom {
     }
 }
 
-/* --- Mobile tuning (chhote screens par halka) --- */
+/* --- Mobile tuning --- */
 @media (max-width: 600px) {
     .wd-burst-glow {
         box-shadow:
             0 0 20px #d49aff,
             0 0 40px #8b4dff;
     }
-
     .wd-spark-fly {
         font-size: 12px !important;
     }
 }
+</style>
 </head>
 
 <body>
