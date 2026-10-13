@@ -1816,27 +1816,59 @@ Lost in stories, music, and my own little universe.
     </div>
 </section>
        
-       <section class="content" id="dramas">
-    <h2>🎬 My K-Drama Library 💗</h2>
-    <p>Explore my favourite Korean dramas and unforgettable stories! 🇰🇷</p>
-   
-<div class="card kdrama-cover">
-    <img src="jpg.webp" alt="My Favourite K-Dramas" class="drama-cover-image">
-    <div class="drama-decor">✦ ❀ 🎬 ❀ ✦</div>
+      <!-- ═══════════════════════════════════════
+     🎬 K-DRAMA + 🎤 K-POP COMBINED
+     ═══════════════════════════════════════ -->
+<section class="content" id="dramas">
+    <h2>🎬 K-Drama & 🎤 K-Pop 💗</h2>
+    <p>My two favourite worlds — stories that stay and music that moves. 🇰🇷✨</p>
 
-   
+    <div class="duo-charts">
 
-    <div class="drama-title">
-        <span>ROMANCE • THRILLER • FEELS</span>
-        <h3>♡ K-DRAMA WORLD ♡</h3>
-        <p>Stories that stay in your heart ✨</p>
+        <!-- 🎬 K-DRAMA CARD -->
+        <div class="duo-card kdrama-duo">
+            <div class="duo-decor">✦ ❀ 🎬 ❀ ✦</div>
+
+            <img src="jpg.webp" alt="My Favourite K-Dramas" class="duo-cover-img">
+
+            <div class="duo-title">
+                <span>ROMANCE • THRILLER • FEELS</span>
+                <h3>♡ K-DRAMA WORLD ♡</h3>
+                <p>Stories that stay in your heart ✨</p>
+            </div>
+
+            <a href="kdrama.html" class="duo-btn">EXPLORE ↗</a>
+
+            <div class="duo-decor">♡ ✧ ♡ 🎞 ♡ ✧ ♡</div>
+        </div>
+
+        <!-- 🎤 K-POP CARD -->
+        <div class="duo-card kpop-duo">
+            <div class="duo-decor">✦ ♡ ✦ ♬ ✦ ♡ ✦</div>
+
+            <div class="duo-photos">
+                <div class="duo-idol">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.tsLVe7SBzrN0WE8A_kvCJAHaLG?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="IVE Wonyoung">
+                    <span>WONYOUNG ♡</span>
+                </div>
+                <div class="duo-idol">
+                    <img src="https://tse2.mm.bing.net/th/id/OIP.iGW69n3QNMWMyWmpLxETVwHaJP?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="BABYMONSTER Asa">
+                    <span>ASA ✧</span>
+                </div>
+            </div>
+
+            <div class="duo-title">
+                <span>MY FAVOURITE IDOLS</span>
+                <h3>K-POP WORLD ♡</h3>
+                <p>Music • Idols • Memories</p>
+            </div>
+
+            <a href="kpop.html" class="duo-btn">ENTER ↗</a>
+
+            <div class="duo-decor">♡ ✧ ♡ ♪ ♡ ✧ ♡</div>
+        </div>
+
     </div>
-
-    <a href="kdrama.html">EXPLORE MY DRAMA LIBRARY ↗</a>
-
-    <div class="drama-decor">♡ ✧ ♡ 🎞 ♡ ✧ ♡</div>
-</div>
-
 </section>
 
 <script>
@@ -1851,38 +1883,6 @@ function searchDramas() {
     });
 }
 </script>
-
-    <section class="content" id="idols">
-    <h2>🎤 My K-pop World 💗</h2>
-    <p>Explore my favourite K-pop idols!</p>
-  
-<div class="card kpop-cover">
-    <div class="kpop-decor">✦ ♡ ✦ ♬ ✦ ♡ ✦</div>
-
-    <div class="kpop-photos">
-        <div class="idol-photo">
-            <img src="https://tse4.mm.bing.net/th/id/OIP.tsLVe7SBzrN0WE8A_kvCJAHaLG?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="IVE Wonyoung">
-            <span>WONYOUNG ♡</span>
-        </div>
-
-        <div class="idol-photo">
-            <img src="https://tse2.mm.bing.net/th/id/OIP.iGW69n3QNMWMyWmpLxETVwHaJP?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="BABYMONSTER Asa">
-            <span>ASA ✧</span>
-        </div>
-    </div>
-
-    <div class="kpop-title">
-        <span>MY FAVOURITE IDOLS</span>
-        <h3>K-POP WORLD ♡</h3>
-        <p>Music • Idols • Memories</p>
-    </div>
-
-    <a href="kpop.html">ENTER MY K-POP WORLD ↗</a>
-    <div class="kpop-decor">♡ ✧ ♡ ♪ ♡ ✧ ♡</div>
-</div>
-
-</section>
-
        
         <section class="content" id="dream">
     <h2>🌙 My Dream World</h2>
@@ -4789,6 +4789,212 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
     .kpop-shortcut .ks-new,
     .kdrama-shortcut .kd-new {
         animation: none !important;
+    }
+}
+</style>
+<style>
+/* ═══════════════════════════════════════════════════════
+   🎬🎤 DUO CHARTS — K-Drama + K-Pop side by side
+   ═══════════════════════════════════════════════════════ */
+
+.duo-charts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-top: 18px;
+}
+
+/* Base card */
+.duo-card {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 14px;
+    border-radius: 20px;
+    border: 2px solid;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    animation: duoGlow 3.5s ease-in-out infinite alternate;
+}
+
+.duo-card:hover {
+    transform: translateY(-5px);
+}
+
+/* 🎬 K-DRAMA CARD */
+.kdrama-duo {
+    border-color: #d9b0ff;
+    background: linear-gradient(145deg, #100d25, #42205d, #17132e);
+    box-shadow: 0 0 16px rgba(190, 130, 255, 0.3);
+}
+
+.kdrama-duo:hover {
+    box-shadow: 0 0 26px rgba(190, 130, 255, 0.75);
+}
+
+/* 🎤 K-POP CARD */
+.kpop-duo {
+    border-color: #f7a8e8;
+    background: linear-gradient(145deg, #260b3c, #711b78, #241044);
+    box-shadow: 0 0 16px rgba(244, 114, 224, 0.35);
+}
+
+.kpop-duo:hover {
+    box-shadow: 0 0 26px rgba(244, 114, 224, 0.75);
+}
+
+@keyframes duoGlow {
+    from { filter: brightness(1); }
+    to   { filter: brightness(1.08); }
+}
+
+/* Decor lines */
+.duo-decor {
+    color: #ffc8f4;
+    letter-spacing: 4px;
+    margin: 6px 0;
+    font-size: 11px;
+}
+
+.kdrama-duo .duo-decor { color: #e7c2ff; }
+
+/* Cover image (K-Drama) */
+.duo-cover-img {
+    display: block;
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    margin: 8px auto;
+    border-radius: 14px;
+    border: 2px solid #e6b8ff;
+    box-shadow: 0 0 12px rgba(210, 140, 255, 0.4);
+    transition: transform 0.4s ease;
+}
+
+.duo-card:hover .duo-cover-img {
+    transform: scale(1.04);
+}
+
+/* Idol photos (K-Pop) */
+.duo-photos {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin: 8px 0;
+}
+
+.duo-idol {
+    width: 48%;
+    overflow: hidden;
+    border: 2px solid #ffc1f3;
+    border-radius: 12px;
+    background: #38134d;
+}
+
+.duo-idol img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.duo-idol:hover img {
+    transform: scale(1.08);
+}
+
+.duo-idol span {
+    display: block;
+    padding: 5px 2px;
+    color: #ffe2fa;
+    font-weight: bold;
+    font-size: 10px;
+    background: #38134d;
+}
+
+/* Titles */
+.duo-title span {
+    color: #f9b9f0;
+    font-size: 9px;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.kdrama-duo .duo-title span { color: #e7c2ff; }
+
+.duo-title h3 {
+    color: #fff0fc;
+    font-size: 17px;
+    margin: 5px 0;
+    text-shadow: 0 0 10px #ff83e4;
+}
+
+.kdrama-duo .duo-title h3 {
+    text-shadow: 0 0 10px #c78cff;
+}
+
+.duo-title p {
+    color: #f8d8f3;
+    font-size: 11px;
+    margin-bottom: 6px;
+}
+
+.kdrama-duo .duo-title p { color: #e7d7f7; }
+
+/* Button */
+.duo-btn {
+    display: inline-block;
+    margin: 8px 0;
+    padding: 8px 16px;
+    border: 1px solid #ffc1f3;
+    border-radius: 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.kdrama-duo .duo-btn { border-color: #e3c2ff; }
+
+.duo-btn:hover {
+    background: #f18adf;
+    color: #260b3c;
+    transform: translateY(-2px);
+    box-shadow: 0 0 16px rgba(244, 114, 224, 0.6);
+}
+
+.kdrama-duo .duo-btn:hover {
+    background: #d6a1ff;
+    color: #17102b;
+    box-shadow: 0 0 16px rgba(190, 130, 255, 0.6);
+}
+
+/* 📱 Mobile — 1 column */
+@media (max-width: 600px) {
+    .duo-charts {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+    .duo-cover-img,
+    .duo-idol img {
+        height: 110px;
+    }
+    .duo-title h3 {
+        font-size: 15px;
+    }
+}
+
+/* Chhoti screens */
+@media (max-width: 400px) {
+    .duo-card {
+        padding: 10px;
+        border-radius: 16px;
+    }
+    .duo-decor {
+        letter-spacing: 2px;
+        font-size: 9px;
     }
 }
 </style>
