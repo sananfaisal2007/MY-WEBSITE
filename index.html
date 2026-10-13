@@ -1404,6 +1404,115 @@ height: 100%;
 </style>
 
 
+<style>
+/* ===== WELCOME SCREEN UPGRADE ===== */
+#welcome-screen { overflow-x: hidden; overflow-y: auto; }
+#welcome-screen.leaving { overflow: hidden; }
+#welcome-screen .welcome-content { margin: auto; width: 100%; padding: 20px 0; }
+
+/* Moving background layers */
+.ws-layer { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.ws-orb { position: absolute; border-radius: 50%; filter: blur(50px); will-change: transform; }
+.ws-o1 { width: 340px; height: 340px; left: 5%;  top: 8%;    background: rgba(150, 80, 255, .35); }
+.ws-o2 { width: 400px; height: 400px; right: 2%; bottom: 4%; background: rgba(255, 120, 220, .25); }
+.ws-o3 { width: 240px; height: 240px; left: 55%; top: 12%;   background: rgba(255, 226, 122, .16); }
+.ws-star { position: absolute; border-radius: 50%; background: #fff; will-change: transform; }
+.ws-emoji { position: absolute; font-size: 24px; opacity: .8; filter: drop-shadow(0 0 8px #d9baff); will-change: transform; }
+.ws-cursor {
+  position: absolute; left: 0; top: 0; width: 300px; height: 300px; margin: -150px 0 0 -150px;
+  border-radius: 50%; pointer-events: none; z-index: 1; will-change: transform;
+  background: radial-gradient(circle, rgba(190, 130, 255, .35), transparent 65%);
+}
+.wd-trail { position: absolute; z-index: 3; pointer-events: none; font-size: 14px; animation: wdTrail 1s ease-out forwards; }
+@keyframes wdTrail { to { opacity: 0; transform: translateY(-30px) scale(.4); } }
+
+/* Name input */
+.wd-name-label { display: block; margin-top: 30px; color: #e5d0ff; font-size: 15px; line-height: 1.7; }
+.wd-name-wrap {
+  max-width: 360px; margin: 14px auto 0; padding: 3px; border-radius: 18px;
+  background: linear-gradient(90deg, #8b4dff, #ffc8f2, #8b4dff); background-size: 200% 200%;
+  animation: wdBorder 4s linear infinite; box-shadow: 0 0 20px rgba(139, 77, 255, .3);
+}
+@keyframes wdBorder { to { background-position: 200% 50%; } }
+.wd-name-wrap input {
+  display: block; width: 100%; padding: 13px; border: 0; outline: 0; border-radius: 15px;
+  background: #130b22; color: #fff; font-size: 16px; text-align: center; font-family: inherit;
+}
+.wd-name-wrap input::placeholder { color: #a994c4; }
+.wd-react { min-height: 22px; margin: 10px 0 0; color: #ffe9a8; font-size: 13px; line-height: 1.6; }
+.wd-shake { animation: wdShake .45s; }
+@keyframes wdShake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-9px); } 40% { transform: translateX(9px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(6px); } }
+
+/* Magical door */
+.wd-door {
+  position: relative; display: block; width: 190px; margin: 18px auto 0; padding: 0; border: 0;
+  background: none; color: #fff; font-family: inherit; cursor: pointer; z-index: 2;
+  transform-origin: 50% 39%; -webkit-tap-highlight-color: transparent;
+  animation: wdFloat 3s ease-in-out infinite;
+  transition: transform 1.3s cubic-bezier(.6, 0, 1, .6);
+}
+@keyframes wdFloat { 0%,100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+.wd-glow {
+  position: absolute; left: 50%; top: 40%; width: 230px; height: 230px; margin: -115px 0 0 -115px;
+  border-radius: 50%; z-index: 0; pointer-events: none;
+  background: radial-gradient(circle, rgba(255, 233, 168, .65), rgba(199, 139, 255, .35) 45%, transparent 70%);
+  animation: wdPulse 2.6s ease-in-out infinite;
+}
+@keyframes wdPulse { 0%,100% { transform: scale(.85); opacity: .7; } 50% { transform: scale(1.15); opacity: 1; } }
+.wd-frame {
+  position: relative; display: block; width: 130px; height: 175px; margin: 0 auto; z-index: 1;
+  border-radius: 70px 70px 6px 6px; border: 4px solid #f1d9ff; perspective: 700px; overflow: hidden;
+  background: #10071e; box-shadow: 0 0 24px #c78bff, 0 0 50px rgba(139, 77, 255, .5), inset 0 0 18px #000;
+  transition: box-shadow .3s;
+}
+.wd-door:hover .wd-frame { box-shadow: 0 0 34px #e3b4ff, 0 0 70px rgba(168, 120, 255, .7), inset 0 0 18px #000; }
+.wd-light {
+  position: absolute; inset: 0; opacity: 0; transition: opacity .8s ease .2s;
+  background: radial-gradient(circle at 50% 55%, #fff 0%, #ffe9a8 30%, #d49aff 65%, #5b2a86 100%);
+}
+.wd-panel {
+  position: absolute; top: 0; bottom: 0; width: 50%; z-index: 2; overflow: hidden;
+  background: linear-gradient(120deg, #8b3fd0, #5a2a96 50%, #8b3fd0);
+  transition: transform 1s cubic-bezier(.5, 0, .2, 1);
+}
+.wd-panel.l { left: 0;  transform-origin: left center;  border-right: 1px solid rgba(0,0,0,.4); }
+.wd-panel.r { right: 0; transform-origin: right center; border-left: 1px solid rgba(0,0,0,.4); }
+.wd-panel::before {
+  content: ""; position: absolute; top: 0; bottom: 0; width: 40%; left: -60%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.7), transparent);
+  animation: wdShine 3s ease-in-out infinite;
+}
+@keyframes wdShine { 0% { left: -60%; } 55%,100% { left: 140%; } }
+.wd-panel::after { content: "✨"; position: absolute; top: 28%; left: 50%; transform: translateX(-50%); font-size: 16px; opacity: .85; }
+.wd-knob {
+  position: absolute; top: 55%; left: 50%; width: 12px; height: 12px; margin-left: -6px; z-index: 3;
+  border-radius: 50%; background: radial-gradient(circle, #fff6c9, #ffd24d); box-shadow: 0 0 10px #ffe27a;
+  transition: opacity .3s;
+}
+.wd-door-text { display: block; margin-top: 14px; font-size: 14px; font-weight: 700; color: #ffeab8; text-shadow: 0 0 10px #ffd24d; position: relative; z-index: 1; }
+.wd-door.open .wd-panel.l { transform: rotateY(-110deg); }
+.wd-door.open .wd-panel.r { transform: rotateY(110deg); }
+.wd-door.open .wd-light { opacity: 1; }
+.wd-door.open .wd-knob { opacity: 0; }
+.wd-door.zoom { transform: scale(16); }
+
+/* Hint + fade out */
+.wd-hint { min-height: 22px; margin: 12px 0 0; color: #cdb9e6; font-size: 13px; line-height: 1.6; }
+.wd-fade, .wd-hint { transition: opacity .6s ease; }
+#welcome-screen.portal .wd-fade, #welcome-screen.portal .wd-hint { opacity: 0; }
+
+/* Sparkle burst */
+.wd-spark { position: fixed; z-index: 10; pointer-events: none; animation: wdSpark 1.4s ease-out forwards; }
+@keyframes wdSpark { to { transform: translate(var(--dx), var(--dy)) scale(.3); opacity: 0; } }
+
+@media (max-width: 600px) {
+  .wd-door { width: 150px; }
+  .wd-frame { width: 105px; height: 140px; border-radius: 55px 55px 6px 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wd-door, .wd-glow, .wd-name-wrap, .wd-panel::before { animation: none; }
+}
+</style>
 </head>
 
 <body>
@@ -1629,49 +1738,240 @@ function toggleTheme() {
 <!-- Welcome Screen -->
 <div id="scrollProgress"></div>
     <div id="welcome-screen">
+
+    <!-- Moving background -->
+    <div class="ws-layer" aria-hidden="true">
+        <i class="ws-orb ws-o1" data-depth="50"></i>
+        <i class="ws-orb ws-o2" data-depth="-70"></i>
+        <i class="ws-orb ws-o3" data-depth="35"></i>
+        <span class="ws-emoji" data-depth="45"  style="left:10%;top:72%">🌸</span>
+        <span class="ws-emoji" data-depth="-40" style="left:82%;top:16%">🌙</span>
+        <span class="ws-emoji" data-depth="60"  style="left:22%;top:14%">⭐</span>
+        <span class="ws-emoji" data-depth="-55" style="left:74%;top:76%">💫</span>
+        <span class="ws-emoji" data-depth="70"  style="left:90%;top:48%">🦋</span>
+        <span class="ws-emoji" data-depth="-30" style="left:6%;top:42%">💜</span>
+    </div>
+    <div class="ws-cursor" id="wsCursor"></div>
+
     <div class="welcome-content">
-        <p class="welcome-label">WELCOME TO MY PERSONAL SPACE</p>
+        <p class="welcome-label wd-fade">WELCOME TO MY PERSONAL SPACE</p>
 
-        <h1>A Little World Called Mine</h1>
+        <h1 class="wd-fade">A Little World Called Mine</h1>
 
-        <p class="welcome-description">
+        <p class="welcome-description wd-fade">
             My life, my dreams, my interests — my little world.
         </p>
 
-        <button id="enter-world-btn" onclick="enterMyWorld()">
-            Enter My World <span>→</span>
+        <label class="wd-name-label wd-fade" for="visitorName">
+            💌 Pehle apna naam batao, warna darwaza nahi khulega 🚪😂
+        </label>
+        <div class="wd-name-wrap wd-fade">
+            <input id="visitorName" type="text" maxlength="30"
+                   autocomplete="given-name" placeholder="✨ Apna naam likho...">
+        </div>
+        <p class="wd-react wd-fade" id="wdReact" aria-live="polite"></p>
+
+        <button type="button" id="enter-door" class="wd-door"
+                onclick="enterMyWorld()" aria-label="Enter My World">
+            <span class="wd-glow"></span>
+            <span class="wd-frame">
+                <span class="wd-light"></span>
+                <span class="wd-panel l"></span>
+                <span class="wd-panel r"></span>
+                <span class="wd-knob"></span>
+            </span>
+            <span class="wd-door-text wd-fade">Enter My World ✨</span>
         </button>
+        <p class="wd-hint" id="wdHint">Darwaza kaat nahi khata, bas dheere se touch karo 😂</p>
     </div>
 
     <div class="welcome-glow"></div>
 </div>
 
 
-
 <script>
-function enterMyWorld() {
+(function () {
     const screen = document.getElementById("welcome-screen");
-    const button = document.getElementById("enter-world-btn");
+    if (!screen) return;
 
-    if (!screen || screen.classList.contains("leaving")) return;
+    const input = document.getElementById("visitorName");
+    const react = document.getElementById("wdReact");
+    const hint  = document.getElementById("wdHint");
+    const door  = document.getElementById("enter-door");
+    const glow  = document.getElementById("wsCursor");
+    const layer = screen.querySelector(".ws-layer");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-    screen.classList.add("leaving");
-    button.disabled = true;
-    button.innerHTML = "Entering My World <span>✦</span>";
+    document.body.style.overflow = "hidden";
 
-    screen.style.transition =
-        "opacity 1.2s ease, transform 1.2s ease, filter 1.2s ease";
+    /* ---------- Funny lines ---------- */
+    const placeholders = [
+        "✨ Apna naam likho...",
+        "🕵️ Secret agent ka naam?",
+        "👑 Apna royal naam batao",
+        "🍭 Nickname bhi chalega 😂"
+    ];
+    const typingLines = [
+        "{n}... bohat pyara naam hai! Sanan ne note kar liya 📝💜",
+        "Wah {n}! Naam sunte hi darwaza thora sharma gaya 🚪🙈",
+        "{n}? Ye naam to Sanan ki diary mein likh liya 🧠✨",
+        "Oho {n}! Aaj ka sab se stylish naam 😎"
+    ];
+    const emptyLines = [
+        "🚪 Darwaza keh raha hai: 'Naam nahi to entry nahi!' 😂",
+        "👻 Bina naam ke to bhoot bhi andar nahi aata!",
+        "🙈 Naam likho, darwaza tumhein ghoor raha hai 👀"
+    ];
+    const enterLines = [
+        "✨ Abra ka dabra... {n} ke liye darwaza khul gaya! 🪄",
+        "🚪 Welcome {n}! Sanan ne chai bana rakhi hai ☕💜",
+        "🌙 {n} aa gaya/gayi! Sanan: 'Finally, late ho gaye!' 😂"
+    ];
 
-    screen.style.opacity = "0";
-    screen.style.transform = "scale(1.08)";
-    screen.style.filter = "blur(12px)";
+    /* ---------- Placeholder rotate ---------- */
+    let ph = 0;
+    setInterval(function () {
+        if (document.activeElement === input || input.value) return;
+        ph = (ph + 1) % placeholders.length;
+        input.placeholder = placeholders[ph];
+    }, 2500);
 
-    setTimeout(function () {
-        screen.style.display = "none";
-        document.body.style.overflow = "";
-   document.body.classList.add("home-reveal");
-    }, 1200);
-}
+    /* ---------- Live funny reaction ---------- */
+    input.addEventListener("input", function () {
+        const n = input.value.trim();
+        if (!n) { react.textContent = ""; return; }
+        if (n.toLowerCase().includes("sanan")) {
+            react.textContent = "🕵️ Sanan?! Fake ID? Asli Sanan ko bulao 😂";
+        } else if (n.length <= 2) {
+            react.textContent = "Itna chhota naam? Nickname hai ya password? 😂";
+        } else {
+            react.textContent = pick(typingLines).replace("{n}", n);
+        }
+    });
+    input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") window.enterMyWorld();
+    });
+
+    /* ---------- Moving background ---------- */
+    for (let i = 0; i < 45; i++) {
+        const s = document.createElement("span");
+        const size = 1 + Math.random() * 3;
+        s.className = "ws-star";
+        s.style.cssText =
+            "left:" + Math.random() * 100 + "%;top:" + Math.random() * 100 + "%;" +
+            "width:" + size + "px;height:" + size + "px;opacity:" + (0.3 + Math.random() * 0.6);
+        s.dataset.depth = (10 + Math.random() * 60) * (Math.random() > 0.5 ? 1 : -1);
+        layer.appendChild(s);
+    }
+    const movers = Array.from(layer.querySelectorAll("[data-depth]"))
+        .map(function (el) { return { el: el, d: parseFloat(el.dataset.depth) }; });
+
+    let tx = 0, ty = 0, cx = 0, cy = 0;
+    let mx = innerWidth / 2, my = innerHeight / 2, gx = mx, gy = my;
+    let moved = false, lastTrail = 0;
+
+    function onMove(e) {
+        moved = true;
+        mx = e.clientX; my = e.clientY;
+        tx = mx / innerWidth - 0.5;
+        ty = my / innerHeight - 0.5;
+
+        const now = Date.now();
+        if (!reduce && now - lastTrail > 90) {
+            lastTrail = now;
+            const t = document.createElement("span");
+            t.className = "wd-trail";
+            t.textContent = pick(["✨", "💜", "⭐"]);
+            t.style.left = mx + "px";
+            t.style.top = my + "px";
+            t.addEventListener("animationend", function () { t.remove(); });
+            screen.appendChild(t);
+        }
+    }
+    window.addEventListener("pointermove", onMove, { passive: true });
+
+    function loop() {
+        if (screen.style.display === "none") {
+            window.removeEventListener("pointermove", onMove);
+            return;
+        }
+        if (!moved) {                       // cursor nahi hila to halka sa khud move kare
+            tx = Math.sin(Date.now() / 2500) * 0.35;
+            ty = Math.cos(Date.now() / 3200) * 0.35;
+            mx = innerWidth / 2 + tx * 500;
+            my = innerHeight / 2 + ty * 500;
+        }
+        cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
+        gx += (mx - gx) * 0.18; gy += (my - gy) * 0.18;
+        movers.forEach(function (m) {
+            m.el.style.transform = "translate3d(" + cx * m.d * 2 + "px," + cy * m.d * 2 + "px,0)";
+        });
+        glow.style.transform = "translate3d(" + gx + "px," + gy + "px,0)";
+        requestAnimationFrame(loop);
+    }
+    if (!reduce) loop();
+
+    /* ---------- Sparkle burst ---------- */
+    function sparkles() {
+        const r = door.getBoundingClientRect();
+        const x = r.left + r.width / 2, y = r.top + 90;
+        const list = ["✨", "💜", "⭐", "🌸", "🦋", "💫"];
+        for (let i = 0; i < 30; i++) {
+            const s = document.createElement("span");
+            s.className = "wd-spark";
+            s.textContent = pick(list);
+            s.style.left = x + "px";
+            s.style.top = y + "px";
+            s.style.fontSize = 14 + Math.random() * 16 + "px";
+            s.style.setProperty("--dx", (Math.random() - 0.5) * 460 + "px");
+            s.style.setProperty("--dy", (Math.random() - 0.5) * 460 + "px");
+            s.addEventListener("animationend", function () { s.remove(); });
+            screen.appendChild(s);
+        }
+    }
+
+    /* ---------- ENTER MY WORLD ---------- */
+    window.enterMyWorld = function () {
+        if (screen.classList.contains("leaving")) return;
+
+        const name = input.value.trim();
+        if (!name) {
+            hint.textContent = pick(emptyLines);
+            input.focus();
+            const wrap = input.parentElement;
+            wrap.classList.remove("wd-shake");
+            void wrap.offsetWidth;
+            wrap.classList.add("wd-shake");
+            return;
+        }
+
+        try { localStorage.setItem("visitorName", name); } catch (e) {}
+
+        screen.classList.add("leaving");
+        door.disabled = true;
+        hint.textContent = pick(enterLines).replace("{n}", name);
+
+        door.classList.add("open");                              // darwaza khulta hai
+        setTimeout(sparkles, 600);                               // sparkles
+        setTimeout(function () {                                 // light mein zoom
+            screen.classList.add("portal");
+            door.classList.add("zoom");
+        }, 1100);
+        setTimeout(function () {                                 // screen fade
+            screen.style.transition = "opacity .8s ease";
+            screen.style.opacity = "0";
+        }, 2100);
+        setTimeout(function () {                                 // home page
+            screen.style.display = "none";
+            document.body.style.overflow = "";
+            document.body.classList.add("home-reveal");
+
+            const tag = document.querySelector(".hero .tag");
+            if (tag) tag.textContent = "WELCOME " + name.toUpperCase() + " 💜";
+        }, 2900);
+    };
+})();
 </script>
 
 
