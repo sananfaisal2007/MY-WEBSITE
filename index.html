@@ -5258,14 +5258,12 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
 /* ═══════════════════════════════════════
    🎨 THEME BUTTON
    ═══════════════════════════════════════ */
-
-   .theme-switcher {
+.theme-switcher {
     position: fixed;
-    top: 90px;
-    left: 20px;
+    top: 84px;
+    left: 16px;
     z-index: 9999;
     font-family: 'Poppins', sans-serif;
-}
 }
 
 .theme-btn {
@@ -5343,15 +5341,17 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
 }
 
 /* ═══════════════════════════════════════
-   🎨 THEME MENU (Dropdown)
+   🎨 THEME MENU (Dropdown) — COMPACT
    ═══════════════════════════════════════ */
 .theme-menu {
     position: absolute;
-    top: calc(100% + 12px);
+    top: calc(100% + 10px);
     left: 0;
-    width: 320px;
-    padding: 18px;
-    border-radius: 24px;
+    width: 280px;              /* ← Chhota kiya */
+    max-height: 70vh;          /* ← Screen se bara na ho */
+    overflow-y: auto;          /* ← Scroll ho sake */
+    padding: 14px;             /* ← Thora compact */
+    border-radius: 20px;
     border: 1px solid rgba(255, 200, 242, 0.4);
     background: linear-gradient(145deg,
         rgba(30, 18, 55, 0.96),
@@ -5369,6 +5369,23 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
     transform-origin: top left;
     transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     pointer-events: none;
+
+    /* Scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(190, 160, 255, 0.45) transparent;
+}
+
+.theme-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.theme-menu::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.theme-menu::-webkit-scrollbar-thumb {
+    background: rgba(190, 160, 255, 0.45);
+    border-radius: 3px;
 }
 
 .theme-menu.active {
@@ -5378,51 +5395,51 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
     pointer-events: auto;
 }
 
-/* Head */
+/* Head — chhota kiya */
 .tm-head {
     text-align: center;
-    padding-bottom: 14px;
-    margin-bottom: 14px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
     border-bottom: 1px dashed rgba(255, 200, 242, 0.25);
 }
 
 .tm-badge {
     display: inline-block;
-    padding: 4px 12px;
-    margin-bottom: 8px;
+    padding: 3px 10px;
+    margin-bottom: 6px;
     border: 1px solid rgba(255, 226, 122, 0.5);
     border-radius: 30px;
     background: rgba(255, 226, 122, 0.1);
     color: #ffeab8;
-    font-size: 9px;
-    letter-spacing: 3px;
+    font-size: 8px;
+    letter-spacing: 2px;
     font-weight: 700;
 }
 
 .tm-sub {
     color: #b8a8d1;
-    font-size: 11px;
-    line-height: 1.5;
+    font-size: 10px;
+    line-height: 1.4;
 }
 
 /* List */
 .tm-list {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
 }
 
 /* ═══════════════════════════════════════
-   🎨 THEME OPTION
+   🎨 THEME OPTION — COMPACT
    ═══════════════════════════════════════ */
 .theme-option {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     width: 100%;
-    padding: 11px 14px;
+    padding: 8px 10px;         /* ← Chhota kiya */
     border: 1px solid transparent;
-    border-radius: 14px;
+    border-radius: 12px;
     background: rgba(255, 255, 255, 0.04);
     color: #e7dcf7;
     font-family: inherit;
@@ -5435,7 +5452,7 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
 .theme-option:hover {
     background: rgba(168, 85, 247, 0.22);
     border-color: rgba(255, 200, 242, 0.5);
-    transform: translateX(4px);
+    transform: translateX(3px);
 }
 
 .theme-option.active {
@@ -5444,7 +5461,7 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
         rgba(255, 159, 210, 0.25));
     border-color: rgba(255, 226, 122, 0.85);
     box-shadow:
-        0 0 18px rgba(168, 85, 247, 0.4),
+        0 0 14px rgba(168, 85, 247, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
@@ -5453,15 +5470,15 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
     transform: scale(1);
 }
 
-/* Color preview */
+/* Color preview — chhota kiya */
 .to-preview {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
+    width: 34px;               /* ← Chhota */
+    height: 34px;
+    border-radius: 10px;
     flex-shrink: 0;
     overflow: hidden;
     border: 1.5px solid rgba(255, 255, 255, 0.2);
@@ -5469,7 +5486,7 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
 }
 
 .theme-option:hover .to-preview {
-    transform: scale(1.1) rotate(-5deg);
+    transform: scale(1.08) rotate(-4deg);
 }
 
 .to-dot {
@@ -5477,35 +5494,30 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
     border-radius: 50%;
 }
 
-.to-dot.c1 { width: 22px; height: 22px; top: 4px; left: 4px; }
-.to-dot.c2 { width: 20px; height: 20px; bottom: 4px; right: 4px; }
-.to-dot.c3 { width: 12px; height: 12px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.to-dot.c1 { width: 18px; height: 18px; top: 3px; left: 3px; }
+.to-dot.c2 { width: 16px; height: 16px; bottom: 3px; right: 3px; }
+.to-dot.c3 { width: 10px; height: 10px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
 
-/* Cosmic preview */
 .to-preview.cosmic { background: #05030f; }
 .cosmic .c1 { background: #7c3aed; }
 .cosmic .c2 { background: #ff9fd2; }
 .cosmic .c3 { background: #ffe27a; }
 
-/* Light preview */
 .to-preview.light { background: #f4f7fb; }
 .light .c1 { background: #a855f7; }
 .light .c2 { background: #e0b3ff; }
 .light .c3 { background: #4c1d95; }
 
-/* Sakura preview */
 .to-preview.sakura { background: #fff0f5; }
 .sakura .c1 { background: #ff85a2; }
 .sakura .c2 { background: #ffc8dc; }
 .sakura .c3 { background: #b23a5a; }
 
-/* Ocean preview */
 .to-preview.ocean { background: #0a1428; }
 .ocean .c1 { background: #0ea5e9; }
 .ocean .c2 { background: #67e8f9; }
 .ocean .c3 { background: #1e40af; }
 
-/* Neon preview */
 .to-preview.neon { background: #10071e; }
 .neon .c1 { background: #f0abfc; }
 .neon .c2 { background: #67e8f9; }
@@ -5517,18 +5529,18 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 1px;
 }
 
 .to-name {
-    font-size: 13px;
+    font-size: 12px;           /* ← Chhota */
     font-weight: 800;
     color: #fff;
     letter-spacing: 0.3px;
 }
 
 .to-desc {
-    font-size: 10px;
+    font-size: 9px;            /* ← Chhota */
     color: #b8a8d1;
     font-weight: 500;
 }
@@ -5538,45 +5550,41 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 22px;
-    height: 22px;
+    width: 18px;               /* ← Chhota */
+    height: 18px;
     border-radius: 50%;
     background: linear-gradient(135deg, #ffe27a, #ffc8f2);
     color: #2a0f45;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 900;
     opacity: 0;
     transform: scale(0.5);
     transition: all 0.3s ease;
     flex-shrink: 0;
-    box-shadow: 0 0 10px rgba(255, 226, 122, 0.7);
+    box-shadow: 0 0 8px rgba(255, 226, 122, 0.7);
 }
 
 /* Foot */
 .tm-foot {
-    padding-top: 12px;
-    margin-top: 12px;
+    padding-top: 10px;
+    margin-top: 10px;
     border-top: 1px dashed rgba(255, 200, 242, 0.25);
     text-align: center;
 }
 
 .tm-foot-text {
     color: #9985b8;
-    font-size: 10px;
-    letter-spacing: 0.5px;
+    font-size: 9px;
+    letter-spacing: 0.3px;
 }
 
-/* Body lock */
-body.theme-menu-open {
-    overflow: hidden;
-}
-
-/* 📱 Mobile */
+/* ═══════════════════════════════════════
+   📱 Mobile — BEST FIT
+   ═══════════════════════════════════════ */
 @media (max-width: 700px) {
     .theme-switcher {
-        top: 75px;
-        left: 12px;
-    }
+        top: 70px;
+        left: 10px;
     }
 
     .theme-btn {
@@ -5586,23 +5594,38 @@ body.theme-menu-open {
     }
 
     .tb-icon { font-size: 14px; }
-    .tb-label { display: none; }  /* Mobile par sirf icon */
+    .tb-label { display: none; }
 
     .theme-menu {
-        width: calc(100vw - 24px);
-        max-width: 320px;
+        width: 260px;
+        max-height: 60vh;
+        padding: 12px;
     }
 
     .theme-option {
-        padding: 10px 12px;
+        padding: 7px 9px;
+        gap: 8px;
     }
 
     .to-preview {
-        width: 36px;
-        height: 36px;
+        width: 30px;
+        height: 30px;
     }
 
-    .to-name { font-size: 12px; }
+    .to-dot.c1 { width: 16px; height: 16px; }
+    .to-dot.c2 { width: 14px; height: 14px; }
+    .to-dot.c3 { width: 9px; height: 9px; }
+
+    .to-name { font-size: 11px; }
+    .to-desc { font-size: 9px; }
+}
+
+/* Chhoti screens (400px) */
+@media (max-width: 400px) {
+    .theme-menu {
+        width: calc(100vw - 20px);
+        max-width: 280px;
+    }
 }
 
 /* ♿ Reduced motion */
