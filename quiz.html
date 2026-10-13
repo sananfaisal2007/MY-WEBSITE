@@ -384,11 +384,19 @@ h1 {
     transition: none !important;
   }
 }
-```
+  
 </style>
 </head>
 
 <body>
+  
+<div id="cosmicBackground" aria-hidden="true">
+  <div class="cosmic-nebula nebula-one"></div>
+  <div class="cosmic-nebula nebula-two"></div>
+  <div class="cosmic-stars"></div>
+  <div id="cursorGlow"></div>
+  <div id="sparkleLayer"></div>
+</div>
 
 <div class="flowers" aria-hidden="true">
   <span class="flower">🌸</span><span class="flower">✨</span><span class="flower">🌷</span><span class="flower">💜</span>
@@ -398,7 +406,7 @@ h1 {
 <main class="welcome-card" id="card">
 
   <!-- SCREEN 1: Welcome / name -->
- ```html
+ 
 <section id="introScreen" class="screen cosmic-welcome">
   <div class="welcome-card">
     <div class="cosmic-moon">🌙</div>
@@ -453,7 +461,6 @@ h1 {
     </p>
   </div>
 </section>
-```
 
   <!-- SCREEN 2: Quiz -->
   <section id="quizArea" class="screen" hidden>
