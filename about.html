@@ -440,6 +440,16 @@ html
     <i class="fx-orb o3"></i>
 </div>
 </style>
+<script>
+try {
+    if (sessionStorage.getItem("welcomeDone") === "1") {
+        document.documentElement.classList.add("skip-welcome");
+    }
+} catch (e) {}
+</script>
+<style>
+html.skip-welcome #welcome-screen { display: none !important; }
+</style>
 </head>
 
 <body>
