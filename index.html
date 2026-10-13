@@ -3086,26 +3086,7 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
   /* Card wrapper + animals */
   .qz-card-wrap { position: relative; width: var(--cw); flex: 0 0 auto; }
   #quizDock:not(.open) .qz-card-wrap { visibility: hidden; transition: visibility 0s .9s; }
-  .qz-pet {
-    position: absolute;
-    font-size: 26px;
-    line-height: 1;
-    opacity: 0;
-    transform: scale(.2) translateY(20px);
-    filter: drop-shadow(0 0 6px #f5c5ff);
-    pointer-events: none;
-    z-index: 4;
-  }
-  #quizDock.open .qz-pet { animation: qzPeek .7s cubic-bezier(.34, 1.56, .64, 1) forwards, qzWave 2.4s ease-in-out 1s infinite; }
-  .qz-pet.p1 { top: -22px; left: 6px; animation-delay: .35s, 1.1s; }
-  .qz-pet.p2 { top: -24px; right: 8px; animation-delay: .5s, 1.3s; }
-  .qz-pet.p3 { top: 38%; left: -16px; animation-delay: .65s, 1.5s; font-size: 24px; }
-  .qz-pet.p4 { bottom: -18px; right: 12px; animation-delay: .8s, 1.7s; }
-  @keyframes qzPeek { to { opacity: 1; transform: scale(1) translateY(0); } }
-  @keyframes qzWave {
-    0%, 100% { rotate: -8deg; }
-    50% { rotate: 8deg; translate: 0 -4px; }
-  }
+
 
   /* The quiz card itself */
   #quizMagicInvite {
@@ -3164,11 +3145,11 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
     #quizMagicInvite .quiz-invite-title { font-size: 13px; }
     #quizMagicInvite .quiz-invite-subtitle,
     #quizMagicInvite .quiz-invite-cta { font-size: 11px; }
-    .qz-pet { font-size: 22px; }
+  
   }
   @media (prefers-reduced-motion: reduce) {
     #quizDock, #quizDock *, #quizMagicInvite { animation: none !important; transition: none !important; }
-    #quizDock.open .qz-pet { opacity: 1; transform: none; }
+    
   }
 </style>
 
@@ -3181,10 +3162,7 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
   <span class="qz-rope" aria-hidden="true"></span>
 
   <div class="qz-card-wrap">
-    <span class="qz-pet p1" aria-hidden="true">🐰</span>
-    <span class="qz-pet p2" aria-hidden="true">🐱</span>
-    <span class="qz-pet p3" aria-hidden="true">🐼</span>
-    <span class="qz-pet p4" aria-hidden="true">🐥</span>
+   
 
     <button id="quizMagicInvite" type="button" aria-label="Open the How Well Do You Know Sanan quiz">
       <span class="quiz-mascot" aria-hidden="true">🧸💜</span>
