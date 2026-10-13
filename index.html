@@ -7275,54 +7275,138 @@ body.zoom-in-portal {
 </style>
 
 <!-- 🎹 PIANO SCRIPT -->
-
-
-<script>
+    <script>
 (function () {
+    var wrap = document.getElementById("pianoMenuWrap");
     var btn = document.getElementById("pianoToggle");
-    var audio = document.getElementById("pianoAudio");
-    if (!btn || !audio) return;
+    var menu = document.getElementById("pianoMenu");
+    var options = document.querySelectorAll(".pm-option");
 
-    var STORAGE_KEY = "sananPianoPlaying";
-    var playing = false;
+    var audios = {
+        piano: document.getElementById("pianoAudioPiano"),
+        lofi:  document.getElementById("pianoAudioLofi"),
+        rain:  document.getElementById("pianoAudioRain"),
+        night: document.getElementById("pianoAudioNight"),
+        ocean: document.getElementById("pianoAudioOcean")
+    };
 
-    audio.volume = 0.5;
+    if (!btn || !menu) return;
 
-    function setPlaying(state) {
-        playing = state;
-        if (state) {
-            btn.classList.add("playing");
-            audio.play().catch(function (err) {
-                console.warn("Piano play blocked:", err);
-                playing = false;
-                btn.classList.remove("playing");
-            });
-        } else {
-            btn.classList.remove("playing");
-            audio.pause();
-        }
-        try {
-            localStorage.setItem(STORAGE_KEY, state ? "1" : "0");
-        } catch (e) {}
-    }
+    var STORAGE_KEY = "sananPianoTrack";
+    var currentTrack = "piano";
+    var currentVolume = 0.5;
+    var isPlaying = false;
+    var userInteracted = false;
 
-    btn.addEventListener("click", function () {
-        setPlaying(!playing);
+    /* Set volume on all */
+    Object.values(audios).forEach(function (a) {
+        if (a) a.volume = currentVolume;
     });
 
-    /* Agar pehle on kiya tha toh pehle click par chalao */
-    var saved = "0";
-    try { saved = localStorage.getItem(STORAGE_KEY) || "0"; } catch (e) {}
+    /* Play track */
+    function playTrack(trackKey) {
+        Object.values(audios).forEach(function (a) {
+            if (a) { a.pause(); try { a.currentTime = 0; } catch (e) {} }
+        });
 
-    if (saved === "1") {
-        var firstClick = function () {
-            setPlaying(true);
-            document.removeEventListener("click", firstClick);
-            document.removeEventListener("touchstart", firstClick);
-        };
-        document.addEventListener("click", firstClick);
-        document.addEventListener("touchstart", firstClick);
+        currentTrack = trackKey;
+        var audio = audios[trackKey];
+
+        options.forEach(function (opt) {
+            opt.classList.toggle("active", opt.getAttribute("data-track") === trackKey);
+        });
+
+        if (audio && userInteracted) {
+            audio.volume = currentVolume;
+            audio.play().then(function () {
+                btn.classList.add("playing");
+                isPlaying = true;
+            }).catch(function (err) {
+                console.warn("Piano play blocked:", err);
+                btn.classList.remove("playing");
+                isPlaying = false;
+            });
+        }
+
+        try { localStorage.setItem(STORAGE_KEY, trackKey); } catch (e) {}
     }
+
+    /* Stop */
+    function stopAll() {
+        Object.values(audios).forEach(function (a) {
+            if (a) { a.pause(); try { a.currentTime = 0; } catch (e) {} }
+        });
+        btn.classList.remove("playing");
+        isPlaying = false;
+    }
+
+    /* Open / Close menu */
+    function openMenu() {
+        menu.classList.add("active");
+        menu.setAttribute("aria-hidden", "false");
+        btn.setAttribute("aria-expanded", "true");
+    }
+    function closeMenu() {
+        menu.classList.remove("active");
+        menu.setAttribute("aria-hidden", "true");
+        btn.setAttribute("aria-expanded", "false");
+    }
+    function toggleMenu() {
+        menu.classList.contains("active") ? closeMenu() : openMenu();
+    }
+
+    /* Button click */
+    btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        userInteracted = true;
+        toggleMenu();
+    });
+
+    /* Click outside */
+    document.addEventListener("click", function (e) {
+        if (!wrap.contains(e.target)) closeMenu();
+    });
+
+    /* ESC */
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeMenu();
+    });
+
+    /* Option click */
+    options.forEach(function (opt) {
+        opt.addEventListener("click", function () {
+            userInteracted = true;
+            var track = opt.getAttribute("data-track");
+
+            /* Same track? → toggle play/pause */
+            if (track === currentTrack && isPlaying) {
+                stopAll();
+            } else {
+                playTrack(track);
+            }
+        });
+    });
+
+    /* Load saved */
+    var saved = "piano";
+    try { saved = localStorage.getItem(STORAGE_KEY) || "piano"; } catch (e) {}
+    if (!audios[saved]) saved = "piano";
+
+    currentTrack = saved;
+    options.forEach(function (opt) {
+        opt.classList.toggle("active", opt.getAttribute("data-track") === saved);
+    });
+
+    /* Pehle user click par play (agar saved tha) */
+    var firstClick = function () {
+        userInteracted = true;
+        playTrack(saved);
+        document.removeEventListener("click", firstClick);
+        document.removeEventListener("touchstart", firstClick);
+    };
+    document.addEventListener("click", firstClick);
+    document.addEventListener("touchstart", firstClick);
+
 })();
 </script>
 
