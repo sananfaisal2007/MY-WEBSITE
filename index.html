@@ -1630,6 +1630,107 @@ This website is a little piece of me — my interests, my dreams, my random thou
     </div>
 </section>
           
+       <!-- ===== Favourites Hub ===== -->
+<style>
+  #favourites h2 { text-align: center; color: #e5d0ff; text-shadow: 0 0 12px rgba(170,105,255,.45); }
+  #favourites .fav-sub { text-align: center; }
+  .fav-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 18px 0 22px; }
+  .fav-tab {
+    padding: 8px 15px; border: 1px solid rgba(220,185,255,.4); border-radius: 22px;
+    background: rgba(190,150,255,.14); color: #f4edff; font: 600 13px inherit; font-family: inherit;
+    cursor: pointer; transition: transform .25s, background .25s, box-shadow .25s;
+  }
+  .fav-tab:hover { transform: translateY(-2px); }
+  .fav-tab.active { background: linear-gradient(135deg,#8b3fd0,#c084fc); color: #fff; box-shadow: 0 0 16px rgba(190,130,255,.6); }
+  .fav-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; }
+  .fav-card {
+    position: relative; padding: 20px 16px; text-align: center; border-radius: 18px;
+    background: rgba(20,14,35,.75); border: 1px solid rgba(180,130,255,.3);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    animation: favPop .5s ease both; transition: transform .3s, box-shadow .3s, border-color .3s;
+  }
+  .fav-card:hover { transform: translateY(-6px) rotate(-1deg); border-color: rgba(205,175,255,.9); box-shadow: 0 10px 28px rgba(139,77,255,.35); }
+  .fav-emoji { display: block; font-size: 40px; margin-bottom: 8px; filter: drop-shadow(0 0 8px #d9baff); }
+  .fav-card:hover .fav-emoji { animation: favWiggle .6s ease; }
+  .fav-title { margin: 0 0 4px; color: #fff0fc; font-size: 17px; }
+  .fav-note { margin: 0 0 10px; color: #d6cde5; font-size: 13px; line-height: 1.6; }
+  .fav-stars { color: #ffe27a; font-size: 15px; letter-spacing: 2px; text-shadow: 0 0 8px rgba(255,226,122,.6); }
+  .fav-tag { position: absolute; top: 10px; right: 12px; font-size: 11px; color: #f3d9ff; opacity: .8; }
+  @keyframes favPop { from { opacity: 0; transform: translateY(16px) scale(.95); } to { opacity: 1; transform: none; } }
+  @keyframes favWiggle { 0%,100% { transform: rotate(0); } 30% { transform: rotate(-14deg) scale(1.15); } 60% { transform: rotate(12deg) scale(1.15); } }
+  @media (prefers-reduced-motion: reduce) { .fav-card, .fav-card:hover .fav-emoji { animation: none; } }
+</style>
+
+<section class="content" id="favourites">
+  <h2>⭐ My Favourites Hub 💜</h2>
+  <p class="fav-sub">Meri pasandeeda cheezein ek jagah. Category chuno aur dekho! ✨</p>
+  <div class="fav-tabs" id="favTabs"></div>
+  <div class="fav-grid" id="favGrid"></div>
+</section>
+
+<script>
+(function () {
+  // ✏️ YAHAN APNI FAVOURITES BADLO: cat = category, icon = emoji, title = naam,
+  // note = aapki ek line ki raye, stars = rating (1 se 5)
+  var favs = [
+    { cat: "Anime",  icon: "⚔️", title: "Jujutsu Kaisen", note: "Action aur emotions, dono full on.", stars: 5 },
+    { cat: "Anime",  icon: "🌀", title: "Apna anime likho", note: "Yahan apni raye likho.", stars: 4 },
+    { cat: "K-Drama", icon: "👑", title: "Queen of Tears", note: "Aisi kahani jo dil mein reh jaye.", stars: 5 },
+    { cat: "K-Drama", icon: "🎬", title: "Apna drama likho", note: "Yahan apni raye likho.", stars: 4 },
+    { cat: "Gaane",  icon: "🎹", title: "Peaceful Piano", note: "Sukoon wali dhun, bilkul meri duniya.", stars: 5 },
+    { cat: "Gaane",  icon: "🎧", title: "Apna gaana likho", note: "Yahan apni raye likho.", stars: 4 },
+    { cat: "Khana",  icon: "🍜", title: "Korean Ramen", note: "Garam aur spicy, perfect.", stars: 5 },
+    { cat: "Khana",  icon: "🍕", title: "Apna khana likho", note: "Yahan apni raye likho.", stars: 4 },
+    { cat: "Movies", icon: "🍿", title: "Apni movie likho", note: "Yahan apni raye likho.", stars: 4 },
+    { cat: "Games",  icon: "🎮", title: "Apna game likho", note: "Yahan apni raye likho.", stars: 4 }
+  ];
+
+  var tabsBox = document.getElementById("favTabs");
+  var grid = document.getElementById("favGrid");
+  if (!tabsBox || !grid) return;
+
+  var cats = ["All"];
+  favs.forEach(function (f) { if (cats.indexOf(f.cat) === -1) cats.push(f.cat); });
+
+  function render(cat) {
+    grid.replaceChildren();
+    favs.filter(function (f) { return cat === "All" || f.cat === cat; })
+      .forEach(function (f, i) {
+        var card = document.createElement("div");
+        card.className = "fav-card";
+        card.style.animationDelay = i * 0.07 + "s";
+
+        function add(tag, cls, text) {
+          var el = document.createElement(tag);
+          el.className = cls;
+          el.textContent = text;
+          card.appendChild(el);
+        }
+        add("span", "fav-tag", f.cat);
+        add("span", "fav-emoji", f.icon);
+        add("h3", "fav-title", f.title);
+        add("p", "fav-note", f.note);
+        add("div", "fav-stars", "★".repeat(f.stars) + "☆".repeat(5 - f.stars));
+        grid.appendChild(card);
+      });
+  }
+
+  cats.forEach(function (c, i) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "fav-tab" + (i === 0 ? " active" : "");
+    b.textContent = c;
+    b.addEventListener("click", function () {
+      tabsBox.querySelectorAll(".fav-tab").forEach(function (t) { t.classList.remove("active"); });
+      b.classList.add("active");
+      render(c);
+    });
+    tabsBox.appendChild(b);
+  });
+
+  render("All");
+})();
+</script>
         <section class="content" id="korea">
             <img src="https://congdankhuyenhoc.qltns.mediacdn.vn/zoom/700_438/449484899827462144/2022/9/8/20161124025533-seoul-gody-1662608032609459426424-2-0-677-1080-crop-16626080397991652965691.jpg" alt="Seoul city skyline and N Seoul Tower at night" style="width:100%; max-height:360px; object-fit:cover; border-radius:16px; margin-bottom:20px;">
 
