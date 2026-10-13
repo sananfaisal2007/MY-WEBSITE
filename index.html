@@ -2432,10 +2432,22 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
     const SUPABASE_URL = "https://mmzowjejnngyzywrpoxz.supabase.co";
     const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_Hec88k2FxVsHx5ybH24SOg_RgfJnsGX";
 
-    const supabaseClient = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-    );
+   const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY,
+    {
+        auth: {
+            persistSession: false,
+            autoRefreshToken: false,
+            detectSessionInUrl: false,
+            storage: {
+                getItem: () => null,
+                setItem: () => {},
+                removeItem: () => {}
+            }
+        }
+    }
+);
 
     console.log("Supabase client initialized");
 </script>
