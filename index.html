@@ -6945,6 +6945,15 @@ body.zoom-in-portal {
                 </span>
                 <span class="pm-check">✓</span>
             </button>
+       <!-- 🤐 SHUSH MODE — Funny Mute -->
+<button class="pm-option" data-track="silent" type="button">
+    <span class="pm-icon">🤐</span>
+    <span class="pm-info">
+        <span class="pm-name">Shush Mode</span>
+        <span class="pm-desc">Sab kuch chup 😶</span>
+    </span>
+    <span class="pm-check">✓</span>
+</button>
         </div>
 
         <div class="pm-foot">
@@ -7305,25 +7314,41 @@ body.zoom-in-portal {
 
     /* Play track */
       function playTrack(trackKey) {
-        /* Pause all */
-        Object.values(audios).forEach(function (a) {
-            if (a) { a.pause(); try { a.currentTime = 0; } catch (e) {} }
-        });
+    /* Pause all */
+    Object.values(audios).forEach(function (a) {
+        if (a) { a.pause(); try { a.currentTime = 0; } catch (e) {} }
+    });
 
-        currentTrack = trackKey;
-        var audio = audios[trackKey];
+    currentTrack = trackKey;
+    var audio = audios[trackKey];
 
-        options.forEach(function (opt) {
-            opt.classList.toggle("active", opt.getAttribute("data-track") === trackKey);
-        });
+    options.forEach(function (opt) {
+        opt.classList.toggle("active", opt.getAttribute("data-track") === trackKey);
+    });
 
-        /* 🆕 Silent mode — music band */
-        if (trackKey === "silent" || !audio) {
+    /* 🆕 SHUSH MODE — music band */
+    if (trackKey === "silent" || !audio) {
+        btn.classList.remove("playing");
+        isPlaying = false;
+        try { localStorage.setItem(STORAGE_KEY, trackKey); } catch (e) {}
+        return;
+    }
+
+    /* Play if not silent */
+    if (audio && userInteracted) {
+        audio.volume = currentVolume;
+        audio.play().then(function () {
+            btn.classList.add("playing");
+            isPlaying = true;
+        }).catch(function (err) {
+            console.warn("Piano play blocked:", err);
             btn.classList.remove("playing");
             isPlaying = false;
-            try { localStorage.setItem(STORAGE_KEY, trackKey); } catch (e) {}
-            return;
-        }
+        });
+    }
+
+    try { localStorage.setItem(STORAGE_KEY, trackKey); } catch (e) {}
+}
 
         /* Play if not silent */
         if (audio && userInteracted) {
@@ -7397,10 +7422,14 @@ body.zoom-in-portal {
         });
     });
 
-    /* Load saved */
-    var saved = "piano";
-    try { saved = localStorage.getItem(STORAGE_KEY) || "piano"; } catch (e) {}
-    if (!audios[saved]) saved = "piano";
+/* Load saved */
+var saved = "piano";
+try { saved = localStorage.getItem(STORAGE_KEY) || "piano"; } catch (e) {}
+
+/* 🆕 "silent" ko bhi valid track maano */
+audios.silent = null;
+
+if (!audios.hasOwnProperty(saved)) saved = "piano";
 
     currentTrack = saved;
     options.forEach(function (opt) {
