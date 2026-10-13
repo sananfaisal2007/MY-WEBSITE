@@ -1682,9 +1682,99 @@ html.skip-welcome #welcome-screen { display: none !important; }
 <body>
 
     
-<button id="themeToggle" onclick="toggleTheme()" style="padding:10px 16px; margin:12px; border-radius:20px; cursor:pointer; background:#00e5ff; color:#111; border:none; font-weight:bold;">
-🌙 Dark / ☀️ Light
-</button>
+<!-- ═══════════════════════════════════════
+     🎨 THEME SWITCHER
+     ═══════════════════════════════════════ -->
+<div class="theme-switcher" id="themeSwitcher">
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Choose theme" aria-expanded="false">
+        <span class="tb-icon" id="themeIcon">🌙</span>
+        <span class="tb-label" id="themeLabel">Theme</span>
+        <span class="tb-chevron">▾</span>
+    </button>
+
+    <!-- Dropdown -->
+    <div class="theme-menu" id="themeMenu" role="menu" aria-hidden="true">
+
+        <div class="tm-head">
+            <span class="tm-badge">✦ CHOOSE YOUR VIBE ✦</span>
+            <p class="tm-sub">Pick a theme that matches your mood ✨</p>
+        </div>
+
+        <div class="tm-list">
+
+            <button class="theme-option active" data-theme="cosmic" type="button" role="menuitem">
+                <span class="to-preview cosmic">
+                    <span class="to-dot c1"></span>
+                    <span class="to-dot c2"></span>
+                    <span class="to-dot c3"></span>
+                </span>
+                <span class="to-info">
+                    <span class="to-name">🌙 Cosmic Dark</span>
+                    <span class="to-desc">Purple night sky</span>
+                </span>
+                <span class="to-check">✓</span>
+            </button>
+
+            <button class="theme-option" data-theme="light" type="button" role="menuitem">
+                <span class="to-preview light">
+                    <span class="to-dot c1"></span>
+                    <span class="to-dot c2"></span>
+                    <span class="to-dot c3"></span>
+                </span>
+                <span class="to-info">
+                    <span class="to-name">☀️ Soft Light</span>
+                    <span class="to-desc">Clean & bright</span>
+                </span>
+                <span class="to-check">✓</span>
+            </button>
+
+            <button class="theme-option" data-theme="sakura" type="button" role="menuitem">
+                <span class="to-preview sakura">
+                    <span class="to-dot c1"></span>
+                    <span class="to-dot c2"></span>
+                    <span class="to-dot c3"></span>
+                </span>
+                <span class="to-info">
+                    <span class="to-name">🌸 Sakura Pink</span>
+                    <span class="to-desc">Cherry blossom dream</span>
+                </span>
+                <span class="to-check">✓</span>
+            </button>
+
+            <button class="theme-option" data-theme="ocean" type="button" role="menuitem">
+                <span class="to-preview ocean">
+                    <span class="to-dot c1"></span>
+                    <span class="to-dot c2"></span>
+                    <span class="to-dot c3"></span>
+                </span>
+                <span class="to-info">
+                    <span class="to-name">🌊 Ocean Blue</span>
+                    <span class="to-desc">Calm & cool vibes</span>
+                </span>
+                <span class="to-check">✓</span>
+            </button>
+
+            <button class="theme-option" data-theme="neon" type="button" role="menuitem">
+                <span class="to-preview neon">
+                    <span class="to-dot c1"></span>
+                    <span class="to-dot c2"></span>
+                    <span class="to-dot c3"></span>
+                </span>
+                <span class="to-info">
+                    <span class="to-name">🌈 Neon Dream</span>
+                    <span class="to-desc">Bold & vibrant</span>
+                </span>
+                <span class="to-check">✓</span>
+            </button>
+
+        </div>
+
+        <div class="tm-foot">
+            <span class="tm-foot-text">💜 Your choice is saved automatically</span>
+        </div>
+
+    </div>
+</div>
 
    <nav>
      
@@ -5191,6 +5281,550 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
     .kdrama-shortcut:hover {
         transform: none;
     }
+}
+</style>
+<!-- ═══════════════════════════════════════
+     🎨 THEME SWITCHER — STYLES
+     ═══════════════════════════════════════ -->
+<style>
+/* ═══════════════════════════════════════
+   🎨 THEME BUTTON
+   ═══════════════════════════════════════ */
+.theme-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    font-family: 'Poppins', sans-serif;
+}
+
+.theme-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px 10px 12px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 200, 242, 0.4);
+    background: linear-gradient(135deg,
+        rgba(91, 42, 134, 0.9),
+        rgba(30, 18, 55, 0.95));
+    color: #ffd6e7;
+    font: 800 13px 'Poppins', sans-serif;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    isolation: isolate;
+    overflow: hidden;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.4),
+        0 0 18px rgba(168, 85, 247, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.3, 1);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.theme-btn:hover {
+    border-color: rgba(255, 226, 122, 0.85);
+    color: #ffeab8;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.45),
+        0 0 26px rgba(255, 200, 242, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.theme-btn[aria-expanded="true"] {
+    border-color: rgba(255, 226, 122, 0.9);
+    background: linear-gradient(135deg,
+        rgba(168, 85, 247, 0.5),
+        rgba(91, 42, 134, 0.8));
+    box-shadow:
+        0 0 24px rgba(255, 200, 242, 0.7),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.tb-icon {
+    display: inline-block;
+    font-size: 16px;
+    line-height: 1;
+    animation: tbIconSpin 4s ease-in-out infinite;
+}
+
+@keyframes tbIconSpin {
+    0%, 100% { transform: rotate(-10deg) scale(1); }
+    50%      { transform: rotate(10deg) scale(1.15); }
+}
+
+.tb-label {
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+.tb-chevron {
+    display: inline-block;
+    font-size: 11px;
+    transition: transform 0.4s ease;
+    opacity: 0.8;
+}
+
+.theme-btn[aria-expanded="true"] .tb-chevron {
+    transform: rotate(180deg);
+}
+
+/* ═══════════════════════════════════════
+   🎨 THEME MENU (Dropdown)
+   ═══════════════════════════════════════ */
+.theme-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    width: 320px;
+    padding: 18px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 200, 242, 0.4);
+    background: linear-gradient(145deg,
+        rgba(30, 18, 55, 0.96),
+        rgba(15, 10, 30, 0.98));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(168, 85, 247, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px) scale(0.95);
+    transform-origin: top right;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+}
+
+.theme-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+/* Head */
+.tm-head {
+    text-align: center;
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    border-bottom: 1px dashed rgba(255, 200, 242, 0.25);
+}
+
+.tm-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(255, 226, 122, 0.5);
+    border-radius: 30px;
+    background: rgba(255, 226, 122, 0.1);
+    color: #ffeab8;
+    font-size: 9px;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+.tm-sub {
+    color: #b8a8d1;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+/* List */
+.tm-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* ═══════════════════════════════════════
+   🎨 THEME OPTION
+   ═══════════════════════════════════════ */
+.theme-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid transparent;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    color: #e7dcf7;
+    font-family: inherit;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.theme-option:hover {
+    background: rgba(168, 85, 247, 0.22);
+    border-color: rgba(255, 200, 242, 0.5);
+    transform: translateX(4px);
+}
+
+.theme-option.active {
+    background: linear-gradient(110deg,
+        rgba(168, 85, 247, 0.35),
+        rgba(255, 159, 210, 0.25));
+    border-color: rgba(255, 226, 122, 0.85);
+    box-shadow:
+        0 0 18px rgba(168, 85, 247, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.theme-option.active .to-check {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Color preview */
+.to-preview {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.theme-option:hover .to-preview {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.to-dot {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.to-dot.c1 { width: 22px; height: 22px; top: 4px; left: 4px; }
+.to-dot.c2 { width: 20px; height: 20px; bottom: 4px; right: 4px; }
+.to-dot.c3 { width: 12px; height: 12px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+/* Cosmic preview */
+.to-preview.cosmic { background: #05030f; }
+.cosmic .c1 { background: #7c3aed; }
+.cosmic .c2 { background: #ff9fd2; }
+.cosmic .c3 { background: #ffe27a; }
+
+/* Light preview */
+.to-preview.light { background: #f4f7fb; }
+.light .c1 { background: #a855f7; }
+.light .c2 { background: #e0b3ff; }
+.light .c3 { background: #4c1d95; }
+
+/* Sakura preview */
+.to-preview.sakura { background: #fff0f5; }
+.sakura .c1 { background: #ff85a2; }
+.sakura .c2 { background: #ffc8dc; }
+.sakura .c3 { background: #b23a5a; }
+
+/* Ocean preview */
+.to-preview.ocean { background: #0a1428; }
+.ocean .c1 { background: #0ea5e9; }
+.ocean .c2 { background: #67e8f9; }
+.ocean .c3 { background: #1e40af; }
+
+/* Neon preview */
+.to-preview.neon { background: #10071e; }
+.neon .c1 { background: #f0abfc; }
+.neon .c2 { background: #67e8f9; }
+.neon .c3 { background: #ffe27a; }
+
+/* Info */
+.to-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.to-name {
+    font-size: 13px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0.3px;
+}
+
+.to-desc {
+    font-size: 10px;
+    color: #b8a8d1;
+    font-weight: 500;
+}
+
+/* Check mark */
+.to-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffe27a, #ffc8f2);
+    color: #2a0f45;
+    font-size: 12px;
+    font-weight: 900;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    box-shadow: 0 0 10px rgba(255, 226, 122, 0.7);
+}
+
+/* Foot */
+.tm-foot {
+    padding-top: 12px;
+    margin-top: 12px;
+    border-top: 1px dashed rgba(255, 200, 242, 0.25);
+    text-align: center;
+}
+
+.tm-foot-text {
+    color: #9985b8;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+}
+
+/* Body lock */
+body.theme-menu-open {
+    overflow: hidden;
+}
+
+/* 📱 Mobile */
+@media (max-width: 700px) {
+    .theme-switcher {
+        top: 12px;
+        right: 12px;
+    }
+
+    .theme-btn {
+        padding: 8px 13px 8px 10px;
+        font-size: 12px;
+        gap: 6px;
+    }
+
+    .tb-icon { font-size: 14px; }
+    .tb-label { display: none; }  /* Mobile par sirf icon */
+
+    .theme-menu {
+        width: calc(100vw - 24px);
+        max-width: 320px;
+    }
+
+    .theme-option {
+        padding: 10px 12px;
+    }
+
+    .to-preview {
+        width: 36px;
+        height: 36px;
+    }
+
+    .to-name { font-size: 12px; }
+}
+
+/* ♿ Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .theme-btn,
+    .tb-icon,
+    .theme-menu,
+    .theme-option,
+    .to-preview,
+    .to-check {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════
+   🎨 THEME VARIABLES (Applied to body)
+   ═══════════════════════════════════════════════════════ */
+
+/* 🌙 COSMIC DARK (Default) */
+body.theme-cosmic {
+    --theme-bg: #05030f;
+    --theme-bg-2: #0d0722;
+    --theme-text: #e7dcf7;
+    --theme-text-soft: #b8a8d1;
+    --theme-accent-1: #a855f7;
+    --theme-accent-2: #ff9fd2;
+    --theme-accent-3: #ffe27a;
+    --theme-card-bg: rgba(30, 18, 55, 0.7);
+    --theme-border: rgba(255, 200, 242, 0.25);
+}
+
+/* ☀️ SOFT LIGHT */
+body.theme-light {
+    --theme-bg: #f4f7fb;
+    --theme-bg-2: #ffffff;
+    --theme-text: #2a1e45;
+    --theme-text-soft: #6b5b8f;
+    --theme-accent-1: #8b5cf6;
+    --theme-accent-2: #c084fc;
+    --theme-accent-3: #fbbf24;
+    --theme-card-bg: rgba(255, 255, 255, 0.85);
+    --theme-border: rgba(168, 85, 247, 0.25);
+    background: #f4f7fb;
+    color: #2a1e45;
+}
+
+body.theme-light nav {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border-bottom-color: rgba(168, 85, 247, 0.25) !important;
+}
+
+body.theme-light .dream-portal,
+body.theme-light .kpop-shortcut,
+body.theme-light .kdrama-shortcut,
+body.theme-light .social-shortcut,
+body.theme-light .fav-shortcut {
+    color: #2a1e45 !important;
+}
+
+body.theme-light .portal-label {
+    color: #2a1e45 !important;
+}
+
+body.theme-light .card,
+body.theme-light .content {
+    background: rgba(255, 255, 255, 0.85) !important;
+    color: #2a1e45 !important;
+    border-color: rgba(168, 85, 247, 0.2) !important;
+}
+
+body.theme-light h1,
+body.theme-light h2,
+body.theme-light h3,
+body.theme-light p {
+    color: #2a1e45;
+}
+
+body.theme-light footer {
+    background: rgba(255, 255, 255, 0.6);
+    color: #6b5b8f;
+}
+
+/* 🌸 SAKURA PINK */
+body.theme-sakura {
+    --theme-bg: #fff0f5;
+    --theme-bg-2: #ffe4ec;
+    --theme-text: #4a1a2a;
+    --theme-text-soft: #8b5a6a;
+    --theme-accent-1: #ff85a2;
+    --theme-accent-2: #ffc8dc;
+    --theme-accent-3: #b23a5a;
+    --theme-card-bg: rgba(255, 240, 245, 0.9);
+    --theme-border: rgba(255, 133, 162, 0.35);
+    background: #fff0f5;
+    color: #4a1a2a;
+}
+
+body.theme-sakura nav {
+    background: rgba(255, 240, 245, 0.92) !important;
+    border-bottom-color: rgba(255, 133, 162, 0.35) !important;
+}
+
+body.theme-sakura .dream-portal,
+body.theme-sakura .kpop-shortcut,
+body.theme-sakura .kdrama-shortcut,
+body.theme-sakura .social-shortcut,
+body.theme-sakura .fav-shortcut {
+    color: #4a1a2a !important;
+}
+
+body.theme-sakura .portal-label {
+    color: #4a1a2a !important;
+}
+
+body.theme-sakura .card,
+body.theme-sakura .content {
+    background: rgba(255, 240, 245, 0.9) !important;
+    color: #4a1a2a !important;
+    border-color: rgba(255, 133, 162, 0.3) !important;
+}
+
+body.theme-sakura h1,
+body.theme-sakura h2,
+body.theme-sakura h3 {
+    color: #4a1a2a;
+}
+
+body.theme-sakura p {
+    color: #6b3a4a;
+}
+
+/* 🌊 OCEAN BLUE */
+body.theme-ocean {
+    --theme-bg: #0a1428;
+    --theme-bg-2: #0f1e3d;
+    --theme-text: #cbe8f2;
+    --theme-text-soft: #7a9bb5;
+    --theme-accent-1: #0ea5e9;
+    --theme-accent-2: #67e8f9;
+    --theme-accent-3: #38bdf8;
+    --theme-card-bg: rgba(15, 30, 60, 0.75);
+    --theme-border: rgba(103, 232, 249, 0.3);
+    background: #0a1428;
+    color: #cbe8f2;
+}
+
+body.theme-ocean nav {
+    background: rgba(10, 20, 40, 0.92) !important;
+    border-bottom-color: rgba(103, 232, 249, 0.35) !important;
+}
+
+body.theme-ocean .card,
+body.theme-ocean .content {
+    background: rgba(15, 30, 60, 0.75) !important;
+    border-color: rgba(103, 232, 249, 0.3) !important;
+}
+
+/* 🌈 NEON DREAM */
+body.theme-neon {
+    --theme-bg: #10071e;
+    --theme-bg-2: #1a0d2e;
+    --theme-text: #f0e5ff;
+    --theme-text-soft: #b8a8d1;
+    --theme-accent-1: #f0abfc;
+    --theme-accent-2: #67e8f9;
+    --theme-accent-3: #ffe27a;
+    --theme-card-bg: rgba(30, 15, 55, 0.75);
+    --theme-border: rgba(240, 171, 252, 0.35);
+    background: #10071e;
+    color: #f0e5ff;
+}
+
+body.theme-neon nav {
+    background: rgba(16, 7, 30, 0.94) !important;
+    border-bottom-color: rgba(240, 171, 252, 0.4) !important;
+}
+
+body.theme-neon .card,
+body.theme-neon .content {
+    background: rgba(30, 15, 55, 0.75) !important;
+    border-color: rgba(240, 171, 252, 0.35) !important;
+}
+
+/* Smooth transitions on theme change */
+body {
+    transition: background-color 0.6s ease, color 0.6s ease;
+}
+
+body nav,
+body .card,
+body .content {
+    transition: background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease;
 }
 </style>
 </body>
