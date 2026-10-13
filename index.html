@@ -3995,30 +3995,7 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
     50%      { translate: 0 -3px; }
 }
 
-/* Rotating rainbow ring around the button */
-.social-shortcut::before {
-    content: "";
-    position: absolute;
-    inset: -2.5px;
-    z-index: -2;
-    border-radius: inherit;
-    background: conic-gradient(
-        from 0deg,
-        #f9a8d4,
-        #ffc8f2,
-        #67e8f9,
-        #fde047,
-        #c9a6ff,
-        #f9a8d4
-    );
-    filter: blur(7px);
-    opacity: 0.75;
-    animation: ssRingSpin 4s linear infinite;
-}
 
-@keyframes ssRingSpin {
-    to { transform: rotate(360deg); }
-}
 
 /* Shine sweep */
 .social-shortcut::after {
@@ -4119,10 +4096,7 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
         inset 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
-.social-shortcut:hover::before {
-    opacity: 1;
-    filter: blur(10px);
-}
+
 
 .social-shortcut:hover .ss-star {
     animation: ssStarSpin 0.9s ease-in-out;
