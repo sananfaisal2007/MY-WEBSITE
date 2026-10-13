@@ -6887,17 +6887,530 @@ body.zoom-in-portal {
 
     </div>
 </div>
-<!-- 🎹 PIANO BUTTON -->
-<button id="pianoToggle" aria-label="Play piano music" title="Play piano">
-    <span class="music-bars" aria-hidden="true">
-        <span></span><span></span><span></span><span></span>
-    </span>
-</button>
+<!-- 🎹 PIANO BUTTON WITH MENU -->
+<div id="pianoMenuWrap">
+    <button id="pianoToggle" aria-label="Open piano songs menu" title="Choose a song" aria-expanded="false">
+        <span class="piano-bars" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+        </span>
+    </button>
 
-<!-- 🎹 PIANO AUDIO -->
-<audio id="pianoAudio" loop preload="none">
+    <div class="piano-menu" id="pianoMenu" role="menu" aria-hidden="true">
+        <div class="pm-head">
+            <span class="pm-badge">✦ MY MELODIES ✦</span>
+            <p class="pm-sub">Choose your song 🎧💜</p>
+        </div>
+
+        <div class="pm-list">
+            <button class="pm-option active" data-track="piano" type="button">
+                <span class="pm-icon">🎹</span>
+                <span class="pm-info">
+                    <span class="pm-name">Soft Piano</span>
+                    <span class="pm-desc">Peaceful & dreamy</span>
+                </span>
+                <span class="pm-check">✓</span>
+            </button>
+
+            <button class="pm-option" data-track="lofi" type="button">
+                <span class="pm-icon">🎧</span>
+                <span class="pm-info">
+                    <span class="pm-name">Lo-fi Beats</span>
+                    <span class="pm-desc">Chill & cozy</span>
+                </span>
+                <span class="pm-check">✓</span>
+            </button>
+
+            <button class="pm-option" data-track="rain" type="button">
+                <span class="pm-icon">🌧️</span>
+                <span class="pm-info">
+                    <span class="pm-name">Gentle Rain</span>
+                    <span class="pm-desc">Soft nature sounds</span>
+                </span>
+                <span class="pm-check">✓</span>
+            </button>
+
+            <button class="pm-option" data-track="night" type="button">
+                <span class="pm-icon">🌙</span>
+                <span class="pm-info">
+                    <span class="pm-name">Starry Night</span>
+                    <span class="pm-desc">Celestial whispers</span>
+                </span>
+                <span class="pm-check">✓</span>
+            </button>
+
+            <button class="pm-option" data-track="ocean" type="button">
+                <span class="pm-icon">🌊</span>
+                <span class="pm-info">
+                    <span class="pm-name">Ocean Waves</span>
+                    <span class="pm-desc">Calm & soothing</span>
+                </span>
+                <span class="pm-check">✓</span>
+            </button>
+        </div>
+
+        <div class="pm-foot">
+            <span class="pm-foot-text">💜 Your song is remembered</span>
+        </div>
+    </div>
+</div>
+
+<!-- 🎹 ALL AUDIO FILES -->
+<audio id="pianoAudioPiano" loop preload="none">
     <source src="leberch-soft-piano-soft-piano-music-603947.mp3" type="audio/mpeg">
 </audio>
+<audio id="pianoAudioLofi" loop preload="none">
+    <source src="lofi-music.mp3" type="audio/mpeg">
+</audio>
+<audio id="pianoAudioRain" loop preload="none">
+    <source src="rain-sound.mp3" type="audio/mpeg">
+</audio>
+<audio id="pianoAudioNight" loop preload="none">
+    <source src="night-ambience.mp3" type="audio/mpeg">
+</audio>
+<audio id="pianoAudioOcean" loop preload="none">
+    <source src="ocean-waves.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 🎹 PIANO CSS -->
+<style>
+#pianoMenuWrap {
+    position: fixed;
+    left: 24px;
+    bottom: 24px;
+    z-index: 100000;
+    font-family: 'Poppins', sans-serif;
+}
+
+#pianoToggle {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(210, 175, 255, 0.65);
+    background: linear-gradient(135deg,
+        rgba(53, 29, 86, 0.96),
+        rgba(19, 13, 35, 0.96));
+    color: #f5eaff;
+    cursor: pointer;
+    box-shadow:
+        0 0 18px rgba(155, 100, 255, 0.35),
+        0 0 36px rgba(255, 159, 210, 0.2),
+        inset 0 0 12px rgba(210, 175, 255, 0.06);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: all 0.3s ease;
+    isolation: isolate;
+}
+
+#pianoToggle::before {
+    content: "🎹";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(175, 120, 255, 0.18);
+    font-size: 26px;
+    box-shadow: 0 0 12px rgba(175, 120, 255, 0.15);
+}
+
+#pianoToggle:hover {
+    background: linear-gradient(135deg,
+        rgba(105, 60, 165, 0.98),
+        rgba(43, 24, 73, 0.98));
+    border-color: #d9baff;
+    box-shadow:
+        0 0 25px rgba(155, 100, 255, 0.55),
+        0 0 50px rgba(255, 159, 210, 0.3),
+        0 8px 25px rgba(0, 0, 0, 0.25);
+    transform: translateY(-3px);
+}
+
+#pianoToggle[aria-expanded="true"] {
+    border-color: rgba(255, 226, 122, 0.95);
+    background: linear-gradient(135deg,
+        rgba(200, 100, 255, 0.7),
+        rgba(120, 55, 190, 0.95));
+    box-shadow:
+        0 0 30px rgba(255, 200, 242, 0.9),
+        0 0 60px rgba(255, 159, 210, 0.5);
+}
+
+/* Playing animation */
+#pianoToggle.playing::before {
+    animation: pianoIconPulse 2s ease-in-out infinite;
+}
+
+@keyframes pianoIconPulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.1); }
+}
+
+/* Music bars (jab song chal rahi ho) */
+.piano-bars {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5px;
+    height: 16px;
+    z-index: 3;
+}
+
+#pianoToggle.playing .piano-bars {
+    display: inline-flex;
+}
+
+#pianoToggle.playing::before {
+    content: "";
+}
+
+.piano-bars span {
+    display: block;
+    width: 3px;
+    height: 6px;
+    border-radius: 2px;
+    background: linear-gradient(to top, #ffe27a, #ffc8f2);
+    box-shadow: 0 0 8px rgba(255, 226, 122, 0.9);
+    animation: pianoBarPulse 0.8s ease-in-out infinite alternate;
+}
+
+.piano-bars span:nth-child(1) { animation-delay: 0s; }
+.piano-bars span:nth-child(2) { animation-delay: 0.15s; }
+.piano-bars span:nth-child(3) { animation-delay: 0.3s; }
+.piano-bars span:nth-child(4) { animation-delay: 0.1s; }
+
+@keyframes pianoBarPulse {
+    from { height: 4px; opacity: 0.6; }
+    to   { height: 16px; opacity: 1; }
+}
+
+/* Piano Menu */
+.piano-menu {
+    position: absolute;
+    bottom: calc(100% + 14px);
+    left: 0;
+    width: 280px;
+    padding: 14px;
+    border-radius: 20px;
+    border: 1.5px solid rgba(255, 200, 242, 0.5);
+    background: linear-gradient(145deg,
+        rgba(35, 20, 65, 0.97),
+        rgba(18, 10, 35, 0.99));
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.65),
+        0 0 45px rgba(168, 85, 247, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(14px) scale(0.94);
+    transform-origin: bottom left;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+}
+
+.piano-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.pm-head {
+    text-align: center;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed rgba(255, 200, 242, 0.3);
+}
+
+.pm-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    margin-bottom: 6px;
+    border: 1px solid rgba(255, 226, 122, 0.6);
+    border-radius: 30px;
+    background: rgba(255, 226, 122, 0.1);
+    color: #ffeab8;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    font-weight: 800;
+}
+
+.pm-sub {
+    color: #cdb9e6;
+    font-size: 11px;
+}
+
+.pm-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.pm-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 8px 10px;
+    border: 1.5px solid transparent;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    color: #e7dcf7;
+    font-family: inherit;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s ease;
+}
+
+.pm-option:hover {
+    background: rgba(168, 85, 247, 0.22);
+    border-color: rgba(255, 200, 242, 0.5);
+    transform: translateX(3px);
+}
+
+.pm-option.active {
+    background: linear-gradient(110deg,
+        rgba(168, 85, 247, 0.4),
+        rgba(255, 159, 210, 0.3));
+    border-color: rgba(255, 226, 122, 0.9);
+    box-shadow:
+        0 0 14px rgba(168, 85, 247, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.pm-option.active .pm-check {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.pm-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.pm-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.pm-name {
+    font-size: 12px;
+    font-weight: 800;
+    color: #fff;
+}
+
+.pm-desc {
+    font-size: 9px;
+    color: #b8a8d1;
+}
+
+.pm-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffe27a, #ffc8f2);
+    color: #2a0f45;
+    font-size: 10px;
+    font-weight: 900;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    box-shadow: 0 0 8px rgba(255, 226, 122, 0.7);
+}
+
+.pm-foot {
+    padding-top: 8px;
+    margin-top: 6px;
+    border-top: 1px dashed rgba(255, 200, 242, 0.3);
+    text-align: center;
+}
+
+.pm-foot-text {
+    color: #9985b8;
+    font-size: 9px;
+}
+
+@media (max-width: 600px) {
+    #pianoMenuWrap {
+        left: 14px;
+        bottom: 16px;
+    }
+    #pianoToggle {
+        width: 56px;
+        height: 56px;
+    }
+    #pianoToggle::before {
+        font-size: 22px;
+    }
+    .piano-menu {
+        width: 260px;
+        padding: 12px;
+    }
+}
+</style>
+
+<!-- 🎹 PIANO SCRIPT -->
+<script>
+(function () {
+    var wrap = document.getElementById("pianoMenuWrap");
+    var btn = document.getElementById("pianoToggle");
+    var menu = document.getElementById("pianoMenu");
+    var options = document.querySelectorAll(".pm-option");
+
+    var audios = {
+        piano: document.getElementById("pianoAudioPiano"),
+        lofi:  document.getElementById("pianoAudioLofi"),
+        rain:  document.getElementById("pianoAudioRain"),
+        night: document.getElementById("pianoAudioNight"),
+        ocean: document.getElementById("pianoAudioOcean")
+    };
+
+    if (!btn || !menu) return;
+
+    var STORAGE_KEY = "sananPianoTrack";
+    var STORAGE_VOL = "sananPianoVolume";
+    var currentTrack = "piano";
+    var currentVolume = 0.5;
+    var isPlaying = false;
+    var userInteracted = false;
+
+    /* Set volume on all */
+    Object.values(audios).forEach(function (a) {
+        if (a) a.volume = currentVolume;
+    });
+
+    /* Play track */
+    function playTrack(trackKey) {
+        Object.values(audios).forEach(function (a) {
+            if (a) { a.pause(); try { a.currentTime = 0; } catch (e) {} }
+        });
+
+        currentTrack = trackKey;
+        var audio = audios[trackKey];
+
+        options.forEach(function (opt) {
+            opt.classList.toggle("active", opt.getAttribute("data-track") === trackKey);
+        });
+
+        if (audio && userInteracted) {
+            audio.volume = currentVolume;
+            audio.play().then(function () {
+                btn.classList.add("playing");
+                isPlaying = true;
+            }).catch(function (err) {
+                console.warn("Piano play blocked:", err);
+                btn.classList.remove("playing");
+                isPlaying = false;
+            });
+        }
+
+        try { localStorage.setItem(STORAGE_KEY, trackKey); } catch (e) {}
+    }
+
+    /* Stop */
+    function stopAll() {
+        Object.values(audios).forEach(function (a) {
+            if (a) { a.pause(); try { a.currentTime = 0; } catch (e) {} }
+        });
+        btn.classList.remove("playing");
+        isPlaying = false;
+    }
+
+    /* Open / Close menu */
+    function openMenu() {
+        menu.classList.add("active");
+        menu.setAttribute("aria-hidden", "false");
+        btn.setAttribute("aria-expanded", "true");
+    }
+    function closeMenu() {
+        menu.classList.remove("active");
+        menu.setAttribute("aria-hidden", "true");
+        btn.setAttribute("aria-expanded", "false");
+    }
+    function toggleMenu() {
+        menu.classList.contains("active") ? closeMenu() : openMenu();
+    }
+
+    /* Button click */
+    btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        userInteracted = true;
+        toggleMenu();
+    });
+
+    /* Click outside */
+    document.addEventListener("click", function (e) {
+        if (!wrap.contains(e.target)) closeMenu();
+    });
+
+    /* ESC */
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeMenu();
+    });
+
+    /* Option click */
+    options.forEach(function (opt) {
+        opt.addEventListener("click", function () {
+            userInteracted = true;
+            var track = opt.getAttribute("data-track");
+
+            /* Same track? → toggle play/pause */
+            if (track === currentTrack && isPlaying) {
+                stopAll();
+            } else {
+                playTrack(track);
+            }
+        });
+    });
+
+    /* Load saved */
+    var saved = "piano";
+    try { saved = localStorage.getItem(STORAGE_KEY) || "piano"; } catch (e) {}
+    if (!audios[saved]) saved = "piano";
+
+    currentTrack = saved;
+    options.forEach(function (opt) {
+        opt.classList.toggle("active", opt.getAttribute("data-track") === saved);
+    });
+
+    /* Pehle user click par play (agar saved tha) */
+    var firstClick = function () {
+        userInteracted = true;
+        playTrack(saved);
+        document.removeEventListener("click", firstClick);
+        document.removeEventListener("touchstart", firstClick);
+    };
+    document.addEventListener("click", firstClick);
+    document.addEventListener("touchstart", firstClick);
+
+})();
+</script>
 
 <script>
 (function () {
