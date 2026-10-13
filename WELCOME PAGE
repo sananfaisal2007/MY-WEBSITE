@@ -1,0 +1,351 @@
+<!-- =====================================================================
+     SANAN FAISAL — PROFESSIONAL WELCOME SCREEN
+     Paste this WHOLE block directly below the <body> tag.
+     The old welcome screen is hidden and removed automatically.
+     ===================================================================== -->
+<style>
+/* Hide the old welcome screen (new one replaces it) */
+#welcome-screen { display: none !important; }
+
+#sf-welcome {
+  position: fixed; inset: 0; z-index: 99999; overflow-y: auto;
+  color: #f1edf8; background: #07060c; font-family: inherit;
+  transition: opacity 1s ease, transform 1s ease, filter 1s ease;
+}
+#sf-welcome * { box-sizing: border-box; }
+#sf-welcome.sfw-leaving { opacity: 0; transform: scale(1.04); filter: blur(10px); pointer-events: none; }
+
+/* Background layers */
+.sfw-bg { position: fixed; inset: 0; pointer-events: none; }
+.sfw-aura { background: radial-gradient(circle at 15% 85%, rgba(112, 44, 255, .16), transparent 45%), radial-gradient(circle at 90% 10%, rgba(60, 40, 140, .22), transparent 45%); }
+.sfw-grid {
+  background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse at center, #000 20%, transparent 75%);
+}
+.sfw-spot { background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 35%), rgba(139, 77, 255, .16), transparent 65%); }
+#sfwCanvas { position: fixed; inset: 0; pointer-events: none; }
+.sfw-prog { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 5; background: linear-gradient(90deg, #8b4dff, #e0b3ff); transition: width 1s ease; }
+#sf-welcome.sfw-leaving .sfw-prog { width: 100%; }
+
+/* Layout */
+.sfw-shell { position: relative; z-index: 2; min-height: 100%; display: flex; flex-direction: column; padding: 22px 5% 18px; }
+.sfw-top, .sfw-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+.sfw-brand { display: flex; align-items: center; gap: 12px; font-size: 13px; letter-spacing: 1px; color: #bdb4cf; }
+.sfw-mono { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid rgba(213, 182, 255, .5); border-radius: 10px; color: #e5d0ff; font-weight: 700; letter-spacing: 1px; }
+.sfw-time { font-size: 13px; color: #bdb4cf; }
+
+.sfw-main { width: min(100%, 680px); margin: auto; padding: 28px 0; text-align: center; animation: sfwUp 1s ease both; }
+@keyframes sfwUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.sfw-eyebrow { margin: 0; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: #c6a0ff; }
+#sf-welcome h1 {
+  margin: 14px 0 8px; font-size: clamp(44px, 9vw, 86px); line-height: 1.05; font-weight: 700; letter-spacing: -1px;
+  background: linear-gradient(135deg, #fff, #e0ccff 55%, #a77bff); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.sfw-role { min-height: 30px; margin: 0; font-size: clamp(16px, 2.6vw, 21px); color: #e3d9f2; }
+.sfw-caret { margin-left: 2px; color: #a878ff; animation: sfwBlink 1s steps(1) infinite; }
+@keyframes sfwBlink { 50% { opacity: 0; } }
+.sfw-desc { max-width: 520px; margin: 14px auto 0; font-size: 15px; line-height: 1.8; color: #b9b3c8; }
+
+/* Interactive panel */
+.sfw-panel { margin-top: 26px; padding: 22px; text-align: left; border: 1px solid rgba(255,255,255,.12); border-radius: 20px; background: rgba(255,255,255,.04); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.sfw-label { display: block; margin: 0 0 8px; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: #bfa9e6; }
+.sfw-label small { text-transform: none; letter-spacing: 0; opacity: .65; }
+#sfwName { width: 100%; padding: 13px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.16); background: rgba(10, 8, 20, .7); color: #fff; font-size: 16px; outline: none; transition: border-color .25s, box-shadow .25s; }
+#sfwName::placeholder { color: #8f879f; }
+#sfwName:focus { border-color: #a878ff; box-shadow: 0 0 0 3px rgba(139, 77, 255, .22); }
+.sfw-gap { height: 18px; }
+.sfw-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.sfw-chip { padding: 9px 14px; border-radius: 30px; border: 1px solid rgba(255,255,255,.16); background: transparent; color: #d9d1e8; font-size: 14px; cursor: pointer; transition: border-color .25s, background .25s, color .25s, transform .25s; }
+.sfw-chip:hover { border-color: #a878ff; transform: translateY(-2px); }
+.sfw-chip[aria-pressed="true"] { background: rgba(139, 77, 255, .24); border-color: #a878ff; color: #fff; }
+.sfw-chip:focus-visible, #sfwEnter:focus-visible { outline: 2px solid #e1c6ff; outline-offset: 3px; }
+.sfw-badge { margin-left: 6px; padding: 2px 7px; border-radius: 10px; background: #8b4dff; color: #fff; font-size: 10px; font-style: normal; font-weight: 700; letter-spacing: .5px; vertical-align: middle; }
+
+.sfw-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-top: 22px; }
+#sfwEnter { padding: 15px 30px; border-radius: 40px; border: 1px solid #a878ff; background: linear-gradient(135deg, #8b4dff, #6a32d8); color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; animation: sfwRing 3s ease-out infinite; transition: box-shadow .3s, filter .3s; }
+#sfwEnter:hover { filter: brightness(1.1); box-shadow: 0 0 28px rgba(139, 77, 255, .55); }
+#sfwEnter span { display: inline-block; margin-left: 8px; transition: transform .3s; }
+#sfwEnter:hover span { transform: translateX(5px); }
+#sfwEnter:disabled { animation: none; cursor: default; }
+@keyframes sfwRing { 0% { box-shadow: 0 0 0 0 rgba(139, 77, 255, .5); } 70%, 100% { box-shadow: 0 0 0 18px rgba(139, 77, 255, 0); } }
+
+.sfw-switch { position: relative; display: inline-flex; align-items: center; gap: 10px; font-size: 14px; color: #d9d1e8; cursor: pointer; user-select: none; }
+.sfw-switch input { position: absolute; opacity: 0; pointer-events: none; }
+.sfw-track { position: relative; width: 42px; height: 24px; border-radius: 20px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.18); transition: background .25s; }
+.sfw-track::after { content: ""; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: transform .25s; }
+.sfw-switch input:checked + .sfw-track { background: #8b4dff; }
+.sfw-switch input:checked + .sfw-track::after { transform: translateX(18px); }
+.sfw-switch input:focus-visible + .sfw-track { outline: 2px solid #e1c6ff; outline-offset: 3px; }
+
+.sfw-hint { margin: 16px 0 0; font-size: 12px; color: #8f879f; }
+.sfw-hint kbd { padding: 2px 7px; border: 1px solid rgba(255,255,255,.22); border-radius: 6px; font-family: inherit; font-size: 11px; color: #cfc5e3; }
+.sfw-bottom { font-size: 12px; color: #8f879f; }
+.sfw-bottom a { color: #bfa9e6; text-decoration: none; transition: color .25s; }
+.sfw-bottom a:hover { color: #fff; }
+
+/* Greeting toast (shown after entering) */
+.sfw-toast { position: fixed; left: 50%; bottom: 28px; z-index: 100002; max-width: 90%; padding: 12px 22px; border-radius: 30px; border: 1px solid rgba(190, 140, 255, .45); background: rgba(25, 18, 45, .95); color: #f1edf8; font-size: 14px; text-align: center; opacity: 0; transform: translate(-50%, 16px); transition: opacity .5s, transform .5s; animation: none !important; pointer-events: none; }
+.sfw-toast.sfw-show { opacity: 1; transform: translate(-50%, 0); }
+
+@media (max-width: 600px) {
+  .sfw-shell { padding: 16px 5% 14px; }
+  .sfw-tz, .sfw-brandtext { display: none; }
+  .sfw-panel { padding: 16px; }
+  .sfw-actions { flex-direction: column; align-items: stretch; }
+  #sfwEnter { width: 100%; }
+  .sfw-switch { justify-content: center; }
+  .sfw-bottom { justify-content: center; text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #sf-welcome *, .sfw-toast { animation: none !important; transition-duration: .01ms !important; }
+}
+</style>
+
+<div id="sf-welcome" role="dialog" aria-modal="true" aria-label="Welcome to Sanan Faisal's personal website">
+  <div class="sfw-bg sfw-aura"></div>
+  <div class="sfw-bg sfw-grid"></div>
+  <div class="sfw-bg sfw-spot" id="sfwSpot"></div>
+  <canvas id="sfwCanvas" aria-hidden="true"></canvas>
+  <div class="sfw-prog"></div>
+
+  <div class="sfw-shell">
+    <header class="sfw-top">
+      <div class="sfw-brand"><span class="sfw-mono">SF</span><span class="sfw-brandtext">PERSONAL PORTFOLIO</span></div>
+      <div class="sfw-time"><span id="sfwTime"></span><span id="sfwTz" class="sfw-tz"></span></div>
+    </header>
+
+    <main class="sfw-main">
+      <p class="sfw-eyebrow" id="sfwEyebrow">Welcome to my personal space</p>
+      <h1>Sanan Faisal</h1>
+      <p class="sfw-role"><span id="sfwRole"></span><span class="sfw-caret">|</span></p>
+      <p class="sfw-desc">A curated space for my projects, interests and ideas, from code to Korean culture.</p>
+
+      <section class="sfw-panel" aria-label="Personalise your visit">
+        <label class="sfw-label" for="sfwName">Your name <small>(optional)</small></label>
+        <input id="sfwName" type="text" maxlength="30" autocomplete="given-name" placeholder="So I can greet you properly">
+
+        <div class="sfw-gap"></div>
+
+        <span class="sfw-label">Where would you like to begin?</span>
+        <div class="sfw-chips" role="group" aria-label="Choose a starting point">
+          <button type="button" class="sfw-chip" aria-pressed="true" data-target="#home">Start from the top</button>
+          <button type="button" class="sfw-chip" aria-pressed="false" data-target="#about">About Me</button>
+          <button type="button" class="sfw-chip" aria-pressed="false" data-target="#dramas">K-Dramas</button>
+          <button type="button" class="sfw-chip" aria-pressed="false" data-target="#idols">K-Pop</button>
+          <button type="button" class="sfw-chip" aria-pressed="false" data-target="#projects">Projects</button>
+          <button type="button" class="sfw-chip" aria-pressed="false" data-target="quiz.html">Take the Quiz <em class="sfw-badge">NEW</em></button>
+        </div>
+
+        <div class="sfw-actions">
+          <button type="button" id="sfwEnter">Enter My World <span>→</span></button>
+          <label class="sfw-switch">
+            <input type="checkbox" id="sfwMusic">
+            <span class="sfw-track"></span>
+            <span>Play soft piano music</span>
+          </label>
+        </div>
+      </section>
+
+      <p class="sfw-hint">Press <kbd>Enter</kbd> to continue</p>
+    </main>
+
+    <footer class="sfw-bottom">
+      <span>© 2026 Sanan Faisal</span>
+      <span>
+        <a href="https://www.instagram.com/celestialdreamer2007/" target="_blank" rel="noopener">Instagram</a> ·
+        <a href="https://www.tiktok.com/@celestialdreamer2007" target="_blank" rel="noopener">TikTok</a> ·
+        <a href="https://www.snapchat.com/add/sananfaisal2007" target="_blank" rel="noopener">Snapchat</a>
+      </span>
+    </footer>
+  </div>
+</div>
+
+<script>
+(function () {
+  var KEY = "sf_visitor_name";
+  var screen = document.getElementById("sf-welcome");
+  if (!screen) return;
+
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var nameInput = document.getElementById("sfwName");
+  var enterBtn = document.getElementById("sfwEnter");
+  var music = document.getElementById("sfwMusic");
+  var chips = Array.prototype.slice.call(screen.querySelectorAll(".sfw-chip"));
+  var leaving = false, closed = false;
+
+  document.body.style.overflow = "hidden";
+
+  // Remove the old welcome screen once the page has loaded
+  document.addEventListener("DOMContentLoaded", function () {
+    var old = document.getElementById("welcome-screen");
+    if (old) old.remove();
+  });
+
+  // Returning visitor
+  var saved = "";
+  try { saved = localStorage.getItem(KEY) || ""; } catch (e) {}
+  if (saved) {
+    nameInput.value = saved;
+    document.getElementById("sfwEyebrow").textContent = "Welcome back, " + saved;
+  }
+
+  // Live greeting + local time
+  function tick() {
+    var d = new Date(), h = d.getHours();
+    var g = h < 5 ? "Good night" : h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening";
+    document.getElementById("sfwTime").textContent =
+      g + " · " + d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    var tz = "";
+    try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone.replace(/_/g, " "); } catch (e) {}
+    document.getElementById("sfwTz").textContent = tz ? " · " + tz : "";
+  }
+  tick();
+  var clock = setInterval(tick, 30000);
+
+  // Rotating role line
+  var roles = ["Computer Science Student", "Aspiring Web Developer", "Korean Culture Enthusiast", "Dreamer & Storyteller"];
+  var roleEl = document.getElementById("sfwRole"), ri = 0, ci = 0, del = false;
+  function type() {
+    if (closed) return;
+    var w = roles[ri];
+    if (!del) {
+      ci++; roleEl.textContent = w.slice(0, ci);
+      if (ci === w.length) { del = true; setTimeout(type, 1800); return; }
+      setTimeout(type, 70);
+    } else {
+      ci--; roleEl.textContent = w.slice(0, ci);
+      if (ci === 0) { del = false; ri = (ri + 1) % roles.length; setTimeout(type, 350); return; }
+      setTimeout(type, 35);
+    }
+  }
+  if (reduce) roleEl.textContent = roles[0]; else type();
+
+  // Starting-point chips
+  chips.forEach(function (c) {
+    c.addEventListener("click", function () {
+      chips.forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+      c.setAttribute("aria-pressed", "true");
+    });
+  });
+
+  // Pointer spotlight + magnetic button
+  var spot = document.getElementById("sfwSpot");
+  var mouse = { x: -999, y: -999 };
+  function onMove(e) {
+    if (closed) return;
+    mouse.x = e.clientX; mouse.y = e.clientY;
+    spot.style.setProperty("--mx", e.clientX + "px");
+    spot.style.setProperty("--my", e.clientY + "px");
+    if (reduce || leaving) return;
+    var r = enterBtn.getBoundingClientRect();
+    var dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+    enterBtn.style.transform = Math.hypot(dx, dy) < 110
+      ? "translate(" + dx * 0.12 + "px," + dy * 0.2 + "px)" : "";
+  }
+  window.addEventListener("pointermove", onMove);
+
+  // Constellation background
+  var cv = document.getElementById("sfwCanvas"), cx = cv.getContext("2d"), W, H, pts = [];
+  function size() {
+    W = cv.width = window.innerWidth; H = cv.height = window.innerHeight;
+    var n = Math.min(70, Math.floor((W * H) / 18000));
+    pts = [];
+    for (var i = 0; i < n; i++) {
+      pts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .25 });
+    }
+  }
+  function frame() {
+    if (closed) return;
+    cx.clearRect(0, 0, W, H);
+    for (var i = 0; i < pts.length; i++) {
+      var p = pts[i];
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      cx.beginPath(); cx.arc(p.x, p.y, 1.4, 0, 6.283);
+      cx.fillStyle = "rgba(205,185,255,.55)"; cx.fill();
+      for (var j = i + 1; j < pts.length; j++) {
+        var q = pts[j], d = Math.hypot(p.x - q.x, p.y - q.y);
+        if (d < 120) {
+          cx.strokeStyle = "rgba(170,130,255," + (1 - d / 120) * 0.18 + ")";
+          cx.beginPath(); cx.moveTo(p.x, p.y); cx.lineTo(q.x, q.y); cx.stroke();
+        }
+      }
+      var m = Math.hypot(p.x - mouse.x, p.y - mouse.y);
+      if (m < 160) {
+        cx.strokeStyle = "rgba(200,170,255," + (1 - m / 160) * 0.4 + ")";
+        cx.beginPath(); cx.moveTo(p.x, p.y); cx.lineTo(mouse.x, mouse.y); cx.stroke();
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+  size();
+  window.addEventListener("resize", size);
+  if (!reduce) frame();
+
+  // Greeting toast
+  function toast(msg) {
+    var t = document.createElement("div");
+    t.className = "sfw-toast";
+    t.textContent = msg;
+    document.body.appendChild(t);
+    requestAnimationFrame(function () { t.classList.add("sfw-show"); });
+    setTimeout(function () {
+      t.classList.remove("sfw-show");
+      setTimeout(function () { t.remove(); }, 600);
+    }, 4200);
+  }
+
+  // Enter the website
+  function enter() {
+    if (leaving) return;
+    leaving = true;
+
+    var name = nameInput.value.trim().slice(0, 30);
+    try { if (name) localStorage.setItem(KEY, name); } catch (e) {}
+
+    var target = "#home";
+    chips.forEach(function (c) { if (c.getAttribute("aria-pressed") === "true") target = c.getAttribute("data-target"); });
+
+    enterBtn.disabled = true;
+    enterBtn.style.transform = "";
+    enterBtn.innerHTML = "Entering <span>✦</span>";
+
+    if (music.checked && target !== "quiz.html") {
+      var pb = document.getElementById("pianoToggle"), au = document.getElementById("peacefulPiano");
+      if (pb && au && au.paused) pb.click();
+    }
+
+    screen.classList.add("sfw-leaving");
+
+    setTimeout(function () {
+      closed = true;
+      clearInterval(clock);
+      window.removeEventListener("pointermove", onMove);
+      screen.style.display = "none";
+      document.body.style.overflow = "";
+      document.body.classList.add("home-reveal");
+
+      if (target === "quiz.html") { window.location.href = "quiz.html"; return; }
+      if (name) toast("Welcome, " + name + ". Enjoy exploring.");
+      if (target !== "#home") {
+        var el = document.querySelector(target);
+        if (el) setTimeout(function () { el.scrollIntoView({ behavior: "smooth", block: "start" }); }, 250);
+      }
+    }, 1000);
+  }
+
+  enterBtn.addEventListener("click", enter);
+  document.addEventListener("keydown", function (e) {
+    if (leaving || closed || e.key !== "Enter") return;
+    var a = document.activeElement;
+    if (a === document.body || a === nameInput) { e.preventDefault(); enter(); }
+  });
+
+  // Keep old function name working in case anything else calls it
+  window.enterMyWorld = enter;
+})();
+</script>
+<!-- ===================== END OF WELCOME SCREEN BLOCK ===================== -->
