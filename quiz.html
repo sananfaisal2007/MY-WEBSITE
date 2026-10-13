@@ -385,6 +385,126 @@ h1 {
   }
 }
   
+```css
+/* ===== COSMIC GALAXY BACKGROUND ===== */
+
+#cosmicBackground {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 30%, #28104c 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 70%, #180c3a 0%, transparent 50%),
+    #080515;
+}
+
+#cosmicBackground .cosmic-nebula {
+  position: absolute;
+  width: 65vw;
+  height: 65vw;
+  max-width: 750px;
+  max-height: 750px;
+  border-radius: 50%;
+  filter: blur(65px);
+  opacity: .38;
+  will-change: transform;
+}
+
+#cosmicBackground .nebula-one {
+  top: -25%;
+  left: -20%;
+  background: radial-gradient(circle, #923bff, #5520a8 35%, transparent 70%);
+  animation: galaxyDriftOne 18s ease-in-out infinite alternate;
+}
+
+#cosmicBackground .nebula-two {
+  right: -25%;
+  bottom: -35%;
+  background: radial-gradient(circle, #d047ff, #5d20a4 35%, transparent 70%);
+  animation: galaxyDriftTwo 22s ease-in-out infinite alternate;
+}
+
+#cosmicBackground .cosmic-stars {
+  position: absolute;
+  inset: 0;
+  opacity: .75;
+  background-image:
+    radial-gradient(2px 2px at 10% 20%, #fff, transparent),
+    radial-gradient(1px 1px at 30% 70%, #e3c7ff, transparent),
+    radial-gradient(2px 2px at 70% 15%, #fff, transparent),
+    radial-gradient(1px 1px at 85% 45%, #d7a6ff, transparent),
+    radial-gradient(2px 2px at 45% 35%, #fff, transparent),
+    radial-gradient(1px 1px at 60% 85%, #fff, transparent),
+    radial-gradient(2px 2px at 92% 78%, #d7a6ff, transparent),
+    radial-gradient(1px 1px at 18% 90%, #fff, transparent);
+  background-size: 310px 270px;
+  animation: starsTwinkle 5s ease-in-out infinite alternate;
+}
+
+#cursorGlow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(155, 65, 255, .22) 0%,
+    rgba(123, 40, 220, .10) 38%,
+    transparent 70%
+  );
+  transform: translate(-50%, -50%);
+  transition: left .12s ease-out, top .12s ease-out;
+}
+
+#sparkleLayer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.cosmic-sparkle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #f5dfff;
+  box-shadow: 0 0 10px 3px rgba(195, 130, 255, .7);
+  animation: sparkleFade .8s ease-out forwards;
+}
+
+@keyframes galaxyDriftOne {
+  from { transform: translate(0, 0) rotate(0deg) scale(1); }
+  to { transform: translate(12vw, 10vh) rotate(18deg) scale(1.18); }
+}
+
+@keyframes galaxyDriftTwo {
+  from { transform: translate(0, 0) scale(1.1); }
+  to { transform: translate(-12vw, -8vh) scale(.9); }
+}
+
+@keyframes starsTwinkle {
+  from { opacity: .35; }
+  to { opacity: .9; }
+}
+
+@keyframes sparkleFade {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0) translateY(-18px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #cosmicBackground *,
+  #cosmicBackground *::before,
+  #cosmicBackground *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+```
 </style>
 </head>
 
