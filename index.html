@@ -3462,30 +3462,7 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
 
 <style>
 /* ===== About button: shine + glow ===== */
-.dream-portal.about-glow {
-  overflow: hidden;
-  border-color: rgba(255, 226, 122, 0.9);
-  background: linear-gradient(110deg, #ffe27a, #ffc8f2, #c9a6ff, #ffe27a);
-  background-size: 250% 100%;
-  box-shadow: 0 0 16px rgba(255, 226, 122, .55), 0 0 30px rgba(201, 166, 255, .4);
-  animation: abFlow 4s linear infinite;
-}
-.dream-portal.about-glow .portal-label { color: #2a0f45; font-weight: 800; }
 
-/* chamakti hui patti */
-.dream-portal.about-glow::before {
-  content: "";
-  position: absolute;
-  top: 0; bottom: 0; left: -60%;
-  width: 40%;
-  background: linear-gradient(100deg, transparent, rgba(255,255,255,.85), transparent);
-  animation: abShine 3s ease-in-out infinite;
-  pointer-events: none;
-}
-.dream-portal.about-glow::after { top: 3px; right: 10px; color: #2a0f45; }
-
-@keyframes abFlow  { to { background-position: 250% 0; } }
-@keyframes abShine { 0% { left: -60%; } 55%, 100% { left: 140%; } }
 
 /* ===== Pyaara transition (click ke baad) ===== */
 #pageTransition {
@@ -3518,7 +3495,175 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
   #pageTransition { transition: none; }
 }
 </style>
+</style>                          ← aakhri style khatam
 
+<!-- ↓↓↓ YAHAN NAYA STYLE PASTE KARO ↓↓↓ -->
+<style>
+/* ═══════════════════════════════════════════════════════
+   🌈 PREMIUM NAV BUTTONS — Flow + Shine + Glow
+   ═══════════════════════════════════════════════════════ */
+
+.nav-portals .dream-portal {
+    --p1: #c9a6ff;
+    --p2: #ffc8f2;
+    --p3: #a78bfa;
+
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+
+    background: linear-gradient(110deg,
+        var(--p1),
+        var(--p2),
+        var(--p3),
+        var(--p1));
+    background-size: 250% 100%;
+    animation: dpFlow 5s linear infinite, dpFloat 3s ease-in-out infinite;
+
+    border: 1px solid var(--p2);
+    box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.28),
+        0 0 16px var(--p1),
+        0 0 28px var(--p2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+
+    color: #2a0f45 !important;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+
+    transition:
+        transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1),
+        box-shadow 0.4s ease;
+}
+
+.nav-portals .dream-portal::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -70%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(100deg,
+        transparent,
+        rgba(255, 255, 255, 0.85),
+        transparent);
+    transform: skewX(-22deg);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.nav-portals .dream-portal:hover::before {
+    animation: dpShine 1s ease-out;
+}
+
+.nav-portals .dream-portal:hover {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.35),
+        0 0 26px var(--p1),
+        0 0 44px var(--p2),
+        0 0 60px var(--p3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.nav-portals .dream-portal .portal-icon,
+.nav-portals .dream-portal .portal-label {
+    position: relative;
+    z-index: 2;
+}
+
+.nav-portals .dream-portal .portal-icon {
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6));
+    transition: transform 0.4s ease;
+}
+
+.nav-portals .dream-portal:hover .portal-icon {
+    transform: translateY(-2px) rotate(-8deg) scale(1.15);
+}
+
+@keyframes dpFlow {
+    to { background-position: 250% 0; }
+}
+
+@keyframes dpFloat {
+    0%, 100% { translate: 0 0; }
+    50%      { translate: 0 -2.5px; }
+}
+
+@keyframes dpShine {
+    0%   { left: -70%; }
+    100% { left: 150%; }
+}
+
+/* 🎨 Har Button Ka Apna Color */
+.nav-portals .dream-portal[href="#home"] {
+    --p1: #a78bfa;
+    --p2: #c4b5fd;
+    --p3: #818cf8;
+}
+.nav-portals .dream-portal.about-glow {
+    --p1: #ffc8f2;
+    --p2: #ffe27a;
+    --p3: #c9a6ff;
+}
+.nav-portals .dream-portal[href="#projects"] {
+    --p1: #67e8f9;
+    --p2: #a5f3fc;
+    --p3: #38bdf8;
+}
+.nav-portals .dream-portal[href="#korea"] {
+    --p1: #fda4af;
+    --p2: #fecdd3;
+    --p3: #fb7185;
+}
+.nav-portals .dream-portal[href="#kpop"] {
+    --p1: #f0abfc;
+    --p2: #fbcfe8;
+    --p3: #e879f9;
+}
+.nav-portals .dream-portal[href="#dream"] {
+    --p1: #a5b4fc;
+    --p2: #c7d2fe;
+    --p3: #8b5cf6;
+}
+
+/* Active state */
+.nav-portals .dream-portal.active {
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.4),
+        0 0 30px var(--p1),
+        0 0 50px var(--p2),
+        inset 0 0 20px rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+    .nav-portals .dream-portal {
+        padding: 8px 13px;
+        font-size: 12px;
+        gap: 6px;
+    }
+    .nav-portals .dream-portal .portal-icon {
+        font-size: 15px;
+    }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    .nav-portals .dream-portal,
+    .nav-portals .dream-portal::before {
+        animation: none !important;
+    }
+}
+</style>
+<!-- ↑↑↑ YAHAN NAYA STYLE KHATAM ↑↑↑ -->
+
+<div id="pageTransition" aria-hidden="true">
+  <div class="pt-emoji">🌙✨</div>
+  <div class="pt-text">Step into my little world... 💜</div>
+</div>
     <div id="pageTransition" aria-hidden="true">
   <div class="pt-emoji">🌙✨</div>
   <div class="pt-text">Step into my little world... 💜</div>
