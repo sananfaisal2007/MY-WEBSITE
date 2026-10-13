@@ -1652,6 +1652,177 @@ html.skip-welcome #welcome-screen { display: none !important; }
     }
 }
 </style>
+/* ═══════════════════════════════════════
+   🎬 CINEMATIC PORTAL TRANSITION
+   ═══════════════════════════════════════ */
+
+/* --- Door se roshni ka burst --- */
+.wd-burst-glow {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 100005;
+    background: radial-gradient(circle,
+        #ffffff 0%,
+        #ffe9a8 25%,
+        #d49aff 55%,
+        #8b4dff 80%,
+        transparent 100%);
+    box-shadow:
+        0 0 40px #d49aff,
+        0 0 80px #8b4dff,
+        0 0 120px rgba(255, 233, 168, 0.6);
+    animation: wdBurstGlow 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes wdBurstGlow {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+    30% {
+        transform: scale(4);
+        opacity: 1;
+    }
+    70% {
+        transform: scale(14);
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(30);
+        opacity: 0;
+    }
+}
+
+/* --- Ring pulse waves --- */
+.wd-ring {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    margin: -40px 0 0 -40px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 233, 168, 0.9);
+    pointer-events: none;
+    z-index: 100004;
+    box-shadow:
+        0 0 30px rgba(212, 154, 255, 0.9),
+        inset 0 0 30px rgba(255, 233, 168, 0.6);
+    animation: wdRingPulse 1.4s ease-out forwards;
+}
+
+@keyframes wdRingPulse {
+    0% {
+        transform: scale(0.2);
+        opacity: 0;
+        border-width: 6px;
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        transform: scale(14);
+        opacity: 0;
+        border-width: 1px;
+    }
+}
+
+/* --- Flying sparkles --- */
+.wd-spark-fly {
+    position: fixed;
+    pointer-events: none;
+    z-index: 100006;
+    filter: drop-shadow(0 0 10px rgba(212, 154, 255, 1));
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 1;
+    animation: wdSparkFly 1.4s cubic-bezier(0.3, 0, 0.7, 1) forwards;
+}
+
+@keyframes wdSparkFly {
+    0% {
+        transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(
+            calc(-50% + var(--fx, 200px)),
+            calc(-50% + var(--fy, -200px))
+        ) scale(1.6) rotate(var(--rot, 360deg));
+        opacity: 0;
+    }
+}
+
+/* --- White-purple flash --- */
+.wd-flash {
+    position: fixed;
+    inset: 0;
+    z-index: 100007;
+    pointer-events: none;
+    background: radial-gradient(circle at center,
+        #ffffff 0%,
+        #f0d9ff 30%,
+        #c78bff 55%,
+        #8b4dff 75%,
+        transparent 100%);
+    opacity: 0;
+    animation: wdFlash 0.9s ease-out forwards;
+}
+
+@keyframes wdFlash {
+    0%   { opacity: 0; }
+    25%  { opacity: 1; }
+    60%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* --- Camera zoom on body --- */
+body.wd-cinematic-zoom {
+    animation: wdZoomIn 1.4s cubic-bezier(0.5, 0, 0.3, 1) forwards;
+}
+
+@keyframes wdZoomIn {
+    0% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    40% {
+        transform: scale(1.06);
+        filter: brightness(1.3);
+    }
+    100% {
+        transform: scale(1.35);
+        filter: brightness(2) blur(6px);
+    }
+}
+
+/* --- Reduced motion support --- */
+@media (prefers-reduced-motion: reduce) {
+    .wd-burst-glow,
+    .wd-ring,
+    .wd-spark-fly,
+    .wd-flash,
+    body.wd-cinematic-zoom {
+        animation: none !important;
+    }
+}
+
+/* --- Mobile tuning (chhote screens par halka) --- */
+@media (max-width: 600px) {
+    .wd-burst-glow {
+        box-shadow:
+            0 0 20px #d49aff,
+            0 0 40px #8b4dff;
+    }
+
+    .wd-spark-fly {
+        font-size: 12px !important;
+    }
+}
 </head>
 
 <body>
@@ -6519,18 +6690,19 @@ body .content {
 </script>
 <script>
 function enterMyWorld() {
-    // 1. Naam check karo
+    /* ═══════════════════════════════════════
+       STEP 1: Naam check karo
+       ═══════════════════════════════════════ */
     var nameInput = document.getElementById("visitorName");
     var hint = document.getElementById("wdHint");
     var react = document.getElementById("wdReact");
     var name = nameInput ? nameInput.value.trim() : "";
 
     if (!name) {
-        // Naam nahi likha → darwaza hilao + warning
         var door = document.getElementById("enter-door");
         if (door) {
             door.classList.remove("wd-shake");
-            void door.offsetWidth; // restart animation
+            void door.offsetWidth;
             door.classList.add("wd-shake");
         }
         if (hint) hint.textContent = "⚠️ Pehle apna naam likho, phir darwaza khulega! 😄";
@@ -6538,52 +6710,141 @@ function enterMyWorld() {
         return;
     }
 
-    // 2. Naam save karo (session)
+    /* ═══════════════════════════════════════
+       STEP 2: Naam save karo
+       ═══════════════════════════════════════ */
     try {
         sessionStorage.setItem("visitorName", name);
         sessionStorage.setItem("welcomeDone", "1");
     } catch (e) {}
 
-    // 3. Door ko open animation do
-    if (door) door.classList.add("open");
+    /* ═══════════════════════════════════════
+       STEP 3: Reduced motion check
+       ═══════════════════════════════════════ */
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // 4. Hint update
+    /* ═══════════════════════════════════════
+       STEP 4: DOM elements
+       ═══════════════════════════════════════ */
+    var door = document.getElementById("enter-door");
+    var ws = document.getElementById("welcome-screen");
+    var body = document.body;
+
+    if (!door || !ws) return;
+
+    /* Door open animation */
+    door.classList.add("open");
     if (hint) hint.textContent = "✨ Darwaza khul raha hai... Welcome, " + name + "! 💜";
     if (react) react.textContent = "";
 
-    // 5. Sparkle burst
-    var rect = door ? door.getBoundingClientRect() : null;
-    if (rect) {
-        var cx = rect.left + rect.width / 2;
-        var cy = rect.top + rect.height / 2;
-        for (var i = 0; i < 20; i++) {
-            var s = document.createElement("span");
-            s.className = "wd-spark";
-            s.textContent = ["✨","💜","⭐","🌸","💫"][Math.floor(Math.random()*5)];
-            s.style.left = cx + "px";
-            s.style.top = cy + "px";
-            s.style.fontSize = (12 + Math.random() * 14) + "px";
-            s.style.setProperty("--dx", ((Math.random() - 0.5) * 400) + "px");
-            s.style.setProperty("--dy", ((Math.random() - 0.5) * 400) + "px");
-            s.addEventListener("animationend", function () { this.remove(); });
-            document.body.appendChild(s);
-        }
-    }
-
-    // 6. Welcome screen ko fade out karo
-    var ws = document.getElementById("welcome-screen");
-    if (ws) {
-        ws.classList.add("portal");
+    /* Reduced motion — simple fade */
+    if (reduce) {
         setTimeout(function () {
-            ws.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+            ws.style.transition = "opacity 0.5s ease";
             ws.style.opacity = "0";
-            ws.style.transform = "scale(1.15)";
             setTimeout(function () {
                 ws.style.display = "none";
-                document.body.classList.add("home-reveal");
-            }, 800);
-        }, 900);
+                body.classList.add("home-reveal");
+            }, 500);
+        }, 400);
+        return;
     }
+
+    /* ═══════════════════════════════════════
+       STEP 5: CINEMATIC SEQUENCE
+       ═══════════════════════════════════════ */
+
+    /* --- 5.1: Door ke andar se roshni phooto --- */
+    var doorRect = door.getBoundingClientRect();
+    var doorCenterX = doorRect.left + doorRect.width / 2;
+    var doorCenterY = doorRect.top + doorRect.height / 2;
+
+    var burst = document.createElement("div");
+    burst.className = "wd-burst-glow";
+    burst.style.left = doorCenterX + "px";
+    burst.style.top = doorCenterY + "px";
+    document.body.appendChild(burst);
+
+    /* --- 5.2: 3 Ring pulses door center se --- */
+    for (var r = 0; r < 3; r++) {
+        (function (index) {
+            setTimeout(function () {
+                var ring = document.createElement("div");
+                ring.className = "wd-ring";
+                ring.style.left = doorCenterX + "px";
+                ring.style.top = doorCenterY + "px";
+                document.body.appendChild(ring);
+                ring.addEventListener("animationend", function () {
+                    this.remove();
+                });
+            }, index * 180);
+        })(r);
+    }
+
+    /* --- 5.3: 35 Sparkles door se nikalte hain --- */
+    var sparkEmojis = ["✨", "💜", "⭐", "🌸", "💫", "🦋", "🌟", "💖"];
+    var totalSparks = 35;
+
+    for (var i = 0; i < totalSparks; i++) {
+        (function (idx) {
+            setTimeout(function () {
+                var spark = document.createElement("span");
+                spark.className = "wd-spark-fly";
+                spark.textContent = sparkEmojis[Math.floor(Math.random() * sparkEmojis.length)];
+                spark.style.left = doorCenterX + "px";
+                spark.style.top = doorCenterY + "px";
+                spark.style.fontSize = (14 + Math.random() * 18) + "px";
+
+                /* Random direction */
+                var angle = Math.random() * Math.PI * 2;
+                var distance = 150 + Math.random() * 380;
+                var fx = Math.cos(angle) * distance;
+                var fy = Math.sin(angle) * distance;
+
+                spark.style.setProperty("--fx", fx + "px");
+                spark.style.setProperty("--fy", fy + "px");
+                spark.style.setProperty("--rot", (Math.random() * 720 - 360) + "deg");
+
+                document.body.appendChild(spark);
+                spark.addEventListener("animationend", function () {
+                    this.remove();
+                });
+            }, idx * 12);
+        })(i);
+    }
+
+    /* --- 5.4: Camera zoom + shake (0.3s baad) --- */
+    setTimeout(function () {
+        body.classList.add("wd-cinematic-zoom");
+    }, 300);
+
+    /* --- 5.5: White-purple flash (0.9s baad) --- */
+    setTimeout(function () {
+        var flash = document.createElement("div");
+        flash.className = "wd-flash";
+        document.body.appendChild(flash);
+        flash.addEventListener("animationend", function () {
+            this.remove();
+        });
+    }, 900);
+
+    /* --- 5.6: Welcome screen fade out (1.2s baad) --- */
+    setTimeout(function () {
+        ws.style.transition = "opacity 0.6s ease, transform 0.6s ease, filter 0.6s ease";
+        ws.style.opacity = "0";
+        ws.style.transform = "scale(1.4)";
+        ws.style.filter = "blur(8px)";
+
+        /* Home reveal */
+        setTimeout(function () {
+            ws.style.display = "none";
+            body.classList.add("home-reveal");
+            body.classList.remove("wd-cinematic-zoom");
+
+            /* Clean up burst glow */
+            if (burst && burst.parentNode) burst.remove();
+        }, 600);
+    }, 1200);
 }
 </script>
 <style>
