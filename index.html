@@ -4986,5 +4986,175 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
     }
 }
 </style>
+<!-- ═══════════════════════════════════════
+     🎨 NAV BUTTONS — Naam ke hisaab se colors
+     ═══════════════════════════════════════ -->
+<style>
+.nav-portals .dream-portal {
+    --c1: #c9a6ff;
+    --c2: #ffc8f2;
+    --c3: #a78bfa;
+
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+
+    background: rgba(30, 18, 55, 0.55);
+    border: 1px solid rgba(190, 150, 255, 0.25);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    color: #e7dcf7;
+
+    transition:
+        background 0.5s ease,
+        border-color 0.5s ease,
+        box-shadow 0.5s ease,
+        transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1),
+        color 0.4s ease;
+}
+
+.nav-portals .dream-portal::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(100deg,
+        transparent,
+        rgba(255, 255, 255, 0.55),
+        transparent);
+    transform: skewX(-22deg);
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.nav-portals .dream-portal::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(110deg,
+        var(--c1),
+        var(--c2),
+        var(--c3),
+        var(--c1));
+    background-size: 300% 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.nav-portals .dream-portal .portal-icon,
+.nav-portals .dream-portal .portal-label {
+    position: relative;
+    z-index: 2;
+    transition: color 0.4s ease, transform 0.4s ease;
+}
+
+.nav-portals .dream-portal:hover {
+    border-color: var(--c2);
+    color: #1a0d2e !important;
+    transform: translateY(-3px) scale(1.04);
+    box-shadow:
+        0 6px 16px rgba(0, 0, 0, 0.35),
+        0 0 18px var(--c1),
+        0 0 32px var(--c2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.nav-portals .dream-portal:hover::after {
+    opacity: 0.85;
+    animation: navFlow 6s linear infinite;
+}
+
+.nav-portals .dream-portal:hover::before {
+    opacity: 1;
+    animation: navShine 1s ease-out;
+}
+
+.nav-portals .dream-portal:hover .portal-icon {
+    transform: translateY(-2px) rotate(-8deg) scale(1.15);
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+}
+
+.nav-portals .dream-portal:hover .portal-label {
+    font-weight: 800;
+    color: #1a0d2e;
+}
+
+@keyframes navFlow {
+    to { background-position: 300% 0; }
+}
+
+@keyframes navShine {
+    0%   { left: -80%; }
+    100% { left: 160%; }
+}
+
+/* 🌙 HOME — Night Sky */
+.nav-portals .dream-portal[href="#home"] {
+    --c1: #6d5bb8;
+    --c2: #a78bfa;
+    --c3: #4c3a8f;
+}
+
+/* ✨ ABOUT — Soft Warmth */
+.nav-portals .dream-portal.about-glow {
+    --c1: #d99bc4;
+    --c2: #ffc8f2;
+    --c3: #b898e0;
+}
+
+/* 💎 PROJECTS — Crystal */
+.nav-portals .dream-portal[href="#projects"] {
+    --c1: #4ba8b5;
+    --c2: #8dd8e5;
+    --c3: #3d7d99;
+}
+
+/* 🇰🇷 KOREAN WORLD — Korea Flag */
+.nav-portals .dream-portal[href="korea.html"] {
+    --c1: #b85260;
+    --c2: #7a9bd9;
+    --c3: #8b3a47;
+}
+
+/* 🌌 MY DREAM WORLD — Cosmos */
+.nav-portals .dream-portal[href="dream.html"] {
+    --c1: #7c5bc9;
+    --c2: #b898e0;
+    --c3: #5b3d9e;
+}
+
+.nav-portals .dream-portal.about-glow {
+    animation: none !important;
+}
+
+@media (max-width: 700px) {
+    .nav-portals .dream-portal {
+        padding: 8px 12px;
+        font-size: 12px;
+        gap: 5px;
+    }
+    .nav-portals .dream-portal .portal-icon {
+        font-size: 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nav-portals .dream-portal,
+    .nav-portals .dream-portal::before,
+    .nav-portals .dream-portal::after {
+        animation: none !important;
+    }
+    .nav-portals .dream-portal:hover {
+        transform: none;
+    }
+}
+</style>
+
+</body>
+</html>
 </body>
 </html>
