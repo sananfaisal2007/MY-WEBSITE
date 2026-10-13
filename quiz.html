@@ -190,6 +190,103 @@ h1 {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+/* ===== MOVING BACKGROUND (cursor ke sath) ===== */
+.bg-orbs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.orb { position: absolute; border-radius: 50%; filter: blur(45px); transition: transform .35s ease-out; will-change: transform; }
+.o1 { width: 320px; height: 320px; left: 6%;  top: 10%;   background: #a95cff55; }
+.o2 { width: 380px; height: 380px; right: 4%; bottom: 6%; background: #ff8fe055; }
+.o3 { width: 220px; height: 220px; left: 48%; top: 42%;   background: #ffe27a33; }
+.sparkle { position: absolute; font-size: 22px; opacity: .75; transition: transform .35s ease-out; filter: drop-shadow(0 0 8px #f5c8ff); }
+.cursor-glow {
+  position: fixed; left: 0; top: 0; width: 280px; height: 280px; margin: -140px 0 0 -140px;
+  border-radius: 50%; pointer-events: none; z-index: 0;
+  background: radial-gradient(circle, #e3b4ff55, transparent 65%);
+  transition: transform .15s ease-out;
+}
+.trail { position: fixed; z-index: 60; pointer-events: none; font-size: 14px; animation: trailFade 1s ease-out forwards; }
+@keyframes trailFade { to { opacity: 0; transform: translateY(-30px) scale(.4); } }
+
+/* ===== MAGICAL DOOR BUTTON ===== */
+.door-btn {
+  position: relative; display: block; margin: 26px auto 0; padding: 0; border: 0; background: none;
+  cursor: pointer; width: 170px; text-align: center; color: white; font-family: 'Poppins', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+.door-glow {
+  position: absolute; left: 50%; top: 40%; width: 200px; height: 200px; margin: -100px 0 0 -100px;
+  border-radius: 50%; background: radial-gradient(circle, #ffe9a8aa, #c78bff55 45%, transparent 70%);
+  animation: doorPulse 2.6s ease-in-out infinite; z-index: 0;
+}
+@keyframes doorPulse { 0%, 100% { transform: scale(.85); opacity: .7; } 50% { transform: scale(1.15); opacity: 1; } }
+.door-frame {
+  position: relative; display: block; width: 130px; height: 175px; margin: 0 auto; z-index: 1;
+  border-radius: 70px 70px 6px 6px; border: 4px solid #f7d5ff; perspective: 700px; overflow: hidden;
+  background: #10071e; box-shadow: 0 0 22px #d49aff, inset 0 0 18px #000;
+  transition: transform .3s;
+}
+.door-btn:hover .door-frame { transform: translateY(-4px) scale(1.04); }
+.door-light {
+  position: absolute; inset: 0; background: radial-gradient(circle at 50% 55%, #fff 0%, #ffe9a8 30%, #d49aff 65%, #5b2a86 100%);
+  opacity: 0; transition: opacity .8s ease .2s;
+}
+.door-panel {
+  position: absolute; top: 0; bottom: 0; width: 50%; z-index: 2;
+  background: linear-gradient(120deg, #8b3fd0, #5a2a96 50%, #8b3fd0);
+  transition: transform 1s cubic-bezier(.5, 0, .2, 1);
+  overflow: hidden;
+}
+.door-panel.left  { left: 0;  transform-origin: left center;  border-right: 1px solid #00000066; }
+.door-panel.right { right: 0; transform-origin: right center; border-left: 1px solid #00000066; }
+.door-panel::before { /* shine sweep */
+  content: ""; position: absolute; top: 0; bottom: 0; width: 40%; left: -60%;
+  background: linear-gradient(100deg, transparent, #ffffffaa, transparent);
+  animation: doorShine 3s ease-in-out infinite;
+}
+@keyframes doorShine { 0% { left: -60%; } 55%, 100% { left: 140%; } }
+.door-panel::after { /* decoration */
+  content: "✨"; position: absolute; top: 28%; left: 50%; transform: translateX(-50%); font-size: 16px; opacity: .8;
+}
+.door-knob {
+  position: absolute; top: 55%; left: 50%; width: 12px; height: 12px; margin-left: -6px; z-index: 3;
+  border-radius: 50%; background: radial-gradient(circle, #fff6c9, #ffd24d); box-shadow: 0 0 10px #ffe27a;
+  transition: opacity .3s;
+}
+.door-text {
+  display: block; margin-top: 14px; font-size: 13px; font-weight: 700; color: #ffeab8;
+  text-shadow: 0 0 10px #ffd24d; position: relative; z-index: 1;
+}
+.door-btn.open .door-panel.left  { transform: rotateY(-110deg); }
+.door-btn.open .door-panel.right { transform: rotateY(110deg); }
+.door-btn.open .door-light { opacity: 1; }
+.door-btn.open .door-knob { opacity: 0; }
+.door-btn.open .door-frame { animation: doorZoom 1.2s ease-in 1s forwards; }
+@keyframes doorZoom { to { transform: scale(9); opacity: .0; } }
+.welcome-card.zooming { animation: portalOut .8s ease 1.4s forwards; }
+@keyframes portalOut { to { opacity: 0; transform: scale(1.12); filter: blur(8px); } }
+.door-sparkle { position: fixed; z-index: 70; pointer-events: none; animation: dsp 1.4s ease-out forwards; }
+@keyframes dsp { to { transform: translate(var(--dx), var(--dy)) scale(.3); opacity: 0; } }
+
+/* ===== FUNNY NAME INPUT ===== */
+.name-react { min-height: 22px; margin: 10px 0 0; font-size: 13px; color: #ffe9a8; line-height: 1.6; }
+.shake { animation: shake .45s; }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-9px); } 40% { transform: translateX(9px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(6px); } }
+STEP 2: HTML mein changes
+2a. Moving background layer add karo
+
+<body> ke baad jo <div class="flowers" ...> hai, uske theek upar yeh paste karo:
+
+html
+<div class="bg-orbs" aria-hidden="true">
+  <i class="orb o1" data-depth="40"></i>
+  <i class="orb o2" data-depth="-55"></i>
+  <i class="orb o3" data-depth="25"></i>
+  <span class="sparkle" data-depth="30"  style="left:12%;top:70%">✨</span>
+  <span class="sparkle" data-depth="-35" style="left:80%;top:18%">🌙</span>
+  <span class="sparkle" data-depth="50"  style="left:25%;top:15%">⭐</span>
+  <span class="sparkle" data-depth="-45" style="left:70%;top:75%">💫</span>
+  <span class="sparkle" data-depth="60"  style="left:90%;top:50%">🦋</span>
+</div>
+<div class="cursor-glow" id="cursorGlow"></div>
 </style>
 </head>
 
@@ -217,14 +314,25 @@ h1 {
       with Sanan. 😂💜<br>
       <em>Side effects are not our responsibility.</em> 🧸
     </div>
-    <form id="welcomeForm">
-      <label class="name-label" for="playerName">💌 Tell me your beautiful name</label>
-      <div class="input-wrap">
-        <input id="playerName" name="playerName" type="text" placeholder="✨ Type your name here... ✨" maxlength="40" autocomplete="given-name" required>
-      </div>
-      <button id="startQuizBtn" class="start-btn" type="submit">🌙 LET THE MAGIC BEGIN ✨</button>
-      <p id="message" aria-live="polite"></p>
-    </form>
+   <form id="welcomeForm">
+  <label class="name-label" for="playerName">💌 Pehle naam batao, warna darwaza nahi khulega 🚪😂</label>
+  <div class="input-wrap">
+    <input id="playerName" name="playerName" type="text" placeholder="✨ Type your name here... ✨" maxlength="40" autocomplete="given-name" required>
+  </div>
+  <p id="nameReact" class="name-react" aria-live="polite"></p>
+
+  <button id="startQuizBtn" class="door-btn" type="submit" aria-label="Enter Sanan's world">
+    <span class="door-glow"></span>
+    <span class="door-frame">
+      <span class="door-light"></span>
+      <span class="door-panel left"></span>
+      <span class="door-panel right"></span>
+      <span class="door-knob"></span>
+    </span>
+    <span class="door-text">🚪 Enter Sanan's World ✨</span>
+  </button>
+  <p id="message" aria-live="polite"></p>
+</form>
     <p class="bottom-note">
       🌷 Made of stardust, flowers and a little bit of chaos 🌷<br>
       Prepare yourself. Sanan's questions are waiting! 💜
@@ -367,7 +475,6 @@ const meterFill = $("meterFill");
 const resultLevel = $("resultLevel");
 const resultMessage = $("resultMessage");
 const restartQuizBtn = $("restartQuizBtn");
-const newPlayerBtn = $("newPlayerBtn");
 const giftBtn = $("giftBtn");
 const giftHint = $("giftHint");
 const giftReveal = $("giftReveal");
@@ -395,17 +502,102 @@ function shuffle(array) {
 }
 
 // Name form -> start quiz directly
+const doorBtn = $("startQuizBtn");
+const nameReact = $("nameReact");
+let entering = false;
+
+const emptyNameLines = [
+  "🚪 Darwaza keh raha hai: 'Naam nahi to entry nahi!' 😂",
+  "🌸 Bina naam ke to bhoot bhi andar nahi aata 👻",
+  "🙈 Naam likho, Sanan ka guard tumhein ghoor raha hai 👀"
+];
+const enterLines = [
+  "✨ Abra ka dabra... {n} ke liye darwaza khul raha hai! 🪄",
+  "🚪 Welcome {n}! Sanan ne chai bana rakhi hai ☕💜",
+  "🌙 {n} aa gaya/gayi! Sanan: 'Finally, late ho gaye!' 😂"
+];
+const placeholders = [
+  "✨ Type your name here... ✨",
+  "🕵️ Secret agent ka naam?",
+  "👑 Apna royal naam likho",
+  "🍭 Nickname bhi chalega 😂"
+];
+const typingLines = [
+  "{n}... bohat pyara naam hai! Sanan ne notes bana liya 📝💜",
+  "Wah {n}! Naam sunte hi darwaza thora sharma gaya 🚪🙈",
+  "{n}? Yeh naam to Sanan ki yaad-dasht mein save ho gaya 🧠✨",
+  "Oho {n}! Aaj ka sab se stylish naam 😎"
+];
+
+// Placeholder rotate
+let phIndex = 0;
+setInterval(() => {
+  if (document.activeElement === nameInput || nameInput.value) return;
+  phIndex = (phIndex + 1) % placeholders.length;
+  nameInput.placeholder = placeholders[phIndex];
+}, 2500);
+
+// Live funny reaction jab user type kare
+nameInput.addEventListener("input", function () {
+  const n = nameInput.value.trim();
+  if (!n) { nameReact.textContent = ""; return; }
+  if (n.toLowerCase().includes("sanan")) {
+    nameReact.textContent = "🕵️ Sanan?! Fake ID? Asli Sanan ko bulao 😂";
+  } else if (n.length <= 2) {
+    nameReact.textContent = "Itna chhota naam? Nickname hai ya password? 😂";
+  } else {
+    nameReact.textContent = pick(typingLines).replace("{n}", n);
+  }
+});
+
+function doorSparkles() {
+  const r = doorBtn.getBoundingClientRect();
+  const cx = r.left + r.width / 2, cy = r.top + 90;
+  const emojis = ["✨", "💜", "⭐", "🌸", "🦋", "💫"];
+  for (let i = 0; i < 28; i++) {
+    const s = document.createElement("span");
+    s.className = "door-sparkle";
+    s.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    s.style.left = cx + "px";
+    s.style.top = cy + "px";
+    s.style.fontSize = 14 + Math.random() * 16 + "px";
+    s.style.setProperty("--dx", (Math.random() - .5) * 420 + "px");
+    s.style.setProperty("--dy", (Math.random() - .5) * 420 + "px");
+    s.addEventListener("animationend", () => s.remove());
+    document.body.appendChild(s);
+  }
+}
+
 welcomeForm.addEventListener("submit", function (event) {
   event.preventDefault();
+  if (entering) return;
   const enteredName = nameInput.value.trim();
+
   if (enteredName === "") {
-    message.textContent = "🌸 Even magic needs your name first! 💜";
+    message.textContent = pick(emptyNameLines);
     nameInput.focus();
+    const wrap = document.querySelector(".input-wrap");
+    wrap.classList.remove("shake");
+    void wrap.offsetWidth;           // animation restart
+    wrap.classList.add("shake");
     return;
   }
+
   playerName = enteredName;
-  message.textContent = "";
-  startQuiz();
+  entering = true;
+  message.textContent = pick(enterLines).replace("{n}", playerName);
+  doorBtn.classList.add("open");
+  card.classList.add("zooming");
+  setTimeout(doorSparkles, 700);
+
+  setTimeout(function () {
+    entering = false;
+    doorBtn.classList.remove("open");
+    card.classList.remove("zooming");
+    message.textContent = "";
+    nameReact.textContent = "";
+    startQuiz();
+  }, 2500);
 });
 
 function startQuiz() {
@@ -679,12 +871,37 @@ function confetti(count) {
 
 resultPet.addEventListener("click", () => confetti(25));
 restartQuizBtn.addEventListener("click", startQuiz);
-newPlayerBtn.addEventListener("click", function () {
-  nameInput.value = "";
-  message.textContent = "";
-  showScreen("intro");
-  nameInput.focus();
+
+// Background cursor ke sath move kare
+const glow = $("cursorGlow");
+const depthEls = document.querySelectorAll("[data-depth]");
+let lastTrail = 0;
+
+function moveBg(x, y) {
+  const dx = x / window.innerWidth - 0.5;   // -0.5 se 0.5
+  const dy = y / window.innerHeight - 0.5;
+  depthEls.forEach((el) => {
+    const d = parseFloat(el.dataset.depth);
+    el.style.transform = "translate(" + dx * d * 2 + "px," + dy * d * 2 + "px)";
+  });
+  glow.style.transform = "translate(" + x + "px," + y + "px)";
+}
+
+window.addEventListener("pointermove", function (e) {
+  moveBg(e.clientX, e.clientY);
+  const now = Date.now();
+  if (now - lastTrail > 90 && !introScreen.hidden) {   // sirf welcome page par sparkle trail
+    lastTrail = now;
+    const t = document.createElement("span");
+    t.className = "trail";
+    t.textContent = ["✨", "💜", "⭐"][Math.floor(Math.random() * 3)];
+    t.style.left = e.clientX + "px";
+    t.style.top = e.clientY + "px";
+    t.addEventListener("animationend", () => t.remove());
+    document.body.appendChild(t);
+  }
 });
+moveBg(window.innerWidth / 2, window.innerHeight / 2);
 </script>
 
 </body>
