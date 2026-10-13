@@ -2752,99 +2752,140 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
 </script>
 
 
-<!-- CELESTIALDREAMER: Floating Quiz Invitation -->
+<!-- CELESTIALDREAMER: Floating Quiz Invitation (Teddy + Animals Drawer) -->
 <style>
-    <style>
-  /* Teddy toggle button */
-  #quizTeddy {
+  #quizDock {
+    --cw: 174px;
+    --shift: calc(var(--cw) + 20px);
     position: fixed;
-    right: 14px;
-    bottom: 80px;
+    right: 0;
+    bottom: 95px;
     z-index: 9999;
-    width: 54px;
-    height: 54px;
+    display: flex;
+    align-items: flex-end;
+    transform: translateX(var(--shift));
+    transition: transform .9s cubic-bezier(.5, 0, .3, 1);
+  }
+  #quizDock.open {
+    transform: translateX(0);
+    transition: transform 1s cubic-bezier(.34, 1.56, .64, 1);
+  }
+
+  /* Teddy handle */
+  #quizTeddy {
+    position: relative;
+    flex: 0 0 auto;
+    width: 58px;
+    height: 58px;
     padding: 0;
-    border-radius: 50%;
-    border: 1px solid rgba(231, 199, 255, 0.85);
+    margin-right: 0;
+    border-radius: 50% 0 0 50%;
+    border: 1px solid rgba(231, 199, 255, .85);
+    border-right: 0;
     background: linear-gradient(145deg, #5a2a96, #21103f);
-    font-size: 28px;
+    font-size: 32px;
     line-height: 1;
     cursor: pointer;
-    box-shadow: 0 0 16px rgba(194, 115, 255, .8);
-    animation: teddyBounce 2s ease-in-out infinite;
+    box-shadow: 0 0 18px rgba(194, 115, 255, .85);
     -webkit-tap-highlight-color: transparent;
+    z-index: 3;
   }
-
+  #quizTeddy .qz-teddy-face { display: block; animation: qzTeddyBob 2.2s ease-in-out infinite; }
+  #quizDock.open #quizTeddy .qz-teddy-face { animation: qzTeddyPull .9s ease-in-out 2; }
   #quizTeddy .teddy-badge {
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    min-width: 20px;
-    height: 20px;
-    padding: 0 4px;
-    border-radius: 10px;
-    background: #f2b7ff;
-    color: #29113d;
-    font-size: 12px;
-    font-weight: 900;
-    line-height: 20px;
-    text-align: center;
+    position: absolute; top: -6px; left: -4px;
+    min-width: 20px; height: 20px; padding: 0 4px;
+    border-radius: 10px; background: #f2b7ff; color: #29113d;
+    font-size: 12px; font-weight: 900; line-height: 20px; text-align: center;
     box-shadow: 0 0 8px rgba(239, 180, 255, .8);
   }
-
-  @keyframes teddyBounce {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-5px) rotate(-6deg); }
+  @keyframes qzTeddyBob {
+    0%, 100% { transform: translateX(0) rotate(0); }
+    50% { transform: translateX(-5px) rotate(-10deg); }
+  }
+  @keyframes qzTeddyPull {
+    0%, 100% { transform: translateX(0) rotate(0); }
+    50% { transform: translateX(-4px) rotate(8deg) scale(1.1); }
   }
 
-  /* Card ki position teddy ke upar */
-  #quizMagicInvite {
-    bottom: 145px !important;
-    right: 14px !important;
+  /* Speech bubble (only when folded) */
+  .qz-bubble {
+    position: absolute;
+    right: 64px;
+    bottom: 66px;
+    width: max-content;
+    max-width: 170px;
+    padding: 8px 12px;
+    border-radius: 16px 16px 4px 16px;
+    background: #fff0fc;
+    color: #4a1f6e;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.4;
+    box-shadow: 0 0 14px rgba(240, 180, 255, .7);
+    opacity: 0;
+    transform: translateY(8px) scale(.9);
     transform-origin: bottom right;
-    transition: opacity .35s ease, visibility .35s ease, transform .35s ease !important;
+    transition: opacity .4s ease, transform .4s ease;
+    pointer-events: none;
+  }
+  #quizDock:not(.open) .qz-bubble.show { opacity: 1; transform: none; }
+
+  /* Rope between teddy and card */
+  .qz-rope {
+    flex: 0 0 20px;
+    height: 0;
+    margin-bottom: 36px;
+    border-top: 3px dashed #f2b7ff;
+    filter: drop-shadow(0 0 4px #f2b7ff);
+    z-index: 2;
   }
 
-  /* Fold hone par card chhup jaye */
-  #quizMagicInvite.qm-hidden {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-    transform: scale(.2) translateY(30px) !important;
+  /* Card wrapper + animals */
+  .qz-card-wrap { position: relative; width: var(--cw); flex: 0 0 auto; }
+  #quizDock:not(.open) .qz-card-wrap { visibility: hidden; transition: visibility 0s .9s; }
+  .qz-pet {
+    position: absolute;
+    font-size: 26px;
+    line-height: 1;
+    opacity: 0;
+    transform: scale(.2) translateY(20px);
+    filter: drop-shadow(0 0 6px #f5c5ff);
+    pointer-events: none;
+    z-index: 4;
+  }
+  #quizDock.open .qz-pet { animation: qzPeek .7s cubic-bezier(.34, 1.56, .64, 1) forwards, qzWave 2.4s ease-in-out 1s infinite; }
+  .qz-pet.p1 { top: -22px; left: 6px; animation-delay: .35s, 1.1s; }
+  .qz-pet.p2 { top: -24px; right: 8px; animation-delay: .5s, 1.3s; }
+  .qz-pet.p3 { top: 38%; left: -16px; animation-delay: .65s, 1.5s; font-size: 24px; }
+  .qz-pet.p4 { bottom: -18px; right: 12px; animation-delay: .8s, 1.7s; }
+  @keyframes qzPeek { to { opacity: 1; transform: scale(1) translateY(0); } }
+  @keyframes qzWave {
+    0%, 100% { rotate: -8deg; }
+    50% { rotate: 8deg; translate: 0 -4px; }
   }
 
-  @media (min-width: 769px) {
-    #quizTeddy { bottom: 90px; right: 18px; }
-    #quizMagicInvite { bottom: 155px !important; right: 18px !important; }
-  }
-</style>
+  /* The quiz card itself */
   #quizMagicInvite {
-    position: fixed;
-    right: 18px;
-    bottom: 125px;
-    z-index: 9998;
-    width: 174px;
+    position: relative;
+    display: block;
+    width: 100%;
     padding: 15px 13px;
-    border: 1px solid rgba(231, 199, 255, 0.8);
+    border: 1px solid rgba(231, 199, 255, .8);
     border-radius: 22px;
     color: #fff;
     text-align: center;
     cursor: pointer;
     overflow: hidden;
     isolation: isolate;
+    font-family: inherit;
     background:
       radial-gradient(circle at 50% 0%, rgba(255,255,255,.2), transparent 45%),
       linear-gradient(145deg, #482078, #21103f 65%, #35105a);
-    box-shadow:
-      0 0 12px rgba(194, 115, 255, .8),
-      0 0 28px rgba(148, 66, 255, .42),
-      inset 0 0 14px rgba(255,255,255,.08);
-    font-family: inherit;
-    animation: quizInviteFloat 3s ease-in-out infinite,
-               quizInviteGlow 2.5s ease-in-out infinite;
-    transition: transform .25s ease;
+    box-shadow: 0 0 12px rgba(194,115,255,.8), 0 0 28px rgba(148,66,255,.42), inset 0 0 14px rgba(255,255,255,.08);
+    animation: quizInviteFloat 3s ease-in-out infinite, quizInviteGlow 2.5s ease-in-out infinite;
+    transition: transform .3s ease, filter .3s ease;
   }
-
   #quizMagicInvite::before {
     content: "✦  ·  ✧  ·  ✦";
     display: block;
@@ -2854,227 +2895,110 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
     margin-bottom: 5px;
     animation: quizStars 3s linear infinite;
   }
-
-  #quizMagicInvite .quiz-mascot {
-    display: block;
-    font-size: 34px;
-    line-height: 1.3;
-    filter: drop-shadow(0 0 8px #f5c5ff);
-    animation: quizMascot 2s ease-in-out infinite;
-  }
-
-  #quizMagicInvite .quiz-invite-title {
-    display: block;
-    margin-top: 5px;
-    color: #ffe8ff;
-    font-size: 15px;
-    font-weight: 800;
-    line-height: 1.35;
-    text-shadow: 0 0 10px #d68bff;
-  }
-
-  #quizMagicInvite .quiz-invite-subtitle {
-    display: block;
-    margin-top: 5px;
-    color: #fff;
-    font-size: 12px;
-    line-height: 1.5;
-  }
-
+  #quizMagicInvite:hover { transform: scale(1.05); filter: brightness(1.15); }
+  #quizMagicInvite .quiz-mascot { display: block; font-size: 34px; line-height: 1.3; filter: drop-shadow(0 0 8px #f5c5ff); animation: quizMascot 2s ease-in-out infinite; }
+  #quizMagicInvite .quiz-invite-title { display: block; margin-top: 5px; color: #ffe8ff; font-size: 15px; font-weight: 800; line-height: 1.35; text-shadow: 0 0 10px #d68bff; }
+  #quizMagicInvite .quiz-invite-subtitle { display: block; margin-top: 5px; color: #fff; font-size: 12px; line-height: 1.5; }
   #quizMagicInvite .quiz-invite-cta {
-    display: block;
-    margin-top: 10px;
-    padding: 8px 7px;
-    border-radius: 12px;
-    background: linear-gradient(90deg, #f2b7ff, #cda4ff);
-    color: #29113d;
-    font-size: 12px;
-    font-weight: 900;
-    box-shadow: 0 0 13px rgba(239, 180, 255, .55);
+    display: block; margin-top: 10px; padding: 8px 7px; border-radius: 12px;
+    background: linear-gradient(90deg, #f2b7ff, #cda4ff); color: #29113d;
+    font-size: 12px; font-weight: 900; box-shadow: 0 0 13px rgba(239,180,255,.55);
   }
 
- 
-#quizMagicInvite {
-    transition: transform 0.4s ease,
-                box-shadow 0.4s ease,
-                filter 0.4s ease;
-    animation: quizInviteFloat 3s ease-in-out infinite,
-               quizInviteGlow 2.5s ease-in-out infinite;
-    transform-origin: center;
-}
-
-#quizMagicInvite:hover {
-    transform: scale(1.08) translateY(-5px);
-    filter: brightness(1.15);
-    box-shadow: 0 0 25px rgba(238,176,255,1),
-                0 0 45px rgba(148,66,255,.8);
-}
-
-#quizMagicInvite:hover .quiz-mascot {
-    animation: quizMascot 0.5s ease-in-out infinite;
-}
-
-#quizMagicInvite:hover .quiz-invite-cta {
-    animation: quizStars 0.8s ease-in-out infinite;
-}
-
-
-  @keyframes quizInviteFloat {
-    0%, 100% { translate: 0 0; }
-    50% { translate: 0 -9px; }
-  }
-
+  @keyframes quizInviteFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -7px; } }
   @keyframes quizInviteGlow {
-    0%, 100% {
-      box-shadow: 0 0 12px rgba(194,115,255,.7),
-                  0 0 25px rgba(148,66,255,.35);
-    }
-    50% {
-      box-shadow: 0 0 19px rgba(238,176,255,.95),
-                  0 0 38px rgba(148,66,255,.65);
-    }
+    0%, 100% { box-shadow: 0 0 12px rgba(194,115,255,.7), 0 0 25px rgba(148,66,255,.35); }
+    50% { box-shadow: 0 0 19px rgba(238,176,255,.95), 0 0 38px rgba(148,66,255,.65); }
   }
-
-  @keyframes quizMascot {
-    0%, 100% { transform: rotate(-7deg) scale(1); }
-    50% { transform: rotate(7deg) scale(1.09); }
-  }
-
-  @keyframes quizStars {
-    0%, 100% { opacity: .65; }
-    50% { opacity: 1; }
-  }
+  @keyframes quizMascot { 0%, 100% { transform: rotate(-7deg) scale(1); } 50% { transform: rotate(7deg) scale(1.09); } }
+  @keyframes quizStars { 0%, 100% { opacity: .65; } 50% { opacity: 1; } }
 
   @media (max-width: 600px) {
-    #quizMagicInvite {
-      right: 10px;
-      bottom: 112px;
-      width: 145px;
-      padding: 11px 9px;
-      border-radius: 18px;
-    }
-
-    #quizMagicInvite .quiz-mascot {
-      font-size: 28px;
-    }
-
-    #quizMagicInvite .quiz-invite-title {
-      font-size: 13px;
-    }
-
+    #quizDock { --cw: 150px; bottom: 90px; }
+    #quizTeddy { width: 52px; height: 52px; font-size: 28px; }
+    .qz-rope { margin-bottom: 32px; }
+    #quizMagicInvite { padding: 11px 9px; border-radius: 18px; }
+    #quizMagicInvite .quiz-mascot { font-size: 28px; }
+    #quizMagicInvite .quiz-invite-title { font-size: 13px; }
     #quizMagicInvite .quiz-invite-subtitle,
-    #quizMagicInvite .quiz-invite-cta {
-      font-size: 11px;
-    }
+    #quizMagicInvite .quiz-invite-cta { font-size: 11px; }
+    .qz-pet { font-size: 22px; }
   }
-
   @media (prefers-reduced-motion: reduce) {
-    #quizMagicInvite,
-    #quizMagicInvite * {
-      animation: none !important;
-      transition: none !important;
-    }
+    #quizDock, #quizDock *, #quizMagicInvite { animation: none !important; transition: none !important; }
+    #quizDock.open .qz-pet { opacity: 1; transform: none; }
   }
 </style>
 
-<style>
-  /* Teddy toggle button */
-  #quizTeddy {
-    position: fixed;
-    right: 14px;
-    bottom: 80px;
-    z-index: 9999;
-    width: 54px;
-    height: 54px;
-    padding: 0;
-    border-radius: 50%;
-    border: 1px solid rgba(231, 199, 255, 0.85);
-    background: linear-gradient(145deg, #5a2a96, #21103f);
-    font-size: 28px;
-    line-height: 1;
-    cursor: pointer;
-    box-shadow: 0 0 16px rgba(194, 115, 255, .8);
-    animation: teddyBounce 2s ease-in-out infinite;
-    -webkit-tap-highlight-color: transparent;
-  }
+<div id="quizDock">
+  <button id="quizTeddy" type="button" aria-expanded="false" aria-label="Quiz card kholo ya band karo">
+    <span class="qz-teddy-face">🧸</span>
+    <span class="teddy-badge" id="teddyBadge">?</span>
+  </button>
+  <span class="qz-bubble" id="qzBubble">Quiz kholo na? 🥺💜</span>
+  <span class="qz-rope" aria-hidden="true"></span>
 
-  #quizTeddy .teddy-badge {
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    min-width: 20px;
-    height: 20px;
-    padding: 0 4px;
-    border-radius: 10px;
-    background: #f2b7ff;
-    color: #29113d;
-    font-size: 12px;
-    font-weight: 900;
-    line-height: 20px;
-    text-align: center;
-    box-shadow: 0 0 8px rgba(239, 180, 255, .8);
-  }
+  <div class="qz-card-wrap">
+    <span class="qz-pet p1" aria-hidden="true">🐰</span>
+    <span class="qz-pet p2" aria-hidden="true">🐱</span>
+    <span class="qz-pet p3" aria-hidden="true">🐼</span>
+    <span class="qz-pet p4" aria-hidden="true">🐥</span>
 
-  @keyframes teddyBounce {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-5px) rotate(-6deg); }
-  }
-
-  /* Card ki position teddy ke upar */
-  #quizMagicInvite {
-    bottom: 145px !important;
-    right: 14px !important;
-    transform-origin: bottom right;
-    transition: opacity .35s ease, visibility .35s ease, transform .35s ease !important;
-  }
-
-  /* Fold hone par card chhup jaye */
-  #quizMagicInvite.qm-hidden {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-    transform: scale(.2) translateY(30px) !important;
-  }
-
-  @media (min-width: 769px) {
-    #quizTeddy { bottom: 90px; right: 18px; }
-    #quizMagicInvite { bottom: 155px !important; right: 18px !important; }
-  }
-</style>
-2. Teddy button add karo
-
-<button id="quizMagicInvite" ...> ke bilkul pehle ye line daal do:
-
-<button id="quizTeddy" type="button" onclick="toggleQuizCard()" aria-label="Quiz card kholo ya band karo">
-  🧸<span class="teddy-badge" id="teddyBadge">?</span>
-</button>
-    
-<button id="quizMagicInvite"
-        <button id="quizMagicInvite" type="button" onclick="window.location.href='quiz.html'"
-        aria-label="Scroll to the Celestial Challenge quiz">
-        aria-label="Scroll to the Celestial Challenge quiz">
- <span class="quiz-mascot" aria-hidden="true">🧸💜</span>
-  <span class="quiz-invite-title">How Well Do You Know Sanan? 👀</span>
- <span class="quiz-invite-subtitle">
-    Sanan ka naam toh suna hai… par usay jaante kitna ho? 😂💜
-</span>
-  <span class="quiz-invite-cta">✦ CHALLENGE ACCEPT KARO ✦</span>
-</button>
+    <button id="quizMagicInvite" type="button" aria-label="Open the How Well Do You Know Sanan quiz">
+      <span class="quiz-mascot" aria-hidden="true">🧸💜</span>
+      <span class="quiz-invite-title">How Well Do You Know Sanan? 👀</span>
+      <span class="quiz-invite-subtitle">Sanan ka naam toh suna hai… par usay jaante kitna ho? 😂💜</span>
+      <span class="quiz-invite-cta">✦ CHALLENGE ACCEPT KARO ✦</span>
+    </button>
+  </div>
+</div>
 
 <script>
-  (() => {
-   <script>
-function toggleQuizCard() {
-  var card = document.getElementById("quizMagicInvite");
+(function () {
+  var dock = document.getElementById("quizDock");
+  var teddy = document.getElementById("quizTeddy");
   var badge = document.getElementById("teddyBadge");
-  var hidden = card.classList.toggle("qm-hidden");
-  badge.textContent = hidden ? "?" : "✕";
-}
+  var bubble = document.getElementById("qzBubble");
+  var card = document.getElementById("quizMagicInvite");
+  if (!dock || !teddy || !card) return;
 
-// Phone par shuru mein card band rahe
-if (window.innerWidth <= 768) {
-  document.getElementById("quizMagicInvite").classList.add("qm-hidden");
-}
+  function setOpen(open) {
+    dock.classList.toggle("open", open);
+    teddy.setAttribute("aria-expanded", String(open));
+    badge.textContent = open ? "✕" : "?";
+    if (open) bubble.classList.remove("show");
+  }
+
+  // Phone par shuru mein fold, desktop par khula
+  setOpen(window.innerWidth > 768);
+
+  teddy.addEventListener("click", function () {
+    setOpen(!dock.classList.contains("open"));
+  });
+
+  card.addEventListener("click", function () {
+    window.location.href = "quiz.html";
+  });
+
+  // Teddy folded ho to kabhi kabhi pyari si baat kare
+  var lines = [
+    "Quiz kholo na? 🥺💜",
+    "Sanan ko kitna jaante ho? 👀",
+    "Mujhe tap karo! 🧸✨",
+    "Hum sab quiz le kar aaye hain 🐰🐱🐼"
+  ];
+  var i = 0;
+  setInterval(function () {
+    if (dock.classList.contains("open")) return;
+    bubble.textContent = lines[i = (i + 1) % lines.length];
+    bubble.classList.add("show");
+    setTimeout(function () { bubble.classList.remove("show"); }, 3200);
+  }, 6000);
+  setTimeout(function () {
+    if (!dock.classList.contains("open")) bubble.classList.add("show");
+    setTimeout(function () { bubble.classList.remove("show"); }, 3200);
+  }, 2500);
+})();
 </script>
 
 </body>
