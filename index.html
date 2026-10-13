@@ -6029,7 +6029,7 @@ body .content {
     position: fixed;
     left: 20px;
     bottom: 30px;              
-    z-index: 9999;
+    z-index: 999999;
     font-family: 'Poppins', sans-serif;
 }
 @media (max-width: 700px) {
@@ -7225,8 +7225,8 @@ body.zoom-in-portal {
 #pianoMenuWrap {
     position: fixed;
     left: 24px;
-    bottom: 24px;
-    z-index: 100000;
+    bottom: 110px;      /* ← Music player ke upar */
+    z-index: 999999;    /* ← Sab se upar */
     font-family: 'Poppins', sans-serif;
 }
 
@@ -7350,6 +7350,7 @@ body.zoom-in-portal {
     width: 280px;
     padding: 14px;
     border-radius: 20px;
+     z-index: 999999; 
     border: 1.5px solid rgba(255, 200, 242, 0.5);
     background: linear-gradient(145deg,
         rgba(35, 20, 65, 0.97),
@@ -7574,23 +7575,6 @@ body.zoom-in-portal {
         try { localStorage.setItem(STORAGE_KEY, trackKey); } catch (e) {}
         return;
     }
-
-    /* Play if not silent */
-    if (audio && userInteracted) {
-        audio.volume = currentVolume;
-        audio.play().then(function () {
-            btn.classList.add("playing");
-            isPlaying = true;
-        }).catch(function (err) {
-            console.warn("Piano play blocked:", err);
-            btn.classList.remove("playing");
-            isPlaying = false;
-        });
-    }
-
-    try { localStorage.setItem(STORAGE_KEY, trackKey); } catch (e) {}
-}
-
         /* Play if not silent */
         if (audio && userInteracted) {
             audio.volume = currentVolume;
