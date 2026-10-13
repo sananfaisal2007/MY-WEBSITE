@@ -1036,6 +1036,62 @@ newPlayerBtn.addEventListener("click", function () {
   showScreen("intro");
   nameInput.focus();
 });
+
+/* ===== COSMIC CURSOR GLOW & SPARKLE TRAIL ===== */
+
+(() => {
+  const cosmicBg = document.getElementById("cosmicBackground");
+  const cursorGlow = document.getElementById("cursorGlow");
+  const sparkleLayer = document.getElementById("sparkleLayer");
+
+  if (!cosmicBg || !cursorGlow || !sparkleLayer) return;
+
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (reduceMotion) return;
+
+  let lastSparkleTime = 0;
+
+  document.addEventListener("mousemove", (event) => {
+    cursorGlow.style.left = event.clientX + "px";
+    cursorGlow.style.top = event.clientY + "px";
+
+    const now = performance.now();
+
+    // Sparkles ko itna limit karte hain ke page slow na ho.
+    if (now - lastSparkleTime < 55) return;
+
+    lastSparkleTime = now;
+
+    const sparkle = document.createElement("span");
+    sparkle.className = "cosmic-sparkle";
+
+    const size = 2 + Math.random() * 4;
+
+    sparkle.style.width = size + "px";
+    sparkle.style.height = size + "px";
+    sparkle.style.left = event.clientX + "px";
+    sparkle.style.top = event.clientY + "px";
+
+    sparkleLayer.appendChild(sparkle);
+
+    window.setTimeout(() => {
+      sparkle.remove();
+    }, 850);
+  });
+
+  // Touch devices par bhi glow ko touch ke saath move karte hain.
+  document.addEventListener("touchmove", (event) => {
+    const touch = event.touches[0];
+    if (!touch) return;
+
+    cursorGlow.style.left = touch.clientX + "px";
+    cursorGlow.style.top = touch.clientY + "px";
+  }, { passive: true });
+})();
+  
 </script>
 
 </body>
