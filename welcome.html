@@ -1,1550 +1,1416 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cosmic Welcome | A New Visitor</title>
+<title>Welcome 🌌 | Sanan's World</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌌</text></svg>">
 
 <style>
-:root {
-  --cyan: #8af7ff;
-  --gold: #ffdca0;
-  --white: #f4f6ff;
-  --bg: #02030c;
-}
+/* ═══════════════════════════════════════════════════════
+   🌌 SOLAR SYSTEM WELCOME — FULL CSS
+   ═══════════════════════════════════════════════════════ */
 
-* { box-sizing: border-box; }
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 html, body {
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: var(--bg);
-  color: var(--white);
-  font-family: "Segoe UI", Arial, sans-serif;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #02000a;
+    font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+    color: #fff;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
-body {
-  isolation: isolate;
+/* ═══════ WELCOME SCREEN ═══════ */
+#welcome-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    overflow: hidden;
+    background: #02000a;
+    transition: opacity 0.8s ease, transform 1s ease, filter 1s ease;
 }
 
+#welcome-screen.leaving {
+    opacity: 0;
+    transform: scale(1.4);
+    filter: blur(12px);
+    pointer-events: none;
+}
+
+/* ═══════ SPACE BACKGROUND ═══════ */
 #space {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -3;
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 20% 30%, rgba(80, 40, 140, 0.38), transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(140, 60, 180, 0.28), transparent 55%),
+        radial-gradient(ellipse at 50% 100%, rgba(40, 20, 90, 0.45), transparent 60%),
+        radial-gradient(ellipse at 50% 0%, rgba(60, 30, 120, 0.32), transparent 60%),
+        linear-gradient(180deg, #02000a 0%, #0a0420 50%, #02000a 100%);
+    overflow: hidden;
 }
 
-.nebula {
-  position: fixed;
-  inset: -20%;
-  z-index: -2;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse at 20% 35%, #34208030, transparent 36%),
-    radial-gradient(ellipse at 78% 20%, #087f9e27, transparent 34%),
-    radial-gradient(ellipse at 70% 80%, #8d286f20, transparent 38%),
-    radial-gradient(ellipse at 50% 48%, #151b4933, transparent 48%);
-  animation: nebulaDrift 35s ease-in-out infinite alternate;
+/* Milky Way */
+#milkyway {
+    position: absolute;
+    inset: -20%;
+    background: linear-gradient(
+        115deg,
+        transparent 25%,
+        rgba(150, 130, 255, 0.08) 38%,
+        rgba(200, 160, 255, 0.16) 46%,
+        rgba(255, 200, 240, 0.24) 50%,
+        rgba(200, 160, 255, 0.16) 54%,
+        rgba(150, 130, 255, 0.08) 62%,
+        transparent 75%
+    );
+    filter: blur(28px);
+    pointer-events: none;
+    z-index: 1;
 }
 
-@keyframes nebulaDrift {
-  from { transform: translate(-1%, -1%) scale(1); }
-  to { transform: translate(2%, 1%) scale(1.09); }
+#milkyway::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(255, 220, 255, 0.15), transparent 40%);
+    filter: blur(40px);
+    animation: mwPulse 8s ease-in-out infinite;
 }
 
-.milkyway {
-  position: fixed;
-  width: 150vw;
-  height: 40vh;
-  left: -25vw;
-  top: 20%;
-  z-index: -1;
-  pointer-events: none;
-  transform: rotate(-29deg);
-  opacity: .28;
-  background:
-    radial-gradient(ellipse at center,
-      #c2e9ff18 0%,
-      #b9c9ff10 24%,
-      transparent 67%);
-  filter: blur(13px);
+@keyframes mwPulse {
+    0%, 100% { opacity: 0.7; }
+    50%      { opacity: 1; }
 }
 
-header {
-  position: absolute;
-  top: 22px;
-  left: 28px;
-  right: 28px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 20;
-  pointer-events: none;
+/* ═══════ STARFIELD CANVAS ═══════ */
+#starCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
 }
 
-.brand {
-  font-size: 11px;
-  letter-spacing: 4px;
-  color: #b6c8e9;
-  text-transform: uppercase;
-}
-
-.status {
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: #a4f9e2;
-}
-
-.status::before {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  margin-right: 8px;
-  background: #8affd1;
-  border-radius: 50%;
-  box-shadow: 0 0 12px #8affd1;
-}
-
-.scene {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  perspective: 1000px;
-}
-
-.solar-system {
-  position: absolute;
-  width: min(88vw, 88vh, 760px);
-  aspect-ratio: 1;
-  left: 50%;
-  top: 47%;
-  transform: translate(-50%, -50%);
-  transition: transform 1.6s ease, opacity 1.5s ease;
-}
-
-.sun-halo {
-  position: absolute;
-  width: 17%;
-  aspect-ratio: 1;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background: #ff9c301c;
-  box-shadow: 0 0 65px 25px #ff7b2920;
-  animation: haloPulse 4s ease-in-out infinite;
-}
-
-@keyframes haloPulse {
-  50% { box-shadow: 0 0 85px 35px #ff9b302b; }
-}
-
-.sun {
-  position: absolute;
-  width: 12%;
-  aspect-ratio: 1;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  z-index: 4;
-  background:
-    radial-gradient(circle at 32% 26%, #fffbd0 0%, #fff09a 13%,
-      #ffc34e 43%, #ff8a29 73%, #e64a17 100%);
-  box-shadow:
-    0 0 12px #fff2a9,
-    0 0 35px #ffb52b,
-    0 0 80px #ff7d2390,
-    0 0 135px #ff9b253d;
-  animation: sunFloat 4s ease-in-out infinite;
-}
-
-@keyframes sunFloat {
-  50% { filter: brightness(1.12); }
-}
-
-.face {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16%;
-  padding-top: 3%;
-}
-
-.eye {
-  width: 17%;
-  height: 23%;
-  background: #492b35;
-  border-radius: 50%;
-  position: relative;
-  overflow: hidden;
-  box-shadow: inset 0 -2px 0 #a64b36;
-}
-
-.eye::after {
-  content: "";
-  position: absolute;
-  width: 36%;
-  height: 30%;
-  top: 10%;
-  left: 17%;
-  border-radius: 50%;
-  background: white;
-}
-
-.sun.blink .eye {
-  height: 3%;
-  margin-top: 10%;
-}
-
-.cheek {
-  position: absolute;
-  top: 57%;
-  width: 15%;
-  height: 8%;
-  border-radius: 50%;
-  background: #ff7467a0;
-  filter: blur(2px);
-}
-
-.cheek.left { left: 13%; }
-.cheek.right { right: 13%; }
-
-.mouth {
-  position: absolute;
-  width: 27%;
-  height: 19%;
-  left: 50%;
-  top: 54%;
-  transform: translateX(-50%);
-  border-bottom: 2px solid #8a392b;
-  border-radius: 0 0 50% 50%;
-  transition: all .15s;
-}
-
-.sun.talking .mouth {
-  height: 25%;
-  width: 19%;
-  background: #8a392b;
-  border: 1px solid #8a392b;
-  border-radius: 45%;
-  animation: talk .2s infinite alternate;
-}
-
-@keyframes talk {
-  to { transform: translateX(-50%) scaleY(.45); }
-}
-
-.orbit {
-  position: absolute;
-  width: var(--size);
-  height: var(--size);
-  left: 50%;
-  top: 50%;
-  border: 1px solid rgba(155, 195, 255, .15);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  animation: orbitSpin var(--speed) linear infinite;
-}
-
-@keyframes orbitSpin {
-  to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-.orbit:hover {
-  border-color: #9edaff70;
-}
-
-.planet-holder {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: var(--planet-size);
-  height: var(--planet-size);
-  transform: translate(-50%, -50%);
-  display: grid;
-  place-items: center;
-}
-
-.planet {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  box-shadow:
-    inset -7px -5px 10px #0009,
-    inset 3px 3px 6px #ffffff72,
-    0 0 12px #9ccaff26;
-  animation: counterSpin var(--speed) linear infinite reverse;
-  cursor: default;
-}
-
-@keyframes counterSpin {
-  to { transform: rotate(-360deg); }
-}
-
-.planet::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 24%, #ffffff55, transparent 45%);
-}
-
-.planet-face {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 13%;
-}
-
-.p-eye {
-  width: 17%;
-  height: 23%;
-  border-radius: 50%;
-  background: #15162b;
-  box-shadow: inset 0 -1px 0 #ffffff40;
-}
-
-.p-eye::after {
-  content: "";
-  display: block;
-  width: 35%;
-  height: 35%;
-  margin: 12%;
-  background: white;
-  border-radius: 50%;
-}
-
-.p-mouth {
-  position: absolute;
-  top: 58%;
-  left: 50%;
-  width: 22%;
-  height: 12%;
-  transform: translateX(-50%);
-  border-bottom: 1.5px solid #272037;
-  border-radius: 50%;
-}
-
-.planet.talking .p-mouth {
-  background: #3c2437;
-  height: 18%;
-  border-radius: 50%;
-  animation: talk .2s infinite alternate;
-}
-
-.mercury {
-  background: radial-gradient(circle at 32% 25%, #ded8ce, #85838b 45%, #484252);
-}
-.venus {
-  background: radial-gradient(circle at 30% 25%, #fff0b1, #d9a16b 48%, #97563d);
-}
-.earth {
-  background:
-    radial-gradient(ellipse at 25% 37%, #73d89a 0 12%, transparent 13%),
-    radial-gradient(ellipse at 62% 62%, #57b980 0 13%, transparent 14%),
-    radial-gradient(circle at 30% 25%, #8cecff, #2178d4 55%, #12316c);
-}
-.mars {
-  background: radial-gradient(circle at 30% 25%, #ffbd91, #d85e43 48%, #792e2b);
-}
-.jupiter {
-  background: repeating-linear-gradient(0deg,
-    #b77b54 0 9%, #f1d3a6 10% 20%, #a95e46 21% 26%,
-    #e6bc91 27% 37%);
-}
-.saturn {
-  background: radial-gradient(circle at 30% 25%, #fff0b7, #d6b878 48%, #8c6a42);
-}
-.uranus {
-  background: radial-gradient(circle at 30% 25%, #c9ffff, #65c8d6 53%, #387f9b);
-}
-.neptune {
-  background: radial-gradient(circle at 30% 25%, #8bbdff, #386fe0 55%, #1a276f);
-}
-.pluto {
-  background: radial-gradient(circle at 30% 25%, #f4d6c1, #a68d83 53%, #61566d);
-}
-
-.ring {
-  position: absolute;
-  width: 165%;
-  height: 45%;
-  top: 28%;
-  left: -32%;
-  border: 2px solid #e6ce98c9;
-  border-radius: 50%;
-  transform: rotate(-23deg);
-  box-shadow: 0 0 4px #ffe6b855;
-}
-
-.planet-label {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
-  color: #b8c8e9;
-  font-size: clamp(7px, .8vw, 10px);
-  letter-spacing: 1px;
-  text-shadow: 0 0 8px #000;
-  white-space: nowrap;
+/* ═══════ ASTEROIDS ═══════ */
+#asteroidsLayer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+    overflow: hidden;
 }
 
 .asteroid {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #d4d1c8;
-  box-shadow: 0 0 5px #ffffff80;
+    position: absolute;
+    background: radial-gradient(circle at 35% 35%,
+        #9a8a78,
+        #6a5a48 55%,
+        #3a2a18 100%);
+    border-radius: 48% 52% 55% 45% / 52% 48% 52% 48%;
+    box-shadow:
+        inset -2px -2px 6px rgba(0, 0, 0, 0.8),
+        inset 2px 2px 5px rgba(200, 180, 150, 0.35),
+        0 0 10px rgba(150, 130, 100, 0.45);
+    animation: astDrift linear infinite;
+    will-change: transform;
 }
 
-.comet {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 0 15px 3px #9de9ff;
-  animation: cometTravel 12s linear infinite;
-  opacity: 0;
+.asteroid::before {
+    content: "";
+    position: absolute;
+    top: 22%;
+    left: 18%;
+    width: 28%;
+    height: 28%;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.35);
+    filter: blur(1.2px);
 }
 
-@keyframes cometTravel {
-  0% { transform: translate(-20vw, -10vh); opacity: 0; }
-  10% { opacity: 1; }
-  70% { opacity: .8; }
-  100% { transform: translate(110vw, 65vh); opacity: 0; }
+.asteroid::after {
+    content: "";
+    position: absolute;
+    top: 55%;
+    left: 58%;
+    width: 18%;
+    height: 18%;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.28);
+    filter: blur(1.2px);
 }
 
-.comet::after {
-  content: "";
-  position: absolute;
-  width: 70px;
-  height: 2px;
-  right: 0;
-  top: 0;
-  transform: translateY(-50%);
-  transform-origin: right;
-  background: linear-gradient(90deg, transparent, #9de9ff99);
+@keyframes astDrift {
+    0%   { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(var(--ax), var(--ay)) rotate(720deg); }
 }
 
-.dialogue {
-  position: absolute;
-  z-index: 10;
-  top: 15%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(410px, 82vw);
-  text-align: center;
-  pointer-events: none;
-  animation: dialogueIn .7s ease both;
+/* ═══════ SOLAR SYSTEM ═══════ */
+#solarSystem {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    z-index: 5;
+    pointer-events: none;
+    transform: scale(var(--solarScale, 1));
+    transform-origin: center center;
+    transition: transform 0.6s ease;
 }
 
-@keyframes dialogueIn {
-  from { opacity: 0; transform: translate(-50%, 12px); }
-  to { opacity: 1; transform: translate(-50%, 0); }
+.orbit-ring {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    border: 1px solid rgba(180, 160, 255, 0.09);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
 }
 
-.speaker {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  color: var(--gold);
-  margin-bottom: 10px;
-  text-shadow: 0 0 15px #ffbc5b80;
+.orbit-ring::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 50%;
+    border: 1px dashed rgba(220, 200, 255, 0.05);
 }
 
-.dialogue-text {
-  font-size: clamp(12px, 1.5vw, 15px);
-  line-height: 1.8;
-  color: #e0e7ff;
-  text-shadow: 0 2px 12px #000;
+.planet-orbit {
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 50%;
+    animation: orbit linear infinite;
+    will-change: transform;
 }
 
-.dots {
-  display: inline-flex;
-  gap: 4px;
-  margin-top: 10px;
+@keyframes orbit {
+    to { transform: rotate(360deg); }
 }
 
-.dots span {
-  width: 3px;
-  height: 3px;
-  background: #9cf4ff;
-  border-radius: 50%;
-  animation: dotPulse 1s infinite alternate;
+/* ═══════ PLANETS ═══════ */
+.planet {
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: auto;
+    cursor: pointer;
+    transition: filter 0.35s ease, transform 0.35s ease;
+    will-change: filter, transform;
 }
 
-.dots span:nth-child(2) { animation-delay: .2s; }
-.dots span:nth-child(3) { animation-delay: .4s; }
-
-@keyframes dotPulse {
-  to { opacity: .25; transform: translateY(-3px); }
+.planet:hover {
+    filter: brightness(1.5) drop-shadow(0 0 14px currentColor);
+    transform: translate(-50%, -50%) scale(1.35);
+    z-index: 100;
 }
 
-.welcome-panel {
-  position: absolute;
-  z-index: 15;
-  bottom: 7%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(390px, 88vw);
-  text-align: center;
-  padding: 17px 20px 18px;
-  border: 1px solid #c7e4ff27;
-  border-radius: 20px;
-  background: linear-gradient(145deg, #10172bc9, #090d1dcc);
-  box-shadow: 0 12px 55px #0008, inset 0 1px 0 #ffffff0b;
-  backdrop-filter: blur(12px);
-  transition: opacity .6s, transform .6s;
+.planet-eye {
+    position: absolute;
+    width: 16%;
+    height: 22%;
+    background: #0a0812;
+    border-radius: 50%;
+    top: 38%;
+    animation: planetBlink 5s ease-in-out infinite;
 }
 
-.eyebrow {
-  color: #a5b9dc;
-  font-size: 9px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 8px;
+.planet-eye.left  { left: 26%; }
+.planet-eye.right { right: 26%; animation-delay: 0.15s; }
+
+.planet-eye::before {
+    content: "";
+    position: absolute;
+    width: 42%;
+    height: 42%;
+    background: #fff;
+    border-radius: 50%;
+    top: 14%;
+    left: 14%;
 }
 
-.welcome-panel h1 {
-  font-size: clamp(21px, 4vw, 29px);
-  font-weight: 400;
-  letter-spacing: 1px;
-  margin: 0 0 7px;
-  background: linear-gradient(90deg, #fff5db, #a8e9ff, #e1c2ff);
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
+@keyframes planetBlink {
+    0%, 44%, 56%, 100% { transform: scaleY(1); }
+    50%                { transform: scaleY(0.08); }
 }
 
-.subtitle {
-  color: #aab8d5;
-  font-size: 11px;
-  line-height: 1.6;
-  margin-bottom: 13px;
+.planet-smile {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 26%;
+    height: 10%;
+    border: 2px solid #0a0812;
+    border-top: none;
+    border-radius: 0 0 40px 40px;
+    opacity: 0.9;
 }
 
-.name-form {
-  display: flex;
-  gap: 8px;
-  width: 100%;
+.saturn-rings {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 220%;
+    height: 42%;
+    border: 3px solid rgba(255, 220, 150, 0.75);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) rotate(-18deg);
+    box-shadow:
+        0 0 10px rgba(255, 220, 150, 0.7),
+        inset 0 0 10px rgba(255, 220, 150, 0.5);
+    pointer-events: none;
 }
 
-.name-form input {
-  min-width: 0;
-  flex: 1;
-  height: 43px;
-  border-radius: 11px;
-  border: 1px solid #9fdcff3b;
-  outline: none;
-  background: #050a19d9;
-  color: white;
-  padding: 0 13px;
-  font-size: 13px;
-  transition: border-color .25s, box-shadow .25s;
+.saturn-rings::before {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 200, 120, 0.45);
 }
 
-.name-form input::placeholder { color: #7486a5; }
-
-.name-form input:focus {
-  border-color: #9aeaff;
-  box-shadow: 0 0 18px #58caff20;
+/* ═══════ SUN ═══════ */
+#sunWrap {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 6;
+    pointer-events: none;
 }
 
-.enter-btn {
-  border: 0;
-  border-radius: 11px;
-  padding: 0 16px;
-  background: linear-gradient(120deg, #b6e9ff, #d5c0ff);
-  color: #15152b;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform .2s, box-shadow .2s;
-  white-space: nowrap;
+#sunGlow {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 500px;
+    height: 500px;
+    margin: -250px 0 0 -250px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(255, 220, 100, 0.55) 0%,
+        rgba(255, 180, 80, 0.3) 30%,
+        rgba(255, 140, 60, 0.12) 55%,
+        transparent 75%);
+    filter: blur(24px);
+    animation: sunPulse 4s ease-in-out infinite;
 }
 
-.enter-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 24px #a5dcff40;
+@keyframes sunPulse {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50%      { transform: scale(1.12); opacity: 1; }
 }
 
-.input-hint {
-  font-size: 10px;
-  color: #7586a7;
-  margin-top: 10px;
-  min-height: 13px;
+#sun {
+    position: relative;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%,
+        #fffbe0 0%,
+        #ffe27a 22%,
+        #ffb84d 55%,
+        #ff8a1a 85%,
+        #e0660a 100%);
+    box-shadow:
+        0 0 50px #ffe27a,
+        0 0 100px rgba(255, 180, 80, 0.8),
+        0 0 160px rgba(255, 140, 60, 0.55),
+        inset 0 0 40px rgba(255, 255, 255, 0.55),
+        inset -12px -12px 40px rgba(200, 80, 20, 0.4);
+    animation: sunFloat 6s ease-in-out infinite;
 }
 
-#typedMessage {
-  min-height: 18px;
-  margin-top: 10px;
-  font-size: 11px;
-  color: #d6c8ff;
-  letter-spacing: .3px;
-  transition: opacity .2s;
+#sun::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 25% 30%, rgba(255, 255, 255, 0.5), transparent 22%),
+        radial-gradient(circle at 70% 45%, rgba(255, 200, 100, 0.6), transparent 26%),
+        radial-gradient(circle at 55% 75%, rgba(255, 180, 80, 0.5), transparent 22%);
+    animation: sunSpin 24s linear infinite;
 }
 
-.footer {
-  position: absolute;
-  bottom: 18px;
-  left: 0;
-  right: 0;
-  z-index: 5;
-  text-align: center;
-  font-size: 9px;
-  letter-spacing: 2px;
-  color: #61708f;
-  pointer-events: none;
+@keyframes sunSpin { to { transform: rotate(360deg); } }
+
+@keyframes sunFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%      { transform: translateY(-8px) scale(1.02); }
 }
 
-#flash {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  pointer-events: none;
-  opacity: 0;
-  background: radial-gradient(circle at center, #fff9d8, #b3e8ff 20%, #5a4c9e 48%, #050713 75%);
+.sun-eye {
+    position: absolute;
+    width: 22px;
+    height: 28px;
+    background: #3a1a08;
+    border-radius: 50%;
+    top: 62px;
+    animation: sunBlink 4s ease-in-out infinite;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
 
-body.departing #flash {
-  animation: flashOut 2.5s ease-in forwards;
+.sun-eye.left  { left: 46px; }
+.sun-eye.right { right: 46px; animation-delay: 0.15s; }
+
+.sun-eye::before {
+    content: "";
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    background: #fff;
+    border-radius: 50%;
+    top: 4px;
+    left: 4px;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
 }
 
-@keyframes flashOut {
-  0% { opacity: 0; }
-  25% { opacity: .95; }
-  48% { opacity: .6; }
-  100% { opacity: 1; }
+.sun-eye::after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    bottom: 6px;
+    right: 5px;
 }
 
-body.departing .solar-system {
-  transform: translate(-50%, -50%) scale(3.8);
-  opacity: 0;
+@keyframes sunBlink {
+    0%, 42%, 58%, 100% { transform: scaleY(1); }
+    50%                { transform: scaleY(0.08); }
 }
 
-body.departing .welcome-panel {
-  opacity: 0;
-  transform: translate(-50%, 20px) scale(.95);
+.sun-mouth {
+    position: absolute;
+    bottom: 42px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 22px;
+    border: 4px solid #3a1a08;
+    border-top: none;
+    border-radius: 0 0 50px 50px;
 }
 
-body.departing .dialogue {
-  opacity: 0;
-  transition: opacity .5s;
+.sun-blush {
+    position: absolute;
+    width: 22px;
+    height: 12px;
+    background: rgba(255, 90, 80, 0.55);
+    border-radius: 50%;
+    top: 96px;
+    filter: blur(4px);
 }
 
-body.departing .milkyway {
-  transform: rotate(-29deg) scale(1.4);
-  transition: transform 2s;
+.sun-blush.left  { left: 26px; }
+.sun-blush.right { right: 26px; }
+
+/* ═══════ SUN BUBBLE (talking) ═══════ */
+#sunBubble {
+    position: absolute;
+    left: 50%;
+    top: calc(50% - 230px);
+    transform: translate(-50%, -100%) scale(0.9);
+    background: linear-gradient(135deg, #fff8c0, #ffe27a);
+    color: #4a2010;
+    padding: 14px 24px;
+    border-radius: 22px 22px 22px 6px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+    max-width: 340px;
+    text-align: center;
+    box-shadow:
+        0 10px 36px rgba(255, 200, 100, 0.55),
+        0 0 0 3px rgba(255, 226, 122, 0.35);
+    z-index: 30;
+    pointer-events: none;
+    opacity: 0;
+    animation: bubbleFloat 3s ease-in-out infinite;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-@media (min-width: 900px) {
-  .solar-system {
-    top: 44%;
-    width: min(78vh, 740px);
-  }
-  .welcome-panel {
-    bottom: 4.5%;
+#sunBubble.show {
+    opacity: 1;
+    transform: translate(-50%, -100%) scale(1);
+}
+
+#sunBubble::after {
+    content: "";
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 13px solid transparent;
+    border-right: 13px solid transparent;
+    border-top: 16px solid #ffe27a;
+    filter: drop-shadow(0 3px 4px rgba(255, 200, 100, 0.4));
+}
+
+@keyframes bubbleFloat {
+    0%, 100% { margin-top: 0; }
+    50%      { margin-top: -6px; }
+}
+
+/* ═══════ NAME INPUT ═══════ */
+#nameBox {
+    position: absolute;
+    left: 50%;
+    top: 63%;
+    transform: translate(-50%, 0);
+    z-index: 20;
+    width: min(300px, 78vw);
+    pointer-events: auto;
+    opacity: 0;
+    transition: opacity 0.8s ease 0.5s;
+}
+
+#nameBox.show { opacity: 1; }
+
+#nameBox .name-hint {
+    display: block;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #ffe27a;
+    font-weight: 800;
+    margin-bottom: 8px;
+    text-shadow: 0 0 10px rgba(255, 226, 122, 0.6);
+    animation: hintPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes hintPulse {
+    0%, 100% { opacity: 0.7; }
+    50%      { opacity: 1; }
+}
+
+#nameWrap {
+    position: relative;
+    padding: 3px;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #8b4dff, #ffc8f2, #ffe27a, #8b4dff);
+    background-size: 300% 100%;
+    animation: borderFlow 5s linear infinite;
+    box-shadow:
+        0 0 24px rgba(200, 130, 255, 0.55),
+        0 0 50px rgba(255, 200, 242, 0.35);
+    transition: box-shadow 0.3s ease;
+}
+
+#nameWrap.shake {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%      { transform: translateX(-10px); }
+    40%      { transform: translateX(10px); }
+    60%      { transform: translateX(-6px); }
+    80%      { transform: translateX(6px); }
+}
+
+@keyframes borderFlow { to { background-position: 300% 0; } }
+
+#visitorName {
+    display: block;
+    width: 100%;
     padding: 13px 18px;
-  }
-  .dialogue { top: 10%; }
+    border: none;
+    outline: none;
+    border-radius: 47px;
+    background: rgba(12, 6, 26, 0.96);
+    color: #fff;
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 200, 242, 0.6);
+    caret-color: #ffc8f2;
 }
 
-@media (max-width: 600px) {
-  header { top: 15px; left: 16px; right: 16px; }
-  .brand { font-size: 9px; letter-spacing: 2px; }
-  .status { font-size: 8px; letter-spacing: 1px; }
-  .solar-system {
-    top: 43%;
-    width: min(94vw, 66vh);
-  }
-  .dialogue {
-    top: 12%;
-    width: 90vw;
-  }
-  .welcome-panel {
-    bottom: 6%;
-    padding: 13px 13px 12px;
-  }
-  .welcome-panel h1 { font-size: 22px; }
-  .subtitle { font-size: 10px; margin-bottom: 10px; }
-  .name-form input, .enter-btn { height: 40px; }
-  .enter-btn { padding: 0 12px; }
-  .footer { bottom: 8px; font-size: 7px; }
+#visitorName::placeholder {
+    color: #8a7aa8;
+    font-weight: 500;
+    letter-spacing: 0.5px;
 }
 
-@media (max-height: 650px) {
-  .solar-system {
-    width: min(65vh, 500px);
-    top: 43%;
-  }
-  .dialogue { top: 8%; }
-  .welcome-panel { bottom: 3%; padding: 10px 15px; }
-  .welcome-panel h1 { font-size: 21px; margin-bottom: 4px; }
-  .subtitle { margin-bottom: 8px; }
-  #typedMessage { margin-top: 5px; }
-  .input-hint { margin-top: 5px; }
+#enterBtn {
+    display: block;
+    margin: 22px auto 0;
+    padding: 13px 32px;
+    border: 2px solid #ffe27a;
+    border-radius: 50px;
+    background: linear-gradient(135deg,
+        rgba(255, 226, 122, 0.18),
+        rgba(255, 200, 242, 0.14),
+        rgba(200, 130, 255, 0.18));
+    color: #fff;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow:
+        0 0 28px rgba(255, 226, 122, 0.5),
+        0 0 60px rgba(200, 130, 255, 0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+    animation: btnPulse 3s ease-in-out infinite;
 }
 
-/* ===== COSMIC UPGRADE: LARGER SOLAR SYSTEM ===== */
-
-.solar-system {
-  width: min(96vw, 94vh, 1100px) !important;
-  top: 47% !important;
+@keyframes btnPulse {
+    0%, 100% {
+        box-shadow:
+            0 0 28px rgba(255, 226, 122, 0.5),
+            0 0 60px rgba(200, 130, 255, 0.3),
+            inset 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+    50% {
+        box-shadow:
+            0 0 48px rgba(255, 226, 122, 0.85),
+            0 0 100px rgba(200, 130, 255, 0.5),
+            inset 0 0 30px rgba(255, 255, 255, 0.2);
+    }
 }
 
-@media (max-width: 600px) {
-  .solar-system {
-    width: min(96vw, 68vh) !important;
-    top: 43% !important;
-  }
+#enterBtn:hover:not(:disabled) {
+    background: linear-gradient(135deg,
+        rgba(255, 226, 122, 0.4),
+        rgba(255, 200, 242, 0.3),
+        rgba(200, 130, 255, 0.4));
+    transform: translateY(-3px) scale(1.05);
 }
 
-/* ===== SMALL NAME BOX BESIDE THE SUN ===== */
-
-.welcome-panel {
-  position: absolute !important;
-  left: 57% !important;
-  top: 43% !important;
-  bottom: auto !important;
-  transform: translateY(-10%) !important;
-  width: min(235px, 35%) !important;
-  padding: 12px !important;
-  border-radius: 14px !important;
-  background: linear-gradient(145deg, #10172be8, #090d1de8) !important;
-  border: 1px solid #b9e8ff48 !important;
-  box-shadow: 0 0 24px #72caff15 !important;
-  backdrop-filter: blur(7px) !important;
-  z-index: 8 !important;
+#enterBtn:disabled {
+    cursor: default;
+    opacity: 0.9;
 }
 
-/* The glowing thread connecting the Sun and name card */
-.welcome-panel::before {
-  content: "";
-  position: absolute;
-  width: 42px;
-  height: 2px;
-  left: -40px;
-  top: 44%;
-  background: linear-gradient(90deg, #ffc55b, #fff0b1, #9cecff);
-  box-shadow: 0 0 9px #ffe3a0;
-  transform: rotate(12deg);
-  transform-origin: right center;
+/* ═══════ LIVE NAME DISPLAY ═══════ */
+#liveNameDisplay {
+    position: fixed;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    z-index: 100000;
+    pointer-events: none;
+    font-size: clamp(34px, 7vw, 76px);
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-align: center;
+    line-height: 1.1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    white-space: nowrap;
 }
 
-.welcome-panel .eyebrow {
-  font-size: 8px;
-  letter-spacing: 1.5px;
-  margin-bottom: 6px;
+#liveNameDisplay.visible { opacity: 1; }
+
+.live-letter {
+    display: inline-block;
+    background: linear-gradient(135deg, #ffffff, #ffc8f2, #c9a6ff, #ffe27a, #ffffff);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation:
+        letterDrop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+        letterFlow 3s linear infinite;
+    filter: drop-shadow(0 0 20px rgba(255, 200, 242, 0.7))
+            drop-shadow(0 0 40px rgba(200, 130, 255, 0.4));
 }
 
-.welcome-panel h1 {
-  font-size: 17px !important;
-  line-height: 1.3;
-  margin-bottom: 5px !important;
+@keyframes letterDrop {
+    0% { opacity: 0; transform: translateY(-70px) scale(0.3) rotate(-25deg); }
+    60% { opacity: 1; transform: translateY(8px) scale(1.15) rotate(5deg); }
+    100% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
 }
 
-.welcome-panel .subtitle {
-  font-size: 10px;
-  line-height: 1.5;
-  margin-bottom: 8px !important;
-}
+@keyframes letterFlow { to { background-position: 300% 0; } }
 
-.welcome-panel .name-form {
-  gap: 5px;
-}
-
-.welcome-panel .name-form input {
-  height: 35px;
-  padding: 0 8px;
-  font-size: 11px;
-  border-radius: 8px;
-}
-
-.welcome-panel .enter-btn {
-  height: 35px;
-  padding: 0 9px;
-  font-size: 10px;
-  border-radius: 8px;
-}
-
-.welcome-panel .input-hint {
-  font-size: 8px;
-  margin-top: 6px;
-}
-
-.welcome-panel #typedMessage {
-  font-size: 9px;
-  margin-top: 5px;
-  line-height: 1.4;
-}
-
-@media (max-width: 600px) {
-  .welcome-panel {
-    left: 55% !important;
-    top: 43% !important;
-    width: 44% !important;
-    padding: 7px !important;
-  }
-
-  .welcome-panel::before {
-    width: 20px;
-    left: -19px;
-  }
-
-  .welcome-panel h1 {
-    font-size: 13px !important;
-  }
-
-  .welcome-panel .subtitle {
-    font-size: 9px;
-  }
-
-  .welcome-panel .name-form {
-    flex-wrap: wrap;
-  }
-
-  .welcome-panel .name-form input {
+/* ═══════ SPARKLE CANVAS ═══════ */
+#typeSparkleCanvas {
+    position: fixed;
+    inset: 0;
     width: 100%;
-    flex-basis: 100%;
-  }
-
-  .welcome-panel .enter-btn {
-    width: 100%;
-  }
+    height: 100%;
+    pointer-events: none;
+    z-index: 99999;
 }
 
-/* ===== HAPPY PLANETS ===== */
-
-.planet.happy {
-  filter: brightness(1.25);
-  box-shadow:
-    inset -5px -4px 8px #0008,
-    inset 3px 3px 6px #ffffff75,
-    0 0 15px #9cecff65;
+.type-particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 100001;
+    font-size: 20px;
+    animation: typeParticleFly 1.2s ease-out forwards;
 }
 
-.planet.happy .p-mouth {
-  height: 16%;
-  border-bottom-width: 2px;
-  border-radius: 0 0 50% 50%;
+@keyframes typeParticleFly {
+    0% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
+    100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0.3) rotate(360deg); }
+}
+
+/* ═══════ TRANSMISSION OVERLAY ═══════ */
+#transmission {
+    position: fixed;
+    inset: 0;
+    z-index: 100005;
+    pointer-events: none;
+    opacity: 0;
+    background:
+        radial-gradient(circle at 50% 50%,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(255, 226, 122, 0.85) 15%,
+            rgba(200, 130, 255, 0.7) 35%,
+            rgba(80, 30, 160, 0.55) 55%,
+            rgba(10, 4, 26, 0.9) 100%);
+}
+
+#transmission.active {
+    animation: transmissionBurst 1.8s cubic-bezier(0.6, 0, 0.3, 1) forwards;
+}
+
+@keyframes transmissionBurst {
+    0%   { opacity: 0; transform: scale(0); }
+    25%  { opacity: 1; transform: scale(2.5); }
+    55%  { opacity: 1; transform: scale(6); }
+    100% { opacity: 0; transform: scale(14); }
+}
+
+.fly-spark {
+    position: fixed;
+    font-size: 24px;
+    pointer-events: none;
+    z-index: 100006;
+    filter: drop-shadow(0 0 12px rgba(255, 226, 122, 1));
+    animation: flySpark 1.4s cubic-bezier(0.3, 0, 0.7, 1) forwards;
+}
+
+@keyframes flySpark {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
+    }
+    70% { opacity: 1; }
+    100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--fx)), calc(-50% + var(--fy)))
+                   scale(2) rotate(720deg);
+    }
+}
+
+/* ═══════ MOBILE ═══════ */
+@media (max-width: 700px) {
+    #sun { width: 110px; height: 110px; }
+    .sun-eye { width: 16px; height: 20px; top: 40px; }
+    .sun-eye.left  { left: 30px; }
+    .sun-eye.right { right: 30px; }
+    .sun-mouth { bottom: 28px; width: 30px; height: 15px; border-width: 3px; }
+    .sun-blush { width: 16px; height: 9px; top: 62px; }
+    .sun-blush.left  { left: 16px; }
+    .sun-blush.right { right: 16px; }
+    #sunGlow { width: 340px; height: 340px; margin: -170px 0 0 -170px; }
+
+    #sunBubble {
+        top: calc(50% - 160px);
+        font-size: 11.5px;
+        padding: 10px 16px;
+        max-width: 260px;
+    }
+
+    #nameBox { top: 66%; width: min(260px, 82vw); }
+    #visitorName { padding: 11px 14px; font-size: 13px; }
+    #enterBtn { padding: 11px 24px; font-size: 11px; letter-spacing: 2px; }
+
+    #liveNameDisplay {
+        top: 24%;
+        font-size: clamp(28px, 10vw, 56px);
+        letter-spacing: 2px;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .solar-system,
-  .welcome-panel {
-    transition: none !important;
-  }
+    #sun, #sunGlow, .sun-eye, .planet-eye, #sunBubble,
+    .asteroid, #milkyway::after, #enterBtn, .live-letter {
+        animation: none !important;
+    }
 }
-
-
-/* BIGGER SOLAR SYSTEM */
-.solar-system {
-  width: min(125vmin, 1500px) !important;
-  height: min(125vmin, 1500px) !important;
-  max-width: none !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-}
-
-/* SUN BIGGER */
-.sun {
-  transform: scale(1.3);
-  z-index: 20;
-}
-
-/* NAME INPUT: REMOVE THE BIG CARD */
-.welcome-panel {
-  position: absolute !important;
-  left: 59% !important;
-  top: 43% !important;
-  width: 190px !important;
-  max-width: 190px !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  background: transparent !important;
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  transform: translateY(-50%) !important;
-  z-index: 100 !important;
-}
-
-/* SMALL NAME HEADING */
-.welcome-panel h1,
-.welcome-panel h2 {
-  font-size: 13px !important;
-  margin: 0 0 8px !important;
-  white-space: normal;
-  text-shadow: 0 0 10px #8eeaff;
-}
-
-/* SMALL INPUT */
-.welcome-panel input {
-  width: 155px !important;
-  max-width: 100% !important;
-  padding: 8px 10px !important;
-  font-size: 12px !important;
-  box-sizing: border-box !important;
-}
-
-/* SMALL BUTTON */
-.welcome-panel button {
-  padding: 7px 10px !important;
-  font-size: 11px !important;
-  margin-top: 6px !important;
-}
-
-/* REMOVE EXTRA DESCRIPTION FROM THE CARD */
-.welcome-panel p {
-  display: none !important;
-}
-
-/* GLOWING SPACE BACKGROUND */
-body::before {
-  content: "";
-  position: fixed;
-  inset: -20%;
-  pointer-events: none;
-  z-index: 0;
-  background:
-    radial-gradient(ellipse at 20% 25%,
-      rgba(60, 70, 255, 0.20), transparent 35%),
-    radial-gradient(ellipse at 80% 30%,
-      rgba(0, 220, 255, 0.16), transparent 30%),
-    radial-gradient(ellipse at 55% 80%,
-      rgba(170, 50, 255, 0.18), transparent 35%);
-  animation: spaceGlow 8s ease-in-out infinite alternate;
-}
-
-@keyframes spaceGlow {
-  from { opacity: 0.45; }
-  to   { opacity: 1; }
-}
-
-/* KEEP THE SOLAR SYSTEM ON TOP OF THE GLOW */
-#space {
-  pointer-events: none;
-}
-
 </style>
 </head>
-
 <body>
-<canvas id="space"></canvas>
-<div class="nebula"></div>
-<div class="milkyway"></div>
-<div id="flash"></div>
 
-<header>
-  <div class="brand">✦ THE COSMIC GATEWAY</div>
-  <div class="status">SOLAR SYSTEM ONLINE</div>
-</header>
+<!-- ═══════════════════════════════════════════════════
+     🌌 SOLAR SYSTEM WELCOME SCREEN
+     ═══════════════════════════════════════════════════ -->
+<div id="welcome-screen">
 
-<main class="scene">
-  <div class="solar-system" id="solarSystem">
-    <div class="sun-halo"></div>
-
-    <div class="sun" id="sun">
-      <div class="face">
-        <div class="eye"></div>
-        <div class="eye"></div>
-        <div class="cheek left"></div>
-        <div class="cheek right"></div>
-        <div class="mouth"></div>
-      </div>
-    </div>
-      <section class="welcome-panel">
-    <div class="eyebrow">✧ A NEW SOUL HAS ARRIVED ✧</div>
-    <h1>Welcome to My Universe</h1>
-    <div class="subtitle" id="subtitle">
-      Even the stars are curious about you.<br>
-      What should our little universe call you?
+    <!-- Space background -->
+    <div id="space">
+        <div id="milkyway"></div>
     </div>
 
-    <form class="name-form" id="nameForm">
-      <input
-        type="text"
-        id="visitorName"
-        placeholder="Your beautiful name..."
-        maxlength="35"
-        autocomplete="given-name"
-        aria-label="Enter your name"
-        required
-      >
-      <button class="enter-btn" type="submit">Enter ✦</button>
-    </form>
+    <!-- Stars canvas (constellation cursor) -->
+    <canvas id="starCanvas"></canvas>
 
-    <div id="typedMessage" aria-live="polite"></div>
-    <div class="input-hint" id="inputHint">✧ Type your name to awaken the stars ✧</div>
-  </section>
+    <!-- Asteroids -->
+    <div id="asteroidsLayer"></div>
 
-    <div class="orbit" style="--size:18%;--speed:9s;--planet-size:4px">
-      <div class="planet-holder">
-        <div class="planet mercury">
-          <div class="planet-face"><i class="p-eye"></i><i class="p-eye"></i><i class="p-mouth"></i></div>
+    <!-- Solar system (planets) -->
+    <div id="solarSystem"></div>
+
+    <!-- Sun -->
+    <div id="sunWrap">
+        <div id="sunGlow"></div>
+        <div id="sun">
+            <div class="sun-eye left"></div>
+            <div class="sun-eye right"></div>
+            <div class="sun-mouth"></div>
+            <div class="sun-blush left"></div>
+            <div class="sun-blush right"></div>
         </div>
-      </div>
     </div>
 
-    <div class="orbit" style="--size:25%;--speed:13s;--planet-size:7px">
-      <div class="planet-holder">
-        <div class="planet venus">
-          <div class="planet-face"><i class="p-eye"></i><i class="p-eye"></i><i class="p-mouth"></i></div>
+    <!-- Sun talking bubble -->
+    <div id="sunBubble"></div>
+
+    <!-- Name input box -->
+    <div id="nameBox">
+        <span class="name-hint">✦ APNA NAAM LIKHO ✦</span>
+        <div id="nameWrap">
+            <input id="visitorName" type="text" maxlength="20"
+                   autocomplete="off" spellcheck="false"
+                   placeholder="✨ Yahan likho...">
         </div>
-      </div>
+        <button id="enterBtn" type="button">ENTER MY WORLD ✨</button>
     </div>
 
-    <div class="orbit" style="--size:34%;--speed:17s;--planet-size:10px">
-      <div class="planet-holder">
-        <div class="planet earth">
-          <div class="planet-face"><i class="p-eye"></i><i class="p-eye"></i><i class="p-mouth"></i></div>
-        </div>
-      </div>
-    </div>
+    <!-- Live name display -->
+    <div id="liveNameDisplay" aria-hidden="true"></div>
 
-    <div class="orbit" style="--size:43%;--speed:22s;--planet-size:8px">
-      <div class="planet-holder">
-        <div class="planet mars">
-          <div class="planet-face"><i class="p-eye"></i><i class="p-eye"></i><i class="p-mouth"></i></div>
-        </div>
-      </div>
-    </div>
+    <!-- Sparkle canvas -->
+    <canvas id="typeSparkleCanvas" aria-hidden="true"></canvas>
 
-    <div class="orbit" style="--size:55%;--speed:31s;--planet-size:19px">
-      <div class="planet-holder">
-        <div class="planet jupiter">
-          <div class="planet-face"><i class="p-eye"></i><i class="p-eye"></i><i class="p-mouth"></i></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="orbit" style="--size:66%;--speed:38s;--planet-size:16px">
-      <div class="planet-holder">
-        <div class="planet saturn">
-          <div class="ring"></div>
-          <div class="planet-face"><i class="p-eye"></i><i class="p-eye"></i><i class="p-mouth"></i></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="orbit" style="--size:76%;--speed:46s;--planet-size:12px">
-      <div class="planet-holder">
-        <div class="planet uranus">
-          <div class="planet-face"><i class="p-eye"></i><i class="p-eye"></i><i class="p-mouth"></i></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="orbit" style="--size:86%;--speed:55s;--planet-size:12px">
-      <div class="planet-holder">
-        <div class="planet neptune">
-          <div class="planet-face"><i class="p-eye"></i><i class="p-eye"></i><i class="p-mouth"></i></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="orbit" style="--size:96%;--speed:64s;--planet-size:6px">
-      <div class="planet-holder">
-        <div class="planet pluto">
-          <div class="planet-face"><i class="p-eye"></i><i class="p-eye"></i><i class="p-mouth"></i></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <section class="dialogue" aria-live="polite">
-    <div class="speaker" id="speaker">☀ Sun · The Guardian</div>
-    <div class="dialogue-text" id="dialogueText">
-      My little stars... I sense someone new approaching our universe.
-    </div>
-    <div class="dots"><span></span><span></span><span></span></div>
-  </section>
-
-
-</main>
-
-<div class="footer">SOMEWHERE BETWEEN STARDUST &amp; DREAMS</div>
+    <!-- Transmission overlay -->
+    <div id="transmission"></div>
+</div>
 
 <script>
-/* ===========================
-   1. INTERACTIVE STAR FIELD
-=========================== */
-const canvas = document.getElementById("space");
-const ctx = canvas.getContext("2d");
+/* ═══════════════════════════════════════════════════════
+   🌌 SOLAR SYSTEM WELCOME — JAVASCRIPT
+   ═══════════════════════════════════════════════════════ */
+(function () {
+    "use strict";
 
-let W = 0, H = 0, stars = [], asteroids = [];
-const mouse = { x: -1000, y: -1000 };
-const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    /* ─────────────────────────────────────────────
+       1. SOLAR SYSTEM SCALING (responsive)
+       ───────────────────────────────────────────── */
+    var solarSystem = document.getElementById("solarSystem");
 
-function resizeSpace() {
-  W = window.innerWidth;
-  H = window.innerHeight;
-  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-
-  canvas.width = Math.round(W * dpr);
-  canvas.height = Math.round(H * dpr);
-  canvas.style.width = W + "px";
-  canvas.style.height = H + "px";
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-  stars = Array.from(
-    { length: Math.min(190, Math.floor(W * H / 6500)) },
-    () => ({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      r: Math.random() * 1.35 + .25,
-      phase: Math.random() * Math.PI * 2,
-      speed: Math.random() * .018 + .004,
-      vx: 0,
-      vy: 0
-    })
-  );
-
-  asteroids = Array.from({ length: 18 }, () => ({
-    x: Math.random() * W,
-    y: Math.random() * H,
-    r: Math.random() * 1.8 + .6,
-    vx: (Math.random() - .5) * .18,
-    vy: (Math.random() - .5) * .18,
-    spin: Math.random() * 6
-  }));
-}
-
-window.addEventListener("resize", resizeSpace);
-resizeSpace();
-
-window.addEventListener("pointermove", e => {
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
-});
-
-window.addEventListener("pointerleave", () => {
-  mouse.x = -1000;
-  mouse.y = -1000;
-});
-
-let frame = 0;
-
-function drawSpace() {
-  ctx.clearRect(0, 0, W, H);
-  frame++;
-
-  for (let i = 0; i < stars.length; i++) {
-    const s = stars[i];
-
-    if (!reducedMotion) {
-      s.phase += s.speed;
-
-      const dx = mouse.x - s.x;
-      const dy = mouse.y - s.y;
-      const dist = Math.hypot(dx, dy);
-
-      if (dist < 115 && dist > 0) {
-        s.vx -= dx / dist * .012;
-        s.vy -= dy / dist * .012;
-      }
-
-      s.vx *= .985;
-      s.vy *= .985;
-      s.x += s.vx;
-      s.y += s.vy;
-
-      if (s.x < 0) s.x = W;
-      if (s.x > W) s.x = 0;
-      if (s.y < 0) s.y = H;
-      if (s.y > H) s.y = 0;
+    function fitSolarSystem() {
+        var minDim = Math.min(window.innerWidth, window.innerHeight);
+        var scale = Math.max(0.34, Math.min(0.62, minDim / 1400));
+        solarSystem.style.setProperty("--solarScale", scale.toFixed(3));
     }
+    fitSolarSystem();
+    window.addEventListener("resize", fitSolarSystem);
 
-    const alpha = .45 + Math.sin(s.phase) * .35;
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(211,231,255,${alpha})`;
-    ctx.fill();
+    /* ─────────────────────────────────────────────
+       2. PLANETS DATA (with personalities)
+       ───────────────────────────────────────────── */
+    var planetsData = [
+        { name: "Mercury", size: 9,  color: "#b8a890", orbit: 95,  speed: 22, hasRing: false,
+          line: "Main chhota hoon, lekin tez bhagta hoon! 🪨" },
+        { name: "Venus",   size: 13, color: "#ffd18a", orbit: 130, speed: 28, hasRing: false,
+          line: "Main sab se chamakta hoon... literally! 💛" },
+        { name: "Earth",   size: 14, color: "#4a9eff", orbit: 168, speed: 34, hasRing: false,
+          line: "Main ghar hoon sabka — Earth, yaad rakho! 🏡" },
+        { name: "Mars",    size: 12, color: "#e85a4a", orbit: 205, speed: 40, hasRing: false,
+          line: "Red Planet? Red attitude bhi 😎" },
+        { name: "Jupiter", size: 26, color: "#d4a574", orbit: 258, speed: 48, hasRing: false,
+          line: "Sab se bara hoon, sab se pyaara hoon 😌" },
+        { name: "Saturn",  size: 22, color: "#e8d4a0", orbit: 312, speed: 56, hasRing: true,
+          line: "Rings meri pehchaan hain 💍✨" },
+        { name: "Uranus",  size: 17, color: "#8ad4e8", orbit: 362, speed: 64, hasRing: false,
+          line: "Main thanda hoon, lekin cool hoon 💠" },
+        { name: "Neptune", size: 16, color: "#4a7ae8", orbit: 408, speed: 72, hasRing: false,
+          line: "Deep blue... deep feelings 🧊💙" },
+        { name: "Pluto",   size: 8,  color: "#c8a090", orbit: 448, speed: 82, hasRing: false,
+          line: "Main chhota hoon... lekin exist karta hoon 🥺" }
+    ];
 
-    if (s.r > 1.15) {
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r * 3, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(134,196,255,${alpha * .12})`;
-      ctx.fill();
-    }
-
-    // Stars near the cursor connect to one another.
-    for (let j = i + 1; j < stars.length; j++) {
-      const t = stars[j];
-      const d = Math.hypot(s.x - t.x, s.y - t.y);
-
-      if (d < 95) {
-        ctx.beginPath();
-        ctx.moveTo(s.x, s.y);
-        ctx.lineTo(t.x, t.y);
-        ctx.strokeStyle = `rgba(112,190,255,${(1 - d / 95) * .11})`;
-        ctx.lineWidth = .55;
-        ctx.stroke();
-      }
-    }
-
-    const md = Math.hypot(s.x - mouse.x, s.y - mouse.y);
-
-    if (md < 145) {
-      ctx.beginPath();
-      ctx.moveTo(s.x, s.y);
-      ctx.lineTo(mouse.x, mouse.y);
-      ctx.strokeStyle = `rgba(135,220,255,${(1 - md / 145) * .6})`;
-      ctx.lineWidth = .65;
-      ctx.stroke();
-    }
-  }
-
-  for (const a of asteroids) {
-    if (!reducedMotion) {
-      a.x += a.vx;
-      a.y += a.vy;
-      a.spin += .01;
-
-      if (a.x < 0) a.x = W;
-      if (a.x > W) a.x = 0;
-      if (a.y < 0) a.y = H;
-      if (a.y > H) a.y = 0;
-    }
-
-    ctx.save();
-    ctx.translate(a.x, a.y);
-    ctx.rotate(a.spin);
-    ctx.fillStyle = "#b4bed0a0";
-    ctx.fillRect(-a.r, -a.r * .6, a.r * 2, a.r * 1.2);
-    ctx.restore();
-  }
-
-  if (!reducedMotion) requestAnimationFrame(drawSpace);
-}
-
-drawSpace();
-
-if (reducedMotion) {
-  // A static star field is shown when reduced motion is requested.
-}
-
-/* ===========================
-   2. SOLAR SYSTEM CHARACTERS
-=========================== */
-const conversations = [
-  {
-    speaker: "☀ Sun · The Guardian",
-    text: "My little stars... I sense someone new approaching our universe.",
-    target: "sun"
-  },
-  {
-    speaker: "🌍 Earth · The Dreamer",
-    text: "Jupiter, are you seeing this? Someone from my little blue world is visiting us!",
-    target: "earth"
-  },
-  {
-    speaker: "🪐 Jupiter · The Gentle Giant",
-    text: "Of course, Earth! I hope our visitor knows how special they are.",
-    target: "jupiter"
-  },
-  {
-    speaker: "💫 Saturn · The Artist",
-    text: "Should I polish my rings? We must make this moment absolutely beautiful!",
-    target: "saturn"
-  },
-  {
-    speaker: "🔴 Mars · The Adventurer",
-    text: "I wonder what adventures brought our new friend here. Tell us, tell us!",
-    target: "mars"
-  },
-  {
-    speaker: "💙 Neptune · The Dreamer",
-    text: "I can feel a little magic in the stardust tonight. Something wonderful is beginning.",
-    target: "neptune"
-  },
-  {
-    speaker: "☿ Mercury · The Messenger",
-    text: "Everyone, get ready! Our visitor is almost ready to meet the whole universe!",
-    target: "mercury"
-  },
-  {
-    speaker: "☀ Sun · The Guardian",
-    text: "Whoever you are, little traveler... there is a place for you among the stars.",
-    target: "sun"
-  }
-];
-
-let dialogueIndex = 0;
-let dialogueTimer;
-let nameTimer;
-let currentName = "";
-let submitted = false;
-
-const speakerEl = document.getElementById("speaker");
-const dialogueEl = document.getElementById("dialogueText");
-const sun = document.getElementById("sun");
-const input = document.getElementById("visitorName");
-const typedMessage = document.getElementById("typedMessage");
-const subtitle = document.getElementById("subtitle");
-const inputHint = document.getElementById("inputHint");
-
-function showDialogue(item) {
-  speakerEl.textContent = item.speaker;
-  dialogueEl.textContent = item.text;
-
-  document.querySelectorAll(".planet").forEach(p => p.classList.remove("talking"));
-  sun.classList.remove("talking");
-
-  if (item.target === "sun") {
-    sun.classList.add("talking");
-  } else {
-    const orbit = [...document.querySelectorAll(".orbit")].find(o =>
-      o.querySelector("." + item.target)
-    );
-
-    if (orbit) {
-      orbit.querySelector(".planet").classList.add("talking");
-    }
-  }
-
-  dialogueEl.animate(
-    [{ opacity: .2, transform: "translateY(5px)" },
-     { opacity: 1, transform: "translateY(0)" }],
-    { duration: 500, easing: "ease-out" }
-  );
-}
-
-function nextDialogue() {
-  if (submitted) return;
-
-  showDialogue(conversations[dialogueIndex]);
-  dialogueIndex = (dialogueIndex + 1) % conversations.length;
-}
-
-function startDialogue() {
-  nextDialogue();
-  dialogueTimer = setInterval(nextDialogue, 5000);
-}
-
-startDialogue();
-
-// A gentle blink for the Sun.
-if (!reducedMotion) {
-  setInterval(() => {
-    if (submitted) return;
-    sun.classList.add("blink");
-    setTimeout(() => sun.classList.remove("blink"), 170);
-  }, 3600);
-}
-
-/* ===========================
-   3. NAME TYPING MAGIC
-=========================== */
-const typingLines = [
-  "The stars are listening...",
-  "A new story is being written...",
-  "Even the planets are smiling...",
-  "Your little corner of the universe awaits..."
-];
-
-let lastTypingLine = -1;
-
-input.addEventListener("input", () => {
-  if (submitted) return;
-
-  clearTimeout(nameTimer);
-
-  const name = input.value.trim();
-  const letters = [...input.value].length;
-
-  if (!letters) {
-    typedMessage.textContent = "";
-    inputHint.textContent = "✧ Type your name to awaken the stars ✧";
-    return;
-  }
-
-  inputHint.textContent = "✦ The universe is learning your name ✦";
-
-  if (name) {
-    typedMessage.textContent = `✧ ${name}... what a lovely name ✧`;
-  } else {
-    typedMessage.textContent = "";
-  }
-
-  // The Sun reacts as each character is typed.
-  sun.animate(
-    [
-      { filter: "brightness(1)" },
-      { filter: "brightness(1.35)" },
-      { filter: "brightness(1)" }
-    ],
-    { duration: 450, easing: "ease-out" }
-  );
-
-  nameTimer = setTimeout(() => {
-    if (!input.value.trim() || submitted) return;
-
-    let next = Math.floor(Math.random() * typingLines.length);
-    if (typingLines.length > 1 && next === lastTypingLine) {
-      next = (next + 1) % typingLines.length;
-    }
-    lastTypingLine = next;
-
-    typedMessage.textContent = typingLines[next];
-  }, 1800);
-});
-
-
-/* ===== PLANETS TALK TO THE NEW VISITOR ===== */
-
-const visitorChats = [
-  {
-    speaker: "🌍 Earth · Your Home",
-    text: name => `Hey ${name}! Can you see our beautiful blue home?`,
-    target: "earth"
-  },
-  {
-    speaker: "🪐 Jupiter · Your Big Friend",
-    text: name => `Jupiter here, ${name}! Even my giant heart is excited to meet you!`,
-    target: "jupiter"
-  },
-  {
-    speaker: "💫 Saturn · The Artist",
-    text: name => `${name}, look at my rings! I made them extra shiny for you!`,
-    target: "saturn"
-  },
-  {
-    speaker: "🔴 Mars · The Adventurer",
-    text: name => `Welcome, ${name}! Shall we explore the universe together?`,
-    target: "mars"
-  },
-  {
-    speaker: "💙 Neptune · The Dreamer",
-    text: name => `${name}, I saved a little stardust just for you!`,
-    target: "neptune"
-  },
-  {
-    speaker: "☀ Sun · Your New Friend",
-    text: name => `Everyone, smile! ${name} is becoming part of our little universe!`,
-    target: "sun"
-  }
-];
-
-let visitorChatTimer;
-
-input.addEventListener("input", () => {
-  if (submitted) return;
-
-  const name = safeName(input.value);
-  if (!name) return;
-
-  // Pause the ordinary conversation while the visitor types.
-  clearInterval(dialogueTimer);
-  clearTimeout(visitorChatTimer);
-
-  // All the planets brighten up and look happy.
-  document.querySelectorAll(".planet").forEach(planet => {
-    planet.classList.add("happy");
-  });
-
-  visitorChatTimer = setTimeout(() => {
-    if (submitted || !safeName(input.value)) return;
-
-    const chat =
-      visitorChats[Math.floor(Math.random() * visitorChats.length)];
-
-    showDialogue({
-      speaker: chat.speaker,
-      text: chat.text(safeName(input.value)),
-      target: chat.target
+    /* Orbit rings */
+    planetsData.forEach(function (p) {
+        var ring = document.createElement("div");
+        ring.className = "orbit-ring";
+        ring.style.width = (p.orbit * 2) + "px";
+        ring.style.height = (p.orbit * 2) + "px";
+        solarSystem.appendChild(ring);
     });
-  }, 1100);
-});
 
-  /* ===========================
-   4. PERSONALIZED FAREWELL
-=========================== */
-function safeName(value) {
-  return value.trim().replace(/\s+/g, " ").slice(0, 35);
-}
+    /* Planet elements */
+    planetsData.forEach(function (p, idx) {
+        var orbit = document.createElement("div");
+        orbit.className = "planet-orbit";
+        orbit.style.width = (p.orbit * 2) + "px";
+        orbit.style.height = (p.orbit * 2) + "px";
+        orbit.style.marginLeft = -p.orbit + "px";
+        orbit.style.marginTop = -p.orbit + "px";
+        orbit.style.animationDuration = p.speed + "s";
+        orbit.style.animationDelay = (-idx * 3) + "s";
 
-function enterUniverse(name) {
-  if (submitted) return;
-  submitted = true;
-  currentName = name;
+        var planet = document.createElement("div");
+        planet.className = "planet";
+        planet.style.width = p.size + "px";
+        planet.style.height = p.size + "px";
+        planet.style.color = p.color;
+        planet.style.background =
+            "radial-gradient(circle at 33% 33%, " +
+            lighten(p.color) + ", " + p.color + " 55%, " +
+            darken(p.color) + " 100%)";
+        planet.style.boxShadow =
+            "0 0 " + (p.size * 1.2) + "px " + p.color +
+            ", inset -3px -3px 8px rgba(0,0,0,0.5), inset 2px 2px 6px rgba(255,255,255,0.35)";
+        planet.title = p.name;
 
-  clearInterval(dialogueTimer);
-  clearTimeout(nameTimer);
+        /* Eyes */
+        var eyeL = document.createElement("div");
+        eyeL.className = "planet-eye left";
+        var eyeR = document.createElement("div");
+        eyeR.className = "planet-eye right";
+        planet.appendChild(eyeL);
+        planet.appendChild(eyeR);
 
-  input.disabled = true;
-  document.querySelector(".enter-btn").disabled = true;
-  document.querySelector(".enter-btn").style.opacity = ".65";
+        /* Smile (only big planets) */
+        if (p.size >= 12) {
+            var smile = document.createElement("div");
+            smile.className = "planet-smile";
+            planet.appendChild(smile);
+        }
 
-  subtitle.textContent = `The whole universe has been waiting for you, ${name}.`;
-  typedMessage.textContent = `✦ Welcome to our universe, ${name} ✦`;
-  inputHint.textContent = "✧ The stars are preparing something magical... ✧";
+        /* Saturn rings */
+        if (p.hasRing) {
+            var rings = document.createElement("div");
+            rings.className = "saturn-rings";
+            planet.appendChild(rings);
+        }
 
-  showDialogue({
-    speaker: "☀ Sun · Your New Friend",
-    text: `Everyone, say hello to ${name}! Our universe just became a little brighter.`,
-    target: "sun"
-  });
+        /* Position at orbit edge */
+        planet.style.left = p.orbit + "px";
+        planet.style.top = p.orbit + "px";
 
-  // The name is stored only for this website's local experience.
-  try {
-    localStorage.setItem("cosmicVisitorName", name);
-    sessionStorage.setItem("cosmicWelcomeDone", "yes");
-  } catch (e) {
-    // Continue even if browser storage is unavailable.
-  }
+        /* Hover: planet speaks */
+        planet.addEventListener("mouseenter", function () {
+            setBubble(p.line, true);
+        });
 
-  setTimeout(() => {
-    document.body.classList.add("departing");
-  }, 1900);
+        planet.addEventListener("mouseleave", function () {
+            setBubble(defaultSunLine, false);
+        });
 
-  // Open the existing home page after the cinematic transition.
-  setTimeout(() => {
-    window.location.href = "index.html";
-  }, 3900);
-}
+        /* Touch support */
+        planet.addEventListener("touchstart", function (e) {
+            e.preventDefault();
+            setBubble(p.line, true);
+        }, { passive: false });
 
-document.getElementById("nameForm").addEventListener("submit", event => {
-  event.preventDefault();
+        orbit.appendChild(planet);
+        solarSystem.appendChild(orbit);
+    });
 
-  const name = safeName(input.value);
+    /* ─────────────────────────────────────────────
+       3. ASTEROIDS
+       ───────────────────────────────────────────── */
+    var asteroidsLayer = document.getElementById("asteroidsLayer");
+    var isSmall = window.innerWidth < 700;
+    var astCount = isSmall ? 28 : 55;
 
-  if (!name) {
-    input.focus();
-    inputHint.textContent = "✧ The stars need your name first ✧";
-    return;
-  }
+    for (var ai = 0; ai < astCount; ai++) {
+        (function () {
+            var a = document.createElement("div");
+            a.className = "asteroid";
 
-  enterUniverse(name);
-});
+            var size = 3 + Math.random() * 14;
+            a.style.width = size + "px";
+            a.style.height = size + "px";
+            a.style.left = Math.random() * 100 + "%";
+            a.style.top = Math.random() * 100 + "%";
+            a.style.opacity = (0.3 + Math.random() * 0.55).toFixed(2);
 
-// Add a few natural-looking drifting comets.
-for (let i = 0; i < 3; i++) {
-  const comet = document.createElement("div");
-  comet.className = "comet";
-  comet.style.top = (8 + i * 27) + "%";
-  comet.style.left = "-5%";
-  comet.style.animationDelay = (i * 4) + "s";
-  comet.style.animationDuration = (12 + i * 3) + "s";
-  document.body.appendChild(comet);
-}
+            var angle = Math.random() * Math.PI * 2;
+            var dist = 120 + Math.random() * 380;
+            a.style.setProperty("--ax", (Math.cos(angle) * dist).toFixed(1) + "px");
+            a.style.setProperty("--ay", (Math.sin(angle) * dist).toFixed(1) + "px");
+
+            a.style.animationDuration = (30 + Math.random() * 50) + "s";
+            a.style.animationDelay = (-Math.random() * 40) + "s";
+
+            asteroidsLayer.appendChild(a);
+        })();
+    }
+
+    /* ─────────────────────────────────────────────
+       4. STARFIELD + CONSTELLATION CURSOR
+       ───────────────────────────────────────────── */
+    var canvas = document.getElementById("starCanvas");
+    var ctx = canvas.getContext("2d");
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W, H;
+
+    function resizeCanvas() {
+        W = window.innerWidth;
+        H = window.innerHeight;
+        canvas.width = W * dpr;
+        canvas.height = H * dpr;
+        canvas.style.width = W + "px";
+        canvas.style.height = H + "px";
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    /* Background stars */
+    var stars = [];
+    var starCount = isSmall ? 100 : 200;
+    var starColors = [
+        { r: 255, g: 255, b: 255 },
+        { r: 213, g: 182, b: 255 },
+        { r: 255, g: 200, b: 242 },
+        { r: 255, g: 226, b: 122 },
+        { r: 165, g: 243, b: 252 }
+    ];
+
+    for (var si = 0; si < starCount; si++) {
+        stars.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.06,
+            vy: (Math.random() - 0.5) * 0.06,
+            r: 0.5 + Math.random() * 1.4,
+            twk: Math.random() * Math.PI * 2,
+            twkSpeed: 0.008 + Math.random() * 0.018,
+            color: starColors[Math.floor(Math.random() * starColors.length)]
+        });
+    }
+
+    /* Cursor trail */
+    var mouse = { x: W / 2, y: H / 2 };
+    var points = [];
+    var maxPoints = 26;
+    var mouseMoving = false;
+    var mouseIdleTimer = null;
+
+    window.addEventListener("pointermove", function (e) {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        mouseMoving = true;
+
+        points.push({ x: e.clientX, y: e.clientY, life: 1 });
+        if (points.length > maxPoints) points.shift();
+
+        if (mouseIdleTimer) clearTimeout(mouseIdleTimer);
+        mouseIdleTimer = setTimeout(function () {
+            mouseMoving = false;
+        }, 300);
+    }, { passive: true });
+
+    window.addEventListener("pointerleave", function () {
+        mouseMoving = false;
+    });
+
+    /* Draw loop */
+    function drawStars() {
+        ctx.clearRect(0, 0, W, H);
+
+        /* Background stars */
+        for (var i = 0; i < stars.length; i++) {
+            var s = stars[i];
+            s.x += s.vx;
+            s.y += s.vy;
+            s.twk += s.twkSpeed;
+
+            if (s.x < 0) s.x = W;
+            if (s.x > W) s.x = 0;
+            if (s.y < 0) s.y = H;
+            if (s.y > H) s.y = 0;
+
+            var twinkle = 0.55 + Math.sin(s.twk) * 0.45;
+            var c = s.color;
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r * (0.85 + twinkle * 0.35), 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(" + c.r + "," + c.g + "," + c.b + "," + (0.5 + twinkle * 0.5) + ")";
+            ctx.shadowBlur = 6 + twinkle * 4;
+            ctx.shadowColor = "rgba(" + c.r + "," + c.g + "," + c.b + ",0.85)";
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+
+        /* Fade trail points */
+        points.forEach(function (p) { p.life -= 0.02; });
+        points = points.filter(function (p) { return p.life > 0; });
+
+        /* Constellation lines (between trail points) */
+        if (points.length > 1) {
+            for (var k = 0; k < points.length - 1; k++) {
+                var a = points[k];
+                var b = points[k + 1];
+                var alpha = ((a.life + b.life) / 2) * 0.75;
+                if (alpha < 0.03) continue;
+
+                ctx.beginPath();
+                ctx.moveTo(a.x, a.y);
+                ctx.lineTo(b.x, b.y);
+                ctx.strokeStyle = "rgba(220, 190, 255," + alpha + ")";
+                ctx.lineWidth = 1.3;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = "rgba(190, 150, 255, 0.8)";
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        /* Constellation lines (cursor to nearby stars) */
+        if (mouseMoving) {
+            for (var m = 0; m < stars.length; m++) {
+                var st = stars[m];
+                var dx = st.x - mouse.x;
+                var dy = st.y - mouse.y;
+                var d = Math.sqrt(dx * dx + dy * dy);
+                if (d < 150) {
+                    ctx.beginPath();
+                    ctx.moveTo(st.x, st.y);
+                    ctx.lineTo(mouse.x, mouse.y);
+                    ctx.strokeStyle = "rgba(200, 170, 255," + ((1 - d / 150) * 0.4) + ")";
+                    ctx.lineWidth = 0.9;
+                    ctx.stroke();
+                }
+            }
+        }
+
+        /* Glowing trail points */
+        points.forEach(function (p) {
+            var r = 2.5 * p.life + 0.8;
+            var g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 5);
+            g.addColorStop(0, "rgba(255, 240, 255," + p.life + ")");
+            g.addColorStop(0.5, "rgba(220, 180, 255," + (p.life * 0.55) + ")");
+            g.addColorStop(1, "rgba(180, 120, 255, 0)");
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, r * 5, 0, Math.PI * 2);
+            ctx.fillStyle = g;
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(255, 255, 255," + p.life + ")";
+            ctx.shadowBlur = 14;
+            ctx.shadowColor = "rgba(255, 220, 255, 0.95)";
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        });
+
+        requestAnimationFrame(drawStars);
+    }
+    drawStars();
+
+    /* ─────────────────────────────────────────────
+       5. HELPERS
+       ───────────────────────────────────────────── */
+    function lighten(hex) {
+        return "#" + hex.replace("#", "").split("").map(function (c) {
+            var v = parseInt(c, 16);
+            return Math.min(15, v + 5).toString(16);
+        }).join("");
+    }
+    function darken(hex) {
+        return "#" + hex.replace("#", "").split("").map(function (c) {
+            var v = parseInt(c, 16);
+            return Math.max(0, v - 5).toString(16);
+        }).join("");
+    }
+
+    /* ─────────────────────────────────────────────
+       6. SUN BUBBLE
+       ───────────────────────────────────────────── */
+    var bubbleEl = document.getElementById("sunBubble");
+    var defaultSunLine = "✨ Welcome traveler! Main Surya hoon — in sab ka dost. Apna naam batao, hum sab tumhara intezar kar rahe hain! 🌞";
+    var bubbleTimer = null;
+    var hoverLock = false;
+
+    function setBubble(text, persist) {
+        bubbleEl.textContent = text;
+        bubbleEl.classList.add("show");
+
+        if (bubbleTimer) clearTimeout(bubbleTimer);
+
+        if (!persist) {
+            bubbleTimer = setTimeout(function () {
+                bubbleEl.classList.remove("show");
+            }, 5200);
+        }
+    }
+
+    setTimeout(function () {
+        setBubble(defaultSunLine, false);
+    }, 1000);
+
+    /* "Planets talking about user" chatter */
+    var chatterLines = [
+        "Earth: Jupiter, dekh na — naya insaan aya hai! 👀",
+        "Jupiter: Haan bhai, bilkul naya lag raha hai! 😄",
+        "Mars: Arre, iska naam kya hoga? 🤔",
+        "Venus: Kuch toh bahut pyaara sa lag raha hai! 💛",
+        "Saturn: Rings toh sabse pyaari meri hain... par yeh bhi cute hai! 💍",
+        "Uranus: Main thanda hoon, par dil se welcome kehta hoon! 💠",
+        "Neptune: Deep feelings wala insaan lagta hai 🌊",
+        "Pluto: Mujhe bhi dost banao na... 🥺",
+        "Mercury: Main chhota hoon, par dekh raha hoon sab! 🪨",
+        "Earth: Shhh... abhi apna naam likh raha hai! ✍️"
+    ];
+
+    var chatterIdx = 0;
+    setInterval(function () {
+        if (document.activeElement === visitorName) return;
+        if (hoverLock) return;
+        setBubble(chatterLines[chatterIdx], false);
+        chatterIdx = (chatterIdx + 1) % chatterLines.length;
+    }, 6500);
+
+    /* Lock hover during planet hover */
+    var allPlanets = solarSystem.querySelectorAll(".planet");
+    allPlanets.forEach(function (pl) {
+        pl.addEventListener("mouseenter", function () { hoverLock = true; });
+        pl.addEventListener("mouseleave", function () { hoverLock = false; });
+    });
+
+    /* ─────────────────────────────────────────────
+       7. NAME INPUT
+       ───────────────────────────────────────────── */
+    var visitorName = document.getElementById("visitorName");
+    var liveNameDisplay = document.getElementById("liveNameDisplay");
+    var nameWrap = document.getElementById("nameWrap");
+    var nameBox = document.getElementById("nameBox");
+    var sparkleCanvas = document.getElementById("typeSparkleCanvas");
+    var sctx = sparkleCanvas.getContext("2d");
+
+    function resizeSparkleCanvas() {
+        sparkleCanvas.width = window.innerWidth * dpr;
+        sparkleCanvas.height = window.innerHeight * dpr;
+        sparkleCanvas.style.width = window.innerWidth + "px";
+        sparkleCanvas.style.height = window.innerHeight + "px";
+        sctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resizeSparkleCanvas();
+    window.addEventListener("resize", resizeSparkleCanvas);
+
+    var sparkles = [];
+
+    function spawnSparkles(x, y) {
+        var colors = ["#ffffff", "#ffc8f2", "#c9a6ff", "#ffe27a", "#67e8f9"];
+        for (var i = 0; i < 14; i++) {
+            sparkles.push({
+                x: x,
+                y: y,
+                vx: (Math.random() - 0.5) * 9,
+                vy: (Math.random() - 0.5) * 9 - 2.5,
+                size: 2 + Math.random() * 4,
+                life: 1,
+                decay: 0.02 + Math.random() * 0.022,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                gravity: 0.16,
+                glow: 9 + Math.random() * 9
+            });
+        }
+    }
+
+    function drawSparkles() {
+        sctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+        for (var i = sparkles.length - 1; i >= 0; i--) {
+            var s = sparkles[i];
+            s.x += s.vx;
+            s.y += s.vy;
+            s.vy += s.gravity;
+            s.vx *= 0.98;
+            s.life -= s.decay;
+
+            if (s.life <= 0) {
+                sparkles.splice(i, 1);
+                continue;
+            }
+
+            sctx.save();
+            sctx.globalAlpha = s.life;
+            sctx.fillStyle = s.color;
+            sctx.shadowBlur = s.glow;
+            sctx.shadowColor = s.color;
+            sctx.beginPath();
+            sctx.arc(s.x, s.y, s.size * s.life, 0, Math.PI * 2);
+            sctx.fill();
+            sctx.restore();
+        }
+        requestAnimationFrame(drawSparkles);
+    }
+    drawSparkles();
+
+    var emojis = ["✨", "💜", "⭐", "🌸", "💫", "🦋", "🌟", "💖", "🎀", "🪐", "🌙", "☀️"];
+
+    function popEmoji(x, y) {
+        var span = document.createElement("span");
+        span.className = "type-particle";
+        span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        span.style.left = x + "px";
+        span.style.top = y + "px";
+        span.style.fontSize = (16 + Math.random() * 16) + "px";
+        span.style.setProperty("--tx", ((Math.random() - 0.5) * 220) + "px");
+        span.style.setProperty("--ty", (-80 - Math.random() * 140) + "px");
+        span.addEventListener("animationend", function () { this.remove(); });
+        document.body.appendChild(span);
+    }
+
+    function updateLiveName(name) {
+        liveNameDisplay.textContent = "";
+        if (!name) {
+            liveNameDisplay.classList.remove("visible");
+            return;
+        }
+        liveNameDisplay.classList.add("visible");
+        for (var i = 0; i < name.length; i++) {
+            var letter = document.createElement("span");
+            letter.className = "live-letter";
+            letter.textContent = name[i] === " " ? "\u00A0" : name[i];
+            letter.style.animationDelay = (i * 0.04) + "s";
+            liveNameDisplay.appendChild(letter);
+        }
+    }
+
+    var lastLen = 0;
+    visitorName.addEventListener("input", function () {
+        var val = visitorName.value;
+        var len = val.length;
+
+        updateLiveName(val);
+
+        if (len > lastLen) {
+            var rect = visitorName.getBoundingClientRect();
+            var cx = rect.left + rect.width / 2;
+            var cy = rect.top + rect.height / 2;
+            spawnSparkles(cx, cy);
+            popEmoji(cx, cy);
+        }
+        lastLen = len;
+
+        /* Sun reacts */
+        if (len > 0) {
+            setBubble(val.trim() ? "Wah, " + val.trim() + "! Kya pyaara naam hai! 💫" : "✨ Apna naam likho traveler...", false);
+        }
+    });
+
+    /* Auto focus */
+    setTimeout(function () { visitorName.focus(); }, 800);
+
+    /* ─────────────────────────────────────────────
+       8. ENTER BUTTON — CINEMATIC TRANSMISSION
+       ───────────────────────────────────────────── */
+    var enterBtn = document.getElementById("enterBtn");
+    var transmission = document.getElementById("transmission");
+    var welcomeScreen = document.getElementById("welcome-screen");
+
+    enterBtn.addEventListener("click", function () {
+        var name = visitorName.value.trim();
+
+        if (!name) {
+            nameWrap.classList.remove("shake");
+            void nameWrap.offsetWidth;
+            nameWrap.classList.add("shake");
+            setBubble("⚠️ Arre! Naam ke bina cosmos mein entry nahi milti! 😄", false);
+            visitorName.focus();
+            return;
+        }
+
+        /* Save name */
+        try {
+            sessionStorage.setItem("visitorName", name);
+            sessionStorage.setItem("welcomeDone", "1");
+        } catch (e) {}
+
+        /* Final bubble */
+        setBubble("✨ Welcome " + name + "! Chalo apni duniya dekhte hain! 💜", true);
+
+        enterBtn.disabled = true;
+        enterBtn.textContent = "TRANSMITTING... ✦";
+
+        /* Sparkle burst from sun */
+        var rect = document.getElementById("sunWrap").getBoundingClientRect();
+        var sx = rect.left + rect.width / 2;
+        var sy = rect.top + rect.height / 2;
+
+        for (var i = 0; i < 45; i++) {
+            (function (idx) {
+                setTimeout(function () {
+                    var sp = document.createElement("span");
+                    sp.className = "fly-spark";
+                    sp.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    sp.style.left = sx + "px";
+                    sp.style.top = sy + "px";
+                    sp.style.fontSize = (16 + Math.random() * 22) + "px";
+
+                    var angle = Math.random() * Math.PI * 2;
+                    var dist = 200 + Math.random() * 500;
+                    sp.style.setProperty("--fx", (Math.cos(angle) * dist) + "px");
+                    sp.style.setProperty("--fy", (Math.sin(angle) * dist) + "px");
+
+                    document.body.appendChild(sp);
+                    sp.addEventListener("animationend", function () { this.remove(); });
+                }, idx * 12);
+            })(i);
+        }
+
+        /* Transmission overlay */
+        setTimeout(function () {
+            transmission.classList.add("active");
+            welcomeScreen.classList.add("leaving");
+        }, 400);
+
+        /* Redirect to main page */
+        setTimeout(function () {
+            window.location.href = "index.html";
+        }, 2100);
+    });
+
+    /* Enter key on input */
+    visitorName.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            enterBtn.click();
+        }
+    });
+
+    /* Show name box after intro */
+    setTimeout(function () {
+        nameBox.classList.add("show");
+    }, 1400);
+
+})();
 </script>
 </body>
 </html>
-
