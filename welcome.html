@@ -784,6 +784,145 @@ height: 155px;
     visibility: visible !important;
 }
 
+
+/* ═════ COSMIC NAME CARD ═════ */
+#cosmicNameCard {
+    position: fixed;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 230px;
+    box-sizing: border-box;
+    padding: 20px 15px 14px;
+    text-align: center;
+    color: #fff;
+    background:
+        radial-gradient(ellipse at top, rgba(160, 110, 255, 0.2), transparent 65%),
+        rgba(12, 9, 32, 0.88);
+    border: 1px solid rgba(195, 165, 255, 0.48);
+    border-radius: 20px;
+    box-shadow:
+        0 0 24px rgba(151, 105, 255, 0.2),
+        inset 0 0 22px rgba(153, 119, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 100;
+    overflow: hidden;
+}
+
+.cosmic-card-stars {
+    color: #ffe8a3;
+    letter-spacing: 8px;
+    font-size: 15px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 12px #bba0ff;
+}
+
+.cosmic-card-heading {
+    color: #cbb8ff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 13px;
+}
+
+#cosmicUserName {
+    overflow-wrap: anywhere;
+    font-size: 22px;
+    line-height: 1.3;
+    font-weight: 900;
+    background: linear-gradient(110deg, #fff, #e1c7ff, #ffe7a0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 9px rgba(198, 160, 255, 0.45));
+}
+
+.cosmic-card-divider {
+    color: #9d83d9;
+    font-size: 12px;
+    margin: 12px 0;
+}
+
+#cosmicKoreanName {
+    font-size: 20px;
+    font-weight: 700;
+    color: #a8e7ff;
+    text-shadow: 0 0 12px rgba(95, 195, 255, 0.4);
+    margin-bottom: 12px;
+}
+
+#cosmicComment {
+    color: #e1d8f7;
+    font-size: 11px;
+    line-height: 1.6;
+    margin: 0 0 15px;
+}
+
+.cosmic-card-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+}
+
+.cosmic-card-buttons button {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 4px;
+    border: 1px solid rgba(196, 169, 255, 0.45);
+    border-radius: 10px;
+    background: rgba(140, 105, 220, 0.16);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.cosmic-card-buttons button:hover {
+    background: rgba(155, 119, 255, 0.35);
+    transform: translateY(-2px);
+}
+
+.cosmic-card-footer {
+    color: #8879ac;
+    font-size: 8px;
+    letter-spacing: 2px;
+    margin-top: 13px;
+}
+
+@media (max-width: 700px) {
+    #cosmicNameCard {
+        right: 8px;
+        top: auto;
+        bottom: 12px;
+        transform: none;
+        width: 185px;
+        padding: 13px 10px 10px;
+    }
+
+    .cosmic-card-stars {
+        margin-bottom: 6px;
+    }
+
+    .cosmic-card-heading {
+        margin-bottom: 8px;
+        font-size: 9px;
+    }
+
+    #cosmicUserName {
+        font-size: 18px;
+    }
+
+    #cosmicKoreanName {
+        font-size: 17px;
+    }
+
+    #cosmicComment {
+        margin-bottom: 10px;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -835,6 +974,33 @@ placeholder="🚀 Type your name, Earthling...">
 
     <!-- Live name display -->
     <div id="liveNameDisplay" aria-hidden="true"></div>
+   <!-- Magical Cosmic Name Card -->
+<div id="cosmicNameCard">
+    <div class="cosmic-card-stars">✦ · ✧ · ✦</div>
+
+    <div class="cosmic-card-heading">
+        ✨ YOUR COSMIC NAME ✨
+    </div>
+
+    <div id="cosmicUserName">Your Name</div>
+
+    <div class="cosmic-card-divider">
+        <span>☄</span> ───────── <span>☽</span>
+    </div>
+
+    <div id="cosmicKoreanName">이름</div>
+
+    <div id="cosmicComment">
+        You make this universe brighter ✨
+    </div>
+
+    <div class="cosmic-card-buttons">
+        <button type="button" id="cosmicShareBtn">↗ Share</button>
+        <button type="button" id="cosmicDownloadBtn">↓ Download</button>
+    </div>
+
+    <div class="cosmic-card-footer">MADE OF STARDUST ✦</div>
+</div>
 
     <!-- Sparkle canvas -->
     <canvas id="typeSparkleCanvas" aria-hidden="true"></canvas>
@@ -1365,12 +1531,156 @@ setTimeout(function () {
         }
     }
 
-    var lastLen = 0;
+   
+/* ═════ COSMIC NAME CARD FUNCTIONS ═════ */
+
+var cosmicUserName = document.getElementById("cosmicUserName");
+var cosmicKoreanName = document.getElementById("cosmicKoreanName");
+var cosmicComment = document.getElementById("cosmicComment");
+var cosmicShareBtn = document.getElementById("cosmicShareBtn");
+var cosmicDownloadBtn = document.getElementById("cosmicDownloadBtn");
+
+function updateCosmicCard(name) {
+    var cleanName = name.trim();
+
+    cosmicUserName.textContent = cleanName || "Your Name";
+
+    /* Common-name Hangul spellings; other names use an approximation */
+    var knownNames = {
+        "sanan faisal": "사난 파이살",
+        "sanan": "사난",
+        "faisal": "파이살",
+        "ali": "알리",
+        "ahmed": "아흐메드",
+        "muhammad": "무함마드",
+        "sara": "사라",
+        "sarah": "사라",
+        "john": "존",
+        "david": "데이비드",
+        "alex": "알렉스",
+        "emma": "엠마",
+        "zain": "자인"
+    };
+
+    var korean = knownNames[cleanName.toLowerCase()];
+
+    if (!korean && cleanName) {
+        korean = "이름: " + cleanName;
+    }
+
+    cosmicKoreanName.textContent = korean || "이름";
+    cosmicComment.textContent = cleanName
+        ? "You make this universe brighter ✨"
+        : "Your cosmic journey awaits ✨";
+}
+
+/* Share card details */
+cosmicShareBtn.addEventListener("click", async function () {
+    var name = cosmicUserName.textContent;
+    var korean = cosmicKoreanName.textContent;
+    var comment = cosmicComment.textContent;
+    var shareText = "✨ My Cosmic Name Card ✨\n" +
+        name + "\n" + korean + "\n" + comment;
+
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: "My Cosmic Name Card",
+                text: shareText
+            });
+        } catch (e) {}
+    } else {
+        try {
+            await navigator.clipboard.writeText(shareText);
+            cosmicShareBtn.textContent = "✓ Copied!";
+            setTimeout(function () {
+                cosmicShareBtn.textContent = "↗ Share";
+            }, 1800);
+        } catch (e) {
+            window.prompt("Copy your cosmic card details:", shareText);
+        }
+    }
+});
+
+/* Download card as an image */
+cosmicDownloadBtn.addEventListener("click", function () {
+    var name = cosmicUserName.textContent;
+    var korean = cosmicKoreanName.textContent;
+    var comment = cosmicComment.textContent;
+
+    function escapeXML(text) {
+        return String(text).replace(/[&<>"']/g, function (ch) {
+            return {
+                "&": "&amp;", "<": "&lt;", ">": "&gt;",
+                '"': "&quot;", "'": "&apos;"
+            }[ch];
+        });
+    }
+
+    var svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="700" height="820">
+      <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#100d2c"/>
+          <stop offset="100%" stop-color="#302052"/>
+        </linearGradient>
+        <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+          <stop stop-color="#ffffff"/>
+          <stop offset="50%" stop-color="#d9baff"/>
+          <stop offset="100%" stop-color="#ffe7a0"/>
+        </linearGradient>
+      </defs>
+      <rect width="700" height="820" rx="42" fill="url(#bg)"/>
+      <rect x="15" y="15" width="670" height="790" rx="32"
+        fill="none" stroke="#bba0ff" stroke-opacity=".7" stroke-width="2"/>
+      <g fill="#ffe7a0" font-size="24">
+        <text x="70" y="85">✦</text><text x="600" y="130">✧</text>
+        <text x="105" y="700">✧</text><text x="570" y="740">✦</text>
+      </g>
+      <text x="350" y="175" text-anchor="middle"
+        font-family="Arial,sans-serif" font-size="25"
+        letter-spacing="5" fill="#cbb8ff">YOUR COSMIC NAME</text>
+      <text x="350" y="330" text-anchor="middle"
+        font-family="Arial,sans-serif" font-size="42"
+        font-weight="bold" fill="url(#gold)">${escapeXML(name)}</text>
+      <path d="M180 375 Q350 345 520 375" stroke="#9d83d9"
+        fill="none" stroke-width="2"/>
+      <text x="350" y="445" text-anchor="middle"
+        font-family="Arial,sans-serif" font-size="34"
+        fill="#a8e7ff">${escapeXML(korean)}</text>
+      <text x="350" y="520" text-anchor="middle"
+        font-family="Arial,sans-serif" font-size="23"
+        fill="#e1d8f7">${escapeXML(comment)}</text>
+      <text x="350" y="650" text-anchor="middle"
+        font-family="Arial,sans-serif" font-size="23"
+        fill="#d5c1ff">☾  ✦  MADE OF STARDUST  ✦  ☽</text>
+    </svg>`;
+
+    var blob = new Blob([svg], {
+        type: "image/svg+xml;charset=utf-8"
+    });
+    var url = URL.createObjectURL(blob);
+    var link = document.createElement("a");
+    link.href = url;
+    link.download = "my-cosmic-name-card.svg";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(function () {
+        URL.revokeObjectURL(url);
+    }, 2000);
+});
+
+/* Initial card content */
+updateCosmicCard(visitorName.value);
+
+   var lastLen = 0;
     visitorName.addEventListener("input", function () {
         var val = visitorName.value;
         var len = val.length;
 
         updateLiveName(val);
+       updateCosmicCard(val);
 
         if (len > lastLen) {
             var rect = visitorName.getBoundingClientRect();
