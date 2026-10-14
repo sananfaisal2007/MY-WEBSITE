@@ -1394,114 +1394,7 @@ height: 100%;
 
 
 <style>
-/* ===== WELCOME SCREEN UPGRADE ===== */
-#welcome-screen { overflow-x: hidden; overflow-y: auto; }
-#welcome-screen.leaving { overflow: hidden; }
-#welcome-screen .welcome-content { margin: auto; width: 100%; padding: 20px 0; }
 
-/* Moving background layers */
-.ws-layer { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-.ws-orb { position: absolute; border-radius: 50%; filter: blur(50px); will-change: transform; }
-.ws-o1 { width: 340px; height: 340px; left: 5%;  top: 8%;    background: rgba(150, 80, 255, .35); }
-.ws-o2 { width: 400px; height: 400px; right: 2%; bottom: 4%; background: rgba(255, 120, 220, .25); }
-.ws-o3 { width: 240px; height: 240px; left: 55%; top: 12%;   background: rgba(255, 226, 122, .16); }
-.ws-star { position: absolute; border-radius: 50%; background: #fff; will-change: transform; }
-.ws-emoji { position: absolute; font-size: 24px; opacity: .8; filter: drop-shadow(0 0 8px #d9baff); will-change: transform; }
-.ws-cursor {
-  position: absolute; left: 0; top: 0; width: 300px; height: 300px; margin: -150px 0 0 -150px;
-  border-radius: 50%; pointer-events: none; z-index: 1; will-change: transform;
-  background: radial-gradient(circle, rgba(190, 130, 255, .35), transparent 65%);
-}
-.wd-trail { position: absolute; z-index: 3; pointer-events: none; font-size: 14px; animation: wdTrail 1s ease-out forwards; }
-@keyframes wdTrail { to { opacity: 0; transform: translateY(-30px) scale(.4); } }
-
-/* Name input */
-.wd-name-label { display: block; margin-top: 30px; color: #e5d0ff; font-size: 15px; line-height: 1.7; }
-.wd-name-wrap {
-  max-width: 360px; margin: 14px auto 0; padding: 3px; border-radius: 18px;
-  background: linear-gradient(90deg, #8b4dff, #ffc8f2, #8b4dff); background-size: 200% 200%;
-  animation: wdBorder 4s linear infinite; box-shadow: 0 0 20px rgba(139, 77, 255, .3);
-}
-@keyframes wdBorder { to { background-position: 200% 50%; } }
-.wd-name-wrap input {
-  display: block; width: 100%; padding: 13px; border: 0; outline: 0; border-radius: 15px;
-  background: #130b22; color: #fff; font-size: 16px; text-align: center; font-family: inherit;
-}
-.wd-name-wrap input::placeholder { color: #a994c4; }
-.wd-react { min-height: 22px; margin: 10px 0 0; color: #ffe9a8; font-size: 13px; line-height: 1.6; }
-.wd-shake { animation: wdShake .45s; }
-@keyframes wdShake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-9px); } 40% { transform: translateX(9px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(6px); } }
-
-/* Magical door */
-.wd-door {
-  position: relative; display: block; width: 190px; margin: 18px auto 0; padding: 0; border: 0;
-  background: none; color: #fff; font-family: inherit; cursor: pointer; z-index: 2;
-  transform-origin: 50% 39%; -webkit-tap-highlight-color: transparent;
-  animation: wdFloat 3s ease-in-out infinite;
-  transition: transform 1.3s cubic-bezier(.6, 0, 1, .6);
-}
-@keyframes wdFloat { 0%,100% { translate: 0 0; } 50% { translate: 0 -8px; } }
-.wd-glow {
-  position: absolute; left: 50%; top: 40%; width: 230px; height: 230px; margin: -115px 0 0 -115px;
-  border-radius: 50%; z-index: 0; pointer-events: none;
-  background: radial-gradient(circle, rgba(255, 233, 168, .65), rgba(199, 139, 255, .35) 45%, transparent 70%);
-  animation: wdPulse 2.6s ease-in-out infinite;
-}
-@keyframes wdPulse { 0%,100% { transform: scale(.85); opacity: .7; } 50% { transform: scale(1.15); opacity: 1; } }
-.wd-frame {
-  position: relative; display: block; width: 130px; height: 175px; margin: 0 auto; z-index: 1;
-  border-radius: 70px 70px 6px 6px; border: 4px solid #f1d9ff; perspective: 700px; overflow: hidden;
-  background: #10071e; box-shadow: 0 0 24px #c78bff, 0 0 50px rgba(139, 77, 255, .5), inset 0 0 18px #000;
-  transition: box-shadow .3s;
-}
-.wd-door:hover .wd-frame { box-shadow: 0 0 34px #e3b4ff, 0 0 70px rgba(168, 120, 255, .7), inset 0 0 18px #000; }
-.wd-light {
-  position: absolute; inset: 0; opacity: 0; transition: opacity .8s ease .2s;
-  background: radial-gradient(circle at 50% 55%, #fff 0%, #ffe9a8 30%, #d49aff 65%, #5b2a86 100%);
-}
-.wd-panel {
-  position: absolute; top: 0; bottom: 0; width: 50%; z-index: 2; overflow: hidden;
-  background: linear-gradient(120deg, #8b3fd0, #5a2a96 50%, #8b3fd0);
-  transition: transform 1s cubic-bezier(.5, 0, .2, 1);
-}
-.wd-panel.l { left: 0;  transform-origin: left center;  border-right: 1px solid rgba(0,0,0,.4); }
-.wd-panel.r { right: 0; transform-origin: right center; border-left: 1px solid rgba(0,0,0,.4); }
-.wd-panel::before {
-  content: ""; position: absolute; top: 0; bottom: 0; width: 40%; left: -60%;
-  background: linear-gradient(100deg, transparent, rgba(255,255,255,.7), transparent);
-  animation: wdShine 3s ease-in-out infinite;
-}
-@keyframes wdShine { 0% { left: -60%; } 55%,100% { left: 140%; } }
-.wd-panel::after { content: "✨"; position: absolute; top: 28%; left: 50%; transform: translateX(-50%); font-size: 16px; opacity: .85; }
-.wd-knob {
-  position: absolute; top: 55%; left: 50%; width: 12px; height: 12px; margin-left: -6px; z-index: 3;
-  border-radius: 50%; background: radial-gradient(circle, #fff6c9, #ffd24d); box-shadow: 0 0 10px #ffe27a;
-  transition: opacity .3s;
-}
-.wd-door-text { display: block; margin-top: 14px; font-size: 14px; font-weight: 700; color: #ffeab8; text-shadow: 0 0 10px #ffd24d; position: relative; z-index: 1; }
-.wd-door.open .wd-panel.l { transform: rotateY(-110deg); }
-.wd-door.open .wd-panel.r { transform: rotateY(110deg); }
-.wd-door.open .wd-light { opacity: 1; }
-.wd-door.open .wd-knob { opacity: 0; }
-.wd-door.zoom { transform: scale(16); }
-
-/* Hint + fade out */
-.wd-hint { min-height: 22px; margin: 12px 0 0; color: #cdb9e6; font-size: 13px; line-height: 1.6; }
-.wd-fade, .wd-hint { transition: opacity .6s ease; }
-#welcome-screen.portal .wd-fade, #welcome-screen.portal .wd-hint { opacity: 0; }
-
-/* Sparkle burst */
-.wd-spark { position: fixed; z-index: 10; pointer-events: none; animation: wdSpark 1.4s ease-out forwards; }
-@keyframes wdSpark { to { transform: translate(var(--dx), var(--dy)) scale(.3); opacity: 0; } }
-
-@media (max-width: 600px) {
-  .wd-door { width: 150px; }
-  .wd-frame { width: 105px; height: 140px; border-radius: 55px 55px 6px 6px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .wd-door, .wd-glow, .wd-name-wrap, .wd-panel::before { animation: none; }
-}
-</style>
 <script>
 try {
     if (sessionStorage.getItem("welcomeDone") === "1") {
@@ -1980,6 +1873,652 @@ body.wd-cinematic-zoom {
     }
 }
 </style>
+<style>
+/* ═══════════════════════════════════════
+   🌌 SOLAR SYSTEM WELCOME — CSS
+   ═══════════════════════════════════════ */
+
+#welcome-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    overflow: hidden;
+    background: #050314;
+    color: #fff;
+    font-family: 'Poppins', 'Arial', sans-serif;
+}
+
+/* ─── SPACE BACKGROUND ─── */
+#space {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 50% 50%, rgba(60, 20, 100, 0.4), transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(100, 40, 140, 0.3), transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(40, 60, 140, 0.3), transparent 50%),
+        linear-gradient(180deg, #050314 0%, #0a0520 40%, #050314 100%);
+    overflow: hidden;
+}
+
+#space::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 30% 40%, rgba(200, 130, 255, 0.15), transparent 30%),
+        radial-gradient(circle at 70% 60%, rgba(255, 130, 200, 0.12), transparent 30%),
+        radial-gradient(circle at 50% 80%, rgba(130, 200, 255, 0.1), transparent 35%);
+    filter: blur(40px);
+}
+
+#space::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        transparent 30%,
+        rgba(200, 180, 255, 0.08) 45%,
+        rgba(255, 200, 240, 0.12) 50%,
+        rgba(200, 180, 255, 0.08) 55%,
+        transparent 70%
+    );
+    filter: blur(20px);
+}
+
+/* ─── STARS ─── */
+.solar-star {
+    position: absolute;
+    border-radius: 50%;
+    background: #fff;
+    pointer-events: none;
+    animation: starTwinkle ease-in-out infinite;
+}
+
+.solar-star.small  { width: 1px; height: 1px; box-shadow: 0 0 4px #fff; }
+.solar-star.medium { width: 2px; height: 2px; box-shadow: 0 0 6px #fff, 0 0 12px rgba(200, 180, 255, 0.5); }
+.solar-star.big    { width: 3px; height: 3px; box-shadow: 0 0 8px #fff, 0 0 16px rgba(255, 200, 240, 0.6); }
+
+.solar-star.purple { background: #c9a6ff; }
+.solar-star.pink   { background: #ffc8f2; }
+.solar-star.gold   { background: #ffe27a; }
+.solar-star.cyan   { background: #a5f3fc; }
+
+@keyframes starTwinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50%      { opacity: 1; transform: scale(1.2); }
+}
+
+/* ─── SUN ─── */
+#sunWrap {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    pointer-events: none;
+}
+
+#sunGlow {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 400px;
+    height: 400px;
+    margin: -200px 0 0 -200px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(255, 220, 100, 0.6) 0%,
+        rgba(255, 180, 80, 0.35) 30%,
+        rgba(255, 140, 60, 0.15) 55%,
+        transparent 75%);
+    filter: blur(20px);
+    animation: sunPulse 4s ease-in-out infinite;
+}
+
+@keyframes sunPulse {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50%      { transform: scale(1.1); opacity: 1; }
+}
+
+#sun {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%,
+        #fff8c0 0%,
+        #ffe27a 25%,
+        #ffb84d 60%,
+        #ff8a1a 100%);
+    box-shadow:
+        0 0 40px #ffe27a,
+        0 0 80px rgba(255, 180, 80, 0.7),
+        0 0 120px rgba(255, 140, 60, 0.5),
+        inset 0 0 30px rgba(255, 255, 255, 0.5);
+    animation: sunFloat 6s ease-in-out infinite;
+}
+
+@keyframes sunFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%      { transform: translateY(-6px) scale(1.02); }
+}
+
+.sun-eye {
+    position: absolute;
+    width: 16px;
+    height: 20px;
+    background: #3a2010;
+    border-radius: 50%;
+    top: 54px;
+    animation: sunBlink 4s ease-in-out infinite;
+}
+
+.sun-eye.left  { left: 42px; }
+.sun-eye.right { right: 42px; animation-delay: 0.1s; }
+
+.sun-eye::before {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    border-radius: 50%;
+    top: 4px;
+    left: 4px;
+}
+
+@keyframes sunBlink {
+    0%, 42%, 58%, 100% { transform: scaleY(1); }
+    50%                { transform: scaleY(0.1); }
+}
+
+.sun-mouth {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 18px;
+    border: 3px solid #3a2010;
+    border-top: none;
+    border-radius: 0 0 40px 40px;
+}
+
+.sun-blush {
+    position: absolute;
+    width: 18px;
+    height: 10px;
+    background: rgba(255, 120, 100, 0.5);
+    border-radius: 50%;
+    top: 80px;
+    filter: blur(3px);
+}
+.sun-blush.left  { left: 22px; }
+.sun-blush.right { right: 22px; }
+
+/* ─── PLANETS ─── */
+#solarSystem {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.orbit-ring {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    border: 1px solid rgba(200, 180, 255, 0.1);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.planet-orbit {
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 50%;
+    animation: orbit linear infinite;
+}
+
+@keyframes orbit {
+    to { transform: rotate(360deg); }
+}
+
+.planet {
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: auto;
+    cursor: pointer;
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.planet:hover {
+    filter: brightness(1.4);
+    transform: translate(-50%, -50%) scale(1.25);
+}
+
+.planet-eye {
+    position: absolute;
+    width: 15%;
+    height: 20%;
+    background: #1a1030;
+    border-radius: 50%;
+    top: 40%;
+    animation: planetBlink 5s ease-in-out infinite;
+}
+
+.planet-eye.left  { left: 25%; }
+.planet-eye.right { right: 25%; animation-delay: 0.1s; }
+
+.planet-eye::before {
+    content: "";
+    position: absolute;
+    width: 40%;
+    height: 40%;
+    background: #fff;
+    border-radius: 50%;
+    top: 15%;
+    left: 15%;
+}
+
+@keyframes planetBlink {
+    0%, 45%, 55%, 100% { transform: scaleY(1); }
+    50%                { transform: scaleY(0.1); }
+}
+
+.planet-smile {
+    position: absolute;
+    bottom: 22%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22%;
+    height: 8%;
+    border: 2px solid #1a1030;
+    border-top: none;
+    border-radius: 0 0 40px 40px;
+    opacity: 0.9;
+}
+
+.saturn-rings {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 200%;
+    height: 40%;
+    border: 3px solid rgba(255, 220, 150, 0.7);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    box-shadow:
+        0 0 8px rgba(255, 220, 150, 0.6),
+        inset 0 0 8px rgba(255, 220, 150, 0.4);
+    pointer-events: none;
+}
+
+/* ─── CENTER UI ─── */
+#uiBox {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    text-align: center;
+    pointer-events: none;
+    width: 90%;
+    max-width: 440px;
+}
+
+#uiBox .ui-label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: #ffe27a;
+    font-weight: 800;
+    margin-bottom: 12px;
+    text-shadow: 0 0 12px rgba(255, 226, 122, 0.6);
+    animation: labelPulse 3s ease-in-out infinite;
+}
+
+@keyframes labelPulse {
+    0%, 100% { opacity: 0.8; }
+    50%      { opacity: 1; }
+}
+
+#uiBox .ui-title {
+    font-size: clamp(20px, 3.5vw, 32px);
+    font-weight: 900;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    background: linear-gradient(135deg, #ffffff, #ffc8f2, #c9a6ff, #ffe27a, #ffffff);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 10px;
+    animation: titleFlow 5s linear infinite;
+    filter: drop-shadow(0 0 20px rgba(200, 130, 255, 0.4));
+}
+
+@keyframes titleFlow {
+    to { background-position: 300% 0; }
+}
+
+#uiBox .ui-subtitle {
+    font-size: 12px;
+    color: #c8b8e0;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    font-weight: 500;
+}
+
+/* ─── NAME INPUT ─── */
+.wd-name-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    padding: 2px;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #8b4dff, #ffc8f2, #ffe27a, #8b4dff);
+    background-size: 300% 100%;
+    animation: borderFlow 5s linear infinite;
+    box-shadow:
+        0 0 20px rgba(200, 130, 255, 0.5),
+        0 0 40px rgba(255, 200, 242, 0.3);
+    pointer-events: auto;
+}
+
+@keyframes borderFlow {
+    to { background-position: 300% 0; }
+}
+
+#visitorName {
+    display: block;
+    width: 100%;
+    padding: 12px 18px;
+    border: none;
+    outline: none;
+    border-radius: 47px;
+    background: rgba(15, 8, 30, 0.95);
+    color: #fff;
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 200, 242, 0.6);
+    caret-color: #ffc8f2;
+}
+
+#visitorName::placeholder {
+    color: #8a7aa8;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.wd-name-wrap.typing {
+    animation: inputGlow 0.6s ease-out;
+}
+
+@keyframes inputGlow {
+    0% { box-shadow: 0 0 20px rgba(139, 77, 255, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(255, 200, 242, 0.9), 0 0 80px rgba(200, 130, 255, 0.6); }
+    100% { box-shadow: 0 0 20px rgba(139, 77, 255, 0.3); }
+}
+
+.wd-name-wrap.shake-letter {
+    animation: letterShake 0.2s ease-out;
+}
+
+@keyframes letterShake {
+    0%, 100% { transform: translateX(0); }
+    25%      { transform: translateX(-2px); }
+    75%      { transform: translateX(2px); }
+}
+
+/* ─── SUN BUBBLE ─── */
+#sunBubble {
+    position: absolute;
+    left: 50%;
+    top: calc(50% - 200px);
+    transform: translate(-50%, -100%);
+    background: linear-gradient(135deg, #fff8c0, #ffe27a);
+    color: #4a2010;
+    padding: 12px 22px;
+    border-radius: 20px 20px 20px 4px;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.5;
+    max-width: 320px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(255, 200, 100, 0.5);
+    z-index: 20;
+    pointer-events: none;
+    animation: bubbleFloat 3s ease-in-out infinite;
+}
+
+#sunBubble::after {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 14px solid #ffe27a;
+}
+
+@keyframes bubbleFloat {
+    0%, 100% { transform: translate(-50%, -100%); }
+    50%      { transform: translate(-50%, calc(-100% - 6px)); }
+}
+
+/* ─── ENTER BUTTON ─── */
+#enterBtn {
+    position: absolute;
+    left: 50%;
+    bottom: 50px;
+    transform: translateX(-50%);
+    z-index: 15;
+    padding: 14px 36px;
+    border: 2px solid #ffe27a;
+    border-radius: 50px;
+    background: linear-gradient(135deg,
+        rgba(255, 226, 122, 0.2),
+        rgba(255, 200, 242, 0.15),
+        rgba(200, 130, 255, 0.2));
+    color: #fff;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow:
+        0 0 30px rgba(255, 226, 122, 0.5),
+        0 0 60px rgba(200, 130, 255, 0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+    animation: btnPulse 3s ease-in-out infinite;
+}
+
+@keyframes btnPulse {
+    0%, 100% {
+        box-shadow:
+            0 0 30px rgba(255, 226, 122, 0.5),
+            0 0 60px rgba(200, 130, 255, 0.3),
+            inset 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+    50% {
+        box-shadow:
+            0 0 50px rgba(255, 226, 122, 0.8),
+            0 0 100px rgba(200, 130, 255, 0.5),
+            inset 0 0 30px rgba(255, 255, 255, 0.2);
+    }
+}
+
+#enterBtn:hover {
+    background: linear-gradient(135deg,
+        rgba(255, 226, 122, 0.4),
+        rgba(255, 200, 242, 0.3),
+        rgba(200, 130, 255, 0.4));
+    transform: translateX(-50%) translateY(-3px) scale(1.05);
+}
+
+/* ─── LIVE NAME DISPLAY ─── */
+#liveNameDisplay {
+    position: fixed;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    z-index: 100000;
+    pointer-events: none;
+    font-size: clamp(40px, 10vw, 100px);
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-align: center;
+    line-height: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
+
+#liveNameDisplay.visible {
+    opacity: 1;
+}
+
+.live-letter {
+    display: inline-block;
+    background: linear-gradient(135deg, #ffffff, #ffc8f2, #c9a6ff, #ffe27a, #ffffff);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation:
+        letterDrop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+        letterFlow 3s linear infinite;
+    filter: drop-shadow(0 0 20px rgba(255, 200, 242, 0.6))
+            drop-shadow(0 0 40px rgba(200, 130, 255, 0.3));
+}
+
+@keyframes letterDrop {
+    0% { opacity: 0; transform: translateY(-60px) scale(0.3) rotate(-25deg); }
+    60% { opacity: 1; transform: translateY(8px) scale(1.15) rotate(5deg); }
+    100% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+}
+
+@keyframes letterFlow {
+    to { background-position: 300% 0; }
+}
+
+/* ─── SPARKLE CANVAS ─── */
+#typeSparkleCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 99999;
+}
+
+.type-particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 100001;
+    font-size: 20px;
+    animation: typeParticleFly 1.2s ease-out forwards;
+}
+
+@keyframes typeParticleFly {
+    0% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
+    100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0.3) rotate(360deg); }
+}
+
+.type-flash {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 99998;
+    background: radial-gradient(circle at center,
+        rgba(255, 200, 242, 0.15),
+        rgba(200, 130, 255, 0.08),
+        transparent 70%);
+    animation: typeFlash 0.4s ease-out forwards;
+}
+
+@keyframes typeFlash {
+    0% { opacity: 0; }
+    30% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* ─── MOBILE ─── */
+@media (max-width: 700px) {
+    #sun { width: 100px; height: 100px; }
+    .sun-eye { width: 12px; height: 16px; top: 38px; }
+    .sun-eye.left  { left: 28px; }
+    .sun-eye.right { right: 28px; }
+    .sun-mouth { bottom: 26px; width: 26px; height: 14px; }
+    .sun-blush { width: 14px; height: 8px; top: 58px; }
+    .sun-blush.left  { left: 14px; }
+    .sun-blush.right { right: 14px; }
+    #sunGlow { width: 280px; height: 280px; margin: -140px 0 0 -140px; }
+
+    #sunBubble {
+        top: calc(50% - 150px);
+        font-size: 11px;
+        padding: 10px 16px;
+        max-width: 240px;
+    }
+
+    #enterBtn {
+        bottom: 30px;
+        padding: 12px 26px;
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
+
+    #uiBox .ui-title { font-size: 20px; }
+    #uiBox .ui-subtitle { font-size: 11px; }
+    #uiBox .ui-label { font-size: 9px; letter-spacing: 3px; }
+
+    .wd-name-wrap { max-width: 260px; }
+    #visitorName { padding: 10px 14px; font-size: 13px; }
+
+    #liveNameDisplay {
+        font-size: clamp(32px, 12vw, 64px);
+        letter-spacing: 2px;
+    }
+}
+
+/* ─── REDUCED MOTION ─── */
+@media (prefers-reduced-motion: reduce) {
+    #space::before,
+    #space::after,
+    #sunGlow,
+    #sun,
+    .solar-star,
+    .sun-eye,
+    .planet-eye,
+    #sunBubble,
+    #enterBtn,
+    .live-letter,
+    .wd-name-wrap,
+    #uiBox .ui-label,
+    #uiBox .ui-title {
+        animation: none !important;
+    }
+}
+</style>
 </head>
 
 <body>
@@ -2356,63 +2895,60 @@ function searchDramas() {
 
 <!-- Welcome Screen -->
 <div id="scrollProgress"></div>
-    <div id="welcome-screen">
 
-    <!-- Moving background -->
-    <div class="ws-layer" aria-hidden="true">
-        <i class="ws-orb ws-o1" data-depth="50"></i>
-        <i class="ws-orb ws-o2" data-depth="-70"></i>
-        <i class="ws-orb ws-o3" data-depth="35"></i>
-        <span class="ws-emoji" data-depth="45"  style="left:10%;top:72%">🌸</span>
-        <span class="ws-emoji" data-depth="-40" style="left:82%;top:16%">🌙</span>
-        <span class="ws-emoji" data-depth="60"  style="left:22%;top:14%">⭐</span>
-        <span class="ws-emoji" data-depth="-55" style="left:74%;top:76%">💫</span>
-        <span class="ws-emoji" data-depth="70"  style="left:90%;top:48%">🦋</span>
-        <span class="ws-emoji" data-depth="-30" style="left:6%;top:42%">💜</span>
+<!-- ═══════════════════════════════════════
+     🌌 SOLAR SYSTEM WELCOME SCREEN
+     ═══════════════════════════════════════ -->
+<div id="welcome-screen">
+
+    <!-- Space background -->
+    <div id="space" aria-hidden="true"></div>
+
+    <!-- Sun (center) -->
+    <div id="sunWrap" aria-hidden="true">
+        <div id="sunGlow"></div>
+        <div id="sun">
+            <div class="sun-eye left"></div>
+            <div class="sun-eye right"></div>
+            <div class="sun-mouth"></div>
+            <div class="sun-blush left"></div>
+            <div class="sun-blush right"></div>
+        </div>
     </div>
-    <div class="ws-cursor" id="wsCursor"></div>
 
-    <div class="welcome-content">
-        <p class="welcome-label wd-fade">WELCOME TO MY PERSONAL SPACE</p>
+    <!-- Solar System (planets) -->
+    <div id="solarSystem" aria-hidden="true"></div>
 
-        <h1 class="wd-fade">A Little World Called Mine</h1>
-
-        <p class="welcome-description wd-fade">
-            My life, my dreams, my interests — my little world.
+    <!-- Center UI -->
+    <div id="uiBox">
+        <span class="ui-label">✦ WELCOME TO MY COSMOS ✦</span>
+        <h1 class="ui-title">A Little World Called Mine</h1>
+        <p class="ui-subtitle">
+            Apna naam batao, traveler — sitare tumhara intezar kar rahe hain.
         </p>
 
-        <label class="wd-name-label wd-fade" for="visitorName">
-            💌 Pehle apna naam batao, warna darwaza nahi khulega 🚪😂
-        </label>
-       <div class="wd-name-wrap wd-fade">
-    <input id="visitorName" type="text" maxlength="30"
-           autocomplete="given-name" placeholder="✨ Apna naam likho..."
-           spellcheck="false">
-</div>
-
-<!-- 🎨 Live name display (input ke upar) -->
-<div id="liveNameDisplay" aria-hidden="true"></div>
-
-<!-- ✨ Sparkle canvas (behind) -->
-<canvas id="typeSparkleCanvas" aria-hidden="true"></canvas>
-        <p class="wd-react wd-fade" id="wdReact" aria-live="polite"></p>
-
-        <button type="button" id="enter-door" class="wd-door"
-                onclick="enterMyWorld()" aria-label="Enter My World">
-            <span class="wd-glow"></span>
-            <span class="wd-frame">
-                <span class="wd-light"></span>
-                <span class="wd-panel l"></span>
-                <span class="wd-panel r"></span>
-                <span class="wd-knob"></span>
-            </span>
-            <span class="wd-door-text wd-fade">Enter My World ✨</span>
-        </button>
-        <p class="wd-hint" id="wdHint">Darwaza kaat nahi khata, bas dheere se touch karo 😂</p>
+        <div class="wd-name-wrap" id="nameWrap">
+            <input id="visitorName" type="text" maxlength="30"
+                   autocomplete="off" spellcheck="false"
+                   placeholder="✨ Apna naam likho...">
+        </div>
     </div>
 
-    <div class="welcome-glow"></div>
+    <!-- Sun bubble -->
+    <div id="sunBubble">
+        ✨ Ruk jao traveler! Pehle apna naam batao — phir hum sab tumhe apni duniya ghumayenge! 🌞
+    </div>
+
+    <!-- Enter button -->
+    <button id="enterBtn" type="button">ENTER MY WORLD ✨</button>
+
+    <!-- Live name display (magic typing) -->
+    <div id="liveNameDisplay" aria-hidden="true"></div>
+
+    <!-- Sparkle canvas -->
+    <canvas id="typeSparkleCanvas" aria-hidden="true"></canvas>
 </div>
+
 
 <script>
 document.querySelectorAll('nav a[href^="#"]').forEach(function (link) {
@@ -6640,166 +7176,7 @@ body .content {
     }
 }
 </style>
-<script>
-function enterMyWorld() {
-    /* ═══════════════════════════════════════
-       STEP 1: Naam check karo
-       ═══════════════════════════════════════ */
-    var nameInput = document.getElementById("visitorName");
-    var hint = document.getElementById("wdHint");
-    var react = document.getElementById("wdReact");
-    var name = nameInput ? nameInput.value.trim() : "";
-
-    if (!name) {
-        var door = document.getElementById("enter-door");
-        if (door) {
-            door.classList.remove("wd-shake");
-            void door.offsetWidth;
-            door.classList.add("wd-shake");
-        }
-        if (hint) hint.textContent = "⚠️ Pehle apna naam likho, phir darwaza khulega! 😄";
-        if (react) react.textContent = "Arre! Naam ke bina koi andar nahi aata 🚪😂";
-        return;
-    }
-
-    /* ═══════════════════════════════════════
-       STEP 2: Naam save karo
-       ═══════════════════════════════════════ */
-    try {
-        sessionStorage.setItem("visitorName", name);
-        sessionStorage.setItem("welcomeDone", "1");
-    } catch (e) {}
-
-    /* ═══════════════════════════════════════
-       STEP 3: Reduced motion check
-       ═══════════════════════════════════════ */
-    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    /* ═══════════════════════════════════════
-       STEP 4: DOM elements
-       ═══════════════════════════════════════ */
-    var door = document.getElementById("enter-door");
-    var ws = document.getElementById("welcome-screen");
-    var body = document.body;
-
-    if (!door || !ws) return;
-
-    /* Door open animation */
-    door.classList.add("open");
-    if (hint) hint.textContent = "✨ Darwaza khul raha hai... Welcome, " + name + "! 💜";
-    if (react) react.textContent = "";
-
-    /* Reduced motion — simple fade */
-    if (reduce) {
-        setTimeout(function () {
-            ws.style.transition = "opacity 0.5s ease";
-            ws.style.opacity = "0";
-            setTimeout(function () {
-                ws.style.display = "none";
-                body.classList.add("home-reveal");
-            }, 500);
-        }, 400);
-        return;
-    }
-
-    /* ═══════════════════════════════════════
-       STEP 5: CINEMATIC SEQUENCE
-       ═══════════════════════════════════════ */
-
-    /* --- 5.1: Door ke andar se roshni phooto --- */
-    var doorRect = door.getBoundingClientRect();
-    var doorCenterX = doorRect.left + doorRect.width / 2;
-    var doorCenterY = doorRect.top + doorRect.height / 2;
-
-    var burst = document.createElement("div");
-    burst.className = "wd-burst-glow";
-    burst.style.left = doorCenterX + "px";
-    burst.style.top = doorCenterY + "px";
-    document.body.appendChild(burst);
-
-    /* --- 5.2: 3 Ring pulses door center se --- */
-    for (var r = 0; r < 3; r++) {
-        (function (index) {
-            setTimeout(function () {
-                var ring = document.createElement("div");
-                ring.className = "wd-ring";
-                ring.style.left = doorCenterX + "px";
-                ring.style.top = doorCenterY + "px";
-                document.body.appendChild(ring);
-                ring.addEventListener("animationend", function () {
-                    this.remove();
-                });
-            }, index * 180);
-        })(r);
-    }
-
-    /* --- 5.3: 35 Sparkles door se nikalte hain --- */
-    var sparkEmojis = ["✨", "💜", "⭐", "🌸", "💫", "🦋", "🌟", "💖"];
-    var totalSparks = 35;
-
-    for (var i = 0; i < totalSparks; i++) {
-        (function (idx) {
-            setTimeout(function () {
-                var spark = document.createElement("span");
-                spark.className = "wd-spark-fly";
-                spark.textContent = sparkEmojis[Math.floor(Math.random() * sparkEmojis.length)];
-                spark.style.left = doorCenterX + "px";
-                spark.style.top = doorCenterY + "px";
-                spark.style.fontSize = (14 + Math.random() * 18) + "px";
-
-                /* Random direction */
-                var angle = Math.random() * Math.PI * 2;
-                var distance = 150 + Math.random() * 380;
-                var fx = Math.cos(angle) * distance;
-                var fy = Math.sin(angle) * distance;
-
-                spark.style.setProperty("--fx", fx + "px");
-                spark.style.setProperty("--fy", fy + "px");
-                spark.style.setProperty("--rot", (Math.random() * 720 - 360) + "deg");
-
-                document.body.appendChild(spark);
-                spark.addEventListener("animationend", function () {
-                    this.remove();
-                });
-            }, idx * 12);
-        })(i);
-    }
-
-    /* --- 5.4: Camera zoom + shake (0.3s baad) --- */
-    setTimeout(function () {
-        body.classList.add("wd-cinematic-zoom");
-    }, 300);
-
-    /* --- 5.5: White-purple flash (0.9s baad) --- */
-    setTimeout(function () {
-        var flash = document.createElement("div");
-        flash.className = "wd-flash";
-        document.body.appendChild(flash);
-        flash.addEventListener("animationend", function () {
-            this.remove();
-        });
-    }, 900);
-
-    /* --- 5.6: Welcome screen fade out (1.2s baad) --- */
-    setTimeout(function () {
-        ws.style.transition = "opacity 0.6s ease, transform 0.6s ease, filter 0.6s ease";
-        ws.style.opacity = "0";
-        ws.style.transform = "scale(1.4)";
-        ws.style.filter = "blur(8px)";
-
-        /* Home reveal */
-        setTimeout(function () {
-            ws.style.display = "none";
-            body.classList.add("home-reveal");
-            body.classList.remove("wd-cinematic-zoom");
-
-            /* Clean up burst glow */
-            if (burst && burst.parentNode) burst.remove();
-        }, 600);
-    }, 1200);
-}
-</script>
-<style>
+ <style>
 /* ═══════════════════════════════════════
    🌌 CINEMATIC TRANSMISSION EFFECT
    ═══════════════════════════════════════ */
@@ -7754,5 +8131,156 @@ if (!audios.hasOwnProperty(saved)) saved = "piano";
 
 })();
 </script>
+<!-- ═══════════════════════════════════════
+     🌌 SOLAR SYSTEM WELCOME — SCRIPT
+     ═══════════════════════════════════════ -->
+<script>
+(function () {
+    "use strict";
+
+    /* ═══════════════════════════════════════
+       STARFIELD
+       ═══════════════════════════════════════ */
+    var space = document.getElementById("space");
+    if (!space) return;
+
+    var starColors = ["", "purple", "pink", "gold", "cyan"];
+    var starSizes = ["small", "small", "small", "medium", "big"];
+
+    for (var i = 0; i < 220; i++) {
+        var s = document.createElement("div");
+        s.className = "solar-star " + starSizes[Math.floor(Math.random() * starSizes.length)];
+
+        var c = starColors[Math.floor(Math.random() * starColors.length)];
+        if (c) s.classList.add(c);
+
+        s.style.left = Math.random() * 100 + "%";
+        s.style.top = Math.random() * 100 + "%";
+        s.style.animationDelay = (-Math.random() * 4) + "s";
+        s.style.animationDuration = (2 + Math.random() * 4) + "s";
+        space.appendChild(s);
+    }
+
+    /* ═══════════════════════════════════════
+       PLANETS DATA
+       ═══════════════════════════════════════ */
+    var planetsData = [
+        { name: "Mercury", size: 8,  color: "#b8a890", orbit: 130, speed: 18, hasRing: false, line: "Main chhota hoon, lekin tez bhagta hoon! 🪨" },
+        { name: "Venus",   size: 12, color: "#ffd18a", orbit: 175, speed: 22, hasRing: false, line: "Main sab se chamakta hoon... literally! 💛" },
+        { name: "Earth",   size: 13, color: "#4a9eff", orbit: 225, speed: 26, hasRing: false, line: "Main ghar hoon sabka — Earth, yaad rakho! 🏡" },
+        { name: "Mars",    size: 11, color: "#e85a4a", orbit: 275, speed: 30, hasRing: false, line: "Red Planet? Red attitude bhi 😎" },
+        { name: "Jupiter", size: 24, color: "#d4a574", orbit: 350, speed: 36, hasRing: false, line: "Sab se bara hoon, sab se pyaara hoon 😌" },
+        { name: "Saturn",  size: 20, color: "#e8d4a0", orbit: 430, speed: 42, hasRing: true,  line: "Rings meri pehchaan hain 💍✨" },
+        { name: "Uranus",  size: 16, color: "#8ad4e8", orbit: 510, speed: 48, hasRing: false, line: "Main thanda hoon, lekin cool hoon 💠" },
+        { name: "Neptune", size: 15, color: "#4a7ae8", orbit: 590, speed: 54, hasRing: false, line: "Deep blue... deep feelings 🧊💙" },
+        { name: "Pluto",   size: 7,  color: "#c8a090", orbit: 660, speed: 60, hasRing: false, line: "Main chhota hoon... lekin exist karta hoon 🥺" }
+    ];
+
+    var solarSystem = document.getElementById("solarSystem");
+
+    /* Orbit rings */
+    planetsData.forEach(function (p) {
+        var ring = document.createElement("div");
+        ring.className = "orbit-ring";
+        ring.style.width = (p.orbit * 2) + "px";
+        ring.style.height = (p.orbit * 2) + "px";
+        solarSystem.appendChild(ring);
+    });
+
+    /* Planet elements */
+    planetsData.forEach(function (p) {
+        var orbit = document.createElement("div");
+        orbit.className = "planet-orbit";
+        orbit.style.width = (p.orbit * 2) + "px";
+        orbit.style.height = (p.orbit * 2) + "px";
+        orbit.style.marginLeft = -p.orbit + "px";
+        orbit.style.marginTop = -p.orbit + "px";
+        orbit.style.animationDuration = p.speed + "s";
+
+        var planet = document.createElement("div");
+        planet.className = "planet";
+        planet.style.width = p.size + "px";
+        planet.style.height = p.size + "px";
+        planet.style.background = "radial-gradient(circle at 35% 35%, " + lighten(p.color) + ", " + p.color + " 60%, " + darken(p.color) + " 100%)";
+        planet.style.boxShadow = "0 0 " + (p.size) + "px " + p.color;
+        planet.title = p.name;
+
+        var eyeL = document.createElement("div");
+        eyeL.className = "planet-eye left";
+        var eyeR = document.createElement("div");
+        eyeR.className = "planet-eye right";
+
+        planet.appendChild(eyeL);
+        planet.appendChild(eyeR);
+
+        if (p.size >= 12) {
+            var smile = document.createElement("div");
+            smile.className = "planet-smile";
+            planet.appendChild(smile);
+        }
+
+        if (p.hasRing) {
+            var ringEl = document.createElement("div");
+            ringEl.className = "saturn-rings";
+            planet.appendChild(ringEl);
+        }
+
+        planet.style.left = p.orbit + "px";
+        planet.style.top = p.orbit + "px";
+
+        /* Hover dialogue */
+        planet.addEventListener("mouseenter", function () {
+            var bubble = document.getElementById("sunBubble");
+            if (bubble) bubble.textContent = p.line;
+        });
+
+        orbit.appendChild(planet);
+        solarSystem.appendChild(orbit);
+    });
+
+    function lighten(hex) {
+        return "#" + hex.replace("#", "").split("").map(function (c) {
+            var v = parseInt(c, 16);
+            v = Math.min(15, v + 5);
+            return v.toString(16);
+        }).join("");
+    }
+
+    function darken(hex) {
+        return "#" + hex.replace("#", "").split("").map(function (c) {
+            var v = parseInt(c, 16);
+            v = Math.max(0, v - 5);
+            return v.toString(16);
+        }).join("");
+    }
+
+    /* ═══════════════════════════════════════
+       NAME INPUT
+       ═══════════════════════════════════════ */
+    var input = document.getElementById("visitorName");
+    var bubble = document.getElementById("sunBubble");
+
+    if (input && bubble) {
+        input.addEventListener("input", function () {
+            var name = input.value.trim();
+            if (name.length > 0) {
+                bubble.textContent = "Wah, " + name + "! Kya khoobsurat naam hai! 💫 Tyaar ho apni cosmic journey ke liye?";
+            } else {
+                bubble.textContent = "✨ Ruk jao traveler! Pehle apna naam batao — phir hum sab tumhe apni duniya ghumayenge! 🌞";
+            }
+        });
+    }
+
+    /* ═══════════════════════════════════════
+       ENTER BUTTON
+       ═══════════════════════════════════════ */
+    var enterBtn = document.getElementById("enterBtn");
+
+    if (enterBtn) {
+        enterBtn.addEventListener("click", function () {
+            var name = input ? input.value.trim() : "";
+
+            if (!name) {
+                if (bubble) bubble.textContent
 </body>
 </html>
