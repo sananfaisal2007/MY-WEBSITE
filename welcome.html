@@ -900,11 +900,8 @@ html, body {
         planet.style.width = p.size + "px";
         planet.style.height = p.size + "px";
         planet.style.color = p.color;
-        planet.style.background =
-            "radial-gradient(circle at 33% 33%, " +
-            lighten(p.color) + ", " + p.color + " 55%, " +
-            darken(p.color) + " 100%)";
-        planet.style.boxShadow =
+planet.style.background = p.color;
+    planet.style.boxShadow =
             "0 0 " + (p.size * 1.2) + "px " + p.color +
             ", inset -3px -3px 8px rgba(0,0,0,0.5), inset 2px 2px 6px rgba(255,255,255,0.35)";
         planet.title = p.name;
