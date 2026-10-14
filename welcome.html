@@ -752,6 +752,32 @@ html, body {
         animation: none !important;
     }
 }
+
+/* FIX: Keep the complete solar system visible */
+#solarSystem {
+    width: 0 !important;
+    height: 0 !important;
+    transform: scale(1.25);
+    transform-origin: center center;
+}
+
+/* Make all planet orbits visible */
+.orbit-ring {
+    border-color: rgba(180, 160, 255, 0.35) !important;
+    border-style: solid !important;
+}
+
+/* Keep planets visible above the orbit lines */
+.planet-orbit {
+    z-index: 10;
+}
+
+.planet {
+    z-index: 11;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
 </style>
 </head>
 <body>
