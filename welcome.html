@@ -1450,9 +1450,11 @@ setTimeout(function () {
         }, 400);
 
         /* Redirect to main page */
-        setTimeout(function () {
-            window.location.href = "index.html";
-        }, 2100);
+sessionStorage.setItem("cosmicWelcomeDone", "yes");
+
+setTimeout(function () {
+window.location.href = "index.html";
+}, 2100);
     });
 
     /* Enter key on input */
