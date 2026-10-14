@@ -314,8 +314,8 @@ html, body {
 
 #sun {
     position: relative;
-    width: 170px;
-    height: 170px;
+    width: 155px;
+height: 155px;
     border-radius: 50%;
     background: radial-gradient(circle at 35% 35%,
         #fffbe0 0%,
@@ -422,16 +422,16 @@ html, body {
 #sunBubble {
     position: absolute;
     left: 50%;
-    top: calc(50% - 230px);
+    top: calc(50% - 115px);
     transform: translate(-50%, -100%) scale(0.9);
     background: linear-gradient(135deg, #fff8c0, #ffe27a);
     color: #4a2010;
-    padding: 14px 24px;
+    padding: 8px 13px;
     border-radius: 22px 22px 22px 6px;
-    font-size: 14px;
+   font-size: 12px;
     font-weight: 700;
     line-height: 1.5;
-    max-width: 340px;
+    max-width: 230px;
     text-align: center;
     box-shadow:
         0 10px 36px rgba(255, 200, 100, 0.55),
@@ -754,12 +754,14 @@ html, body {
 }
 
 /* FIX: Keep the complete solar system visible */
+
 #solarSystem {
     width: 0 !important;
     height: 0 !important;
-    transform: scale(1.25);
+    transform: scale(0.78);
     transform-origin: center center;
 }
+
 
 /* Make all planet orbits visible */
 .orbit-ring {
