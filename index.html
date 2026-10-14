@@ -1783,13 +1783,14 @@ body.wd-cinematic-zoom {
     inset: 0;
     background: linear-gradient(
         120deg,
-        transparent 30%,
-        rgba(200, 180, 255, 0.08) 45%,
-        rgba(255, 200, 240, 0.12) 50%,
-        rgba(200, 180, 255, 0.08) 55%,
-        transparent 70%
+        transparent 20%,
+        rgba(200, 180, 255, 0.28) 40%,
+        rgba(255, 200, 240, 0.42) 50%,
+        rgba(200, 180, 255, 0.28) 60%,
+        transparent 80%
     );
-    filter: blur(20px);
+    filter: blur(18px);
+    pointer-events: none;
 }
 
 /* ─── STARS ─── */
@@ -1932,6 +1933,8 @@ body.wd-cinematic-zoom {
     height: 0;
     z-index: 4;
     pointer-events: none;
+    transform: scale(0.55);
+    transform-origin: center center;
 }
 
 .orbit-ring {
@@ -2033,7 +2036,7 @@ body.wd-cinematic-zoom {
 #uiBox {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 72%;              ← Sun ke neeche
     transform: translate(-50%, -50%);
     z-index: 10;
     text-align: center;
