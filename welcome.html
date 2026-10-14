@@ -1193,6 +1193,7 @@ function enterUniverse(name) {
   // The name is stored only for this website's local experience.
   try {
     localStorage.setItem("cosmicVisitorName", name);
+    sessionStorage.setItem("cosmicWelcomeDone", "yes");
   } catch (e) {
     // Continue even if browser storage is unavailable.
   }
