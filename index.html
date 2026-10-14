@@ -2323,51 +2323,7 @@ document.querySelectorAll(".dream-portal").forEach(function (portal) {
 #adminQuizBoard .aq-hidden { display: none !important; }
 </style>
 
-<section id="adminQuizBoard">
-  <h2>🔐 Celestial Admin Result Board</h2>
-  <p style="text-align:center">
-    Private dashboard for viewing quiz attempts.
-  </p>
 
-  <div id="aqLoginPanel" class="aq-panel">
-    <h3>Admin Login</h3>
-    <p>Sign in with your Supabase admin account.</p>
-    <form id="aqLoginForm">
-      <label for="aqEmail">Admin email</label>
-      <input id="aqEmail" type="email" autocomplete="username"
-             required placeholder="Your admin email">
-
-      <label for="aqPassword">Admin password</label>
-      <input id="aqPassword" type="password"
-             autocomplete="current-password" required
-             placeholder="Your admin password">
-
-      <button type="submit">Login securely</button>
-    </form>
-    <p id="aqLoginStatus" class="aq-status" role="status"></p>
-  </div>
-
-  <div id="aqResultsPanel" class="aq-hidden">
-    <p id="aqWelcome" class="aq-status"></p>
-    <button id="aqRefresh" type="button">Refresh results</button>
-    <button id="aqLogout" type="button">Logout</button>
-    <p id="aqResultsStatus" class="aq-status" role="status"></p>
-
-    <div class="aq-table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Player</th>
-            <th>Score</th>
-            <th>Percentage</th>
-            <th>Played at</th>
-          </tr>
-        </thead>
-        <tbody id="aqResultsRows"></tbody>
-      </table>
-    </div>
-  </div>
-</section>
 
 <script>
 (() => {
