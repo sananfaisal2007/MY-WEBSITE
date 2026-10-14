@@ -963,7 +963,39 @@ planetsData.forEach(function (p, idx) {
     solarSystem.appendChild(orbit);
 });
 
-    /* ─────────────────────────────────────────────
+   /* PLANETS TALKING TO EACH OTHER */
+
+var planetConversation = [
+    { name: "Venus", text: "Earth! Aaj hamara special visitor kaisa hai? 💛" },
+    { name: "Earth", text: "Bohat special! Ye mera favourite guest hai. 🌍" },
+    { name: "Mars", text: "Oye! Mere baare mein bhi kuch bolo! 🔴" },
+    { name: "Jupiter", text: "Mars, relax! Sab ki baari aayegi. 😎" },
+    { name: "Saturn", text: "Mere rings dekhe? Main sab se stylish hoon! 💍" },
+    { name: "Neptune", text: "Style apni jagah, meri blue beauty dekho! 💙" },
+    { name: "Pluto", text: "Guys, mujhe bhi conversation mein include karo! 🥺" },
+    { name: "Earth", text: "Hum sab dost hain. Welcome, space explorer! 🚀" }
+];
+
+var conversationIndex = 0;
+
+function startPlanetConversation() {
+    var dialogue = planetConversation[conversationIndex];
+
+    setBubble(dialogue.name + ": " + dialogue.text, true);
+
+    conversationIndex++;
+
+    if (conversationIndex >= planetConversation.length) {
+        conversationIndex = 0;
+    }
+}
+
+setTimeout(function () {
+    startPlanetConversation();
+
+    setInterval(startPlanetConversation, 4000);
+}, 2000);
+   /* ─────────────────────────────────────────────
        3. ASTEROIDS
        ───────────────────────────────────────────── */
     var asteroidsLayer = document.getElementById("asteroidsLayer");
