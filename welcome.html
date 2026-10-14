@@ -860,22 +860,30 @@ placeholder="🚀 Type your name, Earthling...">
 var planetsData = [
     { name: "Mercury", size: 32, color: "#b8a890", orbit: 100, speed: 22, hasRing: false,
       line: "Main chhota hoon, lekin tez bhagta hoon! 🪨" },
+
     { name: "Venus", size: 44, color: "#ffd18a", orbit: 145, speed: 28, hasRing: false,
       line: "Main sab se chamakta hoon... literally! 💛" },
+
     { name: "Earth", size: 48, color: "#4a9eff", orbit: 195, speed: 34, hasRing: false,
       line: "Main ghar hoon sabka — Earth, yaad rakho! 🏡" },
+
     { name: "Mars", size: 40, color: "#e85a4a", orbit: 245, speed: 40, hasRing: false,
       line: "Red Planet? Red attitude bhi 😎" },
+
     { name: "Jupiter", size: 80, color: "#d4a574", orbit: 310, speed: 48, hasRing: false,
       line: "Sab se bara hoon, sab se pyaara hoon 😌" },
+
     { name: "Saturn", size: 72, color: "#e8d4a0", orbit: 375, speed: 56, hasRing: true,
       line: "Rings meri pehchaan hain 💍✨" },
-{ name: "Uranus", size: 56, color: "#8ad4e8", orbit: 420, speed: 64, hasRing: false,
-  line: "Main thanda hoon, lekin cool hoon 💠" },
-{ name: "Neptune", size: 54, color: "#4a7ae8", orbit: 465, speed: 72, hasRing: false,
-  line: "Deep blue... deep feelings 🧊💙" },
-{ name: "Pluto", size: 28, color: "#c8a090", orbit: 510, speed: 82, hasRing: false,
-  line: "Main chhota hoon... lekin exist karta hoon 🥺" }
+
+    { name: "Uranus", size: 56, color: "#8ad4e8", orbit: 100, speed: 22, hasRing: false,
+      line: "Main thanda hoon, lekin cool hoon 💠" },
+
+    { name: "Neptune", size: 54, color: "#4a7ae8", orbit: 145, speed: 28, hasRing: false,
+      line: "Deep blue... deep feelings 🧊💙" },
+
+    { name: "Pluto", size: 28, color: "#c8a090", orbit: 195, speed: 34, hasRing: false,
+      line: "Main chhota hoon... lekin exist karta hoon 🥺" }
 ];
 
     /* Orbit rings */
@@ -887,75 +895,79 @@ var planetsData = [
         solarSystem.appendChild(ring);
     });
 
-    /* Planet elements */
-    planetsData.forEach(function (p, idx) {
-        var orbit = document.createElement("div");
-        orbit.className = "planet-orbit";
-        orbit.style.width = (p.orbit * 2) + "px";
-        orbit.style.height = (p.orbit * 2) + "px";
-        orbit.style.marginLeft = -p.orbit + "px";
-        orbit.style.marginTop = -p.orbit + "px";
-        orbit.style.animationDuration = p.speed + "s";
-orbit.style.animationDelay = (-idx * 7) + "s";
+/* Planet elements */
+var orbitPairCounts = {};
 
+planetsData.forEach(function (p, idx) {
+    var orbit = document.createElement("div");
+    orbit.className = "planet-orbit";
+    orbit.style.width = (p.orbit * 2) + "px";
+    orbit.style.height = (p.orbit * 2) + "px";
+    orbit.style.marginLeft = -p.orbit + "px";
+    orbit.style.marginTop = -p.orbit + "px";
+    orbit.style.animationDuration = p.speed + "s";
 
-        var planet = document.createElement("div");
-        planet.className = "planet";
-        planet.style.width = p.size + "px";
-        planet.style.height = p.size + "px";
-        planet.style.color = p.color;
-planet.style.background = p.color;
+    var pairIndex = orbitPairCounts[p.orbit] || 0;
+    orbitPairCounts[p.orbit] = pairIndex + 1;
+
+    var planet = document.createElement("div");
+    planet.className = "planet";
+    planet.style.width = p.size + "px";
+    planet.style.height = p.size + "px";
+    planet.style.color = p.color;
+    planet.style.background = p.color;
     planet.style.boxShadow =
-            "0 0 " + (p.size * 1.2) + "px " + p.color +
-            ", inset -3px -3px 8px rgba(0,0,0,0.5), inset 2px 2px 6px rgba(255,255,255,0.35)";
-        planet.title = p.name;
+        "0 0 " + (p.size * 1.2) + "px " + p.color +
+        ", inset -3px -3px 8px rgba(0,0,0,0.5), inset 2px 2px 6px rgba(255,255,255,0.35)";
+    planet.title = p.name;
 
-        /* Eyes */
-        var eyeL = document.createElement("div");
-        eyeL.className = "planet-eye left";
-        var eyeR = document.createElement("div");
-        eyeR.className = "planet-eye right";
-        planet.appendChild(eyeL);
-        planet.appendChild(eyeR);
+    /* Opposite starting positions for planets sharing an orbit */
+    var startAngle = pairIndex * 180;
+    planet.style.left = p.orbit + "px";
+    planet.style.top = "0px";
+    planet.style.transform =
+        "translate(-50%, -50%) rotate(" + startAngle + "deg)";
 
-        /* Smile (only big planets) */
-        if (p.size >= 12) {
-            var smile = document.createElement("div");
-            smile.className = "planet-smile";
-            planet.appendChild(smile);
-        }
+    /* Eyes */
+    var eyeL = document.createElement("div");
+    eyeL.className = "planet-eye left";
+    var eyeR = document.createElement("div");
+    eyeR.className = "planet-eye right";
+    planet.appendChild(eyeL);
+    planet.appendChild(eyeR);
 
-        /* Saturn rings */
-        if (p.hasRing) {
-            var rings = document.createElement("div");
-            rings.className = "saturn-rings";
-            planet.appendChild(rings);
-        }
+    /* Smile */
+    if (p.size >= 12) {
+        var smile = document.createElement("div");
+        smile.className = "planet-smile";
+        planet.appendChild(smile);
+    }
 
-        /* Position at orbit edge */
-       
-planet.style.left = (p.orbit * 2) + "px";
-planet.style.top = (p.orbit * 2) + "px";
+    /* Saturn rings */
+    if (p.hasRing) {
+        var rings = document.createElement("div");
+        rings.className = "saturn-rings";
+        planet.appendChild(rings);
+    }
 
-
-        /* Hover: planet speaks */
-        planet.addEventListener("mouseenter", function () {
-            setBubble(p.line, true);
-        });
-
-        planet.addEventListener("mouseleave", function () {
-            setBubble(defaultSunLine, false);
-        });
-
-        /* Touch support */
-        planet.addEventListener("touchstart", function (e) {
-            e.preventDefault();
-            setBubble(p.line, true);
-        }, { passive: false });
-
-        orbit.appendChild(planet);
-        solarSystem.appendChild(orbit);
+    /* Hover: planet speaks */
+    planet.addEventListener("mouseenter", function () {
+        setBubble(p.line, true);
     });
+
+    planet.addEventListener("mouseleave", function () {
+        setBubble(defaultSunLine, false);
+    });
+
+    /* Touch support */
+    planet.addEventListener("touchstart", function (e) {
+        e.preventDefault();
+        setBubble(p.line, true);
+    }, { passive: false });
+
+    orbit.appendChild(planet);
+    solarSystem.appendChild(orbit);
+});
 
     /* ─────────────────────────────────────────────
        3. ASTEROIDS
