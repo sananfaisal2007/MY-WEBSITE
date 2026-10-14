@@ -254,6 +254,7 @@
 .sun-blush.right { right: 22px; }
 
 /* ─── PLANETS ─── */
+
 #solarSystem {
     position: absolute;
     left: 50%;
@@ -262,6 +263,8 @@
     height: 0;
     z-index: 4;
     pointer-events: none;
+    transform: scale(0.5);
+    transform-origin: center center;
 }
 
 .orbit-ring {
@@ -363,7 +366,7 @@
 #uiBox {
     position: absolute;
     left: 50%;
-    top: 72%;
+    top: 78%;
     transform: translate(-50%, -50%);
     z-index: 10;
     text-align: center;
@@ -744,18 +747,12 @@
 
     <!-- Center UI -->
     <div id="uiBox">
-        <span class="ui-label">✦ WELCOME TO MY COSMOS ✦</span>
-        <h1 class="ui-title">A Little World Called Mine</h1>
-        <p class="ui-subtitle">
-            Apna naam batao, traveler — sitare tumhara intezar kar rahe hain.
-        </p>
-
-        <div class="wd-name-wrap" id="nameWrap">
-            <input id="visitorName" type="text" maxlength="30"
-                   autocomplete="off" spellcheck="false"
-                   placeholder="✨ Apna naam likho...">
-        </div>
+    <div class="wd-name-wrap" id="nameWrap">
+        <input id="visitorName" type="text" maxlength="30"
+               autocomplete="off" spellcheck="false"
+               placeholder="✨ Apna naam likho...">
     </div>
+</div>
 
     <!-- Sun bubble -->
     <div id="sunBubble">
