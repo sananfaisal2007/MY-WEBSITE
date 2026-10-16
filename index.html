@@ -6969,17 +6969,27 @@ window.addEventListener("beforeinstallprompt", (event) => {
   celestialInstallPrompt = event;
 });
 
+
 document.getElementById("celestialInstallBtn").addEventListener("click", async () => {
   if (celestialInstallPrompt) {
-    celestialInstallPrompt.prompt();
-    await celestialInstallPrompt.userChoice;
+    await celestialInstallPrompt.prompt();
+    const result = await celestialInstallPrompt.userChoice;
+
+    if (result.outcome === "accepted") {
+      document.getElementById("celestialInstallBtn").textContent =
+        "✨ App Installed ✨";
+    }
+
     celestialInstallPrompt = null;
+  } else if (window.matchMedia("(display-mode: standalone)").matches) {
+    alert("CELESTIALDREAMER is already installed!");
   } else {
     alert(
       "To install CELESTIALDREAMER, open your browser menu and choose 'Install app' or 'Add to Home Screen'."
     );
   }
 });
+
 </script>
 
 </body>
