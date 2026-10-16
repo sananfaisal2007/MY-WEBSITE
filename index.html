@@ -6918,5 +6918,14 @@ if (!audios.hasOwnProperty(saved)) saved = "piano";
 })();
 </script>
 
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js")
+      .catch(error => console.error("Service worker error:", error));
+  });
+}
+</script>
+
 </body>
 </html>
