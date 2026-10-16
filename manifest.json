@@ -9,12 +9,14 @@
   "background_color": "#08051a",
   "theme_color": "#100825",
   "orientation": "portrait",
- "icons": [
+
+"icons": [
   {
-    "src": "./myphoto.jpeg",
-    "sizes": "any",
-    "type": "image/jpeg",
+    "src": "./myphoto-512.png",
+    "sizes": "512x512",
+    "type": "image/png",
     "purpose": "any"
   }
 ]
+
 }
