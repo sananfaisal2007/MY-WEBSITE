@@ -1,0 +1,20 @@
+
+{
+  "name": "CELESTIALDREAMER",
+  "short_name": "Celestial",
+  "description": "Your personal magical universe",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#08051a",
+  "theme_color": "#100825",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
