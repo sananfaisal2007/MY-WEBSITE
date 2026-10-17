@@ -924,6 +924,7 @@ height: 155px;
 }
 
 
+
 /* Mobile Cosmic Card Fold Button */
 #cosmicCardToggle {
     display: none;
@@ -931,12 +932,39 @@ height: 155px;
 
 @media (max-width: 600px) {
     #cosmicNameCard {
-        right: 10px;
-        top: 10px;
-        transform: none;
-        width: 150px;
-        padding: 8px;
+        position: fixed;
+        top: 8px;
+        right: 8px;
+        width: 230px;
+        padding: 20px 15px 14px;
+        box-sizing: border-box;
+        transform: scale(0.62);
+        transform-origin: top right;
+        z-index: 100;
     }
+
+    #cosmicCardToggle {
+        display: block;
+        margin: 0 auto 8px;
+        padding: 5px 10px;
+        color: white;
+        background: rgba(120, 75, 220, 0.85);
+        border: 1px solid rgba(220, 200, 255, 0.6);
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 12px;
+    }
+
+    #cosmicNameCard.is-collapsed {
+        width: 230px;
+        padding: 5px 8px;
+    }
+
+    #cosmicNameCard.is-collapsed > :not(#cosmicCardToggle) {
+        display: none;
+    }
+}
+
 
     #cosmicCardToggle {
         display: block;
