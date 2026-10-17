@@ -923,6 +923,43 @@ height: 155px;
     }
 }
 
+
+/* Mobile Cosmic Card Fold Button */
+#cosmicCardToggle {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    #cosmicNameCard {
+        right: 10px;
+        top: 10px;
+        transform: none;
+        width: 150px;
+        padding: 8px;
+    }
+
+    #cosmicCardToggle {
+        display: block;
+        margin: 0 auto;
+        padding: 6px 12px;
+        color: white;
+        background: rgba(120, 75, 220, 0.85);
+        border: 1px solid rgba(220, 200, 255, 0.6);
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 12px;
+    }
+
+    #cosmicNameCard.is-collapsed {
+        width: auto;
+        padding: 5px 8px;
+    }
+
+    #cosmicNameCard.is-collapsed > :not(#cosmicCardToggle) {
+        display: none;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -976,6 +1013,9 @@ placeholder="🚀 Type your name, Earthling...">
     <div id="liveNameDisplay" aria-hidden="true"></div>
    <!-- Magical Cosmic Name Card -->
 <div id="cosmicNameCard">
+   <button type="button" id="cosmicCardToggle" aria-expanded="true">
+    − Hide
+</button>
     <div class="cosmic-card-stars">✦ · ✧ · ✦</div>
 
     <div class="cosmic-card-heading">
@@ -1786,5 +1826,22 @@ window.location.href = "index.html";
 
 })();
 </script>
+
+<script>
+(function () {
+    const card = document.getElementById('cosmicNameCard');
+    const toggle = document.getElementById('cosmicCardToggle');
+
+    if (!card || !toggle) return;
+
+    toggle.addEventListener('click', function () {
+        const collapsed = card.classList.toggle('is-collapsed');
+
+        toggle.textContent = collapsed ? '+ Show' : '− Hide';
+        toggle.setAttribute('aria-expanded', String(!collapsed));
+    });
+})();
+</script>
+
 </body>
 </html>
