@@ -559,6 +559,26 @@ select:focus,
   }
 }
 
+.anime-intro-video-section {
+  width: 100%;
+  max-width: 850px;
+  margin: 30px auto;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.anime-intro-video {
+  display: block;
+  width: 100%;
+  max-height: 480px;
+  object-fit: contain;
+  margin: 0 auto;
+  border-radius: 18px;
+  border: 1px solid rgba(170, 225, 255, 0.45);
+  box-shadow: 0 0 30px rgba(115, 205, 255, 0.3);
+  background: #080b18;
+}
+
 </style>
 </head>
 
@@ -583,6 +603,20 @@ select:focus,
 
 <main>
   
+<section class="anime-intro-video-section" id="animeIntroVideo">
+  <video
+    id="animeIntroVideoPlayer"
+    class="anime-intro-video"
+    muted
+    playsinline
+    controls
+    preload="metadata"
+  >
+    <source src="images/images/intro%20(2).mp4" type="video/mp4">
+    Your browser does not support this video.
+  </video>
+</section>
+
 <section class="character-world">
   <div class="world-heading">
     <h2>Meet Our Characters 🌸</h2>
