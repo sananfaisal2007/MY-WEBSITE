@@ -968,6 +968,104 @@ select:focus,
     }
 }
 
+/* Three compact anime story scenes */
+.routine-scenes {
+    width: min(850px, 94%);
+    margin: 20px auto 30px;
+    display: grid;
+    gap: 16px;
+}
+
+.routine-step {
+    display: grid;
+    grid-template-columns: minmax(110px, 30%) minmax(0, 1fr);
+    align-items: center;
+    gap: 15px;
+    padding: 11px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background:
+        linear-gradient(rgba(9, 35, 51, 0.96), rgba(9, 35, 51, 0.96)) padding-box,
+        linear-gradient(110deg, #83dfff, #ffffff, #e4aaff, #a5f4df, #83dfff) border-box;
+    background-size: 100% 100%, 250% 100%;
+    animation: routineShine 7s linear infinite;
+    box-shadow: 0 0 12px rgba(131, 223, 255, 0.14);
+}
+
+.routine-step video {
+    display: block;
+    width: 100%;
+    max-height: 180px;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border: 1px solid rgba(131, 223, 255, 0.35);
+    border-radius: 7px;
+    background: #091923;
+}
+
+.routine-dialogue {
+    min-width: 0;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.routine-dialogue h3 {
+    margin: 0 0 6px;
+    color: #8fe3ff;
+    font-family: Georgia, serif;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.routine-dialogue p {
+    margin: 5px 0;
+}
+
+.routine-dialogue strong {
+    color: #a5f4df;
+    font-weight: 700;
+}
+
+.routine-note {
+    color: #c8e4ef;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+@keyframes routineShine {
+    from { background-position: 0 0, 0% 50%; }
+    to { background-position: 0 0, 250% 50%; }
+}
+
+@media (max-width: 520px) {
+    .routine-step {
+        grid-template-columns: minmax(95px, 34%) minmax(0, 1fr);
+        gap: 10px;
+        padding: 8px;
+    }
+
+    .routine-step video {
+        max-height: 145px;
+    }
+
+    .routine-dialogue {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .routine-dialogue h3 {
+        font-size: 15px;
+    }
+
+    .routine-note {
+        font-size: 12px;
+    }
+}
+
 </style>
 </head>
 
@@ -1245,12 +1343,50 @@ select:focus,
     <p>Ugh… what time is it? Wait—it's already time for university?!</p>
   </div>
 
-  <div class="friend-message">
-    <p>Sanan woke up to the sound of his phone's message ringtone. Still half-asleep, he reached for his phone and checked the time. His sleepy eyes widened—it was already time to get ready for university!</p>
+</div>
+  
+
+<!-- Sanan Gets Ready for University -->
+<div class="routine-scenes">
+
+  <!-- Scene 1: Brushing Teeth -->
+  <div class="routine-step">
+    <video controls playsinline preload="metadata">
+      <source src="images/images/thoot.mp4" type="video/mp4">
+    </video>
+
+    <div class="routine-dialogue">
+      <h3>✦ Sanan's Morning ✦</h3>
+      <p><strong>Sanan:</strong> Ugh… subah subah itni jaldi! 😩</p>
+      <p class="routine-note">He quickly brushes his teeth, thinking about the time.</p>
+    </div>
   </div>
 
-  <div class="friend-message">
-    <p>He quickly got out of bed and hurried to the bathroom to take a shower. He had to get himself ready for the day before he ended up running late. 🌸</p>
+  <!-- Scene 2: Shower -->
+  <div class="routine-step">
+    <video controls playsinline preload="metadata">
+      <source src="images/images/bath.mp4" type="video/mp4">
+    </video>
+
+    <div class="routine-dialogue">
+      <h3>✦ Getting Ready ✦</h3>
+      <p><strong>Sanan:</strong> Bas jaldi se ready ho jaun, warna late ho jaunga!</p>
+      <p class="routine-note">He finishes getting ready as quickly as he can.</p>
+    </div>
+  </div>
+
+  <!-- Scene 3: Breakfast Table -->
+  <div class="routine-step">
+    <video controls playsinline preload="metadata">
+      <source src="images/images/break.mp4" type="video/mp4">
+    </video>
+
+    <div class="routine-dialogue">
+      <h3>✦ Breakfast Time ✦</h3>
+      <p><strong>Naina:</strong> Sanan beta, nashta kar ke jao!</p>
+      <p><strong>Sanan:</strong> Ammi, late ho raha hai! Main bread le ja raha hoon, baad mein kha lunga!</p>
+      <p class="routine-note">He grabs a slice of bread and hurries out without sitting down to eat. 🌸</p>
+    </div>
   </div>
 
 </div>
