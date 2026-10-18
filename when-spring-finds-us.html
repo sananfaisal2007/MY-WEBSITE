@@ -267,23 +267,27 @@ body {
   }
 }
 
-/* Dreamy glass-like story sections */
+
+/* ===== DREAMY SKY-BLUE GLASS STORY THEME ===== */
 
 header {
   background: linear-gradient(
     145deg,
-    rgba(64, 35, 82, 0.78),
-    rgba(28, 19, 44, 0.76),
-    rgba(89, 39, 82, 0.72)
+    rgba(35, 105, 150, 0.82),
+    rgba(15, 39, 63, 0.88),
+    rgba(45, 125, 165, 0.78)
   );
+  border-bottom: 1px solid rgba(160, 225, 255, 0.55);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
 
 .scene {
-  background: rgba(255, 239, 255, 0.055);
-  border: 1px solid rgba(238, 193, 255, 0.22);
-  box-shadow: 0 12px 40px rgba(8, 4, 20, 0.16);
+  background: rgba(185, 230, 255, 0.07);
+  border: 1px solid rgba(150, 220, 255, 0.28);
+  box-shadow:
+    0 12px 40px rgba(5, 20, 40, 0.18),
+    0 0 18px rgba(100, 195, 255, 0.07);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
 }
@@ -291,23 +295,50 @@ header {
 .art-placeholder {
   background: linear-gradient(
     135deg,
-    rgba(67, 42, 86, 0.68),
-    rgba(119, 66, 105, 0.48),
-    rgba(39, 31, 70, 0.72)
+    rgba(32, 91, 126, 0.78),
+    rgba(54, 133, 170, 0.62),
+    rgba(21, 55, 83, 0.82)
   );
-  box-shadow: inset 0 0 30px rgba(255, 193, 239, 0.06);
+  border-color: #91d9fa;
+  color: #eaf9ff;
+  box-shadow: inset 0 0 30px rgba(170, 230, 255, 0.08);
 }
 
 h1 {
-  color: #ffe0f5;
+  color: #e8f9ff;
   text-shadow:
-    0 0 12px rgba(255, 177, 230, 0.45),
-    0 0 35px rgba(186, 140, 255, 0.28);
+    0 0 12px rgba(140, 220, 255, 0.65),
+    0 0 35px rgba(85, 190, 255, 0.35);
+}
+
+.eyebrow {
+  color: #bdeaff;
+}
+
+header p {
+  color: #d9f3ff;
 }
 
 .chapter-heading h2 {
-  text-shadow: 0 0 20px rgba(230, 166, 255, 0.24);
+  color: #bdeaff;
+  text-shadow:
+    0 0 12px rgba(125, 210, 255, 0.4),
+    0 0 25px rgba(90, 185, 245, 0.2);
 }
+
+select,
+.back-link {
+  border-color: #80c9ef;
+  background: rgba(19, 53, 79, 0.92);
+  color: #f0fbff;
+}
+
+select:focus,
+.back-link:focus-visible {
+  outline: 2px solid #b8eaff;
+  outline-offset: 3px;
+}
+
 
 @media (prefers-reduced-motion: reduce) {
   #magical-background::before,
