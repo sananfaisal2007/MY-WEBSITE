@@ -903,6 +903,71 @@ select:focus,
     background: transparent;
 }
 
+/* Colourful, glossy one-line story caption */
+.scene-caption {
+    width: fit-content;
+    max-width: 94%;
+    margin: 18px auto 24px;
+    padding: 10px 18px;
+    text-align: center;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    background:
+        linear-gradient(rgba(9, 35, 51, 0.95), rgba(9, 35, 51, 0.95)) padding-box,
+        linear-gradient(100deg, #83dfff, #ffffff, #e4aaff, #fff0b8, #a5f4df, #83dfff) border-box;
+    background-size: 100% 100%, 250% 100%;
+    animation: captionRainbowShine 6s linear infinite;
+    box-shadow: 0 0 15px rgba(131, 223, 255, 0.2);
+}
+
+.scene-caption .scene-time {
+    display: inline;
+    margin-right: 10px;
+    color: #a5f4df;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.scene-caption h3 {
+    display: inline;
+    margin: 0 10px 0 0;
+    color: #8fe3ff;
+    font-family: Georgia, serif;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.scene-caption p {
+    display: inline;
+    margin: 0;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.8;
+}
+
+@keyframes captionRainbowShine {
+    from { background-position: 0 0, 0% 50%; }
+    to { background-position: 0 0, 250% 50%; }
+}
+
+@media (max-width: 600px) {
+    .scene-caption {
+        width: 92%;
+        padding: 10px 12px;
+    }
+
+    .scene-caption .scene-time,
+    .scene-caption h3,
+    .scene-caption p {
+        font-size: 12px;
+        letter-spacing: normal;
+    }
+}
+
 </style>
 </head>
 
