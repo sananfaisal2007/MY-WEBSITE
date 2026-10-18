@@ -579,6 +579,90 @@ select:focus,
   background: #080b18;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Parisienne&display=swap');
+
+.anime-magic-text {
+  text-align: center;
+  max-width: 850px;
+  margin: 35px auto;
+  padding: 25px 20px;
+  position: relative;
+  animation: magicFloat 4s ease-in-out infinite;
+}
+
+.anime-magic-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(25px, 4vw, 43px);
+  font-weight: 700;
+  letter-spacing: 3px;
+  line-height: 1.5;
+  background: linear-gradient(
+    90deg,
+    #83dfff,
+    #ffffff,
+    #e4aaff,
+    #fff4c7,
+    #83dfff
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 10px rgba(153, 115, 255, 0.7));
+  animation: magicShine 5s linear infinite;
+  margin: 15px 0 22px;
+}
+
+.anime-magic-description {
+  font-family: 'Parisienne', cursive;
+  font-size: clamp(23px, 3vw, 31px);
+  line-height: 1.8;
+  color: #fff7ff;
+  text-shadow:
+    0 0 6px #c58cff,
+    0 0 16px rgba(116, 173, 255, 0.8);
+  max-width: 720px;
+  margin: 0 auto 22px;
+}
+
+.magic-divider {
+  color: #e6c8ff;
+  font-size: 22px;
+  letter-spacing: 4px;
+  text-shadow: 0 0 12px #bd83ff;
+  animation: sparkleGlow 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes magicShine {
+  to { background-position: 250% center; }
+}
+
+@keyframes sparkleGlow {
+  from {
+    opacity: 0.65;
+    text-shadow: 0 0 6px #bd83ff;
+  }
+  to {
+    opacity: 1;
+    text-shadow: 0 0 18px #ffffff, 0 0 28px #bd83ff;
+  }
+}
+
+@keyframes magicFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@media (max-width: 600px) {
+  .anime-magic-text {
+    padding: 20px 12px;
+  }
+
+  .anime-magic-title {
+    letter-spacing: 1.5px;
+  }
+}
+
 </style>
 </head>
 
@@ -769,14 +853,23 @@ select:focus,
 
 
 
-  <div class="opening-narration">
-  <h2>🌸 WHEN SPRING FINDS US 🌸</h2>
-  <p>
-    A world of beautiful moments, unforgettable characters,
-    and emotions that stay in our hearts. Every story has its
-    own magic, and every scene has a feeling worth remembering. 💙✨
+ 
+<div class="opening-narration anime-magic-text">
+  <div class="magic-divider">✦ ── 🌸 ── ✦</div>
+
+  <h2 class="anime-magic-title">
+    WHEN SPRING FINDS US
+  </h2>
+
+  <p class="anime-magic-description">
+    In a world painted with dreams, every soul has a story,
+    every moment holds a little magic, and every spring
+    brings a beautiful new beginning. ✨
   </p>
+
+  <div class="magic-divider">⋆｡°✩ 💙 ✩°｡⋆</div>
 </div>
+
 
 </section>
 
