@@ -978,5 +978,26 @@ document.getElementById("language").addEventListener("change", function() {
   document.body.dir = lang === "ur" ? "rtl" : "ltr";
 });
 </script>
+  
+<script>
+const introVideo = document.getElementById("animeIntroVideoPlayer");
+
+if (introVideo) {
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        introVideo.play().catch(() => {
+          // Agar autoplay block ho, user Play button daba sakta hai.
+        });
+      } else {
+        introVideo.pause();
+      }
+    });
+  }, { threshold: 0.35 });
+
+  videoObserver.observe(introVideo);
+}
+</script>
+
 </body>
 </html>
