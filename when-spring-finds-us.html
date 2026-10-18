@@ -809,6 +809,76 @@ select:focus,
     }
 }
 
+/* Slim, multi-colour glowing friend messages */
+.friend-messages {
+    width: min(680px, 92%);
+    margin: 16px auto 30px;
+    display: grid;
+    gap: 8px;
+}
+
+.friend-message {
+    padding: 7px 12px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    background:
+        linear-gradient(rgba(16, 40, 63, 0.82), rgba(16, 40, 63, 0.82)) padding-box,
+        linear-gradient(90deg, #83dfff, #ffffff, #e4aaff, #fff0b8, #a5f4df, #83dfff) border-box;
+    background-size: 100% 100%, 250% 100%;
+    animation: friendMessageShine 5s linear infinite;
+    box-shadow: 0 0 10px rgba(131, 223, 255, 0.14);
+}
+
+.friend-message h3 {
+    display: inline;
+    margin: 0 8px 0 0;
+    color: #bdeaff;
+    font: 600 12px Georgia, serif;
+}
+
+.friend-message .message-time {
+    color: #b8d9eb;
+    font: 9px Georgia, serif;
+    letter-spacing: 1px;
+}
+
+.friend-message p {
+    margin: 3px 0 0;
+    color: #eaf7ff;
+    font: 14px Georgia, serif;
+    line-height: 1.5;
+}
+
+@keyframes friendMessageShine {
+    from { background-position: 0 0, 0% 50%; }
+    to { background-position: 0 0, 250% 50%; }
+}
+
+@media (max-width: 600px) {
+    .friend-message p {
+        font-size: 13px;
+    }
+}
+
+.notification-scene {
+    width: min(850px, 94%);
+    margin: 18px auto 22px;
+    text-align: center;
+}
+
+.notification-scene video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    object-fit: contain;
+    margin: 0 auto;
+    border: 1px solid rgba(131, 223, 255, 0.4);
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(90, 190, 235, 0.18);
+    background: transparent;
+}
+
 </style>
 </head>
 
@@ -1037,6 +1107,43 @@ select:focus,
   <p>Sanan was still fast asleep, unaware of the messages waiting on his phone… 🌸</p>
 </div>
 
+
+<!-- Phone Notifications Video -->
+<div class="notification-scene">
+  <video controls playsinline preload="metadata">
+    <source src="images/images/noti.mp4" type="video/mp4">
+    Your browser does not support HTML video.
+  </video>
+</div>
+
+<!-- Sanan's University Messages -->
+<div class="friend-messages">
+
+  <div class="friend-message">
+    <h3>Hasnain</h3>
+    <span class="message-time">MONDAY · 7:20 AM</span>
+    <p>Oye Sanan, aaj uni aa raha hai? 😂</p>
+  </div>
+
+  <div class="friend-message">
+    <h3>Zaidan</h3>
+    <span class="message-time">MONDAY · 7:21 AM</span>
+    <p>Bhai, jaldi bata. Saath chalna hai? 👀</p>
+  </div>
+
+  <div class="friend-message">
+    <h3>Saad</h3>
+    <span class="message-time">MONDAY · 7:22 AM</span>
+    <p>Sanan, class miss mat karna aaj 😂</p>
+  </div>
+
+  <div class="friend-message">
+    <h3>Hammad</h3>
+    <span class="message-time">MONDAY · 7:23 AM</span>
+    <p>Bhai, uni ke liye nikla ya abhi so raha hai? 😭</p>
+  </div>
+
+</div>
 
 </section>
 
