@@ -74,60 +74,87 @@ main {
   line-height: 1.4;
 }
 
+
 .scene {
   margin: 28px 0;
   padding: 23px;
-  background: rgba(255,255,255,0.035);
-  border: 1px solid rgba(206,166,230,0.2);
+  background: rgba(170, 225, 255, 0.055);
+  border: 1px solid rgba(145, 215, 255, 0.28);
   border-radius: 18px;
+  box-shadow: 0 5px 24px rgba(55, 155, 220, 0.06);
 }
 
-.scene h3 { color: #e8bde8; }
+.scene h3 {
+  color: #b9eaff;
+  text-shadow: 0 0 12px rgba(105, 200, 255, 0.3);
+}
 
 .art-placeholder {
   min-height: 190px;
   border-radius: 14px;
-  border: 1px dashed #9570aa;
-  background: linear-gradient(135deg, #29203c, #50304d, #201a34);
+  border: 1px dashed #78bfe5;
+  background: linear-gradient(
+    135deg,
+    #17344c,
+    #285674,
+    #142d46
+  );
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding: 20px;
-  color: #ead8f4;
+  color: #e1f5ff;
   margin-bottom: 22px;
 }
 
-.art-placeholder .flower { font-size: 38px; }
-
-.dialogue {
-  border-left: 3px solid #c58cda;
-  padding: 8px 15px;
-  margin: 15px 0;
-  background: rgba(174,120,201,0.08);
+.art-placeholder .flower {
+  font-size: 38px;
 }
 
-.speaker { color: #e6b7f3; font-weight: bold; }
+.dialogue {
+  border-left: 3px solid #79cfff;
+  padding: 8px 15px;
+  margin: 15px 0;
+  background: rgba(105, 195, 245, 0.09);
+  border-radius: 0 10px 10px 0;
+}
+
+.speaker {
+  color: #a9e4ff;
+  font-weight: bold;
+  text-shadow: 0 0 8px rgba(105, 200, 255, 0.2);
+}
 
 footer {
   text-align: center;
   padding: 25px;
-  border-top: 1px solid #46334f;
-  color: #bca9c9;
+  border-top: 1px solid #31546c;
+  color: #c4e7f7;
   font: 12px Arial, sans-serif;
 }
 
 @media (max-width: 550px) {
-  .scene { padding: 16px; }
-  .chapter-heading h2 { font-size: 25px; }
+  .scene {
+    padding: 16px;
+  }
+
+  .chapter-heading h2 {
+    font-size: 25px;
+  }
 }
 
-body[dir="rtl"] { font-family: Tahoma, Arial, sans-serif; }
+body[dir="rtl"] {
+  font-family: Tahoma, Arial, sans-serif;
+}
+
 body[dir="rtl"] .dialogue {
   border-left: 0;
-  border-right: 3px solid #c58cda;
+  border-right: 3px solid #79cfff;
+  border-radius: 10px 0 0 10px;
 }
+
 
 /* ===== MAGICAL CHERRY BLOSSOM WORLD ===== */
 
