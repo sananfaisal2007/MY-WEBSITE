@@ -667,6 +667,80 @@ select:focus,
   }
 }
 
+/* Episode 1 — Magical Anime Button */
+.episode-one-section {
+    text-align: center;
+    padding: 45px 16px 25px;
+}
+
+.episode-one-button {
+    display: inline-block;
+    position: relative;
+    padding: 16px 42px;
+    border: 1px solid rgba(210, 175, 255, 0.8);
+    border-radius: 14px;
+    background: linear-gradient(
+        120deg,
+        rgba(115, 55, 190, 0.35),
+        rgba(40, 160, 220, 0.25),
+        rgba(220, 95, 190, 0.35)
+    );
+    color: #fff;
+    font-family: Georgia, serif;
+    font-size: 19px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-shadow: 0 0 10px #d9a6ff, 0 0 22px #a66bff;
+    box-shadow:
+        0 0 12px rgba(170, 100, 255, 0.55),
+        0 0 28px rgba(95, 180, 255, 0.25),
+        inset 0 0 15px rgba(255, 160, 240, 0.12);
+    animation: episodeButtonGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes episodeButtonGlow {
+    0%, 100% {
+        box-shadow:
+            0 0 12px rgba(170, 100, 255, 0.5),
+            0 0 24px rgba(95, 180, 255, 0.25);
+        transform: translateY(0);
+    }
+    50% {
+        box-shadow:
+            0 0 22px rgba(210, 125, 255, 0.85),
+            0 0 38px rgba(95, 180, 255, 0.55),
+            0 0 48px rgba(255, 120, 210, 0.25);
+        transform: translateY(-3px);
+    }
+}
+
+/* Sleeping scene video */
+.sleeping-scene {
+    width: min(900px, 94%);
+    margin: 20px auto 45px;
+    text-align: center;
+}
+
+.sleeping-scene video {
+    display: block;
+    width: 100%;
+    max-height: 75vh;
+    object-fit: contain;
+    margin: 0 auto;
+    border-radius: 18px;
+    border: 1px solid rgba(190, 145, 255, 0.3);
+    box-shadow: 0 0 25px rgba(130, 80, 255, 0.2);
+    background: #080611;
+}
+
+@media (max-width: 600px) {
+    .episode-one-button {
+        padding: 14px 27px;
+        font-size: 16px;
+        letter-spacing: 3px;
+    }
+}
+
 </style>
 </head>
 
@@ -872,6 +946,21 @@ select:focus,
   </p>
 
   <div class="magic-divider">⋆｡°✩ 💙 ✩°｡⋆</div>
+</div>
+
+<!-- Episode 1 Opening -->
+<section class="episode-one-section">
+  <div class="episode-one-button">
+    ✦ EPISODE 1 ✦
+  </div>
+</section>
+
+<!-- Sanan Sleeping Scene -->
+<div class="sleeping-scene">
+  <video controls playsinline preload="metadata">
+    <source src="images/images/sleep.mp4" type="video/mp4">
+    Your browser does not support HTML video.
+  </video>
 </div>
 
 
