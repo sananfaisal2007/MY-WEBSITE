@@ -809,44 +809,60 @@ select:focus,
     }
 }
 
-/* Slim, multi-colour glowing friend messages */
+
+/* Anime-style dialogue lines */
 .friend-messages {
-    width: min(680px, 92%);
-    margin: 16px auto 30px;
+    width: min(850px, 94%);
+    margin: 18px auto 35px;
     display: grid;
-    gap: 8px;
+    gap: 10px;
 }
 
 .friend-message {
-    padding: 7px 12px;
+    padding: 11px 15px;
     border: 1px solid transparent;
-    border-radius: 7px;
+    border-radius: 8px;
     background:
-        linear-gradient(rgba(16, 40, 63, 0.82), rgba(16, 40, 63, 0.82)) padding-box,
-        linear-gradient(90deg, #83dfff, #ffffff, #e4aaff, #fff0b8, #a5f4df, #83dfff) border-box;
+        linear-gradient(rgba(12, 36, 53, 0.94), rgba(12, 36, 53, 0.94)) padding-box,
+        linear-gradient(100deg, #83dfff, #ffffff, #e4aaff, #fff0b8, #a5f4df, #83dfff) border-box;
     background-size: 100% 100%, 250% 100%;
     animation: friendMessageShine 5s linear infinite;
-    box-shadow: 0 0 10px rgba(131, 223, 255, 0.14);
+    box-shadow: 0 0 12px rgba(131, 223, 255, 0.16);
 }
 
 .friend-message h3 {
     display: inline;
-    margin: 0 8px 0 0;
-    color: #bdeaff;
-    font: 600 12px Georgia, serif;
+    margin: 0;
+    color: #8fe3ff;
+    font-family: Georgia, serif;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.friend-message h3::after {
+    content: ": ";
+    color: #ffffff;
 }
 
 .friend-message .message-time {
-    color: #b8d9eb;
-    font: 9px Georgia, serif;
+    display: block;
+    margin-top: 3px;
+    color: #b9ddeb;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
     letter-spacing: 1px;
 }
 
 .friend-message p {
-    margin: 3px 0 0;
-    color: #eaf7ff;
-    font: 14px Georgia, serif;
-    line-height: 1.5;
+    display: inline;
+    margin: 0;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.8;
+    text-shadow: 0 0 5px rgba(131, 223, 255, 0.15);
 }
 
 @keyframes friendMessageShine {
@@ -855,8 +871,16 @@ select:focus,
 }
 
 @media (max-width: 600px) {
+    .friend-message {
+        padding: 10px 12px;
+    }
+
+    .friend-message h3 {
+        font-size: 16px;
+    }
+
     .friend-message p {
-        font-size: 13px;
+        font-size: 15px;
     }
 }
 
