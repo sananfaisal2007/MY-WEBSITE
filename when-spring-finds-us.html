@@ -128,10 +128,178 @@ body[dir="rtl"] .dialogue {
   border-left: 0;
   border-right: 3px solid #c58cda;
 }
+
+/* ===== MAGICAL CHERRY BLOSSOM WORLD ===== */
+
+html {
+  background: #100d1b;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: transparent;
+  position: relative;
+  isolation: isolate;
+}
+
+#magical-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 20%, rgba(255, 164, 219, 0.30), transparent 42%),
+    radial-gradient(ellipse at 85% 30%, rgba(174, 123, 255, 0.28), transparent 45%),
+    radial-gradient(ellipse at 50% 90%, rgba(91, 65, 145, 0.38), transparent 50%),
+    linear-gradient(145deg, #20132f, #382044, #17132f, #281833);
+}
+
+#magical-background::before,
+#magical-background::after {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  border-radius: 50%;
+  filter: blur(65px);
+  opacity: 0.5;
+  animation: magicalGlow 16s ease-in-out infinite alternate;
+}
+
+#magical-background::before {
+  background: radial-gradient(
+    circle,
+    rgba(255, 173, 224, 0.35),
+    transparent 58%
+  );
+}
+
+#magical-background::after {
+  background: radial-gradient(
+    circle at 70% 60%,
+    rgba(173, 139, 255, 0.30),
+    transparent 55%
+  );
+  animation-delay: -8s;
+}
+
+.magical-petal {
+  position: absolute;
+  top: -35px;
+  left: 0;
+  color: #ffd9ef;
+  text-shadow: 0 0 12px rgba(255, 180, 232, 0.9);
+  opacity: 0.8;
+  animation: petalFall linear infinite;
+  will-change: transform;
+}
+
+.magical-sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fff1ff;
+  box-shadow:
+    0 0 6px 2px rgba(255, 203, 242, 0.8),
+    0 0 18px rgba(198, 163, 255, 0.65);
+  animation: sparkleTwinkle ease-in-out infinite alternate;
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translate3d(0, -5vh, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(65px, 50vh, 0) rotate(220deg);
+  }
+  100% {
+    transform: translate3d(-35px, 110vh, 0) rotate(480deg);
+  }
+}
+
+@keyframes sparkleTwinkle {
+  from {
+    opacity: 0.15;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes magicalGlow {
+  from {
+    transform: translate(-5%, -3%) scale(0.9);
+  }
+  to {
+    transform: translate(5%, 4%) scale(1.15);
+  }
+}
+
+/* Dreamy glass-like story sections */
+
+header {
+  background: linear-gradient(
+    145deg,
+    rgba(64, 35, 82, 0.78),
+    rgba(28, 19, 44, 0.76),
+    rgba(89, 39, 82, 0.72)
+  );
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.scene {
+  background: rgba(255, 239, 255, 0.055);
+  border: 1px solid rgba(238, 193, 255, 0.22);
+  box-shadow: 0 12px 40px rgba(8, 4, 20, 0.16);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.art-placeholder {
+  background: linear-gradient(
+    135deg,
+    rgba(67, 42, 86, 0.68),
+    rgba(119, 66, 105, 0.48),
+    rgba(39, 31, 70, 0.72)
+  );
+  box-shadow: inset 0 0 30px rgba(255, 193, 239, 0.06);
+}
+
+h1 {
+  color: #ffe0f5;
+  text-shadow:
+    0 0 12px rgba(255, 177, 230, 0.45),
+    0 0 35px rgba(186, 140, 255, 0.28);
+}
+
+.chapter-heading h2 {
+  text-shadow: 0 0 20px rgba(230, 166, 255, 0.24);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #magical-background::before,
+  #magical-background::after,
+  .magical-petal,
+  .magical-sparkle {
+    animation: none !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 </style>
 </head>
 
 <body>
+  
+<div id="magical-background" aria-hidden="true"></div>
+
 <header>
   <div class="eyebrow" id="eyebrow">AN ORIGINAL LOVE STORY</div>
   <h1>When Spring Finds Us 🌸</h1>
@@ -231,6 +399,77 @@ body[dir="rtl"] .dialogue {
 </main>
 
 <footer>When Spring Finds Us · Story & Concept: Sanan Faisal</footer>
+
+<script>
+(function () {
+  const garden = document.getElementById("magical-background");
+
+  if (!garden) return;
+
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (reducedMotion) return;
+
+  const petalCount = window.innerWidth < 600 ? 12 : 22;
+  const sparkleCount = window.innerWidth < 600 ? 15 : 28;
+
+  // Floating cherry blossom petals
+  for (let i = 0; i < petalCount; i++) {
+    const petal = document.createElement("span");
+    petal.className = "magical-petal";
+    petal.textContent = ["✿", "❀", "🌸"][i % 3];
+
+    petal.style.left = Math.random() * 100 + "%";
+    petal.style.fontSize = (10 + Math.random() * 13) + "px";
+    petal.style.animationDuration = (12 + Math.random() * 15) + "s";
+    petal.style.animationDelay = (-Math.random() * 25) + "s";
+
+    garden.appendChild(petal);
+  }
+
+  // Tiny glowing magical lights
+  for (let i = 0; i < sparkleCount; i++) {
+    const sparkle = document.createElement("span");
+    sparkle.className = "magical-sparkle";
+
+    sparkle.style.left = Math.random() * 100 + "%";
+    sparkle.style.top = Math.random() * 100 + "%";
+    sparkle.style.animationDuration = (1.5 + Math.random() * 3) + "s";
+    sparkle.style.animationDelay = (-Math.random() * 4) + "s";
+
+    garden.appendChild(sparkle);
+  }
+
+  // Gentle sparkle trail when the mouse moves
+  let lastSparkle = 0;
+
+  document.addEventListener("pointermove", function (event) {
+    const now = Date.now();
+
+    if (now - lastSparkle < 100) return;
+    lastSparkle = now;
+
+    const sparkle = document.createElement("span");
+    sparkle.className = "magical-sparkle";
+
+    sparkle.style.position = "fixed";
+    sparkle.style.left = event.clientX + "px";
+    sparkle.style.top = event.clientY + "px";
+    sparkle.style.width = "5px";
+    sparkle.style.height = "5px";
+    sparkle.style.zIndex = "100";
+    sparkle.style.pointerEvents = "none";
+
+    document.body.appendChild(sparkle);
+
+    window.setTimeout(function () {
+      sparkle.remove();
+    }, 700);
+  });
+})();
+</script>
 
 <script>
 const translations = {
