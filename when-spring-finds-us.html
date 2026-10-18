@@ -1050,25 +1050,43 @@ document.getElementById("language").addEventListener("change", function() {
 });
 </script>
   
-<script>
-const introVideo = document.getElementById("animeIntroVideoPlayer");
 
-if (introVideo) {
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const videos = document.querySelectorAll("video");
+
   const videoObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
+      const video = entry.target;
+
       if (entry.isIntersecting) {
-        introVideo.play().catch(() => {
-          // Agar autoplay block ho, user Play button daba sakta hai.
+        // Screen par aane wali video ko sound ke saath chalane ki koshish
+        videos.forEach((otherVideo) => {
+          if (otherVideo !== video) {
+            otherVideo.pause();
+            otherVideo.muted = true;
+          }
+        });
+
+        video.muted = false;
+        video.play().catch(() => {
+          // Browser sound autoplay block kare to user Play daba sakta hai
         });
       } else {
-        introVideo.pause();
+        video.pause();
+        video.muted = true;
       }
     });
-  }, { threshold: 0.35 });
+  }, {
+    threshold: 0.5
+  });
 
-  videoObserver.observe(introVideo);
-}
+  videos.forEach((video) => {
+    videoObserver.observe(video);
+  });
+});
 </script>
+
 
 </body>
 </html>
