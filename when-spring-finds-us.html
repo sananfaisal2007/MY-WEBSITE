@@ -1,0 +1,324 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When Spring Finds Us | CELESTIALDREAMER</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #100d1b;
+  color: #f7efff;
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.9;
+}
+
+header {
+  text-align: center;
+  padding: 48px 18px 35px;
+  background: linear-gradient(145deg, #35204e, #171125, #42213e);
+  border-bottom: 1px solid #76518a;
+}
+
+.eyebrow {
+  color: #e7b9e7;
+  letter-spacing: 4px;
+  font: 12px Arial, sans-serif;
+}
+
+h1 {
+  font-size: clamp(32px, 6vw, 54px);
+  line-height: 1.25;
+  margin: 16px 0;
+}
+
+header p { color: #ddcde9; }
+
+.controls {
+  margin: 22px auto 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+select, .back-link {
+  padding: 10px 14px;
+  border: 1px solid #a67bc1;
+  border-radius: 20px;
+  background: #211832;
+  color: white;
+  font-size: 14px;
+}
+
+.back-link {
+  text-decoration: none;
+  display: inline-block;
+}
+
+main {
+  max-width: 850px;
+  margin: auto;
+  padding: 28px 18px 65px;
+}
+
+.chapter-heading { text-align: center; margin: 35px 0; }
+
+.chapter-heading h2 {
+  font-size: 30px;
+  color: #f0c9f0;
+  line-height: 1.4;
+}
+
+.scene {
+  margin: 28px 0;
+  padding: 23px;
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(206,166,230,0.2);
+  border-radius: 18px;
+}
+
+.scene h3 { color: #e8bde8; }
+
+.art-placeholder {
+  min-height: 190px;
+  border-radius: 14px;
+  border: 1px dashed #9570aa;
+  background: linear-gradient(135deg, #29203c, #50304d, #201a34);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  color: #ead8f4;
+  margin-bottom: 22px;
+}
+
+.art-placeholder .flower { font-size: 38px; }
+
+.dialogue {
+  border-left: 3px solid #c58cda;
+  padding: 8px 15px;
+  margin: 15px 0;
+  background: rgba(174,120,201,0.08);
+}
+
+.speaker { color: #e6b7f3; font-weight: bold; }
+
+footer {
+  text-align: center;
+  padding: 25px;
+  border-top: 1px solid #46334f;
+  color: #bca9c9;
+  font: 12px Arial, sans-serif;
+}
+
+@media (max-width: 550px) {
+  .scene { padding: 16px; }
+  .chapter-heading h2 { font-size: 25px; }
+}
+
+body[dir="rtl"] { font-family: Tahoma, Arial, sans-serif; }
+body[dir="rtl"] .dialogue {
+  border-left: 0;
+  border-right: 3px solid #c58cda;
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="eyebrow" id="eyebrow">AN ORIGINAL LOVE STORY</div>
+  <h1>When Spring Finds Us 🌸</h1>
+  <p id="subtitle">A story of love, friendship and unforgettable memories.</p>
+
+  <div class="controls">
+    <select id="language" aria-label="Choose story language">
+      <option value="en">English</option>
+      <option value="roman">Roman Urdu</option>
+      <option value="ur">اردو</option>
+    </select>
+    <a class="back-link" href="index.html" id="back">← Back to my website</a>
+  </div>
+</header>
+
+<main>
+  <div class="chapter-heading">
+    <div>✧ ─────── 🌸 ─────── ✧</div>
+    <h2 id="chapterTitle">Chapter 1: A New Spring</h2>
+    <p id="chapterIntro">Sometimes, the smallest moments become the most unforgettable memories.</p>
+  </div>
+
+  <section class="scene">
+    <div class="art-placeholder">
+      <div class="flower">🌸 🏫 🌸</div>
+      <strong id="art1">Illustration coming soon</strong>
+      <span id="art1desc">A beautiful university campus beneath cherry blossoms.</span>
+    </div>
+
+    <h3 id="scene1Title">Scene 1 — The University Morning</h3>
+    <p id="scene1p1">
+      Spring had arrived at the university. Pink cherry blossom petals drifted
+      across the pathways, while students hurried towards their classrooms.
+      The morning felt ordinary, but somewhere in the crowd, a story was about to begin.
+    </p>
+    <p id="scene1p2">
+      Sanan walked through the campus with his friends Hasnain, Zaidan, Saad
+      and Hammad. Their conversation was so lively that Sanan almost forgot
+      he was already running late.
+    </p>
+
+    <div class="dialogue">
+      <span class="speaker">Hasnain:</span>
+      <span id="d1">"Sanan, are you planning to attend class today, or should we tell the teacher you're missing again?"</span>
+    </div>
+
+    <div class="dialogue">
+      <span class="speaker">Sanan:</span>
+      <span id="d2">"Relax. We still have time."</span>
+    </div>
+
+    <div class="dialogue">
+      <span class="speaker">Saad:</span>
+      <span id="d3">"You said that yesterday. We all know how that ended!"</span>
+    </div>
+
+    <p id="scene1p3">
+      Everyone laughed. Sanan shook his head, smiling as the five friends
+      continued towards the main building.
+    </p>
+  </section>
+
+  <section class="scene">
+    <div class="art-placeholder">
+      <div class="flower">🌷 🎒 🌸</div>
+      <strong id="art2">Illustration coming soon</strong>
+      <span id="art2desc">Hurish arrives at the campus with Dua, Gulalai, Mahnoor and Simran.</span>
+    </div>
+
+    <h3 id="scene2Title">Scene 2 — A Girl Called Hurish</h3>
+    <p id="scene2p1">
+      At the other entrance, Hurish arrived with her friends Dua, Gulalai,
+      Mahnoor and Simran. She was the only daughter of Shahmeer and Aqsa,
+      and home was always filled with her parents' affection.
+    </p>
+
+    <p id="scene2p2">
+      "You have checked your bag three times," Simran teased.
+      "Are you sure you've brought everything?"
+    </p>
+
+    <div class="dialogue">
+      <span class="speaker">Hurish:</span>
+      <span id="d4">"Yes! And this time, I really am ready for the day."</span>
+    </div>
+
+    <p id="scene2p3">
+      Her friends laughed, and Hurish joined them. She had no idea that this
+      ordinary university morning would one day become a memory she would
+      never want to forget.
+    </p>
+  </section>
+
+  <p style="text-align:center;color:#e9bde9;margin-top:45px;">
+    ✧ To be continued... ✧
+  </p>
+</main>
+
+<footer>When Spring Finds Us · Story & Concept: Sanan Faisal</footer>
+
+<script>
+const translations = {
+  en: {
+    eyebrow:"AN ORIGINAL LOVE STORY",
+    subtitle:"A story of love, friendship and unforgettable memories.",
+    back:"← Back to my website",
+    chapterTitle:"Chapter 1: A New Spring",
+    chapterIntro:"Sometimes, the smallest moments become the most unforgettable memories.",
+    art1:"Illustration coming soon",
+    art1desc:"A beautiful university campus beneath cherry blossoms.",
+    scene1Title:"Scene 1 — The University Morning",
+    scene1p1:"Spring had arrived at the university. Pink cherry blossom petals drifted across the pathways, while students hurried towards their classrooms. The morning felt ordinary, but somewhere in the crowd, a story was about to begin.",
+    scene1p2:"Sanan walked through the campus with his friends Hasnain, Zaidan, Saad and Hammad. Their conversation was so lively that Sanan almost forgot he was already running late.",
+    d1:'"Sanan, are you planning to attend class today, or should we tell the teacher you are missing again?"',
+    d2:'"Relax. We still have time."',
+    d3:'"You said that yesterday. We all know how that ended!"',
+    scene1p3:"Everyone laughed. Sanan shook his head, smiling as the five friends continued towards the main building.",
+    art2:"Illustration coming soon",
+    art2desc:"Hurish arrives at the campus with Dua, Gulalai, Mahnoor and Simran.",
+    scene2Title:"Scene 2 — A Girl Called Hurish",
+    scene2p1:"At the other entrance, Hurish arrived with her friends Dua, Gulalai, Mahnoor and Simran. She was the only daughter of Shahmeer and Aqsa, and home was always filled with her parents' affection.",
+    scene2p2:'"You have checked your bag three times," Simran teased. "Are you sure you have brought everything?"',
+    d4:'"Yes! And this time, I really am ready for the day."',
+    scene2p3:"Her friends laughed, and Hurish joined them. She had no idea that this ordinary university morning would one day become a memory she would never want to forget."
+  },
+  roman: {
+    eyebrow:"HAMARI APNI MOHABBAT KI KAHANI",
+    subtitle:"Mohabbat, dosti aur kabhi na bhoolne wali yaadon ki kahani.",
+    back:"← Meri website par wapas",
+    chapterTitle:"Chapter 1: Ek Nayi Bahaar",
+    chapterIntro:"Kabhi kabhi chhotay se lamhay zindagi ki sab se khoobsurat yaad ban jatay hain.",
+    art1:"Tasveer jald aa rahi hai",
+    art1desc:"Cherry blossoms se saji khoobsurat university.",
+    scene1Title:"Scene 1 — University Ki Subah",
+    scene1p1:"University mein bahaar aa chuki thi. Gulabi cherry blossom ke phool hawa mein urr rahay thay aur students apni classes ki taraf ja rahay thay. Subah aam si lag rahi thi, lekin bheer mein kahin ek nayi kahani shuru honay wali thi.",
+    scene1p2:"Sanan apne doston Hasnain, Zaidan, Saad aur Hammad ke saath campus se guzar raha tha. Unki baatein itni mazedaar thin ke Sanan ko yaad hi nahi raha ke woh pehle hi late ho raha tha.",
+    d1:'"Sanan, aaj class attend karni hai ya teacher ko phir tumhari ghair hazri batayein?"',
+    d2:'"Relax karo. Abhi time hai."',
+    d3:'"Kal bhi tumne yehi kaha tha. Phir kya hua tha, sab ko pata hai!"',
+    scene1p3:"Sab hans paray. Sanan muskuraya aur paanchon dost main building ki taraf chal diye.",
+    art2:"Tasveer jald aa rahi hai",
+    art2desc:"Hurish apni doston Dua, Gulalai, Mahnoor aur Simran ke saath campus aa rahi hai.",
+    scene2Title:"Scene 2 — Hurish Naam Ki Larki",
+    scene2p1:"Doosray entrance par Hurish apni doston Dua, Gulalai, Mahnoor aur Simran ke saath pohanchi. Woh Shahmeer aur Aqsa ki akeli beti thi aur uska ghar maa baap ki mohabbat se bhara rehta tha.",
+    scene2p2:'"Tum apna bag teen baar check kar chuki ho," Simran ne mazaaq kiya. "Pakka sab kuch le aayi ho?"',
+    d4:'"Haan! Aur is baar main waqai din ke liye ready hoon."',
+    scene2p3:"Uski dostain hans parin aur Hurish bhi unke saath hansnay lagi. Use andaza nahi tha ke university ki ye aam si subah ek din uski zindagi ki aisi yaad ban jayegi jise woh kabhi bhoolna nahi chahegi."
+  },
+  ur: {
+    eyebrow:"ہماری اپنی محبت کی کہانی",
+    subtitle:"محبت، دوستی اور کبھی نہ بھولنے والی یادوں کی کہانی۔",
+    back:"← میری ویب سائٹ پر واپس",
+    chapterTitle:"باب 1: ایک نئی بہار",
+    chapterIntro:"کبھی کبھی چھوٹے سے لمحے زندگی کی سب سے خوبصورت یاد بن جاتے ہیں۔",
+    art1:"تصویر جلد شامل کی جائے گی",
+    art1desc:"چیری بلاسم کے پھولوں سے سجی خوبصورت یونیورسٹی۔",
+    scene1Title:"منظر 1 — یونیورسٹی کی صبح",
+    scene1p1:"یونیورسٹی میں بہار آ چکی تھی۔ گلابی چیری بلاسم کے پھول ہوا میں اڑ رہے تھے اور طلبہ اپنی کلاسوں کی طرف جا رہے تھے۔ صبح عام سی لگ رہی تھی، لیکن ہجوم میں کہیں ایک نئی کہانی شروع ہونے والی تھی۔",
+    scene1p2:"سنان اپنے دوستوں حسنین، زیدان، سعد اور حماد کے ساتھ کیمپس سے گزر رہا تھا۔ ان کی باتیں اتنی دلچسپ تھیں کہ سنان کو یاد ہی نہ رہا کہ وہ پہلے ہی دیر کر رہا تھا۔",
+    d1:"سنان، آج کلاس میں جانا ہے یا ٹیچر کو پھر تمہاری غیر حاضری بتا دیں؟",
+    d2:"آرام کرو، ابھی وقت ہے۔",
+    d3:"کل بھی تم نے یہی کہا تھا۔ پھر کیا ہوا تھا، سب کو پتا ہے!",
+    scene1p3:"سب ہنس پڑے۔ سنان مسکرایا اور پانچوں دوست مرکزی عمارت کی طرف چل دیے۔",
+    art2:"تصویر جلد شامل کی جائے گی",
+    art2desc:"حریش اپنی دوستوں دعا، گل علائی، ماہ نور اور سمرن کے ساتھ کیمپس آ رہی ہے۔",
+    scene2Title:"منظر 2 — حریش نام کی لڑکی",
+    scene2p1:"دوسرے دروازے پر حریش اپنی دوستوں دعا، گل علائی، ماہ نور اور سمرن کے ساتھ پہنچی۔ وہ شاہمیر اور اقصیٰ کی اکلوتی بیٹی تھی اور اس کا گھر والدین کی محبت سے بھرا رہتا تھا۔",
+    scene2p2:"تم اپنا بیگ تین بار چیک کر چکی ہو، سمرن نے مذاق کیا۔ کیا تم واقعی سب کچھ لے آئی ہو؟",
+    d4:"ہاں! اور اس بار میں واقعی دن کے لیے تیار ہوں۔",
+    scene2p3:"اس کی دوستیں ہنس پڑیں اور حریش بھی ان کے ساتھ ہنسنے لگی۔ اسے اندازہ نہیں تھا کہ یونیورسٹی کی یہ عام سی صبح ایک دن اس کی زندگی کی ایسی یاد بن جائے گی جسے وہ کبھی بھولنا نہیں چاہے گی۔"
+  }
+};
+
+const keys = Object.keys(translations.en);
+
+document.getElementById("language").addEventListener("change", function() {
+  const lang = this.value;
+  const t = translations[lang];
+
+  keys.forEach(function(key) {
+    const element = document.getElementById(key);
+    if (element) element.textContent = t[key];
+  });
+
+  document.documentElement.lang = lang === "ur" ? "ur" : "en";
+  document.body.dir = lang === "ur" ? "rtl" : "ltr";
+});
+</script>
+</body>
+</html>
