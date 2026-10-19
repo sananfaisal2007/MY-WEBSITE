@@ -1749,17 +1749,27 @@ a[href*="index.html"]:focus-visible {
   }
 }
 
-/* Scene 3 and 4: Vertical frame on desktop and mobile */
-.diary-video-3,
-.diary-video-4 {
+
+/* ONLY Scene 3 and Scene 4 */
+.diary-video-scene video.diary-video-3,
+.diary-video-scene video.diary-video-4 {
   display: block;
-  width: 100%;
-  max-width: 320px;
+  width: 320px;
+  max-width: 100%;
   height: 500px;
+  object-fit: cover;
+  object-position: center;
   margin: 0 auto;
-  object-fit: contain;
   background: #080812;
   box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .diary-video-scene video.diary-video-3,
+  .diary-video-scene video.diary-video-4 {
+    width: 280px;
+    height: 440px;
+  }
 }
 
 </style>
