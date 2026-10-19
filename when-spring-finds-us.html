@@ -1549,6 +1549,56 @@ a[href*="index.html"]:focus-visible {
   }
 }
 
+.hurish-morning {
+  max-width: 750px;
+  margin: 35px auto;
+  text-align: center;
+}
+
+.hurish-morning-video {
+  display: block;
+  width: 100%;
+  max-height: 430px;
+  object-fit: contain;
+  margin: 0 auto 25px;
+  border: 2px solid rgba(255, 190, 225, 0.9);
+  border-radius: 20px;
+  box-shadow:
+    0 0 15px rgba(255, 170, 225, 0.6),
+    0 0 35px rgba(190, 130, 255, 0.35);
+}
+
+.hurish-morning-caption h2 {
+  color: #ffe0f4;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 27px;
+  text-shadow: 0 0 14px rgba(255, 150, 220, 0.7);
+}
+
+.hurish-morning-caption p {
+  color: #fff4fb;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.8;
+  margin: 14px auto;
+}
+
+.hurish-morning-caption .routine-note {
+  color: #ffd8f0;
+  font-style: italic;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .hurish-morning-caption h2 {
+    font-size: 23px;
+  }
+
+  .hurish-morning-caption p {
+    font-size: 15px;
+  }
+}
+
 </style>
 </head>
 
@@ -1966,6 +2016,32 @@ a[href*="index.html"]:focus-visible {
       </p>
     </div>
   </section>
+
+  
+<!-- Hurish's Morning Video -->
+<section class="scene">
+  <div class="hurish-morning">
+
+    <video class="hurish-morning-video" autoplay muted loop playsinline controls>
+      <source src="huri.mp4" type="video/mp4">
+    </video>
+
+    <div class="hurish-morning-caption">
+      <h2>🌸 The Same Morning 🌸</h2>
+
+      <p>
+        Just like every other morning, Hurish woke up to a new day,
+        carrying her quiet dreams in her heart.
+      </p>
+
+      <p class="routine-note">
+        Little did she know... today would change both their lives forever. 💗
+      </p>
+    </div>
+
+  </div>
+</section>
+
 
   <p style="text-align:center;color:#e9bde9;margin-top:45px;">
     ✧ To be continued... ✧
