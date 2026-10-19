@@ -2513,6 +2513,135 @@ a[href*="index.html"]:focus-visible {
 }
 </style>
 
+<!-- 📚 Sanan Leaves for the Library -->
+<section class="library-scene">
+
+  <h2>📚 One More Stop: The Library</h2>
+
+  <img src="images/cla.png"
+       alt="Sanan says he is going to the library"
+       class="library-image">
+
+  <div class="library-dialogues">
+
+    <p class="library-line friend-line">
+      😄 Hasnain: "Sanan, kidhar ja rahe ho?"
+    </p>
+
+    <p class="library-line sanan-line">
+      😎 Sanan: "Ab main library ja raha hoon!"
+    </p>
+
+    <p class="library-line friend-line">
+      😂 Zaidan: "Wahan bhi kisi se relation discuss karna hai?"
+    </p>
+
+    <p class="library-line sanan-line">
+      🤦‍♂️ Sanan: "Tum logon ko har waqt bas yehi soojhta hai!"
+    </p>
+
+  </div>
+
+  <p class="library-ending">
+    📖✨ Sanan apne doston ko wahin chhor kar library ki taraf rawana hua.
+  </p>
+
+</section>
+
+<style>
+.library-scene {
+  max-width: 850px;
+  margin: 35px auto;
+  padding: 24px 16px;
+  text-align: center;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #fff0f6, #eee8ff, #e7f8ff);
+  box-shadow: 0 8px 25px rgba(120, 75, 150, 0.15);
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+.library-scene h2 {
+  color: #8e44ad;
+  font-family: Georgia, serif;
+  margin-bottom: 20px;
+}
+
+.library-image {
+  display: block;
+  width: 100%;
+  max-width: 650px;
+  height: auto;
+  margin: 0 auto 24px;
+  border-radius: 18px;
+  box-shadow: 0 6px 20px rgba(70, 40, 90, 0.2);
+}
+
+.library-dialogues {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.library-line {
+  margin: 0;
+  padding: 13px 16px;
+  border-radius: 14px;
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 600;
+  animation: libraryFadeIn 0.5s ease both;
+}
+
+.friend-line {
+  background: #ffffff;
+  color: #684080;
+  border-left: 5px solid #c084fc;
+}
+
+.sanan-line {
+  background: #e0f2fe;
+  color: #075985;
+  border-left: 5px solid #38bdf8;
+}
+
+.library-ending {
+  margin: 24px 0 0;
+  padding: 16px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #fce7f3, #ede9fe);
+  color: #7e225e;
+  font-family: Georgia, serif;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 1.7;
+}
+
+@keyframes libraryFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .library-scene {
+    padding: 16px 10px;
+  }
+
+  .library-line {
+    font-size: 14px;
+    padding: 11px;
+  }
+
+  .library-ending {
+    font-size: 15px;
+  }
+}
+</style>
   <p style="text-align:center;color:#e9bde9;margin-top:45px;">
     ✧ To be continued... ✧
   </p>
