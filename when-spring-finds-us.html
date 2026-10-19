@@ -1599,6 +1599,158 @@ a[href*="index.html"]:focus-visible {
   }
 }
 
+/* Hurish and friends scene */
+.hurish-friends-scene {
+  max-width: 800px;
+  margin: 35px auto;
+  padding: 10px;
+}
+
+.hurish-friends-picture {
+  display: block;
+  width: 100%;
+  max-width: 650px;
+  max-height: 430px;
+  object-fit: contain;
+  margin: 0 auto 25px;
+  border: 2px solid rgba(255, 190, 225, 0.9);
+  border-radius: 22px;
+  box-shadow:
+    0 0 16px rgba(255, 170, 225, 0.55),
+    0 0 32px rgba(190, 130, 255, 0.35);
+}
+
+.friends-story-intro {
+  margin: 20px auto 28px;
+  text-align: center;
+}
+
+.friends-story-intro p {
+  color: #fff3fb;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;
+  line-height: 1.8;
+  margin: 12px 0;
+}
+
+.friends-dialogues {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.friend-dialogue {
+  padding: 19px 22px;
+  border-radius: 17px;
+  border: 1px solid rgba(255, 220, 245, 0.4);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: dialogueGlow 3s ease-in-out infinite alternate;
+}
+
+.friend-dialogue:hover {
+  transform: translateY(-3px);
+}
+
+.friend-name {
+  display: block;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.friend-dialogue p {
+  color: #fffaff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.friend-dialogue em {
+  display: inline-block;
+  font-size: 16px;
+  margin-bottom: 7px;
+  color: #ffe6f5;
+}
+
+/* Different highlight for every friend's dialogue */
+.dua-dialogue {
+  background: linear-gradient(
+    120deg, rgba(255, 120, 175, 0.25),
+    rgba(255, 190, 225, 0.12)
+  );
+  border-left: 5px solid #ff86ba;
+}
+
+.dua-dialogue .friend-name {
+  color: #ffb9d8;
+}
+
+.simran-dialogue {
+  background: linear-gradient(
+    120deg, rgba(255, 160, 205, 0.23),
+    rgba(200, 140, 255, 0.16)
+  );
+  border-left: 5px solid #ffacd9;
+}
+
+.simran-dialogue .friend-name {
+  color: #ffc6e5;
+}
+
+.gulalai-dialogue {
+  background: linear-gradient(
+    120deg, rgba(170, 125, 255, 0.23),
+    rgba(255, 180, 230, 0.12)
+  );
+  border-left: 5px solid #c7a0ff;
+}
+
+.gulalai-dialogue .friend-name {
+  color: #d7bcff;
+}
+
+.mahnoor-dialogue {
+  background: linear-gradient(
+    120deg, rgba(255, 195, 130, 0.19),
+    rgba(255, 145, 205, 0.14)
+  );
+  border-left: 5px solid #ffc99a;
+}
+
+.mahnoor-dialogue .friend-name {
+  color: #ffdaad;
+}
+
+@keyframes dialogueGlow {
+  from {
+    box-shadow: 0 0 8px rgba(255, 170, 225, 0.12);
+  }
+  to {
+    box-shadow: 0 0 19px rgba(210, 155, 255, 0.25);
+  }
+}
+
+@media (max-width: 600px) {
+  .friends-story-intro p {
+    font-size: 17px;
+  }
+
+  .friend-dialogue {
+    padding: 16px;
+  }
+
+  .friend-name {
+    font-size: 19px;
+  }
+
+  .friend-dialogue p {
+    font-size: 17px;
+    line-height: 1.7;
+  }
+}
+
 </style>
 </head>
 
@@ -2061,6 +2213,55 @@ a[href*="index.html"]:focus-visible {
       </p>
     </div>
 
+  </div>
+</section>
+
+<!-- Hurish and Her Friends -->
+<section class="scene">
+  <div class="hurish-friends-scene">
+
+    <img
+      src="images/images/hdg.png"
+      alt="Hurish and her friends"
+      class="hurish-friends-picture">
+
+    <div class="friends-story-intro">
+      <p>
+        That same morning, Dua, Mahnoor, Gulalai, and Simran
+        were waiting for Hurish at her home.
+      </p>
+      <p>
+        Just as they were about to leave, Hurish appeared at the door,
+        looking as lovely as ever. 🌸
+      </p>
+    </div>
+
+    <div class="friends-dialogues">
+
+      <div class="friend-dialogue dua-dialogue">
+        <span class="friend-name">💗 Dua</span>
+        <p>“Hurry up, girls! We're going to be late!”</p>
+      </div>
+
+      <div class="friend-dialogue simran-dialogue">
+        <span class="friend-name">🩷 Simran</span>
+        <p>
+          <em>Wrapping her arms around Hurish in a hug</em><br>
+          “Hurish, you're so pretty! How do you look this adorable?” 
+        </p>
+      </div>
+
+      <div class="friend-dialogue gulalai-dialogue">
+        <span class="friend-name">💜 Gulalai</span>
+        <p>“Hurish, you look especially beautiful today!”</p>
+      </div>
+
+      <div class="friend-dialogue mahnoor-dialogue">
+        <span class="friend-name">🌷 Mahnoor</span>
+        <p>“Come on, Hurish! We'll be late. Let's go!”</p>
+      </div>
+
+    </div>
   </div>
 </section>
 
