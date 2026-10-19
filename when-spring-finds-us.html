@@ -1750,23 +1750,24 @@ a[href*="index.html"]:focus-visible {
 }
 
 
+
 /* ONLY Scene 3 and Scene 4 */
-.diary-video-scene video.diary-video-3,
-.diary-video-scene video.diary-video-4 {
+video.diary-video-3,
+video.diary-video-4 {
   display: block;
   width: 320px;
   max-width: 100%;
   height: 500px;
-  object-fit: cover;
-  object-position: center;
   margin: 0 auto;
+  object-fit: contain;
+  object-position: center;
   background: #080812;
   box-sizing: border-box;
 }
 
 @media (max-width: 600px) {
-  .diary-video-scene video.diary-video-3,
-  .diary-video-scene video.diary-video-4 {
+  video.diary-video-3,
+  video.diary-video-4 {
     width: 280px;
     height: 440px;
   }
