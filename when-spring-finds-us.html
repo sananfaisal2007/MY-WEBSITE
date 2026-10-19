@@ -2642,6 +2642,212 @@ a[href*="index.html"]:focus-visible {
   }
 }
 </style>
+  
+<!-- ☕ Hurish and Her Friends at the University Cafe -->
+<section class="hurish-cafe-scene">
+
+  <h2>☕ University Cafe — Girls' Time 🌸</h2>
+
+  <img src="images/cafe.png"
+       alt="Hurish and her friends at the university cafe"
+       class="story-cafe-image">
+
+  <div class="cafe-dialogues">
+
+    <p class="cafe-line dua-line">
+      💗 Dua: "Yaar, kal ka test kaisa gaya?"
+    </p>
+
+    <p class="cafe-line hurish-line">
+      🌸 Hurish: "Easy tha, bas thori tayari thi!"
+    </p>
+
+    <p class="cafe-line simran-line">
+      😏 Simran: "Achha chhoro, tum sab ka crush kaun hai?"
+    </p>
+
+    <p class="cafe-line gulalai-line">
+      😂 Gulalai: "Honestly? Mujhe toh sab ache lagte hain!"
+    </p>
+
+    <p class="cafe-line mahnoor-line">
+      🤭 Mahnoor: "Wah! Phir toh tumhein poori university pasand hai!"
+    </p>
+
+    <p class="cafe-line hurish-line">
+      🙈 Hurish: "Tum log chai peene aayi ho ya rishtay dhoondne?"
+    </p>
+
+    <p class="cafe-line dua-line">
+      🤣 Dua: "Dono! University mein multitasking zaroori hai!"
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- 📚 Hurish Heads to the Library -->
+<section class="hurish-library-scene">
+
+  <h2>📚 Ek Zaroori Kaam...</h2>
+
+  <img src="images/cafe2.png"
+       alt="Hurish getting ready to go to the library"
+       class="story-cafe-image">
+
+  <div class="cafe-dialogues">
+
+    <p class="cafe-line hurish-line">
+      📖 Hurish: "Yaar, mujhe library se ek book chahiye. Main library ja rahi hoon!"
+    </p>
+
+    <p class="cafe-line dua-line">
+      😊 Dua: "Abhi? Hum toh abhi yahan baithe hain!"
+    </p>
+
+    <p class="cafe-line mahnoor-line">
+      😜 Mahnoor: "Book lene ja rahi ho ya librarian se milne?"
+    </p>
+
+    <p class="cafe-line hurish-line">
+      😂 Hurish: "Bas karo! Main book lene ja rahi hoon, detective mat bano!"
+    </p>
+
+  </div>
+
+  <p class="hurish-library-ending">
+    ✨ Hurish apni friends ko goodbye keh kar library ki taraf rawana ho gayi. 📚
+  </p>
+
+</section>
+
+
+<style>
+.hurish-cafe-scene,
+.hurish-library-scene {
+  max-width: 850px;
+  margin: 35px auto;
+  padding: 22px 15px;
+  text-align: center;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #fff0f6, #f0e9ff, #e8f7ff);
+  box-shadow: 0 8px 25px rgba(120, 75, 150, 0.14);
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+.hurish-cafe-scene h2,
+.hurish-library-scene h2 {
+  color: #853bb2;
+  font-family: Georgia, serif;
+  margin: 5px 0 22px;
+}
+
+.story-cafe-image {
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  margin: 0 auto 24px;
+  border-radius: 18px;
+  border: 2px solid #e7b5ed;
+  box-shadow: 0 6px 18px rgba(90, 50, 110, 0.2);
+}
+
+.cafe-dialogues {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cafe-line {
+  margin: 0;
+  padding: 13px 15px;
+  border-radius: 14px;
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.7;
+  font-weight: 600;
+  box-shadow: 0 3px 9px rgba(80, 50, 100, 0.07);
+  animation: cafeDialogueIn 0.5s ease both;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cafe-line:hover {
+  transform: translateX(4px);
+  box-shadow: 0 5px 13px rgba(100, 50, 130, 0.15);
+}
+
+.dua-line {
+  background: #ffe3f0;
+  color: #9d286b;
+  border-left: 5px solid #f472b6;
+}
+
+.hurish-line {
+  background: #e3efff;
+  color: #2856a0;
+  border-left: 5px solid #60a5fa;
+}
+
+.simran-line {
+  background: #f0e5ff;
+  color: #7137a5;
+  border-left: 5px solid #b084f5;
+}
+
+.gulalai-line {
+  background: #fff0d9;
+  color: #96521e;
+  border-left: 5px solid #fbad60;
+}
+
+.mahnoor-line {
+  background: #e1f8ed;
+  color: #24744e;
+  border-left: 5px solid #68c99b;
+}
+
+.hurish-library-ending {
+  margin: 24px 0 0;
+  padding: 17px;
+  border-radius: 15px;
+  background: linear-gradient(90deg, #fce7f3, #e9ddff);
+  color: #772d91;
+  font-family: Georgia, serif;
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+@keyframes cafeDialogueIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .hurish-cafe-scene,
+  .hurish-library-scene {
+    padding: 16px 10px;
+  }
+
+  .cafe-line {
+    font-size: 14px;
+    padding: 11px;
+  }
+
+  .hurish-library-ending {
+    font-size: 15px;
+  }
+}
+</style>
+
   <p style="text-align:center;color:#e9bde9;margin-top:45px;">
     ✧ To be continued... ✧
   </p>
