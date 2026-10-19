@@ -1430,6 +1430,65 @@ a[href*="index.html"]:focus-visible {
     font-size: 26px;
   }
 }
+  
+/* Hurish story text — magical but easy to read */
+.hurish-introduction h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 29px;
+  line-height: 1.5;
+  text-align: center;
+  color: #ffe0f2;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 12px rgba(255, 150, 220, 0.55);
+  margin: 25px 0;
+}
+
+.hurish-introduction p:not(.intro-caption) {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.9;
+  letter-spacing: 0.2px;
+  color: #fff4fb;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 174, 220, 0.13),
+    rgba(175, 130, 255, 0.13)
+  );
+  border-left: 3px solid #f3a8dc;
+  border-radius: 5px 15px 15px 5px;
+  padding: 16px 18px;
+  margin: 18px 0;
+  text-shadow: 0 1px 5px rgba(40, 10, 50, 0.35);
+  box-shadow: 0 4px 18px rgba(220, 150, 255, 0.09);
+}
+
+/* Special highlight for the final emotional line */
+.hurish-introduction p.routine-note {
+  color: #ffe0f4;
+  font-style: italic;
+  font-weight: 600;
+  border-left-color: #d9b2ff;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 150, 210, 0.2),
+    rgba(175, 130, 255, 0.2)
+  );
+  box-shadow: 0 0 18px rgba(220, 150, 255, 0.16);
+}
+
+/* Comfortable reading on mobile */
+@media (max-width: 600px) {
+  .hurish-introduction h2 {
+    font-size: 24px;
+  }
+
+  .hurish-introduction p:not(.intro-caption) {
+    font-size: 16px;
+    line-height: 1.8;
+    padding: 13px 14px;
+  }
+}
+
 </style>
 </head>
 
