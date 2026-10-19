@@ -1748,7 +1748,37 @@ a[href*="index.html"]:focus-visible {
     line-height: 1.7;
   }
 }
+/* Scene 3: Vertical TikTok-style frame */
+.diary-video-3 {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: 500px;
+  margin: 0 auto;
+  object-fit: contain;
+  background: #080812;
+  box-sizing: border-box;
+}
 
+/* Scene 4: Vertical TikTok-style frame */
+.diary-video-4 {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: 500px;
+  margin: 0 auto;
+  object-fit: contain;
+  background: #080812;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .diary-video-3,
+  .diary-video-4 {
+    max-width: 280px;
+    height: 440px;
+  }
+}
 </style>
 </head>
 
