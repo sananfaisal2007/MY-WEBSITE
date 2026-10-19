@@ -3045,18 +3045,21 @@ a[href*="index.html"]:focus-visible {
   line-height: 1.5;
 }
 
+
 .diary-feature-video {
   display: block;
   width: 100%;
   height: auto;
-  min-height: 280px;
-  max-height: 650px;
+  min-height: 0;
+  max-height: none;
+  aspect-ratio: auto;
   object-fit: contain;
   background: #080812;
   border: 1px solid rgba(232, 194, 255, 0.4);
   border-radius: 14px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
 }
+
 
 .diary-caption {
   margin: 18px 0 2px;
@@ -3146,10 +3149,14 @@ a[href*="index.html"]:focus-visible {
     margin: 20px 0 25px;
   }
 
+  
   .diary-feature-video {
-    min-height: 180px;
-    max-height: 420px;
-  }
+  min-height: 0;
+  max-height: none;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
 
   .diary-caption {
     padding: 13px;
