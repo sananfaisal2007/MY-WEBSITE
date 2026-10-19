@@ -1066,6 +1066,136 @@ select:focus,
     }
 }
 
+/* Top controls: back left, language right */
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: min(100%, 950px);
+    margin: 22px auto 10px;
+}
+
+.back-link {
+    order: 1;
+    margin-right: auto;
+    display: inline-block;
+    padding: 9px 14px;
+    color: #eafaff;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid #83dfff;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #10374a, #17283e);
+    box-shadow: 0 0 12px rgba(131, 223, 255, 0.22);
+    transition: 0.25s ease;
+}
+
+.back-link:hover {
+    color: #ffffff;
+    box-shadow: 0 0 20px rgba(131, 223, 255, 0.55);
+    transform: translateY(-2px);
+}
+
+#language {
+    order: 2;
+    margin-left: auto;
+    padding: 9px 12px;
+    color: #ffffff;
+    font-weight: 700;
+    border: 1px solid #e4aaff;
+    border-radius: 9px;
+    background: #17283e;
+    box-shadow: 0 0 12px rgba(228, 170, 255, 0.2);
+}
+
+/* Magical episode navigation */
+.episode-navigation {
+    width: min(950px, 94%);
+    margin: 18px auto 28px;
+    padding: 14px;
+    text-align: center;
+    border: 1px solid rgba(131, 223, 255, 0.3);
+    border-radius: 14px;
+    background: rgba(8, 30, 44, 0.82);
+    box-shadow: 0 0 18px rgba(131, 223, 255, 0.1);
+}
+
+.episode-nav-title {
+    margin-bottom: 12px;
+    color: #a5f4df;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.episode-nav-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.episode-btn {
+    display: inline-block;
+    padding: 9px 15px;
+    color: #f4fbff;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    background:
+        linear-gradient(#102c40, #102c40) padding-box,
+        linear-gradient(110deg, #83dfff, #ffffff, #e4aaff, #a5f4df) border-box;
+    box-shadow: 0 0 10px rgba(131, 223, 255, 0.12);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.episode-btn:hover,
+.episode-btn.active {
+    transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(131, 223, 255, 0.4);
+    background:
+        linear-gradient(#174158, #102c40) padding-box,
+        linear-gradient(110deg, #83dfff, #ffffff, #e4aaff, #a5f4df) border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@media (max-width: 520px) {
+    .controls {
+        gap: 8px;
+    }
+
+    .back-link {
+        padding: 8px 9px;
+        font-size: 11px;
+    }
+
+    #language {
+        max-width: 125px;
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .episode-navigation {
+        padding: 11px 8px;
+    }
+
+    .episode-nav-buttons {
+        gap: 7px;
+    }
+
+    .episode-btn {
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+}
+
 </style>
 </head>
 
@@ -1078,15 +1208,33 @@ select:focus,
   <h1>When Spring Finds Us 🌸</h1>
   <p id="subtitle">A story of love, friendship and unforgettable memories.</p>
 
-  <div class="controls">
-    <select id="language" aria-label="Choose story language">
-      <option value="en">English</option>
-      <option value="roman">Roman Urdu</option>
-      <option value="ur">اردو</option>
-    </select>
-    <a class="back-link" href="index.html" id="back">← Back to my website</a>
-  </div>
+
+<div class="controls">
+  <a class="back-link" href="index.html" id="back">
+    ← Back to my website
+  </a>
+
+  <select id="language" aria-label="Choose story language">
+    <option value="en">English</option>
+    <option value="roman">Roman Urdu</option>
+    <option value="ur">اردو</option>
+  </select>
+</div>
+
 </header>
+
+<div class="episode-nav-buttons">
+  <a href="#episode1" class="episode-btn active">✦ Episode 1</a>
+  <a href="#episode2" class="episode-btn">✧ Episode 2</a>
+  <a href="#episode3" class="episode-btn">✧ Episode 3</a>
+  <a href="#episode4" class="episode-btn">✧ Episode 4</a>
+  <a href="#episode5" class="episode-btn">✧ Episode 5</a>
+  <a href="#episode6" class="episode-btn">✧ Episode 6</a>
+  <a href="#episode7" class="episode-btn">✧ Episode 7</a>
+  <a href="#episode8" class="episode-btn">✧ Episode 8</a>
+  <a href="#episode9" class="episode-btn">✧ Episode 9</a>
+  <a href="#episode10" class="episode-btn">✧ Episode 10</a>
+</div>
 
 <main>
   
@@ -1276,7 +1424,7 @@ select:focus,
 </div>
 
 <!-- Episode 1 Opening -->
-<section class="episode-one-section">
+<section class="episode-one-section" id="episode1">
   <div class="episode-one-button">
     ✦ EPISODE 1 ✦
   </div>
