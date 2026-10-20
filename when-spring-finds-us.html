@@ -338,6 +338,123 @@
   color: #997348;
 }
 
+/* Family and friends */
+.relatives-section {
+  max-width: 1080px;
+  margin: 45px auto 70px;
+  padding: 42px 24px;
+  background: rgba(255, 250, 241, 0.55);
+  border: 1px solid #ddc9ad;
+  border-radius: 14px;
+  box-shadow: 0 12px 35px rgba(76, 52, 32, 0.06);
+}
+
+.relatives-heading {
+  margin-bottom: 38px;
+  text-align: center;
+}
+
+.relatives-heading h2 {
+  margin: 14px 0 10px;
+  color: #4a3020;
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: normal;
+}
+
+.relatives-heading > p {
+  max-width: 580px;
+  margin: 0 auto;
+  color: #795f49;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.relative-group {
+  margin-top: 35px;
+}
+
+.relative-group > h3 {
+  margin: 0 0 10px;
+  color: #70482d;
+  font-size: 25px;
+  font-weight: normal;
+  text-align: center;
+}
+
+.group-intro {
+  max-width: 650px;
+  margin: 0 auto 24px;
+  color: #795f49;
+  font-size: 14px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.relative-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.relative-card {
+  min-width: 0;
+  padding: 12px;
+  text-align: center;
+  background: rgba(255, 253, 248, 0.85);
+  border: 1px solid #e0ceb4;
+  border-radius: 10px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.relative-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 9px 22px rgba(57, 41, 31, 0.1);
+}
+
+.relative-card img {
+  display: block;
+  width: 100%;
+  height: 155px;
+  object-fit: contain;
+  background: #f0e5d5;
+  border-radius: 7px;
+}
+
+.relative-card h4 {
+  margin: 13px 0 7px;
+  color: #4a3020;
+  font-size: 19px;
+  font-weight: normal;
+}
+
+.relative-card p {
+  margin: 0;
+  color: #795f49;
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+@media (max-width: 750px) {
+  .relative-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+  }
+
+  .relatives-section {
+    padding: 30px 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .relative-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .relative-card img {
+    height: 210px;
+  }
+}
+
 .characters-footer > span {
   font-size: 23px;
 }
