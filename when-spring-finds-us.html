@@ -550,6 +550,106 @@
         padding: 50px 18px;
       }
     }
+    
+/* ===== Novel Intro & Episode Styling ===== */
+
+#storyEpisodes {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 25px;
+  color: #4b3428;
+}
+
+.episode-intro {
+  text-align: center;
+  padding: 35px 25px;
+  margin-bottom: 50px;
+  background: #f8f0e4;
+  border: 1px solid #d6b77a;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(75, 52, 40, 0.08);
+}
+
+.episode-intro h2 {
+  color: #543a2b;
+  font-size: clamp(28px, 5vw, 42px);
+  margin-bottom: 12px;
+}
+
+.story-tagline {
+  color: #9b7946;
+  font-style: italic;
+  margin-bottom: 25px;
+}
+
+.episode-intro p:not(.story-tagline) {
+  max-width: 680px;
+  margin: 18px auto;
+  line-height: 1.9;
+  font-size: 16px;
+}
+
+.story-episode {
+  padding: 30px;
+  margin-bottom: 55px;
+  background: #fffaf2;
+  border-left: 4px solid #b89457;
+  border-radius: 10px;
+}
+
+.story-episode h2 {
+  color: #654532;
+  text-align: center;
+  font-size: clamp(23px, 4vw, 32px);
+  margin-bottom: 30px;
+}
+
+.story-episode p {
+  font-size: 17px;
+  line-height: 2;
+  margin: 22px 0;
+}
+
+.episode-ending {
+  text-align: center;
+  color: #9b7946;
+  font-weight: bold;
+  font-style: italic;
+  margin-top: 35px !important;
+}
+
+.novel-cover {
+  text-align: center;
+  margin: 60px auto 20px;
+}
+
+.novel-cover img {
+  display: block;
+  width: 100%;
+  max-width: 650px;
+  height: auto;
+  margin: 0 auto;
+  border: 3px solid #c6a56b;
+  border-radius: 8px;
+  box-shadow: 0 12px 35px rgba(55, 36, 25, 0.18);
+}
+
+@media (max-width: 600px) {
+  #storyEpisodes {
+    padding: 12px;
+    margin: 30px auto;
+  }
+
+  .episode-intro,
+  .story-episode {
+    padding: 20px 16px;
+  }
+
+  .story-episode p {
+    font-size: 16px;
+  }
+}
+
   </style>
 </head>
 
@@ -751,7 +851,100 @@
 
 </section>
 
-    <section id="storyEpisodes"></section>
+   
+    <section id="storyEpisodes">
+
+      <div class="episode-intro">
+        <h2>Perhaps, You Were My Dua</h2>
+
+        <p class="story-tagline">
+          Some hearts hide their deepest pain behind the quietest smiles.
+        </p>
+
+        <p>
+          Not every story begins with a meeting. Some begin with a silent
+          prayer, a heart full of unspoken words, and a diary that holds
+          the tears no one ever sees.
+        </p>
+
+        <p>
+          This is Inaya's story—a girl who learned to smile through pain,
+          remain gentle in an unkind world, and turn to Allah when her
+          heart had nowhere else to go.
+        </p>
+
+        <p>
+          Somewhere, a boy named Sanan was living a life of his own,
+          unaware that one day, a story he had never imagined would
+          change the way he understood love, pain, and destiny.
+        </p>
+      </div>
+
+      <article class="story-episode">
+        <h2>Episode 1 — The Things I Never Said</h2>
+
+        <p>
+          The night was quiet, but Inaya's heart was not.
+        </p>
+
+        <p>
+          Sitting beside her bedroom window, she opened her old brown
+          diary. Moonlight slipped through the curtains, falling softly
+          across the pages where she kept the words she could never say
+          aloud.
+        </p>
+
+        <p>
+          She picked up her pen and began to write, pretending that
+          somewhere between the lines, her heart might finally feel lighter.
+        </p>
+
+        <p>
+          "Sometimes, I wonder how long a person can keep saying
+          'I'm fine' before even they begin to believe the lie."
+        </p>
+
+        <p>
+          Her gaze drifted towards the framed photograph of her mother.
+          For a moment, she wished she could hear her voice again, feel
+          her embrace, and tell her everything she had been holding inside.
+        </p>
+
+        <p>
+          But the room remained silent.
+        </p>
+
+        <p>
+          A voice called her downstairs, pulling her away from the only
+          place where she felt free to be herself. Inaya closed her diary,
+          wiped her eyes, and put on the familiar smile everyone expected
+          from her.
+        </p>
+
+        <p>
+          That night, before falling asleep, she whispered a prayer to Allah.
+          She asked for a heart that could endure pain without becoming
+          cruel, and for the strength to forgive without losing herself.
+        </p>
+
+        <p>
+          She did not know what tomorrow would bring. She only hoped that
+          one day, she would look back and understand why some prayers
+          took so long to be answered.
+        </p>
+
+        <p class="episode-ending">
+          Perhaps, You Were My Dua.
+        </p>
+      </article>
+
+      <div class="novel-cover">
+        <img src="images/cover.png"
+             alt="Perhaps, You Were My Dua — Novel Cover">
+      </div>
+
+    </section>
+
 
   </main>
 
