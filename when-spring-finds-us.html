@@ -165,6 +165,210 @@
       letter-spacing: 3px;
     }
 
+/* Main characters section */
+.characters-section {
+  max-width: 1080px;
+  margin: 75px auto 35px;
+  padding: 48px 24px;
+  color: #39291f;
+  background: rgba(255, 250, 241, 0.55);
+  border: 1px solid #ddc9ad;
+  border-radius: 14px;
+  box-shadow: 0 15px 45px rgba(76, 52, 32, 0.07);
+}
+
+.characters-heading {
+  text-align: center;
+  margin-bottom: 38px;
+}
+
+.characters-eyebrow {
+  color: #997348;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 4px;
+}
+
+.characters-heading h2 {
+  margin: 14px 0 10px;
+  color: #4a3020;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: normal;
+  line-height: 1.2;
+}
+
+.characters-heading > p {
+  max-width: 500px;
+  margin: 0 auto;
+  color: #795f49;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.heading-ornament {
+  margin-top: 18px;
+  color: #b28a58;
+  letter-spacing: 3px;
+}
+
+.main-characters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  align-items: stretch;
+}
+
+.character-card {
+  min-width: 0;
+  overflow: hidden;
+  background: rgba(255, 253, 248, 0.85);
+  border: 1px solid #ddc8a9;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(57, 41, 31, 0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.character-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 32px rgba(57, 41, 31, 0.13);
+}
+
+.character-image-wrap {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+  background: #e8d8c2;
+}
+
+.character-image-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s ease;
+}
+
+.character-card:hover .character-image-wrap img {
+  transform: scale(1.04);
+}
+
+.character-label {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 20px);
+  padding: 7px 13px;
+  color: #fff8eb;
+  background: rgba(65, 43, 29, 0.88);
+  border: 1px solid rgba(226, 194, 151, 0.8);
+  border-radius: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.character-details {
+  padding: 23px 22px 25px;
+  text-align: center;
+}
+
+.character-number {
+  color: #a17a4f;
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+}
+
+.character-details h3 {
+  margin: 12px 0 5px;
+  color: #4a3020;
+  font-size: 32px;
+  font-weight: normal;
+}
+
+.character-divider {
+  margin: 10px 0;
+  color: #b28a58;
+}
+
+.character-details > p:not(.character-quote) {
+  max-width: 390px;
+  margin: 0 auto;
+  color: #6e5845;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.character-traits {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 20px;
+}
+
+.character-traits span {
+  padding: 7px 10px;
+  color: #795633;
+  background: #f2e6d3;
+  border: 1px solid #e2cfb3;
+  border-radius: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+}
+
+.character-quote {
+  margin: 20px 0 0;
+  padding-top: 15px;
+  color: #98744e;
+  border-top: 1px solid #e6d8c5;
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.8;
+}
+
+.characters-footer {
+  margin-top: 35px;
+  text-align: center;
+  color: #997348;
+}
+
+.characters-footer > span {
+  font-size: 23px;
+}
+
+.characters-footer p {
+  margin: 8px 0 0;
+  color: #795f49;
+  font-size: 14px;
+  font-style: italic;
+}
+
+@media (max-width: 650px) {
+  .characters-section {
+    margin: 45px auto 25px;
+    padding: 32px 14px;
+  }
+
+  .main-characters {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .character-image-wrap {
+    height: 280px;
+  }
+
+  .character-details {
+    padding: 22px 17px;
+  }
+}
+
     .story-coming-soon h1 {
       margin: 20px 0;
       color: #4a3020;
@@ -268,7 +472,79 @@
 
     </section>
 
-    <section id="storyCharacters"></section>
+    
+<section id="storyCharacters" class="characters-section">
+
+  <div class="characters-heading">
+    <span class="characters-eyebrow">THE HEART OF OUR STORY</span>
+    <h2>Meet the Main Characters</h2>
+    <p>Two souls, two different worlds, and a story waiting to unfold.</p>
+    <div class="heading-ornament">───── ❦ ─────</div>
+  </div>
+
+  <div class="main-characters">
+
+    <article class="character-card">
+      <div class="character-image-wrap">
+        <img src="images/sa.png" alt="Sanan — Main Character">
+        <span class="character-label">THE MALE LEAD</span>
+      </div>
+
+      <div class="character-details">
+        <span class="character-number">01 · THE UNWRITTEN CHAPTER</span>
+        <h3>Sanan</h3>
+        <div class="character-divider">✦</div>
+        <p>
+          A soul with dreams of his own, Sanan carries a world of thoughts
+          behind his quiet moments. He has yet to discover how one
+          unexpected person might change the story of his life.
+        </p>
+        <div class="character-traits">
+          <span>Dreamer</span>
+          <span>Thoughtful</span>
+          <span>Unwritten Destiny</span>
+        </div>
+        <p class="character-quote">
+          “Some chapters begin before we even know the story has started.”
+        </p>
+      </div>
+    </article>
+
+    <article class="character-card">
+      <div class="character-image-wrap">
+        <img src="images/ma.png" alt="Maria — Main Character">
+        <span class="character-label">THE FEMALE LEAD</span>
+      </div>
+
+      <div class="character-details">
+        <span class="character-number">02 · A HEART FULL OF DUAS</span>
+        <h3>Maria</h3>
+        <div class="character-divider">✦</div>
+        <p>
+          Kind-hearted and quietly resilient, Maria carries feelings
+          she rarely shares with the world. Behind her gentle smile
+          lies a heart that still holds on to hope, faith, and silent prayers.
+        </p>
+        <div class="character-traits">
+          <span>Kind Soul</span>
+          <span>Quiet Strength</span>
+          <span>Faith & Hope</span>
+        </div>
+        <p class="character-quote">
+          “Some prayers are whispered by the heart, never spoken aloud.”
+        </p>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="characters-footer">
+    <span>❦</span>
+    <p>Every soul has a story. This is where theirs begins.</p>
+  </div>
+
+</section>
+
     <section id="storyEpisodes"></section>
 
   </main>
