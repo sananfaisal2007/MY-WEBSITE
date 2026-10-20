@@ -241,5 +241,26 @@
 
   </main>
 
+<script>
+  const storyPage = document.querySelector(".story-page");
+
+  if (storyPage) {
+    storyPage.addEventListener("pointermove", function (event) {
+      const rect = storyPage.getBoundingClientRect();
+
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      storyPage.style.setProperty("--mouse-x", x + "px");
+      storyPage.style.setProperty("--mouse-y", y + "px");
+    });
+
+    storyPage.addEventListener("pointerleave", function () {
+      storyPage.style.setProperty("--mouse-x", "50%");
+      storyPage.style.setProperty("--mouse-y", "30%");
+    });
+  }
+</script>
+
 </body>
 </html>
