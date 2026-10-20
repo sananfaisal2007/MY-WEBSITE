@@ -1819,6 +1819,183 @@ video.diary-video-4 {
 
 <main>
   
+<!-- NEW NOVEL OPENING -->
+<section class="dua-novel-opening" id="duaNovelOpening">
+
+  <div class="dua-opening-stars">✦ ✧ ⋆｡°✩ ✧ ✦</div>
+
+  <p class="dua-opening-label">A STORY WRITTEN BETWEEN HEARTBEATS</p>
+
+  <h1 class="dua-opening-title">
+    Perhaps,<br>
+    You Were My Dua
+  </h1>
+
+  <div class="dua-opening-divider">♡ ───── ✧ ───── ♡</div>
+
+  <p class="dua-opening-intro">
+    Some people enter our lives like a beautiful dream.
+    Others become the silent prayer we never stop making.
+  </p>
+
+  <p class="dua-opening-quote">
+    "And perhaps, long before their paths crossed,
+    one heart had already become a prayer
+    written in the silence of another."
+  </p>
+
+  <div class="dua-opening-signature">
+    A tale of faith, hidden pain, friendship, and a love
+    neither heart was prepared for.
+  </div>
+
+  <div class="dua-opening-bottom">✧ THE STORY BEGINS HERE ✧</div>
+
+</section>
+
+<style>
+.dua-novel-opening {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: calc(100% - 30px);
+  max-width: 1050px;
+  min-height: 620px;
+  margin: 35px auto 55px;
+  padding: 90px 25px 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff1fb;
+  font-family: Georgia, "Times New Roman", serif;
+  border: 1px solid rgba(238, 190, 255, 0.35);
+  border-radius: 28px;
+  background:
+    radial-gradient(ellipse at 50% 35%, rgba(125, 74, 160, 0.38), transparent 55%),
+    linear-gradient(145deg, #100d20, #24142f 52%, #100e20);
+  box-shadow: 0 15px 55px rgba(8, 4, 22, 0.4);
+}
+
+.dua-novel-opening::before,
+.dua-novel-opening::after {
+  content: "✧";
+  position: absolute;
+  z-index: -1;
+  color: rgba(255, 205, 238, 0.2);
+  font-size: 170px;
+  animation: duaStarFloat 6s ease-in-out infinite alternate;
+}
+
+.dua-novel-opening::before {
+  top: 25px;
+  left: 30px;
+}
+
+.dua-novel-opening::after {
+  right: 30px;
+  bottom: 15px;
+  animation-delay: 1.5s;
+}
+
+.dua-opening-stars {
+  color: #f5c9ff;
+  font-size: 23px;
+  letter-spacing: 8px;
+  margin-bottom: 28px;
+  text-shadow: 0 0 18px #d6a2ff;
+}
+
+.dua-opening-label {
+  color: #e5b9ed;
+  font-size: 11px;
+  letter-spacing: 4px;
+  line-height: 1.8;
+}
+
+.dua-opening-title {
+  margin: 22px 0 12px;
+  color: #ffe1f2;
+  font-size: clamp(43px, 8vw, 78px);
+  line-height: 1.15;
+  font-weight: normal;
+  text-shadow: 0 0 25px rgba(242, 169, 255, 0.35);
+}
+
+.dua-opening-divider {
+  color: #e6baff;
+  font-size: 19px;
+  margin: 20px 0 25px;
+}
+
+.dua-opening-intro {
+  max-width: 650px;
+  margin: 0 auto 22px;
+  color: #f7eaf8;
+  font-size: clamp(17px, 2.5vw, 21px);
+  line-height: 1.9;
+}
+
+.dua-opening-quote {
+  max-width: 690px;
+  margin: 8px auto 28px;
+  color: #f3c8e7;
+  font-size: clamp(17px, 2.5vw, 22px);
+  font-style: italic;
+  line-height: 1.9;
+}
+
+.dua-opening-signature {
+  max-width: 600px;
+  color: #d8c4e8;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.dua-opening-bottom {
+  margin-top: 45px;
+  color: #e8bdf4;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+}
+
+@keyframes duaStarFloat {
+  from { transform: translateY(0) rotate(-8deg); }
+  to { transform: translateY(-15px) rotate(8deg); }
+}
+
+@media (max-width: 600px) {
+  .dua-novel-opening {
+    min-height: 540px;
+    padding: 65px 18px 55px;
+    border-radius: 20px;
+  }
+
+  .dua-opening-label {
+    letter-spacing: 2px;
+  }
+
+  .dua-opening-stars {
+    letter-spacing: 4px;
+  }
+
+  .dua-opening-bottom {
+    letter-spacing: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dua-novel-opening::before,
+  .dua-novel-opening::after {
+    animation: none;
+  }
+}
+</style>
+<!-- END OF NEW NOVEL OPENING -->
+
 <section class="anime-intro-video-section" id="animeIntroVideo">
   <video
     id="animeIntroVideoPlayer"
