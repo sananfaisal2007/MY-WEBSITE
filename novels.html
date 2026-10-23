@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Novel Collection | Celestialdreamer</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            background: #E8DCC5;
+            color: #4B3025;
+        }
+
+        .novels-header {
+            padding: 24px 18px;
+            text-align: center;
+            background: #4B3025;
+            color: #F5EFE3;
+            border-bottom: 4px solid #A47C55;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-bottom: 18px;
+            padding: 9px 16px;
+            border: 1px solid #C8B69B;
+            border-radius: 25px;
+            color: #F5EFE3;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            transition: background 0.25s, color 0.25s;
+        }
+
+        .back-home:hover {
+            background: #F5EFE3;
+            color: #4B3025;
+        }
+
+        .header-ornament {
+            color: #D4B58C;
+            letter-spacing: 5px;
+            font-size: 17px;
+        }
+
+        .novels-header h1 {
+            margin: 12px 0;
+            font-size: clamp(30px, 5vw, 48px);
+            letter-spacing: 4px;
+        }
+
+        .novels-header p {
+            margin: 0;
+            color: #E8DCC5;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .collection {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 35px 20px 50px;
+        }
+
+        .collection-heading {
+            text-align: center;
+            margin-bottom: 26px;
+        }
+
+        .collection-heading h2 {
+            margin: 0 0 8px;
+            font-size: 27px;
+        }
+
+        .collection-heading p {
+            margin: 0;
+            color: #725744;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .novel-grid {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit, minmax(min(100%, 235px), 285px)
+            );
+            justify-content: center;
+            gap: 22px;
+        }
+
+        .novel-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 24px 19px 20px;
+            background: #F5EFE3;
+            border: 1px solid #B69A78;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(75, 48, 37, 0.09);
+            transition: transform 0.3s ease,
+                        box-shadow 0.3s ease;
+        }
+
+        .novel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(75, 48, 37, 0.16);
+        }
+
+        .card-ornament {
+            color: #A47C55;
+            font-size: 19px;
+            margin-bottom: 12px;
+        }
+
+        .book-symbol {
+            width: 76px;
+            height: 92px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #E8DCC5;
+            border: 1px solid #B69A78;
+            border-left: 5px solid #8B6D50;
+            border-radius: 3px 7px 7px 3px;
+            box-shadow: 3px 4px 7px rgba(75, 48, 37, 0.12);
+            font-size: 35px;
+            margin-bottom: 17px;
+        }
+
+        .card-label {
+            margin: 0 0 8px;
+            color: #8B6D50;
+            font-family: Arial, sans-serif;
+            font-size: 9px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            line-height: 1.7;
+        }
+
+        .novel-card h3 {
+            margin: 0;
+            color: #4B3025;
+            font-size: 25px;
+            line-height: 1.4;
+        }
+
+        .card-divider {
+            width: 48px;
+            height: 1px;
+            margin: 13px 0;
+            background: #A47C55;
+        }
+
+        .card-author {
+            margin: 0;
+            color: #725744;
+            font-size: 13px;
+            font-style: italic;
+        }
+
+        .card-description {
+            min-height: 54px;
+            margin: 13px 0 18px;
+            color: #5E4636;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .card-button {
+            display: inline-block;
+            padding: 10px 19px;
+            background: #4B3025;
+            color: #F5EFE3;
+            border: 1px solid #4B3025;
+            border-radius: 3px;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: background 0.25s, color 0.25s;
+        }
+
+        .card-button:hover {
+            background: #E8DCC5;
+            color: #4B3025;
+        }
+
+        .novels-footer {
+            padding: 22px 15px;
+            text-align: center;
+            background: #4B3025;
+            color: #E8DCC5;
+            font-size: 11px;
+            letter-spacing: 2px;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 500px) {
+            .collection {
+                padding: 27px 16px 38px;
+            }
+
+            .novel-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .novel-card {
+                width: 100%;
+                max-width: 320px;
+                justify-self: center;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .novel-card,
+            .back-home,
+            .card-button {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="novels-header">
+
+        <a href="index.html" class="back-home">
+            ← BACK TO HOME
+        </a>
+
+        <div class="header-ornament">❧ ✦ ❧</div>
+
+        <h1>THE NOVEL CORNER</h1>
+
+        <p>
+            Every book opens a door to another world.
+        </p>
+
+        <div class="header-ornament">✦ ❦ ✦</div>
+
+    </header>
+
+    <main class="collection">
+
+        <div class="collection-heading">
+            <h2>♡ Our Novel Collection ♡</h2>
+            <p>
+                Stories of faith, love, hope and transformation.
+            </p>
+        </div>
+
+        <div class="novel-grid">
+
+            <!-- PEER-E-KAMIL NOVEL CARD -->
+
+            <article class="novel-card">
+
+                <div class="card-ornament">❧ ✦ ❧</div>
+
+                <div class="book-symbol">📖</div>
+
+                <p class="card-label">
+                    A JOURNEY OF FAITH
+                </p>
+
+                <h3>Peer-e-Kamil</h3>
+
+                <div class="card-divider"></div>
+
+                <p class="card-author">
+                    By Umera Ahmed
+                </p>
+
+                <p class="card-description">
+                    A journey of faith, transformation,
+                    and the search for a deeper purpose.
+                </p>
+
+                <a href="peer-e-kamil.html" class="card-button">
+                    EXPLORE NOVEL ↗
+                </a>
+
+            </article>
+
+            <!-- ADD MORE NOVEL CARDS HERE LATER -->
+
+        </div>
+
+    </main>
+
+    <footer class="novels-footer">
+        ❦ CELESTIALDREAMER · STORIES THAT STAY WITH THE SOUL ❦
+    </footer>
+
+</body>
+</html>
